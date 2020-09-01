@@ -9,9 +9,9 @@ Ce projet est un mini réseau social, avec des vignettes (avec photo) sur une ca
  
 ### La liste des rôles de chacun :
 
-  -Product Owner :  Chloé
-  -Scrum Master : Thibault
-  -Lead Dev Front : Quentin
-  -Lead Dev Back :  Christophe
-  -Référent Git: Sebastien
+  *Product Owner :  Chloé
+  *Scrum Master : Thibault
+  *Lead Dev Front : Quentin
+  *Lead Dev Back :  Christophe
+  *Référent Git: Sebastien
  
