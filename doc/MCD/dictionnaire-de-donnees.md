@@ -20,6 +20,7 @@
 |id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant du voyage|
 |title|VARCHAR(255)|NOT NULL|Le titre du voyage|
 |description|VARCHAR(255)|NOT NULL|La description du voyage|
+|status|VARCHAR(255)|NOT NULL|Le status 0: en cours 1: terminé|
 |creation_date|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de début du voyage|
 |created_at|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de création du voyage|
 |updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour du voyage|
