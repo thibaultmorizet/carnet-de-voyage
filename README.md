@@ -1,6 +1,5 @@
 # projet-carnet-voyage
 
-## Cahier des charges
 
 ### Présentation du projet
 
