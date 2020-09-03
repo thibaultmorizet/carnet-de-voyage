@@ -1,10 +1,11 @@
 # User stories
 
 ## Voyages
---
+
 | En tant que | Je veux | Afin de (si besoin/nécessaire) |
 |--|--|--|
 | utilisateur | pouvoir créer un voyage | - |
+| utilisateur | pouvoir modifier un voyage | - |
 | utilisateur | pouvoir visualiser la liste de mes voyages  | - |
 | utilisateur | pouvoir ajouter une image à mon voyage  | - |
 | utilisateur | pouvoir ajouter du texte à mon image | - |
@@ -20,7 +21,6 @@
 | utilisateur | pouvoir commenter les voyages pour lesquels j'ai été invité | - |
 | utilisateur | pouvoir aimer les voyages pour lesquels j'ai été invité | - |
 | visiteur | pouvoir visualiser le voyage pour lequel j'ai été invité | - |
-
 
 ## USER
 
