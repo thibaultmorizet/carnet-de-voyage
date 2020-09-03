@@ -8,7 +8,7 @@
 |last_name|VARCHAR(255)|NOT NULL|Le nom de l'utilisateur|
 |first_name|VARCHAR(255)|NOT NULL|Le prénom de l'utilisateur|
 |password|VARCHAR(255)|NOT NULL|Le mot de passe de l'utilisateur|
-|role|VARCHAR(255)|NULL|Le rôle de l'utilisateur|
+|role|VARCHAR(255)|NOT NULL|Le rôle de l'utilisateur|
 |avatar|VARCHAR(255)|NULL|L'avatar de l'utilisateur|
 |created_at|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de création de l'utilisateur|
 |updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de l'utilisateur|
