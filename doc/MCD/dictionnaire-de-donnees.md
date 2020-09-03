@@ -32,6 +32,7 @@
 |id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant de l'étape|
 |picture|VARCHAR(255)|NOT NULL|L'url de la photo|
 |description|VARCHAR(255)|NOT NULL|La description de l'étape|
+|like|INT|NULL|Bouton j'aime|
 |step_date|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de l'étape|
 |created_at|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de création de l'étape|
 |updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de l'étape|
