@@ -12,6 +12,7 @@
 | utilisateur | pouvoir modifier mon image | - |
 | utilisateur | pouvoir modifier mon texte | - |
 | utilisateur | pouvoir supprimer mon voyage | - |
+| utilisateur | pouvoir modifier mon voyage | - |
 | utilisateur | pouvoir supprimer une étape de mon voyage | - |
 | utilisateur | pouvoir partager mon voyage | - |
 | utilisateur | pouvoir visualiser les voyages pour lesquels j'ai été invité | - |

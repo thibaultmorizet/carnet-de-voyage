@@ -13,6 +13,7 @@
 |`/travels/{id}`|`GET`|`TravelsController`|`show`|`aperçu voyage`|`map avec aperçu du voyage`|`même chose si on est visiteur ( pas d'accès aux commentaires ), visiteur connecté ou créateur`|
 |`/travels/list`|`GET`|`TravelsController`|`list`|`liste des ses voyages`|`liste des voyages`|`Liste de l'ensemble de ses voyages`|
 |`/travels/{id}/delete`|`DELETE`|`TravelsController`|`delete`|`suppression d'un voyage`|`bouton de supression de voyage`|`Permet de supprimer un voyage dans sa totalité`|
+|`/travels/{id}/update`|`POST`|`TravelsController`|`update`|`modification d'un voyage`|`bouton de modification de voyage`|`Permet de modifier`|
 |--|--|--|--|--|--|--|
 |`/travel/{id1}/update/{id2}`|`POST`|`TravelController`|`update`|`modification d'étape`|`formulaire de modification d'étape`|`{id1} du voyage {id2} de l'étape`|
 |`/travel/{id}/add`|`POST`|`TravelController`|`create`|`nouvelle étape`|`formulaire de création d'étape`|`formulaire d'une nouvelle étape`|
