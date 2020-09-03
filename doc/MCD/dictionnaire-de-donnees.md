@@ -9,7 +9,7 @@
 |first_name|VARCHAR(255)|NOT NULL|Le prénom de l'utilisateur|
 |email|VARCHAR(255)|NOT NULL|L'adresse mail de l'utilisateur|
 |password|VARCHAR(255)|NOT NULL|Le mot de passe de l'utilisateur|
-|role|VARCHAR(255)|NULL|Le rôle de l'utilisateur|
+|role|VARCHAR(255)|NOT NULL|Le rôle de l'utilisateur|
 |avatar|VARCHAR(255)|NULL|L'avatar de l'utilisateur|
 |created_at|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de création de l'utilisateur|
 |updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de l'utilisateur|
@@ -37,6 +37,7 @@
 |description|VARCHAR(255)|NOT NULL|La description de l'étape|
 |latitude|VARCHAR(255)|NOT NULL|Latitude de l'étape|
 |longitude|VARCHAR(255)|NOT NULL|Longitude de l'étape|
+|like|INT|NULL|Nombre de like de l'étape|
 |step_date|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de l'étape|
 |created_at|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de création de l'étape|
 |updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de l'étape|
