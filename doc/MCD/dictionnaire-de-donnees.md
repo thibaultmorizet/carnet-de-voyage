@@ -20,7 +20,7 @@
 |-|-|-|-|
 |id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant du voyage|
 |title|VARCHAR(255)|NOT NULL|Le titre du voyage|
-|description|VARCHAR(255)|NOT NULL|La description du voyage|
+|description|LONGTEXT|NOT NULL|La description du voyage|
 |status|BOOLEAN|NOT NULL|Le status 0: en cours 1: terminé|
 |picture_url|VARCHAR(255)|NULL|La photo de présentation du voyage|
 |creation_date|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de début du voyage|
@@ -33,7 +33,6 @@
 |Champ|Type|Spécificités|Description|
 |-|-|-|-|
 |id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant de l'étape|
-|picture|VARCHAR(255)|NOT NULL|L'url de la photo|
 |description|VARCHAR(255)|NOT NULL|La description de l'étape|
 |latitude|VARCHAR(255)|NOT NULL|Latitude de l'étape|
 |longitude|VARCHAR(255)|NOT NULL|Longitude de l'étape|
