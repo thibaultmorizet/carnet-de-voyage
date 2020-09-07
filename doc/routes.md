@@ -19,6 +19,7 @@
 
 | URL | HTTP Method | Controller | Method | Title | Content | Comment |
 |--|--|--|--|--|--|--|
+|`/travel/{id1}/step/{id2}`|`GET`|`TravelController`|`show`|`étape`|`visualisation de l'étape`|`{id1} du voyage {id2} de l'étape`|
 |`/travel/{id1}/update/{id2}`|`POST`|`TravelController`|`update`|`modification d'étape`|`formulaire de modification d'étape`|`{id1} du voyage {id2} de l'étape`|
 |`/travel/{id}/add`|`POST`|`TravelController`|`create`|`nouvelle étape`|`formulaire de création d'étape`|`formulaire d'une nouvelle étape`|
 |`/travel/{id1}/delete/{id2}`|`DELETE`|`TravelController`|`delete`|`suppression d'étape`|`bouton de suppression d'étape`|`{id1} du voyage {id2} de l'étape`|
@@ -48,4 +49,4 @@
 | URL | HTTP Method | Controller | Method | Title | Content | Comment |
 |--|--|--|--|--|--|--|
 |`/admin/userlist`|`GET`|`AdminController`|`user`|`liste de tous les utilisateurs`|`accès aux utilisateurs`|`recherche d'un utilisateur`|
-|`/admin/userlist/{id}`|`DELETE`|`AdminController`|`delete`|`Supprimer un utilisateur`|`Supprimer un utilisateur`|`gestion des utilisateurs`|
+|`/admin/userlist/{id}/delete`|`DELETE`|`AdminController`|`delete`|`Supprimer un utilisateur`|`Supprimer un utilisateur`|`gestion des utilisateurs`|
