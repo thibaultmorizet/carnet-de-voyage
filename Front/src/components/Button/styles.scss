@@ -1,0 +1,12 @@
+.button {
+  &__elmt {
+    display: block;
+    margin: auto;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    padding: .5em 1em;
+    font-family: 'IBM Plex Sans', sans-serif;
+    box-shadow: 0px -1px 41px -15px rgba(0,0,0,0.75);
+  }
+}

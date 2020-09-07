@@ -1,0 +1,6 @@
+.carnetDeVoyage {
+  background-image: url(../../assets/images/background-homepage.jpg);
+  background-size: cover;
+  height: 100vh;
+  padding-top: 1em;
+}
