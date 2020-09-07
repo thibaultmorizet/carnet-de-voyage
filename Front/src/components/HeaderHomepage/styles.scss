@@ -1,0 +1,19 @@
+.headerHomePage {
+  &__mobile {
+    display: block;
+  }
+  &__desktop {
+    display: none;
+  }
+}
+
+@media only screen and (min-width : 1224px) {
+  .headerHomePage {
+    &__mobile {
+      display: none;
+    }
+    &__desktop {
+      display: block;
+    }
+  }
+}

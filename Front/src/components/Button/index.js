@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 const Button = ({ text }) => (
-  <header className="button">
+  <div className="button">
     <button type="button" className="button__elmt">{text}</button>
-  </header>
+  </div>
 );
 
 Button.propTypes = {
