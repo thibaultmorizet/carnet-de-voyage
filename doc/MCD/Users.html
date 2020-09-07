@@ -12,32 +12,29 @@
 <div id='mld'>
 <div>
   <span class='relation'>FOLLOW</span> (
-    <span class='foreign primary'>travel_id</span>,
-    <span class='foreign primary'>user_id</span>
+    <span class='foreign primary'>title</span>,
+    <span class='foreign primary'>firstname</span>
   )
 </div>
 <div>
   <span class='relation'>TRAVEL</span> (
-    <span class='primary'>travel_id</span>,
-    <span class='normal'>title</span>,
+    <span class='primary'>title</span>,
     <span class='normal'>description</span>,
     <span class='normal'>picture</span>,
     <span class='normal'>date</span>,
     <span class='normal'>status</span>,
-    <span class='foreign'>user_id</span>
+    <span class='foreign'>firstname</span>
   )
 </div>
 <div>
   <span class='relation'>PICTURE</span> (
-    <span class='primary'>picture_id</span>,
-    <span class='normal'>url</span>,
-    <span class='foreign'>step_id</span>
+    <span class='primary'>url</span>,
+    <span class='foreign'>description</span>
   )
 </div>
 <div>
   <span class='relation'>USER</span> (
-    <span class='primary'>user_id</span>,
-    <span class='normal'>firstname</span>,
+    <span class='primary'>firstname</span>,
     <span class='normal'>lastname</span>,
     <span class='normal'>email</span>,
     <span class='normal'>password</span>,
@@ -47,21 +44,19 @@
 </div>
 <div>
   <span class='relation'>STEP</span> (
-    <span class='primary'>step_id</span>,
-    <span class='normal'>description</span>,
+    <span class='primary'>description</span>,
     <span class='normal'>date</span>,
     <span class='normal'>latitude</span>,
     <span class='normal'>longitude</span>,
     <span class='normal'>like</span>,
-    <span class='foreign'>travel_id</span>
+    <span class='foreign'>title</span>
   )
 </div>
 <div>
   <span class='relation'>COMMENT</span> (
-    <span class='primary'>comment_id</span>,
-    <span class='normal'>text</span>,
-    <span class='foreign'>user_id</span>,
-    <span class='foreign'>step_id</span>
+    <span class='primary'>text</span>,
+    <span class='foreign'>firstname</span>,
+    <span class='foreign'>description</span>
   )
 </div>
 </div>

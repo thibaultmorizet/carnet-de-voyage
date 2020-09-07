@@ -57,10 +57,10 @@
 
 |Champ|Type|Spécificités|Description|
 |-|-|-|-|
-|id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant du commentaire|
+|id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant de la photo|
 |url|VARCHAR(255)|NOT NULL|L'url de la photo|
-|created_at|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de création du commentaire|
-|updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour du commentaire|
+|created_at|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de création de la photo|
+|updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de la photo|
 |step_id|INT|NOT NULL|L'id de l'étape à qui appartient la photo (relation)|
 
 ## Table pivot entre les voyages (travel) et les utilisateurs (user) pour les `followers`
