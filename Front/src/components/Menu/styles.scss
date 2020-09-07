@@ -1,5 +1,6 @@
 .menu {
-  background-color: rgba(255, 255, 255, .5);
+  background-color: rgba(255, 255, 255, .2);
+  backdrop-filter: blur(2px);
   padding: 1.5em;
   &__nav {
     display: flex;
