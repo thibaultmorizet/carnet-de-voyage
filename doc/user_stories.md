@@ -35,7 +35,7 @@
 | utilisateur | pouvoir supprimer mon étape | - |
 | utilisateur | pouvoir modifier mon image | - |
 | utilisateur | pouvoir modifier mon texte | - |
- utilisateur | pouvoir modifier la localisation | rajouter du contenu dans mon voyage |
+| utilisateur | pouvoir modifier la localisation | rajouter du contenu dans mon voyage |
 | utilisateur | pouvoir modifier une date à mon étape | |
 | utilisateur | pouvoir commenter les étapes des voyages pour lesquels j'ai été invité | - |
 | utilisateur | pouvoir aimer les étapes des voyages pour lesquels j'ai été invité | - |
