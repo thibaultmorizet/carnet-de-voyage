@@ -2,35 +2,54 @@
 import React from 'react';
 import './styles.scss';
 
-const RegisterForm = () => (
-  <div className="register__form">
-    <h2 className="register__form--title">Inscription</h2>
-    <form action="">
-      <div>
-        <label htmlFor="last_name" className="register__form--last_name">Nom</label>
-        <input type="text" name="last_name" />
-      </div>
-      <div>
-        <label htmlFor="first_name">Prénom</label>
-        <input type="text" name="first_name" />
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input type="email" name="email" />
-      </div>
-      <div>
-        <label htmlFor="password">Mot de passe</label>
-        <input type="password" name="password" />
-      </div>
-      <div>
-        <label htmlFor="passwordVerification">Vérification du mot de passe</label>
-        <input type="passwordVerification" name="passwordVerification" />
-      </div>
+const RegisterForm = () => {
+  const essai = (evt) => {
+    evt.target.classList.add('active');
+    console.log(evt.target);
+  };
+  return (
+    <div className="register__form">
+      <h2 className="register__form--title">Inscription</h2>
+      <form action="">
 
-      <input type="submit" name="registerSubmit" id="registerSubmit" value="S'inscrire" />
-    </form>
-  </div>
-);
+        <div className="floating-label">
+          <input className="floating-input" name="last_name" type="text" placeholder=" " />
+          <label htmlFor="last_name">Nom</label>
+        </div>
+
+        <div className="floating-label">
+          <input className="floating-input" name="first_name" type="text" placeholder=" " />
+          <label htmlFor="first_name">Prénom</label>
+        </div>
+
+        <div className="floating-label">
+          <input className="floating-input" name="email" type="text" placeholder=" " />
+          <label htmlFor="email">Email</label>
+        </div>
+
+        <div className="floating-label">
+          <input className="floating-input" name="password" type="password" placeholder=" " />
+          <label htmlFor="password">Mot de passe</label>
+        </div>
+
+        <div className="password__span">
+          <span>
+            Le mot de passe doit contenir au minimum 8 caractères,
+            une majuscule et un chiffre
+          </span>
+        </div>
+
+        <div className="floating-label">
+          <input className="floating-input" name="passwordVerify" type="password" placeholder=" " />
+          <label htmlFor="passwordVerify">Répéter votre mot de passe</label>
+        </div>
+
+        <input type="submit" name="registerSubmit" id="registerSubmit" value="S'inscrire" />
+      </form>
+
+    </div>
+  );
+};
 
 export default RegisterForm;
 
