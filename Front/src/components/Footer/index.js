@@ -1,19 +1,35 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './styles.scss';
 
 const Footer = () => (
   <div className="footer">
     <nav className="footer__nav">
       <ul className="footer__nav--ul">
-        <a href="#">
-          <li className="footer__nav--li">Contact</li>
-        </a>
-        <a href="#">
-          <li className="footer__nav--li">Mentions légales</li>
-        </a>
-        <a href="#">
-          <li className="footer__nav--li">L'équipe</li>
-        </a>
+        <li className="footer__nav--li">
+          <NavLink
+            to="/contact"
+            exact
+          >
+            Contact
+          </NavLink>
+        </li>
+        <li className="footer__nav--li">
+          <NavLink
+            to="/privacy"
+            exact
+          >
+            Mentions Légales
+          </NavLink>
+        </li>
+        <li className="footer__nav--li">
+          <NavLink
+            to="/presentation"
+            exact
+          >
+            Présentation
+          </NavLink>
+        </li>
       </ul>
     </nav>
   </div>
