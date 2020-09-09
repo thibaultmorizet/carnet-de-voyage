@@ -1,8 +1,16 @@
 import React from 'react';
+import {
+  Map, Marker, Popup, TileLayer,
+} from 'react-leaflet';
 import './styles.scss';
 
-const Map = () => (
-  <div className="map">Map</div>
+const MapElement = () => (
+  <Map className="map" center={[47.218372, -1.553621]} zoom={12}>
+    <TileLayer
+      url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    />
+  </Map>
 );
 
-export default Map;
+export default MapElement;
