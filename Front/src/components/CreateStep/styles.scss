@@ -1,0 +1,16 @@
+.createStep {
+  &__title, &__span{
+    font-family: 'Pacifico', cursive;
+  }
+
+  &__title {
+    font-size: 1.5em;
+    padding: 1em 1em .5em;
+    padding-bottom: .5em;
+    padding-top: 1em;
+  }
+
+  &__span {
+    padding-left: 4em;
+  }
+}
