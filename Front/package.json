@@ -54,11 +54,13 @@
     "webpack-merge": "^5.1.2"
   },
   "dependencies": {
+    "@material/floating-label": "^7.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
+    "react-toast-notifications": "^2.4.0",
     "redux": "^4.0.5",
     "styled-components": "^5.1.1"
   }
