@@ -1,36 +1,38 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import FormInput from '../FormInput';
 import './styles.scss';
 
 const RegisterForm = () => {
-  const essai = (evt) => {
-    evt.target.classList.add('active');
-    console.log(evt.target);
-  };
+  console.log('salut');
   return (
     <div className="register__form">
       <h2 className="register__form--title">Inscription</h2>
       <form action="">
 
-        <div className="floating-label">
-          <input className="floating-input" name="last_name" type="text" placeholder=" " />
-          <label htmlFor="last_name">Nom</label>
-        </div>
+        <FormInput
+          type="text"
+          name="last_name"
+          content="Nom"
+        />
 
-        <div className="floating-label">
-          <input className="floating-input" name="first_name" type="text" placeholder=" " />
-          <label htmlFor="first_name">Prénom</label>
-        </div>
+        <FormInput
+          type="text"
+          name="first_name"
+          content="Prénom"
+        />
 
-        <div className="floating-label">
-          <input className="floating-input" name="email" type="text" placeholder=" " />
-          <label htmlFor="email">Email</label>
-        </div>
+        <FormInput
+          type="email"
+          name="email"
+          content="Email"
+        />
 
-        <div className="floating-label">
-          <input className="floating-input" name="password" type="password" placeholder=" " />
-          <label htmlFor="password">Mot de passe</label>
-        </div>
+        <FormInput
+          type="password"
+          name="password"
+          content="Mot de passe"
+        />
 
         <div className="password__span">
           <span>
@@ -39,10 +41,11 @@ const RegisterForm = () => {
           </span>
         </div>
 
-        <div className="floating-label">
-          <input className="floating-input" name="passwordVerify" type="password" placeholder=" " />
-          <label htmlFor="passwordVerify">Répéter votre mot de passe</label>
-        </div>
+        <FormInput
+          type="password"
+          name="passwordVerify"
+          content="Répéter le mode de passe"
+        />
 
         <input type="submit" name="registerSubmit" id="registerSubmit" value="S'inscrire" />
       </form>
@@ -57,7 +60,3 @@ export default RegisterForm;
 // Prénom -- first_name
 // Email -- email
 // Mot de passe -- password
-// Répéter le mot de passe
-
-// Mot de passe -- password
-// Répéter le mot de passe

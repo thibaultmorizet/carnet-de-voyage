@@ -25,41 +25,6 @@
   
 }
 
-.floating-label { 
-  position:relative; 
-  margin-bottom:1em; 
-  margin-top: 1.5em;
-}
-.floating-input {
-  font-size:1em;
-  padding:.5em;
-  display:block;
-  width:100%;
-  background-color: white;
-  border-radius: 10px;
-  border: none;
-  box-shadow: -1px 2px 15px -6px rgba(0,0,0,0.75);
-}
-
-label {
-  color: rgba(0, 0, 0, .5);
-  font-size:.9em;
-  position:absolute;
-  pointer-events:none;
-  left:10px;
-  top:10px;
-  transition:0.1s ease all; 
-  -moz-transition:0.1s ease all; 
-  -webkit-transition:0.1s ease all;
-}
-
-.floating-input:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
-  top:-1em;
-  font-size:.7em;
-  color: black;
-  color: rgb(55, 118, 139);
-}
-
 .password__span {
   font-size: .8em;
   width: 98%;
@@ -79,5 +44,40 @@ label {
   cursor: pointer;
   &:hover {
     background-color: lightblue;
+  }
+}
+
+@media only screen and (min-width : 426px) {
+  .register {
+    &__form {
+     width: 50%;
+    }
+  } 
+}
+
+@media only screen and (min-width : 1024px) {
+  .register {
+    &__form {
+     width: 40%;
+    }
+    
+  }
+}
+
+@media only screen and (min-width : 1440px) {
+  .register {
+    &__form {
+     width: 30%;
+    }
+    
+  }
+}
+
+@media only screen and (min-width : 1824px) {
+  .register {
+    &__form {
+     width: 20%;
+    }
+    
   }
 }
