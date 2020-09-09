@@ -4,18 +4,25 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 const FormInput = ({
-  type, name, content,
-}) => (
-  <div className="floating-label">
-    <input className="floating-input" name={name} type={type} placeholder=" " />
-    <label htmlFor={name}>{content}</label>
-  </div>
-);
+  type, name, content, onChange,
+}) => {
+  // console.log(onChange);
+  const handleChange = (evt) => {
+    onChange(evt.target.value, name);
+  };
+  return (
+    <div className="floating-label">
+      <input className="floating-input" name={name} type={type} placeholder=" " onChange={handleChange} />
+      <label htmlFor={name}>{content}</label>
+    </div>
+  );
+};
 
 FormInput.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default FormInput;

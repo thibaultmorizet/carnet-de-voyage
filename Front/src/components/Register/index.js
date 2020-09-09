@@ -1,8 +1,8 @@
 import React from 'react';
 
 // Import Components
+import FormRegister from 'src/containers/register';
 import Menu from '../Menu';
-import FormRegister from './form';
 
 // Import Styles
 import './styles.scss';
