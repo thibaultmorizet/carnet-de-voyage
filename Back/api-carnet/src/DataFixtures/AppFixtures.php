@@ -7,6 +7,7 @@ use App\Entity\Step;
 use App\Entity\User;
 use App\Entity\Travel;
 use App\Entity\Comment;
+use App\Entity\Picture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -81,10 +82,10 @@ class AppFixtures extends Fixture
 
 
         // create 10 travels
-        for ($i = 0; $i < 10; $i++) {
+        for ($travelNumber = 0; $travelNumber < 10; $travelNumber++) {
             $travel = new Travel();
-            $travel->setTitle('travel ' . $i);
-            $travel->setDescription('Text description ' . $i);
+            $travel->setTitle('travel ' . $travelNumber);
+            $travel->setDescription('Text description' . $travelNumber);
             $travel->setStatus(mt_rand(0, 1));
             $travel->setCreationDate(new \DateTime('NOW'));
             $travel->setCreatedAt(new DateTime('NOW'));
@@ -105,11 +106,10 @@ class AppFixtures extends Fixture
         // create an array of Step Entity
         $stepEntities[] = null;
 
-        // create 20 step
-
-        for ($i = 0; $i < 20; $i++) {
+        // create 20 steps
+        for ($stepNumber = 0; $stepNumber < 20; $stepNumber++) {
             $step = new Step();
-            $step->setDescription('Text description step ' . $i);
+            $step->setDescription('Text description step' . $stepNumber);
             $step->setLatitude(random_int(-90, 90));
             $step->setLongitude(random_int(-180, 180));
             $step->setStepDate(new DateTime('NOW'));
@@ -120,11 +120,10 @@ class AppFixtures extends Fixture
             $manager->persist($step);
         }
 
-        // create 20 comment
-
-        for ($i = 0; $i < 20; $i++) {
+        // create 20 comments
+        for ($commentNumber = 0; $commentNumber < 20; $commentNumber++) {
             $comment = new Comment();
-            $comment->setComment("Commentaire " . $i);
+            $comment->setComment("Comment" . $commentNumber);
             // Get a random User in array $userEntities
             $userRandom = $userEntities[rand(1, 5)];
             $comment->setUser($userRandom);
@@ -132,6 +131,16 @@ class AppFixtures extends Fixture
             $stepRandom = $stepEntities[rand(1, (count($stepEntities) - 1))];
             $comment->setStep($stepRandom);
             $manager->persist($comment);
+        }
+
+        // create 20 pictures
+        for ($pictureNumber = 1; $pictureNumber < 21; $pictureNumber++) {
+            $picture = new Picture();
+            $picture->setUrl('picture' . $pictureNumber . '.jpeg');
+            // Get a random Step in array $stepEntities
+            $stepRandom = $stepEntities[rand(1, (count($stepEntities) - 1))];
+            $picture->setStep($stepRandom);
+            $manager->persist($picture);
         }
 
         $manager->flush();
