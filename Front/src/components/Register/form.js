@@ -1,8 +1,9 @@
 /* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import PropTypes, { array } from 'prop-types';
+import PropTypes from 'prop-types';
 import { errorMessage } from 'src/selectors/carnetDeVoyage';
+import { useHistory } from 'react-router-dom';
 import FormInput from '../FormInput';
 import './styles.scss';
 
@@ -15,6 +16,7 @@ const RegisterForm = ({
   password,
   verifyPassword,
 }) => {
+  const history = useHistory();
   const handleSubmit = (evt) => {
     const allDataForRegister = [email, first_name, last_name, password, verifyPassword];
     const emptyElement = allDataForRegister.includes('');
@@ -35,7 +37,9 @@ const RegisterForm = ({
         errorMessage(message);
       }
       else {
+        evt.preventDefault();
         handleRegister();
+        history.push('/login');
       }
     }
     else {
