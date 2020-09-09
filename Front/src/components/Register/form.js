@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { errorMessage } from 'src/selectors/carnetDeVoyage';
+import { useToasts } from 'react-toast-notifications';
 import { useHistory } from 'react-router-dom';
 import FormInput from '../FormInput';
 import './styles.scss';
@@ -17,6 +18,8 @@ const RegisterForm = ({
   verifyPassword,
 }) => {
   const history = useHistory();
+  const { addToast } = useToasts();
+
   const handleSubmit = (evt) => {
     const allDataForRegister = [email, first_name, last_name, password, verifyPassword];
     const emptyElement = allDataForRegister.includes('');
@@ -39,6 +42,10 @@ const RegisterForm = ({
       else {
         evt.preventDefault();
         handleRegister();
+        addToast('Incription Réussie', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
         history.push('/login');
       }
     }
