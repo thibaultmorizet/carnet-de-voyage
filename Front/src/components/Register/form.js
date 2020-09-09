@@ -1,6 +1,7 @@
+/* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { array } from 'prop-types';
 import { errorMessage } from 'src/selectors/carnetDeVoyage';
 import FormInput from '../FormInput';
 import './styles.scss';
@@ -15,35 +16,27 @@ const RegisterForm = ({
   verifyPassword,
 }) => {
   const handleSubmit = (evt) => {
-    let isItEmpty = false;
+    const allDataForRegister = [email, first_name, last_name, password, verifyPassword];
+    const emptyElement = allDataForRegister.includes('');
 
-    if (email === '') {
-      isItEmpty = true;
-    }
-
-    if (first_name === '') {
-      isItEmpty = true;
-    }
-
-    if (last_name === '') {
-      isItEmpty = true;
-    }
-
-    if (password === '') {
-      isItEmpty = true;
-    }
-
-    if (verifyPassword === '') {
-      isItEmpty = true;
-    }
-
-    if (isItEmpty === true) {
+    // If inputs are empty
+    if (emptyElement === true) {
       evt.preventDefault();
       const message = 'Veuillez remplir tous les champs';
       errorMessage(message);
     }
+    // if password and passwordVerify are not the same
     else if (password === verifyPassword) {
-      handleRegister();
+      // regex : lowerCase, upperCase, a number, eight letter minimum
+      const regex = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/;
+      const isItGoodPasswordCharacter = password.match(regex);
+      if (isItGoodPasswordCharacter === null) {
+        const message = 'Votre mot de passe ne contient pas les caractères demandés';
+        errorMessage(message);
+      }
+      else {
+        handleRegister();
+      }
     }
     else {
       evt.preventDefault();
@@ -125,10 +118,4 @@ export default RegisterForm;
 // Prénom -- first_name
 // Email -- email
 // Mot de passe -- password
-
-// match(/[a-z]/)
-// match(/[A-Z]/)
-// match(/[0-9]/)
-// match(/\d/)
-
-// #a+# « a » doit apparaître au moins 1 fois
+// Salut1234
