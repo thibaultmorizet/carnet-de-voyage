@@ -6,11 +6,14 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -18,6 +21,22 @@ class User
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -28,21 +47,6 @@ class User
      * @ORM\Column(type="string", length=255)
      */
     private $firstName;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $role;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -60,30 +64,105 @@ class User
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Travel::class, mappedBy="creator", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity=Travel::class, mappedBy="followers")
      */
-    private $travel;
+    private $follower;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="userId", orphanRemoval=true)
      */
     private $comments;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Travel::class, inversedBy="followers")
-     */
-    private $follower;
-
     public function __construct()
     {
-        $this->travel = new ArrayCollection();
-        $this->comments = new ArrayCollection();
         $this->follower = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function onPersist()
+    {
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getLastName(): ?string
@@ -106,42 +185,6 @@ class User
     public function setFirstName(string $firstName): self
     {
         $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
 
         return $this;
     }
@@ -185,29 +228,26 @@ class User
     /**
      * @return Collection|Travel[]
      */
-    public function getTravel(): Collection
+    public function getFollower(): Collection
     {
-        return $this->travel;
+        return $this->follower;
     }
 
-    public function addTravel(Travel $travel): self
+    public function addFollower(Travel $follower): self
     {
-        if (!$this->travel->contains($travel)) {
-            $this->travel[] = $travel;
-            $travel->setCreator($this);
+        if (!$this->follower->contains($follower)) {
+            $this->follower[] = $follower;
+            $follower->addFollower($this);
         }
 
         return $this;
     }
 
-    public function removeTravel(Travel $travel): self
+    public function removeFollower(Travel $follower): self
     {
-        if ($this->travel->contains($travel)) {
-            $this->travel->removeElement($travel);
-            // set the owning side to null (unless already changed)
-            if ($travel->getCreator() === $this) {
-                $travel->setCreator(null);
-            }
+        if ($this->follower->contains($follower)) {
+            $this->follower->removeElement($follower);
+            $follower->removeFollower($this);
         }
 
         return $this;
@@ -225,7 +265,7 @@ class User
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
-            $comment->setUserId($this);
+            $comment->setUser($this);
         }
 
         return $this;
@@ -236,35 +276,9 @@ class User
         if ($this->comments->contains($comment)) {
             $this->comments->removeElement($comment);
             // set the owning side to null (unless already changed)
-            if ($comment->getUserId() === $this) {
-                $comment->setUserId(null);
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
             }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Travel[]
-     */
-    public function getFollower(): Collection
-    {
-        return $this->follower;
-    }
-
-    public function addFollower(Travel $follower): self
-    {
-        if (!$this->follower->contains($follower)) {
-            $this->follower[] = $follower;
-        }
-
-        return $this;
-    }
-
-    public function removeFollower(Travel $follower): self
-    {
-        if ($this->follower->contains($follower)) {
-            $this->follower->removeElement($follower);
         }
 
         return $this;
