@@ -23,6 +23,9 @@ const CarnetDeVoyage = () => (
         <Register />
       </Page>
     </Route>
+    <Route exact path="/travel/{id}/add">
+      <Page />
+    </Route>
     <Footer />
   </div>
 );

@@ -21,12 +21,12 @@ const RegisterForm = ({
   const { addToast } = useToasts();
 
   const handleSubmit = (evt) => {
+    evt.preventDefault();
     const allDataForRegister = [email, first_name, last_name, password, verifyPassword];
     const emptyElement = allDataForRegister.includes('');
 
     // If inputs are empty
     if (emptyElement === true) {
-      evt.preventDefault();
       const message = 'Veuillez remplir tous les champs';
       errorMessage(message);
     }
@@ -40,7 +40,6 @@ const RegisterForm = ({
         errorMessage(message);
       }
       else {
-        evt.preventDefault();
         handleRegister();
         addToast('Incription Réussie ! Vous allez recevoir un email de confirmation', {
           appearance: 'success',
@@ -50,7 +49,6 @@ const RegisterForm = ({
       }
     }
     else {
-      evt.preventDefault();
       const message = 'Vos mots de passe ne sont pas identiques';
       errorMessage(message);
     }
