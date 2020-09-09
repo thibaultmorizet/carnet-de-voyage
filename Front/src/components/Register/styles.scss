@@ -1,8 +1,11 @@
 .register {
-  height: 90vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;  
   justify-content: space-between;
+  background-image: url(../../assets/images/background-machu.jpg);
+  background-size: cover;
+  background-position: center;
   &__form {
    display: block;
    margin: auto;

@@ -3,7 +3,7 @@ import Button from '../Button';
 import Menu from '../Menu';
 import './styles.scss';
 
-const HeaderHomePage = () => (
+const Header = () => (
   <header className="headerHomePage">
     <div className="headerHomePage__mobile">
       <Button text="Connexion" />
@@ -15,4 +15,4 @@ const HeaderHomePage = () => (
   </header>
 );
 
-export default HeaderHomePage;
+export default Header;

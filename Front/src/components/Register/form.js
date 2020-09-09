@@ -42,7 +42,7 @@ const RegisterForm = ({
       else {
         evt.preventDefault();
         handleRegister();
-        addToast('Incription Réussie', {
+        addToast('Incription Réussie ! Vous allez recevoir un email de confirmation', {
           appearance: 'success',
           autoDismiss: true,
         });
