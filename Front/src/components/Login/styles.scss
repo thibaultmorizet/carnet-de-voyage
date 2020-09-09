@@ -4,6 +4,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-image: url(../../assets/images/background-machu.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  padding-top: 1em;
 
   &__form {
     
@@ -31,48 +36,13 @@
 }
 }
 
-.floating-label { 
-  position:relative; 
-  margin-bottom:1em; 
-  margin-top: 1.5em;
-}
-.floating-input {
-  font-size:1em;
-  padding:.5em;
-  display:block;
-  width:100%;
-  background-color: white;
-  border-radius: 10px;
-  border: none;
-  box-shadow: -1px 2px 15px -6px rgba(0,0,0,0.75);
-}
-
-label {
-  color: rgba(0, 0, 0, .5);
-  font-size:.9em;flex-direction: column;
-  position:absolute;
-  pointer-events:none;
-  left:10px;
-  top:10px;
-  transition:0.1s ease all; 
-  -moz-transition:0.1s ease all; 
-  -webkit-transition:0.1s ease all;
-}
-
-.floating-input:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
-  top:-1em;
-  font-size:.7em;
-  color: black;
-  color: rgb(55, 118, 139);
-}
-
 .form__span {
   display: flex;
   text-align: center;
   flex-direction: column;
   margin: auto;
   padding: 2em;
-  font-size: .8em;
+  font-size: .7em;
   width: 98%;
   line-height: 3em;
   text-decoration: underline;
@@ -104,5 +74,40 @@ label {
   cursor: pointer;
   &:hover {
     background-color: lightblue;
+  }
+}
+
+@media only screen and (min-width : 426px) {
+  .login {
+    &__form {
+     width: 50%;
+    }
+  } 
+}
+
+@media only screen and (min-width : 1024px) {
+  .login {
+    &__form {
+     width: 40%;
+    }
+
+  }
+}
+
+@media only screen and (min-width : 1440px) {
+  .login {
+    &__form {
+     width: 40%;
+    }
+
+  }
+}
+
+@media only screen and (min-width : 1824px) {
+  .login {
+    &__form {
+     width: 30%;
+    }
+
   }
 }
