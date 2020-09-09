@@ -8,6 +8,7 @@ import Presentation from '../Presentation';
 import UrlInput from '../UrlInput';
 import HeaderHomepage from '../HeaderHomepage';
 import Page from '../Page';
+import Login from '../Login';
 
 import './styles.css';
 
@@ -20,6 +21,11 @@ const CarnetDeVoyage = () => (
         <Title text="Carnets de Voyage" />
         <Presentation />
         <UrlInput />
+      </Page>
+    </Route>
+    <Route exact path="/login">
+      <Page>
+        <Login />
       </Page>
     </Route>
     <Footer />
