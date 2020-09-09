@@ -1,4 +1,8 @@
 .createStep {
+  background-image: url('../../assets/images/globe.svg');
+  background-repeat: no-repeat;
+  background-position:  bottom 0% right 100px;
+  height: auto;
   &__title, &__span{
     font-family: 'Pacifico', cursive;
   }
@@ -12,5 +16,32 @@
 
   &__span {
     padding-left: 4em;
+  }
+}
+
+
+.map {
+  height: 40vh;
+  background-color: lightblue;
+  margin: 1em;
+}
+
+.form {
+  width: 90%;
+  padding: 1em;
+  margin: 1em auto;
+  background-color: rgba($color: white, $alpha: .5);
+      backdrop-filter: blur(2px);
+  &__element {
+    &--submit {
+      margin-bottom: 4em;
+      display: block;
+      margin:1em auto 2em;
+      background-color: rgb(255, 217, 0);
+      border: none;
+      padding: 1em 3em;
+      border-radius: 15px;
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
   }
 }
