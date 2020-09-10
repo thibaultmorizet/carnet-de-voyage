@@ -1,17 +1,17 @@
 .createStep {
+  background-color: rgb(231, 247, 251);
   background-image: url('../../assets/images/globe.svg');
   background-repeat: no-repeat;
-  background-position:  bottom 0% right 100px;
+  background-position:  top 10% right 0px;
+  background-size: 70%;
   height: auto;
   &__title, &__span{
     font-family: 'Pacifico', cursive;
   }
 
   &__title {
-    font-size: 1.5em;
-    padding: 1em 1em .5em;
-    padding-bottom: .5em;
-    padding-top: 1em;
+    font-size: 2.5em;
+    padding: .5em 1em .5em;
   }
 
   &__span {
@@ -23,16 +23,19 @@
 .map {
   height: 40vh;
   background-color: lightblue;
-  margin: 1em;
+  margin:1em;
 }
 
 .formStep {
   width: 90%;
   padding: 1em;
-  margin: 1em auto;
+  margin: 2em auto;
   background-color: rgba($color: white, $alpha: .5);
-      backdrop-filter: blur(2px);
+  border-radius: 10px;
+  backdrop-filter: blur(2px);
+  box-shadow: 0px 2px 14px -8px rgba(0,0,0,0.75);
   &__element {
+    
     &--submit {
       margin-bottom: 4em;
       display: block;
@@ -63,9 +66,13 @@
 
 .text__fileButton {
   padding-bottom: .5em;
-  font-size: .9em;
+  font-size: .8em;
+  color: blue($color: #000000);
 }
 
+.littleMapTitle {
+  font-size: .8em;
+}
 
 
 
@@ -298,34 +305,76 @@
   }
 }
 
-@media only screen and (min-width : 768px) {
+@media only screen and (min-width : 769px) {
   .leaflet-control-geosearch form input {
-    min-width: 36em;
+    min-width: 20em;
   }
 
   .createStep {
     height: 100vh;
+    background-repeat: no-repeat;
+    background-position:  top 10% right 0px;
+    background-size: 40%;
   }
 
   .map {
     height: 60vh;
-    width: 30vw;
+    width: 40vw;
     background-color: lightblue;
-    margin: 1em;
+    margin: 1em 3em 1em 1em; 
+    padding: 1em;   
   }
 
   .formStep {
     width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+    backdrop-filter: blur(0px);
     &__element {
       display: flex;
+      &--submit {
+        position: absolute;
+        bottom: 0;
+        right: 10%;
+      }
       &--allInput {
         width: 40%;
         margin: 2em;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
+        
       }
     }
+    
+
+  }
+
+}
+
+@media only screen and (min-width : 1440px) {
+
+  .leaflet-control-geosearch form input {
+    min-width: 20em;
+  }
+
+  .createStep {
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position:  top 30% right 0px;
+    background-size: 30%;
+  }
+
+  .formStep {
+    &__element {
+      &--submit {
+      }
+      &--allInput {
+        width: 33%;
+        
+      }
+    }
+    
 
   }
 }
