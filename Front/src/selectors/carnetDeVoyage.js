@@ -17,3 +17,7 @@ export const errorMessage = (message) => {
     errorMessageElt.innerHTML = message;
   }
 };
+
+export const fileChangedHandler = (evt) => {
+  console.log(evt.target.files[0]);
+};
