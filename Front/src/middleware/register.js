@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { REGISTER } from 'src/actions/register';
+import { REGISTER } from '../actions/register';
 
 const Register = (store) => (next) => (action) => {
   switch (action.type) {
