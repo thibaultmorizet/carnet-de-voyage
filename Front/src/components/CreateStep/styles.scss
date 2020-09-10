@@ -26,7 +26,7 @@
   margin: 1em;
 }
 
-.form {
+.formStep {
   width: 90%;
   padding: 1em;
   margin: 1em auto;
@@ -46,6 +46,84 @@
   }
 }
 
+
+@media only screen and (min-width : 426px) {
+
+  .formStep {
+    width: 70%;
+  }
+  .leaflet-control-geosearch form input {
+    min-width: 30em;
+  }
+
+  .createStep {
+    background-position:  top 10% right 0%;
+    background-size: 60%;
+    &__title, &__span{
+      
+    }
+    &__title {
+      font-size: 3em;
+    }
+  
+    &__span {
+      padding-left: 4em;
+      font-size: 1.8em;
+    }
+  }
+}
+
+@media only screen and (min-width : 768px) {
+  .leaflet-control-geosearch form input {
+    min-width: 36em;
+  }
+
+  .createStep {
+    height: 100vh;
+  }
+
+  .map {
+    height: 60vh;
+    width: 30vw;
+    background-color: lightblue;
+    margin: 1em;
+  }
+
+  .formStep {
+    width: 100%;
+    &__element {
+      display: flex;
+      &--allInput {
+        width: 40%;
+        margin: 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+
+  }
+}
+
+.essaiii {
+  background-color: lightblue;
+  border: none;
+  // padding: 1em;
+  width: 30%;
+  font-size: 5em;
+}
+
+.upload {
+  position: relative;
+  border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
+}
 
 
 .leaflet-control-geosearch *,
@@ -150,18 +228,6 @@
   height: 30px;
   border-radius: 0 4px 4px 0;
   text-indent: 8px;
-}
-
-@media only screen and (min-width : 426px) {
-  .leaflet-control-geosearch form input {
-    min-width: 30em;
-  }
-}
-
-@media only screen and (min-width : 768px) {
-  .leaflet-control-geosearch form input {
-    min-width: 36em;
-  }
 }
 
 .leaflet-control-geosearch .results {
