@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import RegisterForm from 'src/components/Register/form';
+import RegisterForm from '../components/Register/form';
 import { changeValue } from '../actions/register';
 
 const mapStateToProps = (state) => ({

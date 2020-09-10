@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.scss';
 import Menu from '../Menu';
-import FormLogin from './form';
+import FormLogin from '../../containers/login';
 
 const Login = () => (
   <div className="login">

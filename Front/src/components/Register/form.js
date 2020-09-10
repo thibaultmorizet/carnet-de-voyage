@@ -2,9 +2,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { errorMessage } from 'src/selectors/carnetDeVoyage';
 import { useToasts } from 'react-toast-notifications';
 import { useHistory } from 'react-router-dom';
+import { errorMessage } from '../../selectors/carnetDeVoyage';
 import FormInput from '../FormInput';
 import './styles.scss';
 

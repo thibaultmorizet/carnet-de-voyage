@@ -1,4 +1,4 @@
-import { CHANGE_VALUE } from 'src/actions/register';
+import { CHANGE_VALUE } from '../actions/register';
 
 export const initialState = {
   last_name: '',
