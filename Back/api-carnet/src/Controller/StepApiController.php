@@ -28,7 +28,7 @@ class StepApiController extends AbstractController
     public function add(SerializerInterface $serializer, Request $request, ValidatorInterface $validator, Travel $travel)
     {
         try {
-            // transforme le JSON en objet de type step
+            // transforms the JSON to object of type step
             $step = $serializer->deserialize(
                 $request->getContent(),
                 Step::class,
@@ -36,10 +36,10 @@ class StepApiController extends AbstractController
                 ['attributes' => ['title', 'description', 'latitude', 'longitude', 'step_like']]
             );
 
-            //Si le contenu de la requete n'est pas du JSON correct
-            // le deserializer va emettre une exception
+            //If the content of the request is not correct JSON
+            // the deserializer will throw an exception
         } catch (NotEncodableValueException $exception) {
-            // si c'est le cas on renvoi a celui qui appel l'API une erreur
+            // we then send an error to the one who calls the API
             return $this->json(
                 [
                     "success" => false,
@@ -49,13 +49,13 @@ class StepApiController extends AbstractController
             );
         }
 
-        // Avant de persister l'objet on verifie que son contenu est correct
-        // on demande au validator de comparer les propriété de mon objet avec les contrainte de validation (@Assert)
+        // Before persisting the object we check that its content is correct
+        // we ask the validator to compare the properties of my object with the validation constraints (@Assert)
         $errors = $validator->validate($step);
-        // Si on trouve des erreur
+        // if we found errors
         if ($errors->count() > 0) {
 
-            // on renvoi a celui qui a appelé l'API les erreur trouvées par le validator
+            // we return the errors found by the validator to the one who called the API
             return $this->json(
                 [
                     "success" => false,
@@ -65,16 +65,23 @@ class StepApiController extends AbstractController
             );
         }
 
+        //transforms JSON content into Array
         $requestArray = json_decode($request->getContent(), true);
 
+        //add the date of the JSON request to the step object
         $step->setStepDate(new \DateTime($requestArray['step_date']));
 
+        //add the travel object to the step object
         $step->setTravel($travel);
 
+        //if the array picture exists in the JSON request and it is not empty
         if (array_key_exists('picture', $requestArray) && $requestArray['picture'] != null) {
+            //for each non-empty url
             foreach ($requestArray['picture'] as  $url) {
                 if (!empty($url)) {
+                    //we create a new picture entity
                     $picture = new Picture();
+                    //add the url and step to the picture entity
                     $picture->setUrl($url);
                     $picture->setStep($step);
                     $manager = $this->getDoctrine()->getManager();
@@ -83,12 +90,12 @@ class StepApiController extends AbstractController
             }
         }
 
-        // si tout est ok alors on enregistre l'objet en BDD
+        // if everything is ok then we save the object in Database
 
         $manager->persist($step);
         $manager->flush();
 
-        // on renvoi un petit message de confirmation de tout est OK
+        // we return confirmation message of everything is OK
         return $this->json(
             [
                 "success" => true,
@@ -105,77 +112,126 @@ class StepApiController extends AbstractController
     {
         $manager = $this->getDoctrine()->getManager();
 
+        //we select the desired step object with the url id
         $step = $stepRepository->find($id2);
 
+        //we create an array of picture belonging to the step
         $pictures = $pictureRepository->findBy(['step' => $step->getId()]);
-
+        
+        //transforms JSON content into Array
         $requestArray = json_decode($request->getContent(), true);
 
+        //if the request contains a title, we replace the old one with the title of the request
         if (array_key_exists('title', $requestArray) && $requestArray['title'] != null) {
             $step->setTitle($requestArray['title']);
         }
 
+        //if the request contains a description, we replace the old one with the description of the request
         if (array_key_exists('description', $requestArray) && $requestArray['description'] != null) {
             $step->setDescription($requestArray['description']);
         }
 
+        //if the request contains a latitude, we replace the old one with the latitude of the request
         if (array_key_exists('latitude', $requestArray) && $requestArray['latitude'] != null) {
             $step->setLatitude(($requestArray['latitude']));
         }
 
+        //if the request contains a longitude, we replace the old one with the longitude of the request
         if (array_key_exists('longitude', $requestArray) && $requestArray['longitude'] != null) {
             $step->setLongitude(($requestArray['longitude']));
         }
 
+        //if the request contains a step_date, we replace the old one with the step_date of the request
         if (array_key_exists('step_date', $requestArray) && $requestArray['step_date'] != null) {
             $step->setStepDate(new \DateTime($requestArray['step_date']));
         }
 
-
+        //if the array picture exists in the JSON request and it is not empty
         if (array_key_exists('picture', $requestArray) && $requestArray['picture'] != null) {
 
+            //browse each picture of the database
             foreach ($pictures as $picture) {
                 $pictureDelete = True;
+                //browse each picture of the request
                 foreach ($requestArray['picture'] as  $url) {
+                    //if the database picture matches with the request picture
                     if ($picture->getUrl() == $url) {
-                        $pictureDelete=False;
-                    break;
+                        //we didn't delete the picture
+                        $pictureDelete = False;
+                        //we leave the loop
+                        break;
                     }
                 }
 
+                //if $pictureDelete == True 
                 if ($pictureDelete) {
+                    //we delete the picture of the database
                     $step->removePicture($picture);
                 }
             }
 
+            //browse each picture of the request
             foreach ($requestArray['picture'] as  $url) {
                 $pictureAdd = True;
+                //if the url isn't empty
                 if (!empty($url)) {
+                    //browse each picture of the database
                     foreach ($pictures as $picture) {
+                        //if the database picture matches with the request picture
                         if ($picture->getUrl() == $url) {
-                            $pictureAdd=False;
-                        break;
+                            //we didn't add the picture to the database
+                            $pictureAdd = False;
+                            //we leave the loop
+                            break;
                         }
                     }
                 }
-                if ($pictureAdd) {
+                //if $pictureAdd == True 
+                if ($pictureAdd) {                    
+                    //we create a new picture entity
                     $newPicture = new Picture();
+                    //add the url and step to the picture entity
                     $newPicture->setUrl($url);
                     $newPicture->setStep($step);
+                    //we prepare the element to be added to the database
                     $manager->persist($newPicture);
                 }
             }
         }
 
-
+        // if everything is ok then we save the object in Database
         $manager->persist($step);
         $manager->flush();
 
-        // on renvoi un petit message de confirmation de tout est OK
+        // we return confirmation message of everything is OK
         return $this->json(
             [
                 "success" => true,
                 "id" => $step->getId()
+            ],
+            Response::HTTP_OK
+        );
+    }
+
+    /**
+     *  @Route("/delete/{id2}", name="api_step_delete", methods={"DELETE"})
+     */
+    public function delete(StepRepository $stepRepository, $id2)
+    {
+        //we select the desired step object with the url id
+        $step = $stepRepository->find($id2);
+
+        
+        $manager = $this->getDoctrine()->getManager();
+
+        // we delete the step object and all that is linked to it
+        $manager->remove($step);
+        $manager->flush();
+
+        //we return confirmation message of everything is OK
+        return $this->json(
+            [
+                "success" => true
             ],
             Response::HTTP_OK
         );
