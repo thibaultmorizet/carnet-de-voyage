@@ -110,6 +110,7 @@ class AppFixtures extends Fixture
         for ($stepNumber = 0; $stepNumber < 20; $stepNumber++) {
             $step = new Step();
             $step->setDescription('Text description step' . $stepNumber);
+            $step->setTitle('Title step' . $stepNumber);
             $step->setLatitude(random_int(-90, 90));
             $step->setLongitude(random_int(-180, 180));
             $step->setStepDate(new DateTime('NOW'));
