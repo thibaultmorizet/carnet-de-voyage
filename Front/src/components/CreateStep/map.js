@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Map, Marker, Popup, TileLayer,
+  Map, TileLayer,
 } from 'react-leaflet';
 // import { OpenStreetMapProvider, GeoSearchControl } from 'leaflet-geosearch';
 import { SearchControl, OpenStreetMapProvider } from 'react-leaflet-geosearch';
