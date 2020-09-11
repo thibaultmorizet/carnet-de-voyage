@@ -20,7 +20,6 @@ const Menu = () => (
         >
           Inscription
         </NavLink>
-
       </li>
     </nav>
   </div>
