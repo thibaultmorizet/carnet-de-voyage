@@ -8,12 +8,14 @@ use App\Entity\Travel;
 use App\Repository\PictureRepository;
 use App\Repository\StepRepository;
 use PhpParser\Node\Stmt\Break_;
+use SplFileInfo;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
@@ -74,19 +76,39 @@ class StepApiController extends AbstractController
         //add the travel object to the step object
         $step->setTravel($travel);
 
+
         //if the array picture exists in the JSON request and it is not empty
         if (array_key_exists('picture', $requestArray) && $requestArray['picture'] != null) {
-            //for each non-empty url
-            foreach ($requestArray['picture'] as  $url) {
-                if (!empty($url)) {
+            for($pictureJson = 0; $pictureJson < count($requestArray['picture']); $pictureJson++) {
+
+                // je recupère le fichier uploadé
+                /** @var UploadedFile $pictureFile */
+                $pictureFile = $requestArray['picture'][$pictureJson + 1]['data'];
+                $pictureUrl = $requestArray['picture'][$pictureJson + 1]['url'];
+                $pictureName = uniqid() . strrchr($pictureUrl, '.');
+                $spl = new SplFileInfo($pictureName);
+                $extension = $spl->getExtension();
+                if ($extension != "jpeg" and $extension != "png") {
+                    return $this->json(
+                        [
+                            "success" => false
+                        ],
+                        Response::HTTP_NOT_ACCEPTABLE
+                    );
+                } else {
+                    $fileSystem = new Filesystem();
+                    $current_dir_path = getcwd()."/uploads/pictures/travel".$travel->getId()."step/";
+                    $decodePicture = base64_decode($pictureFile);
+                    $fileSystem->dumpFile($current_dir_path.$pictureName, $decodePicture);
                     //we create a new picture entity
                     $picture = new Picture();
                     //add the url and step to the picture entity
-                    $picture->setUrl($url);
+                    $picture->setUrl($pictureName);
                     $picture->setStep($step);
                     $manager = $this->getDoctrine()->getManager();
                     $manager->persist($picture);
                 }
+                
             }
         }
 
@@ -94,6 +116,8 @@ class StepApiController extends AbstractController
 
         $manager->persist($step);
         $manager->flush();
+
+        rename(getcwd()."/uploads/pictures/travel".$travel->getId()."step/",getcwd()."/uploads/pictures/travel".$travel->getId()."step".$step->getId()."/");
 
         // we return confirmation message of everything is OK
         return $this->json(
@@ -108,7 +132,7 @@ class StepApiController extends AbstractController
     /**
      *  @Route("/update/{id2}", name="api_step_update", methods={"PUT"})
      */
-    public function update(Request $request, StepRepository $stepRepository, $id2, PictureRepository $pictureRepository)
+    public function update(Request $request, StepRepository $stepRepository, $id2, PictureRepository $pictureRepository, Travel $travel)
     {
         $manager = $this->getDoctrine()->getManager();
 
@@ -117,7 +141,7 @@ class StepApiController extends AbstractController
 
         //we create an array of picture belonging to the step
         $pictures = $pictureRepository->findBy(['step' => $step->getId()]);
-        
+
         //transforms JSON content into Array
         $requestArray = json_decode($request->getContent(), true);
 
@@ -148,56 +172,43 @@ class StepApiController extends AbstractController
 
         //if the array picture exists in the JSON request and it is not empty
         if (array_key_exists('picture', $requestArray) && $requestArray['picture'] != null) {
+            foreach ($pictures as $picture ) {
+                $step->removePicture($picture);
 
-            //browse each picture of the database
-            foreach ($pictures as $picture) {
-                $pictureDelete = True;
-                //browse each picture of the request
-                foreach ($requestArray['picture'] as  $url) {
-                    //if the database picture matches with the request picture
-                    if ($picture->getUrl() == $url) {
-                        //we didn't delete the picture
-                        $pictureDelete = False;
-                        //we leave the loop
-                        break;
-                    }
-                }
-
-                //if $pictureDelete == True 
-                if ($pictureDelete) {
-                    //we delete the picture of the database
-                    $step->removePicture($picture);
-                }
             }
-
-            //browse each picture of the request
-            foreach ($requestArray['picture'] as  $url) {
-                $pictureAdd = True;
-                //if the url isn't empty
-                if (!empty($url)) {
-                    //browse each picture of the database
-                    foreach ($pictures as $picture) {
-                        //if the database picture matches with the request picture
-                        if ($picture->getUrl() == $url) {
-                            //we didn't add the picture to the database
-                            $pictureAdd = False;
-                            //we leave the loop
-                            break;
-                        }
-                    }
-                }
-                //if $pictureAdd == True 
-                if ($pictureAdd) {                    
+            for($pictureJson = 0; $pictureJson < count($requestArray['picture']); $pictureJson++) {
+                $fileSystem = new Filesystem();
+                $fileSystem->remove(getcwd()."/uploads/pictures/travel".$travel->getId()."step".$step->getId()."/");
+                // je recupère le fichier uploadé
+                /** @var UploadedFile $pictureFile */
+                $pictureFile = $requestArray['picture'][$pictureJson + 1]['data'];
+                $pictureUrl = $requestArray['picture'][$pictureJson + 1]['url'];
+                $pictureName = uniqid() . strrchr($pictureUrl, '.');
+                $spl = new SplFileInfo($pictureName);
+                $extension = $spl->getExtension();
+                if ($extension != "jpeg" and $extension != "png") {
+                    return $this->json(
+                        [
+                            "success" => false
+                        ],
+                        Response::HTTP_NOT_ACCEPTABLE
+                    );
+                } else {
+                    $current_dir_path = getcwd()."/uploads/pictures/travel".$travel->getId()."step".$step->getId()."/";
+                    $decodePicture = base64_decode($pictureFile);
+                    $fileSystem->dumpFile($current_dir_path.$pictureName, $decodePicture);
                     //we create a new picture entity
-                    $newPicture = new Picture();
+                    $picture = new Picture();
                     //add the url and step to the picture entity
-                    $newPicture->setUrl($url);
-                    $newPicture->setStep($step);
-                    //we prepare the element to be added to the database
-                    $manager->persist($newPicture);
+                    $picture->setUrl($pictureName);
+                    $picture->setStep($step);
+                    $manager = $this->getDoctrine()->getManager();
+                    $manager->persist($picture);
                 }
+                
             }
         }
+
 
         // if everything is ok then we save the object in Database
         $manager->persist($step);
@@ -216,12 +227,15 @@ class StepApiController extends AbstractController
     /**
      *  @Route("/delete/{id2}", name="api_step_delete", methods={"DELETE"})
      */
-    public function delete(StepRepository $stepRepository, $id2)
+    public function delete(StepRepository $stepRepository, $id2, Travel $travel)
     {
         //we select the desired step object with the url id
         $step = $stepRepository->find($id2);
+        $current_dir_path = getcwd()."/uploads/pictures/travel".$travel->getId()."step".$step->getId()."/";
+        $fileSystem = new Filesystem();
+        $fileSystem->remove($current_dir_path);
 
-        
+
         $manager = $this->getDoctrine()->getManager();
 
         // we delete the step object and all that is linked to it
@@ -236,4 +250,5 @@ class StepApiController extends AbstractController
             Response::HTTP_OK
         );
     }
+
 }
