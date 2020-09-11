@@ -2,6 +2,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import { ToastProvider } from 'react-toast-notifications';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 // == Import : local
@@ -16,7 +17,9 @@ import store from 'src/store';
 const rootReactElement = (
   <Provider store={store}>
     <Router>
-      <CarnetDeVoyage />
+      <ToastProvider>
+        <CarnetDeVoyage />
+      </ToastProvider>
     </Router>
   </Provider>
 );

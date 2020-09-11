@@ -9,6 +9,7 @@ use App\Repository\PictureRepository;
 use App\Repository\StepRepository;
 use PhpParser\Node\Stmt\Break_;
 use SplFileInfo;
+use App\Repository\TravelRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,10 +32,12 @@ class StepApiController extends AbstractController
     {
         try {
             // transforms the JSON to object of type step
+
             $step = $serializer->deserialize(
                 $request->getContent(),
                 Step::class,
                 'json',
+
                 ['attributes' => ['title', 'description', 'latitude', 'longitude', 'step_like']]
             );
 
@@ -42,6 +45,8 @@ class StepApiController extends AbstractController
             // the deserializer will throw an exception
         } catch (NotEncodableValueException $exception) {
             // we then send an error to the one who calls the API
+
+
             return $this->json(
                 [
                     "success" => false,
@@ -58,6 +63,7 @@ class StepApiController extends AbstractController
         if ($errors->count() > 0) {
 
             // we return the errors found by the validator to the one who called the API
+
             return $this->json(
                 [
                     "success" => false,
@@ -66,6 +72,7 @@ class StepApiController extends AbstractController
                 Response::HTTP_BAD_REQUEST
             );
         }
+
 
         //transforms JSON content into Array
         $requestArray = json_decode($request->getContent(), true);
@@ -126,6 +133,7 @@ class StepApiController extends AbstractController
 
         // if everything is ok then we save the object in Database
 
+
         $manager->persist($step);
         $manager->flush();
 
@@ -133,6 +141,7 @@ class StepApiController extends AbstractController
         rename(getcwd() . "/uploads/pictures/travel" . $travel->getId() . "/step/", getcwd() . "/uploads/pictures/travel" . $travel->getId() . "/step" . $step->getId() . "/");
 
         // we return confirmation message of everything is OK
+
         return $this->json(
             [
                 "success" => true,
@@ -141,6 +150,7 @@ class StepApiController extends AbstractController
             Response::HTTP_CREATED
         );
     }
+
 
     /**
      *  @Route("/update/{id2}", name="api_step_update", methods={"PUT"})
@@ -276,4 +286,5 @@ class StepApiController extends AbstractController
             Response::HTTP_OK
         );
     }
+
 }
