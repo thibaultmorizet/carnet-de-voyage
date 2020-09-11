@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
-import RegisterForm from '../components/Register/form';
-import { changeValue } from '../actions/register';
+
+import RegisterForm from 'src/components/Register/form';
+import { changeValue, saveRegister } from '../actions/register';
+
 
 const mapStateToProps = (state) => ({
   last_name: state.register.last_name,
@@ -12,6 +14,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   handleRegister: () => {
+
+    const action = saveRegister();
+    dispatch(action);
+
   },
   changeField: (value, name) => {
     const action = changeValue(value, name);

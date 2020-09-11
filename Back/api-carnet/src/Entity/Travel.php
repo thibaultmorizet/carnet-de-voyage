@@ -7,8 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass=TravelRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Travel
 {
@@ -61,12 +63,12 @@ class Travel
     private $creator;
 
     /**
-     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="travelId", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="travel", orphanRemoval=true)
      */
     private $steps;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="follower")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="follower")
      */
     private $followers;
 
@@ -74,6 +76,14 @@ class Travel
     {
         $this->steps = new ArrayCollection();
         $this->followers = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function onPersist()
+    {
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -189,7 +199,7 @@ class Travel
     {
         if (!$this->steps->contains($step)) {
             $this->steps[] = $step;
-            $step->setTravelId($this);
+            $step->setTravel($this);
         }
 
         return $this;
@@ -200,8 +210,8 @@ class Travel
         if ($this->steps->contains($step)) {
             $this->steps->removeElement($step);
             // set the owning side to null (unless already changed)
-            if ($step->getTravelId() === $this) {
-                $step->setTravelId(null);
+            if ($step->getTravel() === $this) {
+                $step->setTravel(null);
             }
         }
 
@@ -220,7 +230,6 @@ class Travel
     {
         if (!$this->followers->contains($follower)) {
             $this->followers[] = $follower;
-            $follower->addFollower($this);
         }
 
         return $this;
@@ -230,7 +239,6 @@ class Travel
     {
         if ($this->followers->contains($follower)) {
             $this->followers->removeElement($follower);
-            $follower->removeFollower($this);
         }
 
         return $this;

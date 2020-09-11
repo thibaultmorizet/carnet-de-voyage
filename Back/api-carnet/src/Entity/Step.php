@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=StepRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Step
 {
@@ -58,15 +59,15 @@ class Step
      * @ORM\ManyToOne(targetEntity=Travel::class, inversedBy="steps")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $travelId;
+    private $travel;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="stepId", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="step", orphanRemoval=true)
      */
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="stepId", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="step", orphanRemoval=true)
      */
     private $pictures;
 
@@ -74,6 +75,14 @@ class Step
     {
         $this->comments = new ArrayCollection();
         $this->pictures = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function onPersist()
+    {
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -165,14 +174,14 @@ class Step
         return $this;
     }
 
-    public function getTravelId(): ?Travel
+    public function getTravel(): ?Travel
     {
-        return $this->travelId;
+        return $this->travel;
     }
 
-    public function setTravelId(?Travel $travelId): self
+    public function setTravel(?Travel $travel): self
     {
-        $this->travelId = $travelId;
+        $this->travel = $travel;
 
         return $this;
     }
@@ -189,7 +198,7 @@ class Step
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
-            $comment->setStepId($this);
+            $comment->setStep($this);
         }
 
         return $this;
@@ -200,8 +209,8 @@ class Step
         if ($this->comments->contains($comment)) {
             $this->comments->removeElement($comment);
             // set the owning side to null (unless already changed)
-            if ($comment->getStepId() === $this) {
-                $comment->setStepId(null);
+            if ($comment->getStep() === $this) {
+                $comment->setStep(null);
             }
         }
 
@@ -220,7 +229,7 @@ class Step
     {
         if (!$this->pictures->contains($picture)) {
             $this->pictures[] = $picture;
-            $picture->setStepId($this);
+            $picture->setStep($this);
         }
 
         return $this;
@@ -231,8 +240,8 @@ class Step
         if ($this->pictures->contains($picture)) {
             $this->pictures->removeElement($picture);
             // set the owning side to null (unless already changed)
-            if ($picture->getStepId() === $this) {
-                $picture->setStepId(null);
+            if ($picture->getStep() === $this) {
+                $picture->setStep(null);
             }
         }
 

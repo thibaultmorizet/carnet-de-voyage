@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=PictureRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Picture
 {
@@ -36,7 +37,15 @@ class Picture
      * @ORM\ManyToOne(targetEntity=Step::class, inversedBy="pictures")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $stepId;
+    private $step;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function onPersist()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -79,14 +88,14 @@ class Picture
         return $this;
     }
 
-    public function getStepId(): ?Step
+    public function getStep(): ?Step
     {
-        return $this->stepId;
+        return $this->step;
     }
 
-    public function setStepId(?Step $stepId): self
+    public function setStep(?Step $step): self
     {
-        $this->stepId = $stepId;
+        $this->step = $step;
 
         return $this;
     }

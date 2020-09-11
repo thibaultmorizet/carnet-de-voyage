@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Comment
 {
@@ -36,13 +37,21 @@ class Comment
      * @ORM\ManyToOne(targetEntity=Step::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $stepId;
+    private $step;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $userId;
+    private $user;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function onPersist()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -85,27 +94,29 @@ class Comment
         return $this;
     }
 
-    public function getStepId(): ?Step
+    public function getStep(): ?Step
     {
-        return $this->stepId;
+        return $this->step;
     }
 
-    public function setStepId(?Step $stepId): self
+    public function setStep(?Step $step): self
     {
-        $this->stepId = $stepId;
+        $this->step = $step;
 
         return $this;
     }
 
-    public function getUserId(): ?User
+    public function getUser(): ?User
     {
-        return $this->userId;
+        return $this->user;
     }
 
-    public function setUserId(?User $userId): self
+    public function setUser(?User $user): self
     {
-        $this->userId = $userId;
+        $this->user = $user;
 
         return $this;
     }
+
+
 }
