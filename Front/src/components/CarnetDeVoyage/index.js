@@ -7,6 +7,7 @@ import HomePage from '../HomePage';
 import Footer from '../Footer';
 import Page from '../Page';
 import Register from '../Register';
+import Login from '../Login';
 
 import './styles.css';
 
@@ -21,6 +22,11 @@ const CarnetDeVoyage = () => (
     <Route exact path="/register">
       <Page>
         <Register />
+      </Page>
+    </Route>
+    <Route exact path="/login">
+      <Page>
+        <Login />
       </Page>
     </Route>
     <Route exact path="/travel/{id}/add">
