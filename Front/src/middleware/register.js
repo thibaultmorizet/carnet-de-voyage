@@ -12,17 +12,10 @@ const Register = (store) => (next) => (action) => {
         email: state.register.email,
         password: state.register.password,
       };
-      const options = {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': '*',
-          'Access-Control-Allow-Methods': 'POST',
-        },
-      };
+
       const dataJSON = JSON.stringify(data);
 
-      axios.post('http://127.0.0.1:8000/api/user/register', data, options,
-        { withCredentials: true })
+      axios.post('http://127.0.0.1:8000/api/user/register', dataJSON)
         .then((response) => {
           console.log(response);
         })

@@ -11,10 +11,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchUser: () => {
-        console.log('je passe dans fetchUser');
-        dispatch(fetchUser());
-    }
+  fetchUser: () => {
+    console.log('je passe dans fetchUser');
+    dispatch(fetchUser());
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(User);

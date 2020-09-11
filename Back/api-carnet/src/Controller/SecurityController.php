@@ -22,6 +22,15 @@ class SecurityController extends AbstractController
 
         $user = $userRepository->findOneBy(['email' => $userData['email']]);
 
+        if(!$user){
+            return $this->json(
+                [
+                    "success" => false,
+                    "errors" => "Vous n'avez pas de compte, merci de vous inscrire"
+                ],
+                Response::HTTP_BAD_REQUEST
+            );
+        }
         if ($user->getToken()) {
             return $this->json(
                 [
@@ -32,5 +41,18 @@ class SecurityController extends AbstractController
             );
         }
 
+        if ($userData['password']) {
+
+        }
+
+
+
+    }
+    /**
+     * @Route("/api/login_check", name="app_api_login_check")
+     */
+    public function apiLoginCheck()
+    {
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

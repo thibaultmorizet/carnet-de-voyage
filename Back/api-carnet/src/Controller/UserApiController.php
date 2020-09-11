@@ -11,6 +11,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -23,7 +24,6 @@ class UserApiController extends AbstractController
      */
     public function register(UserPasswordEncoderInterface $passwordEncoder, SerializerInterface $serializer, Request $request, ValidatorInterface $validator, MailerInterface $mailerInterface, MailerController $mailerController)
     {
-      dd($request->getContent());
 
         try {
             $user = $serializer->deserialize(
@@ -61,17 +61,12 @@ class UserApiController extends AbstractController
 
         $mailerController->sendEmail($mailerInterface, $user->getEmail(), 'Merci de vous inscrire!', 'emails/activation.twig.html', $user->getFirstName(), $user->getToken());
 
-        // return $this->json(
-        //     [
-        //         "success" => true,
-        //         "id" => $user->getId()
-        //     ],
-        //     Response::HTTP_CREATED
-        // );
-           $test = $request->getContent();
-        return $this->render(
-            'base.html.twig',
-            ['test' => $test]
+        return $this->json(
+            [
+                "success" => true,
+                "id" => $user->getId()
+            ],
+            Response::HTTP_CREATED
         );
     }
 
@@ -108,14 +103,16 @@ class UserApiController extends AbstractController
     /**
      * @Route("/api/admin/user/list", name="user_list", methods={"GET"})
      */
-    public function list(UserRepository $userRepository) 
+    public function list(UserRepository $userRepository)
     {
         $userList = $userRepository->findAll();
-
-        return $this->json([
+        
+        return $this->json(
             $userList,
             200,
-            []
-        ]);
+            [],
+            ["groups" => "user"]
+        );
     }
 }
+

@@ -1,7 +1,7 @@
 import { HAVE_USER } from '../actions/user';
 
 export const initialState = {
-  last_name: 'je suis un nom',
+  last_name: 'je suis un boulet',
   first_name: '',
   email: '',
   password: '',
