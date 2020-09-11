@@ -1,6 +1,6 @@
 import React from 'react';
 import Menu from 'src/components/Menu';
-import Form from 'src/components/CreateStep/form';
+import Form from 'src/components/CreateStep/formStep';
 
 import './styles.scss';
 

@@ -7,7 +7,7 @@ import { fileChangedHandler } from 'src/selectors/carnetDeVoyage';
 import FileUploader from './fileButton';
 import './styles.scss';
 
-const Form = () => (
+const FormStep = () => (
   <div className="formStep">
 
     <form action="" className="formStep__element">
@@ -42,4 +42,4 @@ const Form = () => (
   </div>
 );
 
-export default Form;
+export default FormStep;
