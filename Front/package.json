@@ -1,5 +1,6 @@
 {
   "name": "react-modele",
+  "proxy": "http://localhost:8000",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",

@@ -7,6 +7,7 @@ import HomePage from '../HomePage';
 import Footer from '../Footer';
 import Page from '../Page';
 import Register from '../Register';
+import User from '../../containers/user';
 
 import './styles.css';
 
@@ -23,8 +24,8 @@ const CarnetDeVoyage = () => (
         <Register />
       </Page>
     </Route>
-    <Route exact path="/travel/{id}/add">
-      <Page />
+    <Route exact path="/admin/user/list">
+      <User />
     </Route>
     <Footer />
   </div>

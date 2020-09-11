@@ -17,11 +17,14 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserApiController extends AbstractController
 {
+
     /**
      * @Route("/api/user/register", name="user_register", methods={"POST"})
      */
     public function register(UserPasswordEncoderInterface $passwordEncoder, SerializerInterface $serializer, Request $request, ValidatorInterface $validator, MailerInterface $mailerInterface, MailerController $mailerController)
     {
+      dd($request->getContent());
+
         try {
             $user = $serializer->deserialize(
                 $request->getContent(),
@@ -58,12 +61,17 @@ class UserApiController extends AbstractController
 
         $mailerController->sendEmail($mailerInterface, $user->getEmail(), 'Merci de vous inscrire!', 'emails/activation.twig.html', $user->getFirstName(), $user->getToken());
 
-        return $this->json(
-            [
-                "success" => true,
-                "id" => $user->getId()
-            ],
-            Response::HTTP_CREATED
+        // return $this->json(
+        //     [
+        //         "success" => true,
+        //         "id" => $user->getId()
+        //     ],
+        //     Response::HTTP_CREATED
+        // );
+           $test = $request->getContent();
+        return $this->render(
+            'base.html.twig',
+            ['test' => $test]
         );
     }
 
@@ -95,5 +103,19 @@ class UserApiController extends AbstractController
                 "id" => $user->getId(),
             ],
         );
+    }
+
+    /**
+     * @Route("/api/admin/user/list", name="user_list", methods={"GET"})
+     */
+    public function list(UserRepository $userRepository) 
+    {
+        $userList = $userRepository->findAll();
+
+        return $this->json([
+            $userList,
+            200,
+            []
+        ]);
     }
 }
