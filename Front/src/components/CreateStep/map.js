@@ -1,40 +1,44 @@
-import React from 'react';
-import {
-  Map, TileLayer,
-} from 'react-leaflet';
-// import { OpenStreetMapProvider, GeoSearchControl } from 'leaflet-geosearch';
-import { SearchControl, OpenStreetMapProvider } from 'react-leaflet-geosearch';
+import React, { useEffect } from 'react';
+import * as GeoSearch from 'leaflet-geosearch';
 import './styles.scss';
+import L from 'leaflet';
+
+const yourEventHandler = (evt) => {
+  console.log(evt);
+};
 
 const MapElement = () => {
-  const prov = OpenStreetMapProvider();
-  const GeoSearchControlElement = SearchControl;
-  const essai = (evt) => {
-    console.log('salut', evt.target);
-  };
-  return (
-    <div>
-      <p className="littleMapTitle">Ajouter une localisation :</p>
-      <Map className="map" center={[48.858884469956905, 2.346941100000031]} zoom={12} onClick={essai}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        />
-        <GeoSearchControlElement
-          provider={prov}
-          showMarker
-          showPopup={false}
-          popupFormat={({ query, result }) => result.label}
-          maxMarkers={3}
-          retainZoomLevel={false}
-          animateZoom
-          autoClose={false}
-          searchLabel="Entrer une adresse"
-          keepResult
-        />
-      </Map>
-    </div>
+  const generateMap = () => {
+    const map = L.map('map').setView([51.505, -0.09], 13);
+    const marker = L.marker([51.505, -0.09]).addTo(map);
 
+    console.log(map);
+    const provider = new GeoSearch.OpenStreetMapProvider();
+
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png').addTo(map);
+
+    const search = new GeoSearch.GeoSearchControl({
+      provider,
+      searchLabel: 'Localisation',
+      autoClose: true,
+      showMarker: true,
+      showPopup: true,
+      keepResult: true,
+      marker: {
+        icon: new L.Icon.Default(),
+        draggable: false,
+      },
+    });
+    map.addControl(search);
+    map.on('geosearch/showlocation', yourEventHandler);
+  };
+
+  useEffect(() => {
+    generateMap();
+  }, []);
+
+  return (
+    <div id="map" />
   );
 };
 export default MapElement;

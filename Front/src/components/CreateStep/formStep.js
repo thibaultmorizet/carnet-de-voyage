@@ -7,39 +7,45 @@ import { fileChangedHandler } from 'src/selectors/carnetDeVoyage';
 import FileUploader from './fileButton';
 import './styles.scss';
 
-const FormStep = () => (
-  <div className="formStep">
+const FormStep = ({ changeField }) => {
+  console.log(changeField);
+  const handleChange = (evt) => {
+    changeField(evt.target.value, 'description');
+  };
+  return (
+    <div className="formStep">
 
-    <form action="" className="formStep__element">
-      <Map />
+      <form action="" className="formStep__element">
+        <Map />
 
-      <div className="formStep__element--allInput">
-        <FormInput
-          type="text"
-          name="title"
-          content="Titre"
-          onChange={() => console.log('coucou')}
-        />
+        <div className="formStep__element--allInput">
+          <FormInput
+            type="text"
+            name="title"
+            content="Titre"
+            onChange={changeField}
+          />
 
-        <div className="floating-label">
-          <textarea className="floating-input" name="description" placeholder=" " rows="9" />
-          <label htmlFor="description"> Description (255 caractères maximum) </label>
+          <div className="floating-label">
+            <textarea type="text" className="floating-input" name="description" placeholder=" " rows="9" onChange={handleChange} />
+            <label htmlFor="description"> Description (255 caractères maximum) </label>
+          </div>
+
+          <FormInput
+            type="text"
+            name="step_date"
+            content="Date (JJ/MM/AAAA)"
+            onChange={changeField}
+          />
+
+          <FileUploader />
+
+          <input className="formStep__element--submit" type="submit" value="Enregistrer l'étape" />
         </div>
 
-        <FormInput
-          type="text"
-          name="date"
-          content="Date (JJ/MM/AAAA)"
-          onChange={() => console.log('coucou')}
-        />
-
-        <FileUploader />
-
-        <input className="formStep__element--submit" type="submit" value="Enregistrer l'étape" />
-      </div>
-
-    </form>
-  </div>
-);
+      </form>
+    </div>
+  );
+};
 
 export default FormStep;

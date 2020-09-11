@@ -1,4 +1,4 @@
-import { CHANGE_VALUE } from 'src/actions/createStep';
+import { CHANGE_VALUE_STEP } from 'src/actions/createStep';
 
 export const initialState = {
   title: '',
@@ -10,8 +10,11 @@ export const initialState = {
 
 const createStep = (state = initialState, action = {}) => {
   switch (action.type) {
-    case CHANGE_VALUE:
-      return state;
+    case CHANGE_VALUE_STEP:
+      return {
+        ...state,
+        [action.name]: action.value,
+      };
     default:
       return state;
   }

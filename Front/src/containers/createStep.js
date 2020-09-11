@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import CreateStep from 'src/components/CreateStep/formStep';
+import { changeValue } from 'src/actions/createStep';
 
 const mapStateToProps = (state) => ({
   title: state.createStep.title,
@@ -9,6 +10,11 @@ const mapStateToProps = (state) => ({
   step_date: state.createStep.step_date,
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  changeField: (value, name) => {
+    console.log(name);
+    dispatch(changeValue(value, name));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateStep);
