@@ -33,7 +33,14 @@
     margin: auto;
 
   }
+ }
 }
+
+.errorMessage {
+  font-size: .8em;
+  text-align: center;
+  color: rgb(122, 31, 31);
+  font-weight: bold;
 }
 
 .form__span {

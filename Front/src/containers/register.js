@@ -12,10 +12,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   handleRegister: () => {
-    console.log('je suis dans le handleLogin');
   },
   changeField: (value, name) => {
-    console.log('je suis dans changeField');
     const action = changeValue(value, name);
     dispatch(action);
   },

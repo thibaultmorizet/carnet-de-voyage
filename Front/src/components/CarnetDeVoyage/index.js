@@ -19,14 +19,14 @@ const CarnetDeVoyage = () => (
         <HomePage />
       </Page>
     </Route>
-    <Route exact path="/login">
-      <Page>
-        <Login />
-      </Page>
-    </Route>
     <Route exact path="/register">
       <Page>
         <Register />
+      </Page>
+    </Route>
+    <Route exact path="/login">
+      <Page>
+        <Login />
       </Page>
     </Route>
     <Route exact path="/travel/{id}/add">

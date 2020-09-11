@@ -8,12 +8,10 @@ import FormInput from '../FormInput';
 import './styles.scss';
 
 const LoginForm = ({
-
   handleLogin,
   changeField,
   email,
   password,
-
 }) => {
   const history = useHistory();
 
@@ -29,8 +27,8 @@ const LoginForm = ({
     }
     else {
       handleLogin();
+      history.push('/register');
     }
-    history.push('/register');
   };
 
   return (
@@ -74,7 +72,7 @@ const LoginForm = ({
 
           <span>
             <NavLink
-              to="/email-forgot-password"
+              to="/register"
               exact
             >
               Vous n'êtes pas inscrit ?
