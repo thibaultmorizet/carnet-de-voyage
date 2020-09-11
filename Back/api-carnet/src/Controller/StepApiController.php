@@ -80,7 +80,7 @@ class StepApiController extends AbstractController
         //if the array picture exists in the JSON request and it is not empty
         if (array_key_exists('picture', $requestArray) && $requestArray['picture'] != null) {
             //for each picture array in request
-            for($pictureJson = 0; $pictureJson < count($requestArray['picture']); $pictureJson++) {
+            for ($pictureJson = 0; $pictureJson < count($requestArray['picture']); $pictureJson++) {
 
                 //we recover the uploaded file
                 /** @var UploadedFile $pictureFile */
@@ -102,18 +102,17 @@ class StepApiController extends AbstractController
                         ],
                         Response::HTTP_NOT_ACCEPTABLE
                     );
-                
-                } 
+                }
                 //-if it is
                 else {
                     //we create a new FileSystem object
                     $fileSystem = new Filesystem();
                     //we prepare the way for store the pictures
-                    $current_dir_path = getcwd()."/uploads/pictures/travel".$travel->getId()."step/";
+                    $current_dir_path = getcwd() . "/uploads/pictures/travel" . $travel->getId() . "/step/";
                     //we decode the data picture
                     $decodePicture = base64_decode($pictureFile);
                     //we create the repository of the step and put the picture in this repository
-                    $fileSystem->dumpFile($current_dir_path.$pictureName, $decodePicture);
+                    $fileSystem->dumpFile($current_dir_path . $pictureName, $decodePicture);
                     //we create a new picture entity
                     $picture = new Picture();
                     //add the url and step to the picture entity
@@ -122,7 +121,6 @@ class StepApiController extends AbstractController
                     $manager = $this->getDoctrine()->getManager();
                     $manager->persist($picture);
                 }
-                
             }
         }
 
@@ -132,7 +130,7 @@ class StepApiController extends AbstractController
         $manager->flush();
 
         //we rename the repository for add the Step ID
-        rename(getcwd()."/uploads/pictures/travel".$travel->getId()."step/",getcwd()."/uploads/pictures/travel".$travel->getId()."step".$step->getId()."/");
+        rename(getcwd() . "/uploads/pictures/travel" . $travel->getId() . "/step/", getcwd() . "/uploads/pictures/travel" . $travel->getId() . "/step" . $step->getId() . "/");
 
         // we return confirmation message of everything is OK
         return $this->json(
@@ -187,16 +185,15 @@ class StepApiController extends AbstractController
 
         //if the array picture exists in the JSON request and it is not empty
         if (array_key_exists('picture', $requestArray) && $requestArray['picture'] != null) {
-            foreach ($pictures as $picture ) {
+            foreach ($pictures as $picture) {
                 $step->removePicture($picture);
-
             }
             //for each picture array in request
-            for($pictureJson = 0; $pictureJson < count($requestArray['picture']); $pictureJson++) {
+            for ($pictureJson = 0; $pictureJson < count($requestArray['picture']); $pictureJson++) {
                 //we create a new FileSystem object
                 $fileSystem = new Filesystem();
                 //we delete the repository with old pictures
-                $fileSystem->remove(getcwd()."/uploads/pictures/travel".$travel->getId()."step".$step->getId()."/");
+                $fileSystem->remove(getcwd() . "/uploads/pictures/travel" . $travel->getId() . "/step" . $step->getId() . "/");
                 //we recover the uploaded file
                 /** @var UploadedFile $pictureFile */
                 //we recover the data and the url in variables
@@ -217,15 +214,15 @@ class StepApiController extends AbstractController
                         ],
                         Response::HTTP_NOT_ACCEPTABLE
                     );
-                }      
+                }
                 //if it is          
                 else {
                     //we prepare the way for store the pictures
-                    $current_dir_path = getcwd()."/uploads/pictures/travel".$travel->getId()."step".$step->getId()."/";
-                     //we decode the data picture
+                    $current_dir_path = getcwd() . "/uploads/pictures/travel" . $travel->getId() . "/step" . $step->getId() . "/";
+                    //we decode the data picture
                     $decodePicture = base64_decode($pictureFile);
                     //we create the repository of the step and put the picture in this repository
-                    $fileSystem->dumpFile($current_dir_path.$pictureName, $decodePicture);
+                    $fileSystem->dumpFile($current_dir_path . $pictureName, $decodePicture);
                     //we create a new picture entity
                     $picture = new Picture();
                     //add the url and step to the picture entity
@@ -234,7 +231,6 @@ class StepApiController extends AbstractController
                     $manager = $this->getDoctrine()->getManager();
                     $manager->persist($picture);
                 }
-                
             }
         }
 
@@ -264,8 +260,7 @@ class StepApiController extends AbstractController
         //we create a new FileSystem object
         $fileSystem = new Filesystem();
         //we delete the repository with old pictures
-        $fileSystem->remove(getcwd()."/uploads/pictures/travel".$travel->getId()."step".$step->getId()."/");
-
+        $fileSystem->remove(getcwd() . "/uploads/pictures/travel" . $travel->getId() . "/step" . $step->getId() . "/");
 
         $manager = $this->getDoctrine()->getManager();
 
@@ -281,5 +276,4 @@ class StepApiController extends AbstractController
             Response::HTTP_OK
         );
     }
-
 }
