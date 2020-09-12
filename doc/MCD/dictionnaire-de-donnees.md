@@ -33,6 +33,7 @@
 |Champ|Type|Spécificités|Description|
 |-|-|-|-|
 |id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant de l'étape|
+|title|VARCHAR(255)|NOT NULL|Le titre de l'étape|
 |description|VARCHAR(255)|NOT NULL|La description de l'étape|
 |latitude|FLOAT|NOT NULL|Latitude de l'étape|
 |longitude|FLOAT|NOT NULL|Longitude de l'étape|
