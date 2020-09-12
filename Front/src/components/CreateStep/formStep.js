@@ -7,16 +7,21 @@ import { fileChangedHandler } from 'src/selectors/carnetDeVoyage';
 import FileUploader from './fileButton';
 import './styles.scss';
 
-const FormStep = ({ changeField }) => {
+const FormStep = ({ changeField, handleSubmit }) => {
   console.log(changeField);
   const handleChange = (evt) => {
     changeField(evt.target.value, 'description');
   };
+
+  const handleForm = (evt) => {
+    evt.preventDefault();
+    handleSubmit();
+  };
   return (
     <div className="formStep">
 
-      <form action="" className="formStep__element">
-        <Map />
+      <form action="" className="formStep__element" onSubmit={handleForm}>
+        <Map onChange={changeField} />
 
         <div className="formStep__element--allInput">
           <FormInput

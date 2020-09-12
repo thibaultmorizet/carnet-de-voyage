@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "@material/floating-label": "^7.0.0",
+    "axios": "^0.20.0",
     "leaflet": "^1.7.1",
     "leaflet-geosearch": "^3.0.6",
     "prop-types": "^15.7.2",

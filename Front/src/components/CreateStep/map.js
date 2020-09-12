@@ -3,11 +3,14 @@ import * as GeoSearch from 'leaflet-geosearch';
 import './styles.scss';
 import L from 'leaflet';
 
-const yourEventHandler = (evt) => {
-  console.log(evt);
-};
-
-const MapElement = () => {
+const MapElement = ({ onChange }) => {
+  const yourEventHandler = (evt) => {
+    const result = evt.location;
+    const lat = result.y;
+    const lng = result.x;
+    onChange(lat, 'latitude');
+    onChange(lng, 'longitude');
+  };
   const generateMap = () => {
     const map = L.map('map').setView([51.505, -0.09], 13);
     const marker = L.marker([51.505, -0.09]).addTo(map);

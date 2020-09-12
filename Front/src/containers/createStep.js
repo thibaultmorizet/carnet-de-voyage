@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import CreateStep from 'src/components/CreateStep/formStep';
-import { changeValue } from 'src/actions/createStep';
+import { changeValue, saveStep } from 'src/actions/createStep';
 
 const mapStateToProps = (state) => ({
   title: state.createStep.title,
@@ -14,6 +14,10 @@ const mapDispatchToProps = (dispatch) => ({
   changeField: (value, name) => {
     console.log(name);
     dispatch(changeValue(value, name));
+  },
+  handleSubmit: () => {
+    console.log('toto');
+    // dispatch(saveStep());
   },
 });
 
