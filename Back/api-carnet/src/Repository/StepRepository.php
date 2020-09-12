@@ -47,4 +47,8 @@ class StepRepository extends ServiceEntityRepository
         ;
     }
     */
+
+/*     public function findAllByCollection($value): ?Step
+ */
+
 }
