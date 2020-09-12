@@ -45,9 +45,8 @@ class SecurityController extends AbstractController
 
         }
 
-
-
     }
+
     /**
      * @Route("/api/login_check", name="app_api_login_check")
      */
