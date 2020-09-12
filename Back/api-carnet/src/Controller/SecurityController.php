@@ -13,39 +13,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class SecurityController extends AbstractController
 {
-    /**
-     * @Route("api/login", name="app_login")
-     */
-    public function login(SerializerInterface $serializer, Request $request, UserRepository $userRepository)
-    {
-        $userData = json_decode($request->getContent(), true);
 
-        $user = $userRepository->findOneBy(['email' => $userData['email']]);
-
-        if(!$user){
-            return $this->json(
-                [
-                    "success" => false,
-                    "errors" => "Vous n'avez pas de compte, merci de vous inscrire"
-                ],
-                Response::HTTP_BAD_REQUEST
-            );
-        }
-        if ($user->getToken()) {
-            return $this->json(
-                [
-                    "success" => false,
-                    "errors" => "Votre compte n'est pas activé, verifier vos mail"
-                ],
-                Response::HTTP_BAD_REQUEST
-            );
-        }
-
-        if ($userData['password']) {
-
-        }
-
-    }
 
     /**
      * @Route("/api/login_check", name="app_api_login_check")
