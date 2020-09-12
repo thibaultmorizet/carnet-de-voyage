@@ -31,7 +31,7 @@ const CarnetDeVoyage = () => (
 
     <Route exact path="/admin/user/list">
       <User />
-
+    </Route>
     <Route exact path="/login">
       <Page>
         <Login />
