@@ -41,6 +41,7 @@
 | utilisateur | pouvoir modifier une date à mon étape | |
 | utilisateur | pouvoir commenter les étapes des voyages pour lesquels j'ai été invité | - |
 | utilisateur | pouvoir aimer les étapes des voyages pour lesquels j'ai été invité | - |
+| utilisateur | pouvoir ne plus aimer les étapes des voyages pour lesquels j'ai été invité | - |
 
 
 ## USER

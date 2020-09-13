@@ -2,23 +2,23 @@
 
 namespace App\Controller;
 
-use App\Entity\Step;
-use App\Entity\Picture;
-use App\Entity\Travel;
-use App\Repository\PictureRepository;
-use App\Repository\StepRepository;
-use PhpParser\Node\Stmt\Break_;
 use SplFileInfo;
+use App\Entity\Step;
+use App\Entity\Travel;
+use App\Entity\Picture;
+use PhpParser\Node\Stmt\Break_;
+use App\Repository\StepRepository;
 use App\Repository\TravelRepository;
+use App\Repository\PictureRepository;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 
 /**
  *  @Route("/api/travel/{id}")
@@ -38,7 +38,7 @@ class StepApiController extends AbstractController
                 Step::class,
                 'json',
 
-                ['attributes' => ['title', 'description', 'latitude', 'longitude', 'step_like']]
+                ['attributes' => ['title', 'description', 'latitude', 'longitude']]
             );
 
             //If the content of the request is not correct JSON
@@ -83,6 +83,8 @@ class StepApiController extends AbstractController
         //add the travel object to the step object
         $step->setTravel($travel);
 
+        //put the step_like to 0
+        $step->setStepLike(0);
 
         //if the array picture exists in the JSON request and it is not empty
         if (array_key_exists('picture', $requestArray) && $requestArray['picture'] != null) {
@@ -287,4 +289,51 @@ class StepApiController extends AbstractController
         );
     }
 
+    /**
+     *  @Route("/like/{id2}", name="api_step_like", methods={"GET"})
+     */
+    public function like(StepRepository $stepRepository, $id2)
+    {
+        //we select the desired step object with the url id
+        $step = $stepRepository->find($id2);
+
+        $current_step_like = $step->getStepLike();
+        $new_step_like = $current_step_like +1;
+        $step->setStepLike($new_step_like);
+
+        $manager = $this->getDoctrine()->getManager();
+        $manager->flush();
+
+        //we return confirmation message of everything is OK
+        return $this->json(
+            [
+                "success" => true
+            ],
+            Response::HTTP_OK
+        );
+    }
+
+        /**
+     *  @Route("/unlike/{id2}", name="api_step_unlike", methods={"GET"})
+     */
+    public function unlike(StepRepository $stepRepository, $id2)
+    {
+        //we select the desired step object with the url id
+        $step = $stepRepository->find($id2);
+
+        $current_step_like = $step->getStepLike();
+        $new_step_like = $current_step_like -1;
+        $step->setStepLike($new_step_like);
+
+        $manager = $this->getDoctrine()->getManager();
+        $manager->flush();
+
+        //we return confirmation message of everything is OK
+        return $this->json(
+            [
+                "success" => true
+            ],
+            Response::HTTP_OK
+        );
+    }
 }
