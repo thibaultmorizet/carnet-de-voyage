@@ -23,9 +23,10 @@
 |`/travel/{id1}/update/{id2}`|`PUT`|`TravelController`|`update`|`modification d'étape`|`formulaire de modification d'étape`|`{id1} du voyage {id2} de l'étape`|
 |`/travel/{id}/add`|`POST`|`TravelController`|`add`|`nouvelle étape`|`formulaire de création d'étape`|`formulaire d'une nouvelle étape`|
 |`/travel/{id1}/delete/{id2}`|`DELETE`|`TravelController`|`delete`|`suppression d'étape`|`bouton de suppression d'étape`|`{id1} du voyage {id2} de l'étape`|
-|`/travel/{id}/comment/{id}`|`GET`|`TravelController`|`addComment`|`Ajouter un commentaire`|`Permet d'ajouter un commentaire`|`Ajout commentaire`|
-|`/travel/{id}/like/{id}`|`GET`|`TravelController`|`addLike`|`Aimer un post`|`Permet de liker un post`|`Ajout d'un like`|
-|`/travel/{id}/comment/{id}/delete`|`GET`|`TravelController`|`deleteComment`|`Suppression d'un commentaire`|`Permet de supprimer un commentaire`|`Suppression de commentaire possible que par l'admin`|
+|`/travel/{id}/comment/{id}`|`GET`|`TravelController`|`comment`|`Ajouter un commentaire`|`Permet d'ajouter un commentaire`|`Ajout commentaire`|
+|`/travel/{id}/like/{id}`|`GET`|`TravelController`|`like`|`Aimer un post`|`Permet de liker un post`|`Ajout d'un like`|
+|`/travel/{id}/unlike/{id}`|`GET`|`TravelController`|`unlike`|`Ne plus aimer un post`|`Permet de déliker un post`|`Suppression d'un like`|
+|`/travel/{id}/comment/{id}/delete`|`DELETE`|`TravelController`|`deleteComment`|`Suppression d'un commentaire`|`Permet de supprimer un commentaire`|`Suppression de commentaire possible que par l'admin`|
 
 | URL | HTTP Method | Controller | Method | Title | Content | Comment |
 |--|--|--|--|--|--|--|
