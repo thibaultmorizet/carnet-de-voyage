@@ -24,11 +24,12 @@ const RegisterForm = ({
     evt.preventDefault();
     const allDataForRegister = [email, first_name, last_name, password, verifyPassword];
     const emptyElement = allDataForRegister.includes('');
+    const divElt = '.register__form--submit';
 
     // If inputs are empty
     if (emptyElement === true) {
       const message = 'Veuillez remplir tous les champs';
-      errorMessage(message);
+      errorMessage(message, divElt);
     }
     // if password and passwordVerify are not the same
     else if (password === verifyPassword) {
@@ -37,7 +38,7 @@ const RegisterForm = ({
       const isItGoodPasswordCharacter = password.match(regex);
       if (isItGoodPasswordCharacter === null) {
         const message = 'Votre mot de passe ne contient pas les caractères demandés';
-        errorMessage(message);
+        errorMessage(message, divElt);
       }
       else {
         handleRegister();
@@ -50,7 +51,7 @@ const RegisterForm = ({
     }
     else {
       const message = 'Vos mots de passe ne sont pas identiques';
-      errorMessage(message);
+      errorMessage(message, divElt);
     }
   };
 

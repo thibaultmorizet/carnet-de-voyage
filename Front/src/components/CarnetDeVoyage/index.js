@@ -14,7 +14,6 @@ import User from '../../containers/user';
 import Login from '../Login';
 import TravelsList from '../TravelsList';
 
-
 import './styles.css';
 
 // == Composant
@@ -41,8 +40,9 @@ const CarnetDeVoyage = () => (
     <Route exact path="/travels/list">
       <Page>
         <TravelsList />
+      </Page>
     </Route>
-     <Route exact path="/travel/:id/add">
+    <Route exact path="/travel/:id/add">
       <Page>
         <CreateStep />
       </Page>
