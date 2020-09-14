@@ -7,12 +7,10 @@ const Login = (store) => (next) => (action) => {
       const state = store.getState();
 
       axios.post('http://34.239.44.174/api/login_check', {
-        last_name: state.register.last_name,
-        first_name: state.register.first_name,
-        email: state.register.email,
+        username: state.register.email,
         password: state.register.password,
-      },
-      { withCredentials: true })
+      }
+      )
         .then((response) => {
           console.log(response);
         })
