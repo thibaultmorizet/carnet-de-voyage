@@ -27,7 +27,7 @@ const LoginForm = ({
     }
     else {
       handleLogin();
-      history.push('/register');
+      history.push('/travels/list');
     }
   };
 

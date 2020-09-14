@@ -6,6 +6,7 @@ import rootReducer from '../reducers';
 import logMiddleware from '../middleware/logMiddleware';
 import createStep from '../middleware/createStep';
 import register from '../middleware/register';
+import login from '../middleware/login';
 import user from '../middleware/user';
 
 // == Enhancers
@@ -16,6 +17,7 @@ const enhancers = composeEnhancers(
     logMiddleware,
     createStep,
     register,
+    login,
     user,
     // secondMiddleware,
   ),

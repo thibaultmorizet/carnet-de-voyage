@@ -12,6 +12,7 @@ import CreateStep from '../CreateStep';
 import User from '../../containers/user';
 
 import Login from '../Login';
+import TravelsList from '../TravelsList';
 
 
 import './styles.css';
@@ -29,7 +30,6 @@ const CarnetDeVoyage = () => (
         <Register />
       </Page>
     </Route>
-
     <Route exact path="/admin/user/list">
       <User />
     </Route>
@@ -37,6 +37,10 @@ const CarnetDeVoyage = () => (
       <Page>
         <Login />
       </Page>
+    </Route>
+    <Route exact path="/travels/list">
+      <Page>
+        <TravelsList />
     </Route>
      <Route exact path="/travel/:id/add">
       <Page>
