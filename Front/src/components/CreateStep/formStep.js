@@ -1,14 +1,14 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect } from 'react';
+import React from 'react';
 import FormInput from 'src/components/FormInput';
 import Map from 'src/components/CreateStep/map';
 import PropTypes from 'prop-types';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { errorMessage, handleDate } from 'src/selectors/carnetDeVoyage';
 import { useToasts } from 'react-toast-notifications';
+import ImageUploader from 'react-images-upload';
 import FileUploader from './fileButton';
-
 import './styles.scss';
 
 const FormStep = ({
@@ -17,36 +17,25 @@ const FormStep = ({
   latitude,
   longitude,
   step_date,
-  response,
   changeField,
   handleSubmit,
 }) => {
-  const { id } = useParams();
   const { addToast } = useToasts();
-  const history = useHistory();
+  const { id } = useParams();
   const handleChange = (evt) => {
     changeField(evt.target.value, 'description');
   };
 
-  const toastFailOrSuccess = () => {
-    if (response === 'Error') {
-      addToast('Il y a eu une erreur dans l\'envoi de l\'étape. Veuillez réessayer plus tard', {
-        appearance: 'error',
-        autoDismiss: true,
-      });
-    }
-    else if (response === 'true') {
-      addToast('Votre étape à bien été enregistrée !', {
-        appearance: 'success',
-        autoDismiss: true,
-      });
-      history.push('/');
-    }
-  };
-
-  useEffect(() => {
-    toastFailOrSuccess();
-  }, [response]);
+  function getBase64(file, onLoadCallback) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
 
   const handleForm = (evt) => {
     evt.preventDefault();
@@ -69,6 +58,21 @@ const FormStep = ({
     else {
       changeField(id, 'travel_id');
       handleSubmit();
+    }
+  };
+
+  const handlePicture = (evt) => {
+    if (evt[0]) {
+      const promise = getBase64(evt[0]);
+      promise.then((result) => {
+        const elementWanted = result;
+        const { name } = evt[0];
+        const array = {
+          url: name,
+          data: elementWanted,
+        };
+        changeField(array, 'picture');
+      });
     }
   };
 
@@ -98,7 +102,15 @@ const FormStep = ({
             onChange={changeField}
           />
 
-          <FileUploader onChange={changeField} />
+          {/* <FileUploader onChange={changeField} /> */}
+          <ImageUploader
+            withIcon
+            onChange={handlePicture}
+            imgExtension={['.jpg', '.gif', '.png', '.gif']}
+            maxFileSize={5242880}
+            withPreview
+            singleImage
+          />
 
           <div className="divElement_form">
             <input className="formStep__element--submit" type="submit" value="Enregistrer l'étape" />
@@ -116,10 +128,6 @@ FormStep.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   step_date: PropTypes.string.isRequired,
-  latitude: PropTypes.string.isRequired,
-  longitude: PropTypes.string.isRequired,
-  step_date: PropTypes.string.isRequired,
-  response: PropTypes.string.isRequired,
 };
 
 export default FormStep;
