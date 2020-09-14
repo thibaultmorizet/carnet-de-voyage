@@ -7,7 +7,12 @@ import HomePage from '../HomePage';
 import Footer from '../Footer';
 import Page from '../Page';
 import Register from '../Register';
+import CreateStep from '../CreateStep';
+
+import User from '../../containers/user';
+
 import Login from '../Login';
+import TravelsList from '../TravelsList';
 
 import './styles.css';
 
@@ -24,14 +29,25 @@ const CarnetDeVoyage = () => (
         <Register />
       </Page>
     </Route>
+    <Route exact path="/admin/user/list">
+      <User />
+    </Route>
     <Route exact path="/login">
       <Page>
         <Login />
       </Page>
     </Route>
-    <Route exact path="/travel/{id}/add">
-      <Page />
+    <Route exact path="/travels/list">
+      <Page>
+        <TravelsList />
+      </Page>
     </Route>
+    <Route exact path="/travel/:id/add">
+      <Page>
+        <CreateStep />
+      </Page>
+    </Route>
+
     <Footer />
   </div>
 );

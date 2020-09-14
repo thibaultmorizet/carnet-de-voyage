@@ -10,4 +10,3 @@ export const changeValue = (value, name) => ({
 export const saveLogin = () => ({
   type: LOGIN,
 });
-

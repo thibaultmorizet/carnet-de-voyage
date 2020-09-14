@@ -11,17 +11,20 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
 class UserApiController extends AbstractController
 {
+
     /**
-     * @Route("/api/user/register", name="user_register", methods={"POST"})
+     * @Route("/api/login/register", name="user_register", methods={"POST"})
      */
     public function register(UserPasswordEncoderInterface $passwordEncoder, SerializerInterface $serializer, Request $request, ValidatorInterface $validator, MailerInterface $mailerInterface, MailerController $mailerController)
     {
+
         try {
             $user = $serializer->deserialize(
                 $request->getContent(),
@@ -96,4 +99,20 @@ class UserApiController extends AbstractController
             ],
         );
     }
+
+    /**
+     * @Route("/api/admin/user/list", name="user_list", methods={"GET"})
+     */
+    public function list(UserRepository $userRepository)
+    {
+        $userList = $userRepository->findAll();
+        
+        return $this->json(
+            $userList,
+            200,
+            [],
+            ["groups" => "user"]
+        );
+    }
 }
+
