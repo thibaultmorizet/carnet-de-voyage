@@ -31,10 +31,12 @@ export const handleDate = (date) => {
   return true;
 };
 
-export const emptyElement = (elt) => {
-  const isEmptyElement = elt.includes('');
-  if (isEmptyElement === true) {
-    return true;
-  }
-  return false;
+export const tryAgain = () => {
+  const { addToast } = useToasts();
+  return (
+    addToast('content', {
+      appearance: 'success',
+      autoDismiss: true,
+    })
+  );
 };

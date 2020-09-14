@@ -5,10 +5,10 @@ import FormInput from 'src/components/FormInput';
 import Map from 'src/components/CreateStep/map';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import { errorMessage, handleDate, emptyElement } from 'src/selectors/carnetDeVoyage';
-import { ToastProvider, useToasts } from 'react-toast-notifications';
+import { errorMessage, handleDate } from 'src/selectors/carnetDeVoyage';
+import { useToasts } from 'react-toast-notifications';
+import ImageUploader from 'react-images-upload';
 import FileUploader from './fileButton';
-
 import './styles.scss';
 
 const FormStep = ({
@@ -26,12 +26,24 @@ const FormStep = ({
     changeField(evt.target.value, 'description');
   };
 
+  function getBase64(file, onLoadCallback) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
   const handleForm = (evt) => {
     evt.preventDefault();
     const allDataForRegister = [title, description, latitude, longitude, step_date];
+    const isEmptyElement = allDataForRegister.includes('');
     const submitElt = '.divElement_form';
 
-    if (emptyElement(allDataForRegister) === true) {
+    if (isEmptyElement === true) {
       const message = 'Veuillez remplir tous les champs';
       errorMessage(message, submitElt);
     }
@@ -46,6 +58,21 @@ const FormStep = ({
     else {
       changeField(id, 'travel_id');
       handleSubmit();
+    }
+  };
+
+  const handlePicture = (evt) => {
+    if (evt[0]) {
+      const promise = getBase64(evt[0]);
+      promise.then((result) => {
+        const elementWanted = result;
+        const { name } = evt[0];
+        const array = {
+          url: name,
+          data: elementWanted,
+        };
+        changeField(array, 'picture');
+      });
     }
   };
 
@@ -75,7 +102,15 @@ const FormStep = ({
             onChange={changeField}
           />
 
-          <FileUploader onChange={changeField} />
+          {/* <FileUploader onChange={changeField} /> */}
+          <ImageUploader
+            withIcon
+            onChange={handlePicture}
+            imgExtension={['.jpg', '.gif', '.png', '.gif']}
+            maxFileSize={5242880}
+            withPreview
+            singleImage
+          />
 
           <div className="divElement_form">
             <input className="formStep__element--submit" type="submit" value="Enregistrer l'étape" />
