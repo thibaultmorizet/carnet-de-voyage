@@ -1,4 +1,4 @@
-import { CHANGE_VALUE_STEP, SAVE_STEP_VALUE } from 'src/actions/createStep';
+import { CHANGE_VALUE_STEP, SAVE_STEP_VALUE, CHANGE_VALUE_PICTURE } from 'src/actions/createStep';
 
 export const initialState = {
   title: '',
@@ -23,6 +23,11 @@ const createStep = (state = initialState, action = {}) => {
         ...state,
         response: action.value,
       };
+    case CHANGE_VALUE_PICTURE: {
+      return {
+        ...state,
+        picture: action.value,
+      }; }
     default:
       return state;
   }

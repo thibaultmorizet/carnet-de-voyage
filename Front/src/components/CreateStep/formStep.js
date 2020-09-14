@@ -20,6 +20,7 @@ const FormStep = ({
   response,
   changeField,
   handleSubmit,
+  changePicture,
 }) => {
   const { addToast } = useToasts();
   const history = useHistory();
@@ -85,17 +86,21 @@ const FormStep = ({
   };
 
   const handlePicture = (evt) => {
-    if (evt[0]) {
-      const promise = getBase64(evt[0]);
-      promise.then((result) => {
-        const elementWanted = result;
-        const { name } = evt[0];
-        const array = {
-          url: name,
-          data: elementWanted,
-        };
-        changeField(array, 'picture');
+    if (evt.length > 0) {
+      const arrayForPicture = [];
+      evt.map((elt) => {
+        const promise = getBase64(elt);
+        promise.then((result) => {
+          const elementWanted = result;
+          const { name } = elt;
+          const currentImg = {
+            url: name,
+            data: elementWanted,
+          };
+          arrayForPicture.push(currentImg);
+        });
       });
+      changePicture(arrayForPicture, 'picture', 'key');
     }
   };
 
@@ -132,7 +137,6 @@ const FormStep = ({
             imgExtension={['.jpg', '.gif', '.png', '.gif']}
             maxFileSize={5242880}
             withPreview
-            singleImage
           />
 
           <div className="divElement_form">

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import CreateStep from 'src/components/CreateStep/formStep';
-import { changeValue, saveStep } from 'src/actions/createStep';
+import { changeValue, saveStep, changeValuePicture } from 'src/actions/createStep';
 
 const mapStateToProps = (state) => ({
   title: state.createStep.title,
@@ -18,6 +18,9 @@ const mapDispatchToProps = (dispatch) => ({
   handleSubmit: () => {
     console.log('je fais un submit');
     dispatch(saveStep());
+  },
+  changePicture: (value, name) => {
+    dispatch(changeValuePicture(value, name));
   },
 });
 
