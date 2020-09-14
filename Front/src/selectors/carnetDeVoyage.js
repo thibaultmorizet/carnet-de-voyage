@@ -40,3 +40,47 @@ export const tryAgain = () => {
     })
   );
 };
+
+export const getBase64 = (file, onLoadCallback) => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.onload = () => {
+    resolve(reader.result);
+  };
+  reader.onerror = reject;
+  reader.readAsDataURL(file);
+});
+
+export const handlePicture = (evt, fctState) => {
+  if (evt.length > 0) {
+    const arrayForPicture = [];
+    evt.map((elt) => {
+      const promise = getBase64(elt);
+      promise.then((result) => {
+        const elementWanted = result;
+        const { name } = elt;
+        const currentImg = {
+          url: name,
+          data: elementWanted,
+        };
+        arrayForPicture.push(currentImg);
+      });
+    });
+    fctState(arrayForPicture, 'picture', 'key');
+  }
+};
+
+export const toastNotification = (addToast, history, response) => {
+  if (response === 'Error') {
+    addToast('Il y a eu une erreur dans l\'envoi de l\'étape. Veuillez réessayer plus tard', {
+      appearance: 'error',
+      autoDismiss: true,
+    });
+  }
+  else if (response === 'true') {
+    addToast('Votre étape à bien été enregistrée !', {
+      appearance: 'success',
+      autoDismiss: true,
+    });
+    history.push('/');
+  }
+};

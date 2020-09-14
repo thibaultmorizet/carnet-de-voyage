@@ -3,8 +3,8 @@ import { CHANGE_VALUE_STEP, SAVE_STEP_VALUE, CHANGE_VALUE_PICTURE } from 'src/ac
 export const initialState = {
   title: '',
   description: '',
-  latitude: '',
-  longitude: '',
+  latitude: 0,
+  longitude: 0,
   step_date: '',
   picture: '',
   travel_id: '',

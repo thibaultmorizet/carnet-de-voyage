@@ -5,10 +5,14 @@ import FormInput from 'src/components/FormInput';
 import Map from 'src/components/CreateStep/map';
 import PropTypes from 'prop-types';
 import { useParams, useHistory } from 'react-router-dom';
-import { errorMessage, handleDate } from 'src/selectors/carnetDeVoyage';
+import {
+  errorMessage,
+  handleDate,
+  handlePicture,
+  toastNotification,
+} from 'src/selectors/carnetDeVoyage';
 import { useToasts } from 'react-toast-notifications';
 import ImageUploader from 'react-images-upload';
-import FileUploader from './fileButton';
 import './styles.scss';
 
 const FormStep = ({
@@ -30,36 +34,12 @@ const FormStep = ({
   };
 
   const toastFailOrSuccess = () => {
-    console.log('erreur');
-    if (response === 'Error') {
-      addToast('Il y a eu une erreur dans l\'envoi de l\'étape. Veuillez réessayer plus tard', {
-        appearance: 'error',
-        autoDismiss: true,
-      });
-    }
-    else if (response === 'true') {
-      addToast('Votre étape à bien été enregistrée !', {
-        appearance: 'success',
-        autoDismiss: true,
-      });
-      history.push('/');
-    }
+    toastNotification(addToast, history, response);
   };
 
   useEffect(() => {
     toastFailOrSuccess();
   }, [response]);
-
-  function getBase64(file, onLoadCallback) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  }
 
   const handleForm = (evt) => {
     evt.preventDefault();
@@ -85,23 +65,8 @@ const FormStep = ({
     }
   };
 
-  const handlePicture = (evt) => {
-    if (evt.length > 0) {
-      const arrayForPicture = [];
-      evt.map((elt) => {
-        const promise = getBase64(elt);
-        promise.then((result) => {
-          const elementWanted = result;
-          const { name } = elt;
-          const currentImg = {
-            url: name,
-            data: elementWanted,
-          };
-          arrayForPicture.push(currentImg);
-        });
-      });
-      changePicture(arrayForPicture, 'picture', 'key');
-    }
+  const handleChangePicture = (evt) => {
+    handlePicture(evt, changePicture);
   };
 
   return (
@@ -130,10 +95,9 @@ const FormStep = ({
             onChange={changeField}
           />
 
-          {/* <FileUploader onChange={changeField} /> */}
           <ImageUploader
             withIcon
-            onChange={handlePicture}
+            onChange={handleChangePicture}
             imgExtension={['.jpg', '.gif', '.png', '.gif']}
             maxFileSize={5242880}
             withPreview
@@ -155,6 +119,11 @@ FormStep.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   step_date: PropTypes.string.isRequired,
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
+  step_date: PropTypes.string.isRequired,
+  response: PropTypes.string.isRequired,
+  changePicture: PropTypes.func.isRequired,
 };
 
 export default FormStep;
