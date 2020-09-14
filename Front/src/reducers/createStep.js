@@ -8,7 +8,7 @@ export const initialState = {
   step_date: '',
   picture: '',
   travel_id: '',
-  passage: false,
+  response: '',
 };
 
 const createStep = (state = initialState, action = {}) => {
@@ -21,7 +21,7 @@ const createStep = (state = initialState, action = {}) => {
     case SAVE_STEP_VALUE:
       return {
         ...state,
-        passage: action.value,
+        response: action.value,
       };
     default:
       return state;

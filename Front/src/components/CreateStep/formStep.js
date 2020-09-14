@@ -1,12 +1,12 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import FormInput from 'src/components/FormInput';
 import Map from 'src/components/CreateStep/map';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
-import { errorMessage, handleDate, emptyElement } from 'src/selectors/carnetDeVoyage';
-import { ToastProvider, useToasts } from 'react-toast-notifications';
+import { useParams, useHistory } from 'react-router-dom';
+import { errorMessage, handleDate } from 'src/selectors/carnetDeVoyage';
+import { useToasts } from 'react-toast-notifications';
 import FileUploader from './fileButton';
 
 import './styles.scss';
@@ -17,26 +17,42 @@ const FormStep = ({
   latitude,
   longitude,
   step_date,
-  passage,
+  response,
   changeField,
   handleSubmit,
 }) => {
   const { id } = useParams();
   const { addToast } = useToasts();
+  const history = useHistory();
   const handleChange = (evt) => {
     changeField(evt.target.value, 'description');
   };
+
+  const toastFailOrSuccess = () => {
+    if (response === 'Error') {
+      addToast('Il y a eu une erreur dans l\'envoi de l\'étape. Veuillez réessayer plus tard', {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
+    else if (response === 'true') {
+      addToast('Votre étape à bien été enregistrée !', {
+        appearance: 'success',
+        autoDismiss: true,
+      });
+      history.push('/');
+    }
+  };
+
+  useEffect(() => {
+    toastFailOrSuccess();
+  }, [response]);
 
   const handleForm = (evt) => {
     evt.preventDefault();
     const allDataForRegister = [title, description, latitude, longitude, step_date];
     const isEmptyElement = allDataForRegister.includes('');
     const submitElt = '.divElement_form';
-
-    async function popop() {
-      const response = await handleSubmit();
-      console.log(passage);
-    }
 
     if (isEmptyElement === true) {
       const message = 'Veuillez remplir tous les champs';
@@ -52,20 +68,7 @@ const FormStep = ({
     }
     else {
       changeField(id, 'travel_id');
-      popop();
-
-      // if (passage) {
-      //   addToast('content', {
-      //     appearance: 'success',
-      //     autoDismiss: true,
-      //   });
-      // }
-      // else {
-      //   addToast('fail', {
-      //     appearance: 'error',
-      //     autoDismiss: true,
-      //   });
-      // }
+      handleSubmit();
     }
   };
 
@@ -113,6 +116,10 @@ FormStep.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   step_date: PropTypes.string.isRequired,
+  latitude: PropTypes.string.isRequired,
+  longitude: PropTypes.string.isRequired,
+  step_date: PropTypes.string.isRequired,
+  response: PropTypes.string.isRequired,
 };
 
 export default FormStep;

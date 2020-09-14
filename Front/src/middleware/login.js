@@ -11,8 +11,7 @@ const Login = (store) => (next) => (action) => {
         first_name: state.register.first_name,
         email: state.register.email,
         password: state.register.password,
-      },
-      { withCredentials: true })
+      })
         .then((response) => {
           console.log(response);
         })

@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
   latitude: state.createStep.latitude,
   longitude: state.createStep.longitude,
   step_date: state.createStep.step_date,
-  passage: state.createStep.passage,
+  response: state.createStep.response,
 });
 
 const mapDispatchToProps = (dispatch) => ({
