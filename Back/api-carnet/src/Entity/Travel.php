@@ -8,8 +8,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-
-
 /**
  * @ORM\Entity(repositoryClass=TravelRepository::class)
  * @ORM\HasLifecycleCallbacks()
@@ -20,26 +18,31 @@ class Travel
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"step:show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"step:show"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"step:show"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"step:show"})
      */
     private $status;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"step:show"})
      */
     private $pictureUrl;
 
@@ -61,6 +64,7 @@ class Travel
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="travel")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"step:show"})
      */
     private $creator;
 
