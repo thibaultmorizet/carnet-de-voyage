@@ -6,6 +6,8 @@ export const initialState = {
   latitude: '',
   longitude: '',
   step_date: '',
+  picture: '',
+  travel_id: '',
 };
 
 const createStep = (state = initialState, action = {}) => {

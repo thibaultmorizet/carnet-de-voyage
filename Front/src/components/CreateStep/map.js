@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import * as GeoSearch from 'leaflet-geosearch';
-import './styles.scss';
+import PropTypes from 'prop-types';
 import L from 'leaflet';
+
+import './styles.scss';
 
 const MapElement = ({ onChange }) => {
   const yourEventHandler = (evt) => {
@@ -15,7 +17,6 @@ const MapElement = ({ onChange }) => {
     const map = L.map('map').setView([51.505, -0.09], 13);
     const marker = L.marker([51.505, -0.09]).addTo(map);
 
-    console.log(map);
     const provider = new GeoSearch.OpenStreetMapProvider();
 
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png').addTo(map);
@@ -43,5 +44,9 @@ const MapElement = ({ onChange }) => {
   return (
     <div id="map" />
   );
+};
+
+MapElement.propTypes = {
+  onChange: PropTypes.func.isRequired,
 };
 export default MapElement;

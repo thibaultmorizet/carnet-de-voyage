@@ -12,12 +12,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeField: (value, name) => {
-    console.log(name);
     dispatch(changeValue(value, name));
   },
   handleSubmit: () => {
-    console.log('toto');
-    // dispatch(saveStep());
+    console.log('je fais un submit');
+    dispatch(saveStep());
   },
 });
 
