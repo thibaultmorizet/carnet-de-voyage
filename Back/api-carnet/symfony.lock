@@ -120,7 +120,9 @@
             "ref": "5b2157bcd5778166a5696e42f552ad36529a07a6"
         },
         "files": [
-            "./config/packages/lexik_jwt_authentication.yaml"
+
+            "config/packages/lexik_jwt_authentication.yaml"
+
         ]
     },
     "monolog/monolog": {
@@ -138,7 +140,9 @@
             "ref": "6388de23860284db9acce0a7a5d9d13153bcb571"
         },
         "files": [
-            "./config/packages/nelmio_cors.yaml"
+
+            "config/packages/nelmio_cors.yaml"
+
         ]
     },
     "nikic/php-parser": {
@@ -149,6 +153,15 @@
     },
     "php": {
         "version": "7.4"
+    },
+    "phpdocumentor/reflection-common": {
+        "version": "2.2.0"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "5.2.1"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "1.3.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -174,6 +187,18 @@
             "./config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "symfony/apache-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "71599f5b0fdeeeec0fb90e9b17c85e6f5e1350c1"
+        },
+        "files": [
+            "public/.htaccess"
+        ]
+    },
     "symfony/asset": {
         "version": "v5.1.5"
     },
@@ -197,6 +222,9 @@
         "files": [
             "./bin/console"
         ]
+    },
+    "symfony/css-selector": {
+        "version": "v5.1.5"
     },
     "symfony/debug-bundle": {
         "version": "4.1",
@@ -270,6 +298,15 @@
             "./src/Controller/.gitignore",
             "./src/Kernel.php"
         ]
+    },
+    "symfony/google-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "f8fd4ddb9b477510f8f4bce2b9c054ab428c0120"
+        }
     },
     "symfony/http-foundation": {
         "version": "v5.1.5"
@@ -405,6 +442,11 @@
     "symfony/serializer": {
         "version": "v5.1.5"
     },
+
+    "symfony/serializer-pack": {
+        "version": "v1.0.3"
+    },
+
     "symfony/service-contracts": {
         "version": "v2.1.3"
     },
@@ -433,6 +475,9 @@
             "./config/packages/twig.yaml",
             "./templates/base.html.twig"
         ]
+    },
+    "symfony/twig-pack": {
+        "version": "v1.0.0"
     },
     "symfony/validator": {
         "version": "4.3",
@@ -470,10 +515,22 @@
     "symfony/yaml": {
         "version": "v5.1.5"
     },
+    "tijsverkoyen/css-to-inline-styles": {
+        "version": "2.2.3"
+    },
+    "twig/cssinliner-extra": {
+        "version": "v3.0.5"
+    },
+    "twig/extra-bundle": {
+        "version": "v3.0.5"
+    },
     "twig/twig": {
         "version": "v3.0.5"
     },
     "webimpress/safe-writer": {
         "version": "2.1.0"
+    },
+    "webmozart/assert": {
+        "version": "1.9.1"
     }
 }

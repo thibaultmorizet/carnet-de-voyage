@@ -82,7 +82,7 @@ class AppFixtures extends Fixture
 
 
         // create 10 travels
-        for ($travelNumber = 0; $travelNumber < 10; $travelNumber++) {
+        for ($travelNumber = 1; $travelNumber <= 10; $travelNumber++) {
             $travel = new Travel();
             $travel->setTitle('travel ' . $travelNumber);
             $travel->setDescription('Text description' . $travelNumber);
@@ -107,9 +107,10 @@ class AppFixtures extends Fixture
         $stepEntities[] = null;
 
         // create 20 steps
-        for ($stepNumber = 0; $stepNumber < 20; $stepNumber++) {
+        for ($stepNumber = 1; $stepNumber <= 20; $stepNumber++) {
             $step = new Step();
             $step->setDescription('Text description step' . $stepNumber);
+            $step->setTitle('Title step' . $stepNumber);
             $step->setLatitude(random_int(-90, 90));
             $step->setLongitude(random_int(-180, 180));
             $step->setStepDate(new DateTime('NOW'));
@@ -121,7 +122,7 @@ class AppFixtures extends Fixture
         }
 
         // create 20 comments
-        for ($commentNumber = 0; $commentNumber < 20; $commentNumber++) {
+        for ($commentNumber = 1; $commentNumber <= 20; $commentNumber++) {
             $comment = new Comment();
             $comment->setComment("Comment" . $commentNumber);
             // Get a random User in array $userEntities
@@ -134,7 +135,7 @@ class AppFixtures extends Fixture
         }
 
         // create 20 pictures
-        for ($pictureNumber = 1; $pictureNumber < 21; $pictureNumber++) {
+        for ($pictureNumber = 1; $pictureNumber <= 20; $pictureNumber++) {
             $picture = new Picture();
             $picture->setUrl('picture' . $pictureNumber . '.jpeg');
             // Get a random Step in array $stepEntities

@@ -20,8 +20,8 @@
 | URL | HTTP Method | Controller | Method | Title | Content | Comment |
 |--|--|--|--|--|--|--|
 |`/travel/{id1}/step/{id2}`|`GET`|`TravelController`|`show`|`étape`|`visualisation de l'étape`|`{id1} du voyage {id2} de l'étape`|
-|`/travel/{id1}/update/{id2}`|`POST`|`TravelController`|`update`|`modification d'étape`|`formulaire de modification d'étape`|`{id1} du voyage {id2} de l'étape`|
-|`/travel/{id}/add`|`POST`|`TravelController`|`create`|`nouvelle étape`|`formulaire de création d'étape`|`formulaire d'une nouvelle étape`|
+|`/travel/{id1}/update/{id2}`|`PUT`|`TravelController`|`update`|`modification d'étape`|`formulaire de modification d'étape`|`{id1} du voyage {id2} de l'étape`|
+|`/travel/{id}/add`|`POST`|`TravelController`|`add`|`nouvelle étape`|`formulaire de création d'étape`|`formulaire d'une nouvelle étape`|
 |`/travel/{id1}/delete/{id2}`|`DELETE`|`TravelController`|`delete`|`suppression d'étape`|`bouton de suppression d'étape`|`{id1} du voyage {id2} de l'étape`|
 |`/travel/{id}/comment/{id}`|`GET`|`TravelController`|`addComment`|`Ajouter un commentaire`|`Permet d'ajouter un commentaire`|`Ajout commentaire`|
 |`/travel/{id}/like/{id}`|`GET`|`TravelController`|`addLike`|`Aimer un post`|`Permet de liker un post`|`Ajout d'un like`|

@@ -1,0 +1,93 @@
+.register {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;  
+  justify-content: space-between;
+  background-image: url(../../assets/images/background-machu.jpg);
+  background-size: cover;
+  background-position: center;
+  &__form {
+   display: block;
+   margin: auto;
+   width: 80%;
+   background-color: rgba(255, 255, 255, .5);
+   border-radius: 20px;
+   backdrop-filter: blur(5px);
+   padding: 2em 1em;
+   &--title {
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 1em;
+   }
+   & form {
+     width: 80%;
+     margin: auto;
+   }
+  }
+  
+}
+
+.errorMessage {
+  font-size: .8em;
+  text-align: center;
+  color: rgb(122, 31, 31);
+  font-weight: bold;
+}
+
+.password__span {
+  font-size: .8em;
+  width: 98%;
+  margin: auto;
+  line-height: 1.2em;
+}
+
+#registerSubmit {
+  display: block;
+  margin: 2em auto 0em;
+  background-color: white;
+  border: none;
+  border-radius: 20px;
+  padding: .5em 2em;
+  box-shadow: -1px 2px 15px -6px rgba(0,0,0,0.75);
+  font-family: 'IBM Plex Sans', sans-serif;
+  cursor: pointer;
+  &:hover {
+    background-color: lightblue;
+  }
+}
+
+@media only screen and (min-width : 426px) {
+  .register {
+    &__form {
+     width: 50%;
+    }
+  } 
+}
+
+@media only screen and (min-width : 1024px) {
+  .register {
+    &__form {
+     width: 40%;
+    }
+    
+  }
+}
+
+@media only screen and (min-width : 1440px) {
+  .register {
+    &__form {
+     width: 30%;
+    }
+    
+  }
+}
+
+@media only screen and (min-width : 1824px) {
+  .register {
+    &__form {
+     width: 20%;
+    }
+    
+  }
+}
