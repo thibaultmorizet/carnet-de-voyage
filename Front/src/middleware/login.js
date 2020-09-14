@@ -10,6 +10,7 @@ const Login = (store) => (next) => (action) => {
       axios.post('http://34.239.44.174/api/login_check', {
         username: state.register.email,
         password: state.register.password,
+      })
         .then((response) => {
           const tokenString = JSON.parse(response.request.response);
           store.dispatch(keepToken(tokenString.token));
