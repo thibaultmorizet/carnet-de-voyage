@@ -1,10 +1,10 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import FormInput from 'src/components/FormInput';
 import Map from 'src/components/CreateStep/map';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { errorMessage, handleDate } from 'src/selectors/carnetDeVoyage';
 import { useToasts } from 'react-toast-notifications';
 import ImageUploader from 'react-images-upload';
@@ -17,14 +17,37 @@ const FormStep = ({
   latitude,
   longitude,
   step_date,
+  response,
   changeField,
   handleSubmit,
 }) => {
   const { addToast } = useToasts();
+  const history = useHistory();
   const { id } = useParams();
   const handleChange = (evt) => {
     changeField(evt.target.value, 'description');
   };
+
+  const toastFailOrSuccess = () => {
+    console.log('erreur');
+    if (response === 'Error') {
+      addToast('Il y a eu une erreur dans l\'envoi de l\'étape. Veuillez réessayer plus tard', {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
+    else if (response === 'true') {
+      addToast('Votre étape à bien été enregistrée !', {
+        appearance: 'success',
+        autoDismiss: true,
+      });
+      history.push('/');
+    }
+  };
+
+  useEffect(() => {
+    toastFailOrSuccess();
+  }, [response]);
 
   function getBase64(file, onLoadCallback) {
     return new Promise((resolve, reject) => {
