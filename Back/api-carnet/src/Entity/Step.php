@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\StepRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=StepRepository::class)
@@ -17,62 +19,74 @@ class Step
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"step:show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"step:show"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"step:show"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"step:show"})
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"step:show"})
      */
     private $longitude;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"step:show"})
      */
     private $stepLike;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"step:show"})
      */
     private $stepDate;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"step:show"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"step:show"})
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Travel::class, inversedBy="steps")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"step:show"})
      */
     private $travel;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="step", orphanRemoval=true)
+     * @Groups({"step:show"})
      */
     private $comments;
 
     /**
      * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="step", orphanRemoval=true)
+     * @Groups({"step:show"})
      */
     private $pictures;
 

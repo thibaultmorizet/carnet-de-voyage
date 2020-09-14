@@ -6,10 +6,15 @@ use SplFileInfo;
 use App\Entity\Step;
 use App\Entity\Travel;
 use App\Entity\Picture;
+use App\Entity\Comment;
 use PhpParser\Node\Stmt\Break_;
+use App\Repository\UserRepository;
 use App\Repository\StepRepository;
 use App\Repository\TravelRepository;
 use App\Repository\PictureRepository;
+use App\Repository\CommentRepository;
+use Symfony\Bundle\MakerBundle\Validator;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,13 +23,33 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\LcobucciJWTEncoder;
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
+
 
 /**
  *  @Route("/api/travel/{id}")
  */
 class StepApiController extends AbstractController
 {
+    /**
+     *  @Route("/step/{id2}", name="api_step_show", methods={"GET"})
+     */
+    public function show(StepRepository $stepRepository, $id2)
+    {
+        //we select the desired step object with the url id
+        $step = $stepRepository->find($id2);
+
+        //we return in JSON all the important variables for the display of the step pages
+        return $this->json(
+                $step,
+                200,
+                [],
+                ["groups" => ["step:show"]]
+        );
+    }
+
     /**
      *  @Route("/add", name="api_step_add", methods={"POST"})
      */
@@ -170,6 +195,9 @@ class StepApiController extends AbstractController
         //transforms JSON content into Array
         $requestArray = json_decode($request->getContent(), true);
 
+        //we save the date of the update
+        $step->setUpdatedAt(new \DateTime());
+        
         //if the request contains a title, we replace the old one with the title of the request
         if (array_key_exists('title', $requestArray) && $requestArray['title'] != null) {
             $step->setTitle($requestArray['title']);
@@ -297,10 +325,14 @@ class StepApiController extends AbstractController
         //we select the desired step object with the url id
         $step = $stepRepository->find($id2);
 
+        //we recover the actual number of like
         $current_step_like = $step->getStepLike();
-        $new_step_like = $current_step_like +1;
+        //we add 1 to the number of like
+        $new_step_like = $current_step_like + 1;
+        //we save the new numbe rof like in step object
         $step->setStepLike($new_step_like);
 
+        // if everything is ok then we save the change in Database
         $manager = $this->getDoctrine()->getManager();
         $manager->flush();
 
@@ -313,7 +345,7 @@ class StepApiController extends AbstractController
         );
     }
 
-        /**
+    /**
      *  @Route("/unlike/{id2}", name="api_step_unlike", methods={"GET"})
      */
     public function unlike(StepRepository $stepRepository, $id2)
@@ -321,10 +353,14 @@ class StepApiController extends AbstractController
         //we select the desired step object with the url id
         $step = $stepRepository->find($id2);
 
+        //we recover the actual number of like
         $current_step_like = $step->getStepLike();
-        $new_step_like = $current_step_like -1;
+        //we subtracted 1 to the number of like
+        $new_step_like = $current_step_like - 1;
+        //we save the new numbe rof like in step object
         $step->setStepLike($new_step_like);
 
+        // if everything is ok then we save the change in Database
         $manager = $this->getDoctrine()->getManager();
         $manager->flush();
 
@@ -335,5 +371,116 @@ class StepApiController extends AbstractController
             ],
             Response::HTTP_OK
         );
+    }
+
+    /**
+     *  @Route("/comment/{id2}", name="api_step_comment", methods={"GET"})
+     */
+    public function comment(StepRepository $stepRepository, $id2, Request $request, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface)
+    {
+        //transforms JSON content into Array
+        $requestArray = json_decode($request->getContent(), true);
+        //we put the token of the request in a variable
+        $token = $requestArray['token'];
+        //we decode the token
+        $tokenArray = $jWTEncoderInterface->decode($token);
+        //we recover the username of the decode token
+        $user = $userRepository->findOneByUsername($tokenArray['username']);
+        //we recover the id of the connected user 
+        $userId = $user->getId();
+        //we put the comment of the request in a variable
+        $commentRequest = $requestArray['comment'];
+
+        //we select the desired step object with the url id
+        $step = $stepRepository->find($id2);
+        //we select the desired user object with the id of the token
+        $user = $userRepository->find($userId);
+
+        //we create a new object comment
+        $comment = new Comment();
+        //we save the step and the user obects in the new comment
+        $comment->setStep($step);
+        $comment->setUser($user);
+        //we save the comment of the request in the new comment
+        $comment->setComment($commentRequest);
+
+        // if everything is ok then we save the object in Database
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($comment);
+        $manager->flush();
+
+        //we return confirmation message of everything is OK
+        return $this->json(
+            [
+                "success" => true,
+                "id" => $comment->getId()
+
+            ],
+            Response::HTTP_CREATED
+        );
+    }
+
+    /**
+     *  @Route("/comment/{id2}/delete", name="api_step_delete_comment", methods={"DELETE"})
+     */
+    public function deleteComment(UserRepository $userRepository, CommentRepository $commentRepository, $id2, JWTEncoderInterface $jWTEncoderInterface, Request $request)
+    {
+        $manager = $this->getDoctrine()->getManager();
+
+        //transforms JSON content into Array
+        $requestArray = json_decode($request->getContent(), true);
+        //we put the token of the request in a variable
+        $token = $requestArray['token'];
+        //we decode the token
+        $tokenArray = $jWTEncoderInterface->decode($token);
+        //we recover the username of the decode token
+        $user = $userRepository->findOneByUsername($tokenArray['username']);
+        //we recover the id of the connected user 
+        $userId = $user->getId();
+        //we recover the roles of the connected user 
+        $userRoles = $user->getRoles();
+
+        //we select the desired comment object with the url id
+        $comment = $commentRepository->find($id2);
+        //we create a boolean for the authorization of the user
+        $userAutorize = False;
+        //we recover the id of the author of the comment
+        $AuthorId = $comment->getUser()->getId();
+        //if the id of the connected user is same to the id of the author of the comment
+        if ($userId == $AuthorId) {
+            //we put the boolean for the authorization of the user to "True"
+            $userAutorize = True;
+        }
+        //for each role of $userRoles
+        foreach ($userRoles as $role) {
+            //if the role is "ROLE_ADMIN"
+            if ($role == "ROLE_ADMIN") {
+                //we put the boolean for the authorization of the user to "True"
+                $userAutorize = True;
+            }
+        }
+        //if the boolean for the authorization of the user is equal to "True" 
+        if ($userAutorize) {
+            //we remove the comment and save the change in Database
+            $manager->remove($comment);
+            $manager->flush();
+
+            //we return confirmation message of everything is OK
+            return $this->json(
+                [
+                    "success" => true
+                ],
+                Response::HTTP_OK
+            );
+        }
+        //else we return an error with "HTTP_UNAUTHORIZED"
+        else {
+            return $this->json(
+                [
+                    "success" => false
+                ],
+                Response::HTTP_UNAUTHORIZED
+            );
+        }
     }
 }
