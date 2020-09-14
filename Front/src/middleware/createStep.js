@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SAVE_STEP } from 'src/actions/createStep';
+import { SAVE_STEP, saveDataStep } from 'src/actions/createStep';
 
 const CreateStep = (store) => (next) => (action) => {
   switch (action.type) {
@@ -14,13 +14,14 @@ const CreateStep = (store) => (next) => (action) => {
         step_date: state.createStep.step_date,
         picture: state.createStep.picture,
         travel_id: state.createStep.travel_id,
-      },
-      { withCredentials: true })
+      })
         .then((response) => {
           console.log(response);
         })
         .catch((error) => {
           console.log(error);
+          const actioToDispatch = saveDataStep(error.name);
+          store.dispatch(actioToDispatch);
         });
       break;
     }

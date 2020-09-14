@@ -17,11 +17,12 @@ const FormStep = ({
   latitude,
   longitude,
   step_date,
+  passage,
   changeField,
   handleSubmit,
 }) => {
-  const { addToast } = useToasts();
   const { id } = useParams();
+  const { addToast } = useToasts();
   const handleChange = (evt) => {
     changeField(evt.target.value, 'description');
   };
@@ -29,9 +30,15 @@ const FormStep = ({
   const handleForm = (evt) => {
     evt.preventDefault();
     const allDataForRegister = [title, description, latitude, longitude, step_date];
+    const isEmptyElement = allDataForRegister.includes('');
     const submitElt = '.divElement_form';
 
-    if (emptyElement(allDataForRegister) === true) {
+    async function popop() {
+      const response = await handleSubmit();
+      console.log(passage);
+    }
+
+    if (isEmptyElement === true) {
       const message = 'Veuillez remplir tous les champs';
       errorMessage(message, submitElt);
     }
@@ -45,7 +52,20 @@ const FormStep = ({
     }
     else {
       changeField(id, 'travel_id');
-      handleSubmit();
+      popop();
+
+      // if (passage) {
+      //   addToast('content', {
+      //     appearance: 'success',
+      //     autoDismiss: true,
+      //   });
+      // }
+      // else {
+      //   addToast('fail', {
+      //     appearance: 'error',
+      //     autoDismiss: true,
+      //   });
+      // }
     }
   };
 
