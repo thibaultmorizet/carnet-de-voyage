@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { REGISTER } from '../actions/register';
+import { REGISTER, saveRegisterResponse } from '../actions/register';
 
 const Register = (store) => (next) => (action) => {
   switch (action.type) {
@@ -15,11 +15,16 @@ const Register = (store) => (next) => (action) => {
 
       const dataJSON = JSON.stringify(data);
 
-      axios.post('http://127.0.0.1:8000/api/user/register', dataJSON)
+      axios.post('http://34.239.44.174/api/user/register', dataJSON)
         .then((response) => {
           console.log(response);
+          const actioToDispatch = saveRegisterResponse('Success');
+          store.dispatch(actioToDispatch);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          const actioToDispatch = saveRegisterResponse('Error');
+          store.dispatch(actioToDispatch);
+        });
       break;
     }
     default:

@@ -1,4 +1,4 @@
-import { CHANGE_VALUE } from '../actions/register';
+import { CHANGE_VALUE, SAVE_REGISTER_RESPONSE } from '../actions/register';
 
 export const initialState = {
   last_name: '',
@@ -6,6 +6,7 @@ export const initialState = {
   email: '',
   password: '',
   verifyPassword: '',
+  response: '',
 };
 
 const auth = (state = initialState, action = {}) => {
@@ -14,6 +15,11 @@ const auth = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.name]: action.value,
+      };
+    case SAVE_REGISTER_RESPONSE:
+      return {
+        ...state,
+        response: action.value,
       };
     default:
       return state;
