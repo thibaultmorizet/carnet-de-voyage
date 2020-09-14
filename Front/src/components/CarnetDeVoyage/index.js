@@ -9,6 +9,11 @@ import Page from '../Page';
 import Register from '../Register';
 import CreateStep from '../CreateStep';
 
+import User from '../../containers/user';
+
+import Login from '../Login';
+
+
 import './styles.css';
 
 // == Composant
@@ -24,11 +29,21 @@ const CarnetDeVoyage = () => (
         <Register />
       </Page>
     </Route>
-    <Route exact path="/travel/:id/add">
+
+    <Route exact path="/admin/user/list">
+      <User />
+    </Route>
+    <Route exact path="/login">
+      <Page>
+        <Login />
+      </Page>
+    </Route>
+     <Route exact path="/travel/:id/add">
       <Page>
         <CreateStep />
       </Page>
     </Route>
+
     <Footer />
   </div>
 );
