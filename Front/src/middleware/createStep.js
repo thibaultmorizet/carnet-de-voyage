@@ -18,7 +18,8 @@ const CreateStep = (store) => (next) => (action) => {
         travel_id: state.createStep.travel_id,
       }, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
-          console.log(response);
+          const actioToDispatch = saveDataStep('Success');
+          store.dispatch(actioToDispatch);
         })
         .catch((error) => {
           console.log(error);
