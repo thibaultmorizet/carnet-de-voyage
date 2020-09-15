@@ -49,5 +49,6 @@
 
 | URL | HTTP Method | Controller | Method | Title | Content | Comment |
 |--|--|--|--|--|--|--|
-|`/admin/userlist`|`GET`|`AdminController`|`user`|`liste de tous les utilisateurs`|`accès aux utilisateurs`|`recherche d'un utilisateur`|
+|`/admin/userlist/search`|`GET`|`AdminController`|`user`|`recherche d'un des utilisateurs`|`accès aux utilisateurs`|`recherche d'un utilisateur`|
+|`/admin/userlist`|`GET`|`AdminController`|`userlist`|`liste de tous les utilisateurs`|`accès aux utilisateurs`|`liste des utilisateurs`|
 |`/admin/userlist/{id}/delete`|`DELETE`|`AdminController`|`delete`|`Supprimer un utilisateur`|`Supprimer un utilisateur`|`gestion des utilisateurs`|

@@ -56,6 +56,8 @@ class StepApiController extends AbstractController
      */
     public function add(SerializerInterface $serializer, Request $request, ValidatorInterface $validator, Travel $travel)
     {
+        $manager = $this->getDoctrine()->getManager();
+
         try {
             // transforms the JSON to object of type step
 
@@ -128,7 +130,7 @@ class StepApiController extends AbstractController
                 $spl = new SplFileInfo($pictureName);
                 //we put the extension in a variable
                 $extension = $spl->getExtension();
-                //we test if the extension is "jpeg" or "png":
+                //we test if the extension is "jpeg" or "jpg" or "png":
                 //-if it isn't 
                 if ($extension != "jpeg" and $extension != "png" and $extension != "jpg") {
                     //we return an error
@@ -154,10 +156,18 @@ class StepApiController extends AbstractController
                     //add the url and step to the picture entity
                     $picture->setUrl($pictureName);
                     $picture->setStep($step);
-                    $manager = $this->getDoctrine()->getManager();
                     $manager->persist($picture);
                 }
             }
+        }
+
+        else {
+            return $this->json(
+                [
+                    "success" => false
+                ],
+                Response::HTTP_NOT_ACCEPTABLE
+            );
         }
 
         // if everything is ok then we save the object in Database
@@ -246,9 +256,9 @@ class StepApiController extends AbstractController
                 $spl = new SplFileInfo($pictureName);
                 //we put the extension in a variable
                 $extension = $spl->getExtension();
-                //we test if the extension is "jpeg" or "png"
+                //we test if the extension is "jpeg" or "jpg" or "png"
                 //if it isn't 
-                if ($extension != "jpeg" and $extension != "png") {
+                if ($extension != "jpeg" and $extension != "png" and $extension != "jpg") {
                     //we return an error
                     return $this->json(
                         [
