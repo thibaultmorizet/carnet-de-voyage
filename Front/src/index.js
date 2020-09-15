@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 // == Import : local
 // Composants
-import CarnetDeVoyage from 'src/components/CarnetDeVoyage';
+import CarnetDeVoyage from 'src/containers/carnetDeVoyage';
 // Store
 import store from 'src/store';
 

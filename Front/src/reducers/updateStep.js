@@ -11,6 +11,7 @@ export const initialState = {
   response: '',
   id: 0,
   type: 0,
+  loading: true,
 };
 
 const updateStep = (state = initialState, action = {}) => {
@@ -31,6 +32,7 @@ const updateStep = (state = initialState, action = {}) => {
         step_date: action.data.step_date,
         picture: action.data.pictures,
         id: action.data.id,
+        loading: false,
       }; }
     default:
       return state;
