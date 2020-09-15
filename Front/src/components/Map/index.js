@@ -3,9 +3,10 @@ import * as GeoSearch from 'leaflet-geosearch';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
 
-import './styles.scss';
+// import './styles.scss';
 
-const MapElement = ({ onChange }) => {
+const MapElement = ({ onChange, latitude, longitude }) => {
+  console.log(latitude);
   const yourEventHandler = (evt) => {
     const result = evt.location;
     const lat = result.y;
@@ -14,8 +15,8 @@ const MapElement = ({ onChange }) => {
     onChange(lng, 'longitude');
   };
   const generateMap = () => {
-    const map = L.map('map').setView([51.505, -0.09], 13);
-    const marker = L.marker([51.505, -0.09]).addTo(map);
+    const map = L.map('map').setView([latitude, longitude], 13);
+    const marker = L.marker([latitude, longitude]).addTo(map);
 
     const provider = new GeoSearch.OpenStreetMapProvider();
 
@@ -48,5 +49,7 @@ const MapElement = ({ onChange }) => {
 
 MapElement.propTypes = {
   onChange: PropTypes.func.isRequired,
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
 };
 export default MapElement;

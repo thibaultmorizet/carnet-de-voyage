@@ -8,7 +8,7 @@ import Footer from '../Footer';
 import Page from '../Page';
 import Register from '../Register';
 import CreateStep from '../CreateStep';
-
+import UpdateStep from '../UpdateStep';
 import User from '../../containers/user';
 
 import Login from '../Login';
@@ -45,6 +45,11 @@ const CarnetDeVoyage = () => (
     <Route exact path="/travel/:id/add">
       <Page>
         <CreateStep />
+      </Page>
+    </Route>
+    <Route exact path="/travel/:id/update/:type">
+      <Page>
+        <UpdateStep />
       </Page>
     </Route>
 
