@@ -8,6 +8,7 @@ import createStep from '../middleware/createStep';
 import register from '../middleware/register';
 import login from '../middleware/login';
 import user from '../middleware/user';
+import updateStep from '../middleware/updateStep';
 
 // == Enhancers
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -19,6 +20,7 @@ const enhancers = composeEnhancers(
     register,
     login,
     user,
+    updateStep,
     // secondMiddleware,
   ),
 );

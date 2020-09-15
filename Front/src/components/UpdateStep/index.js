@@ -1,6 +1,6 @@
 import React from 'react';
 import MenuDesktop from 'src/components/MenuDesktop';
-import FormUpdateStep from './formUpdateStep';
+import FormUpdateStep from 'src/containers/formUpdateStep';
 import './styles.scss';
 
 const UpdateStep = () => (
