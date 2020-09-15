@@ -1,10 +1,10 @@
-import { CHANGE_VALUE_STEP, SAVE_STEP_VALUE } from 'src/actions/createStep';
+import { CHANGE_VALUE_STEP, SAVE_STEP_VALUE, CHANGE_VALUE_PICTURE } from 'src/actions/createStep';
 
 export const initialState = {
   title: '',
   description: '',
-  latitude: '',
-  longitude: '',
+  latitude: 0,
+  longitude: 0,
   step_date: '',
   picture: '',
   travel_id: '',
@@ -23,6 +23,11 @@ const createStep = (state = initialState, action = {}) => {
         ...state,
         response: action.value,
       };
+    case CHANGE_VALUE_PICTURE: {
+      return {
+        ...state,
+        picture: action.value,
+      }; }
     default:
       return state;
   }
