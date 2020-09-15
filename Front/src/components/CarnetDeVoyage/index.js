@@ -50,16 +50,11 @@ const CarnetDeVoyage = ({ loading }) => {
           <CreateStep />
         </Page>
       </Route>
-      {loading && (
-        <Spinner />
-      )}
-      {!loading && (
       <Route exact path="/travel/:id/update/:type">
         <Page>
           <UpdateStep />
         </Page>
       </Route>
-      )}
 
       <Route exact path="/spinner" />
 

@@ -12,6 +12,7 @@ const mapStateToProps = (state) => ({
   travel_id: state.updateStep.travel_id,
   response: state.updateStep.response,
   type: state.updateStep.type,
+  loading: state.updateStep.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

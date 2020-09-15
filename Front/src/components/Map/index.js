@@ -6,6 +6,7 @@ import L from 'leaflet';
 // import './styles.scss';
 
 const MapElement = ({ onChange, latitude, longitude }) => {
+  console.log(latitude, longitude);
   const yourEventHandler = (evt) => {
     const result = evt.location;
     const lat = result.y;
@@ -13,10 +14,10 @@ const MapElement = ({ onChange, latitude, longitude }) => {
     onChange(lat, 'latitude');
     onChange(lng, 'longitude');
   };
-  const generateMap = ({ lat, lng }) => {
-    const map = L.map('map').setView([lat, lng], 13);
+  const generateMap = () => {
+    const map = L.map('map').setView([latitude, longitude], 13);
     console.log('latitude long 2', latitude, longitude);
-    const marker = L.marker([lat, lng]).addTo(map);
+    const marker = L.marker([latitude, longitude]).addTo(map);
 
     const provider = new GeoSearch.OpenStreetMapProvider();
 
@@ -39,7 +40,7 @@ const MapElement = ({ onChange, latitude, longitude }) => {
   };
 
   useEffect(() => {
-    generateMap(latitude, longitude);
+    generateMap();
   }, []);
 
   return (
