@@ -21,13 +21,13 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"step:show", "user"})
+     * @Groups({"step:show", "user", "userlist", "userlist:search"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups("user")
+     * @Groups({"user", "userlist:search"})
      */
     private $email;
 
@@ -46,19 +46,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"step:show", "user"})
+     * @Groups({"step:show", "user", "userlist", "userlist:search"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"step:show", "user"})
+     * @Groups({"step:show", "user", "userlist", "userlist:search"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"step:show"})
+     * @Groups({"step:show", "userlist", "userlist:search"})
      */
     private $avatar;
 
@@ -73,12 +73,17 @@ class User implements UserInterface
     private $updatedAt;
 
     /**
+     * @ORM\OneToMany(targetEntity=Travel::class, mappedBy="creator", orphanRemoval=true)
+     */
+    private $travel;
+
+    /**
      * @ORM\ManyToMany(targetEntity=Travel::class, mappedBy="followers")
      */
     private $follower;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="userId", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user", orphanRemoval=true)
      */
     private $comments;
 
@@ -306,6 +311,38 @@ class User implements UserInterface
     public function setToken(?string $token): self
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection|Travel[]
+     */
+    public function getTravel(): Collection
+    {
+        return $this->travel;
+    }
+
+    public function addTravel(Travel $travel): self
+    {
+        if (!$this->travel->contains($travel)) {
+            $this->travel[] = $travel;
+            $travel->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTravel(Travel $travel): self
+    {
+        if ($this->travel->contains($travel)) {
+            $this->travel->removeElement($travel);
+            // set the owning side to null (unless already changed)
+            if ($travel->getCreator() === $this) {
+                $travel->setCreator(null);
+            }
+        }
 
         return $this;
     }
