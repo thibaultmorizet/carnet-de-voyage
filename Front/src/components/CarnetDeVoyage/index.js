@@ -15,6 +15,7 @@ import Login from '../Login';
 import TravelsList from '../TravelsList';
 
 import './styles.css';
+import PresentationTeam from '../PresentationTeam';
 
 // == Composant
 const CarnetDeVoyage = () => (
@@ -22,6 +23,11 @@ const CarnetDeVoyage = () => (
     <Route exact path="/">
       <Page>
         <HomePage />
+      </Page>
+    </Route>
+    <Route exact path="/presentation">
+      <Page>
+        <PresentationTeam />
       </Page>
     </Route>
     <Route exact path="/register">
