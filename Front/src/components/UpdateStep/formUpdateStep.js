@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import Map from 'src/components/Map';
 import FormInput from 'src/components/FormInput';
+import { useParams } from 'react-router-dom';
 import './styles.scss';
 
 const FormUpdateStep = ({
@@ -12,28 +13,20 @@ const FormUpdateStep = ({
   longitude,
   step_date,
   picture,
+  changeDataStep,
 }) => {
+  const { id, type } = useParams();
   useEffect(() => {
+    changeDataStep(id, 'id');
+    changeDataStep(type, 'type');
     fetchDataStep();
   }, []);
 
-  const changeDate = () => {
-    // const split = step_date.split('T');
-    // const newDate = split[0];
-    // console.log(newDate);
-    const datat = new Date(step_date);
-    console.log(datat);
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-    const event = datat.toLocaleDateString('de-DE', options);
-    console.log(event);
-  };
-
-  changeDate();
   return (
     <div className="FormUpdateStep">
       <form action="" className="FormUpdateStep__formElt">
 
-        <Map onChange={() => console.log('salut la map')} latitude={latitude} longitude={longitude} />
+        <Map onChange={changeDataStep} latitude={latitude} longitude={longitude} />
 
         <div className="formStep__element--allInput FormUpdateStep__formElt--allInput">
           <div className="FormUpdateStep__formElt--allInput">
@@ -41,12 +34,12 @@ const FormUpdateStep = ({
               type="text"
               name="title"
               content="Titre"
-              onChange={() => console.log('salut la map')}
+              onChange={changeDataStep}
               value={title}
             />
 
             <div className="floating-label">
-              <textarea type="text" className="floating-input" name="description" placeholder=" " maxLength="255" rows="9" value={description} onChange={() => console.log('salut la map')} />
+              <textarea type="text" className="floating-input" name="description" placeholder=" " maxLength="255" rows="9" value={description} onChange={changeDataStep} />
               <label htmlFor="description"> Description (255 caractères maximum) </label>
             </div>
 
@@ -54,7 +47,7 @@ const FormUpdateStep = ({
               type="text"
               name="step_date"
               content="Date (JJ/MM/AAAA)"
-              onChange={() => console.log('salut la map')}
+              onChange={changeDataStep}
               value={step_date}
             />
           </div>

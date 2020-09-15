@@ -10,6 +10,7 @@ export const initialState = {
   travel_id: '',
   response: '',
   id: 0,
+  type: 0,
 };
 
 const updateStep = (state = initialState, action = {}) => {
@@ -20,14 +21,14 @@ const updateStep = (state = initialState, action = {}) => {
         [action.name]: action.value,
       };
     case SAVE_DATA_STEP: {
-      console.log(action.data.title);
+      console.log(action.data);
       return {
         ...state,
         title: action.data.title,
         description: action.data.description,
         latitude: action.data.latitude,
         longitude: action.data.longitude,
-        step_date: action.data.stepDate,
+        step_date: action.data.step_date,
         picture: action.data.pictures,
         id: action.data.id,
       }; }
