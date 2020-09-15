@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useToasts } from 'react-toast-notifications';
 import { useHistory } from 'react-router-dom';
@@ -16,10 +16,12 @@ const RegisterForm = ({
   email,
   password,
   verifyPassword,
+  response,
 }) => {
   const history = useHistory();
   const { addToast } = useToasts();
 
+  // TODO: refactor this function because it's ugly, i don't like it but i don't have time. Please future Chloe, to this for me. Counter : 0
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const allDataForRegister = [email, first_name, last_name, password, verifyPassword];
@@ -42,11 +44,6 @@ const RegisterForm = ({
       }
       else {
         handleRegister();
-        addToast('Incription Réussie ! Vous allez recevoir un email de confirmation', {
-          appearance: 'success',
-          autoDismiss: true,
-        });
-        history.push('/login');
       }
     }
     else {
@@ -54,6 +51,26 @@ const RegisterForm = ({
       errorMessage(message, divElt);
     }
   };
+
+  const toastNotification = () => {
+    if (response === 'Error') {
+      addToast('Il y a eu une erreur dans l\'envoi du formulaire. Veuillez réessayer plus tard', {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
+    else if (response === 'true') {
+      addToast('L\'inscription a échoué', {
+        appearance: 'success',
+        autoDismiss: true,
+      });
+      history.push('/login');
+    }
+  };
+
+  useEffect(() => {
+    toastNotification();
+  }, [response]);
 
   return (
     <div className="register__form">
