@@ -10,31 +10,38 @@ const FormUpdateStep = () => (
 
       <Map onChange={() => console.log('salut la map')} latitude={64.5731537} longitude={11.52803643954819} />
 
-      <div className="formStep__element--allInput">
-        <FormInput
-          type="text"
-          name="title"
-          content="Titre"
-          onChange={() => console.log('salut la map')}
-        />
+      <div className="formStep__element--allInput FormUpdateStep__formElt--allInput">
+        <div className="FormUpdateStep__formElt--allInput">
+          <FormInput
+            type="text"
+            name="title"
+            content="Titre"
+            onChange={() => console.log('salut la map')}
+          />
 
-        <div className="floating-label">
-          <textarea type="text" className="floating-input" name="description" placeholder=" " maxLength="255" rows="9" onChange={() => console.log('salut la map')} />
-          <label htmlFor="description"> Description (255 caractères maximum) </label>
+          <div className="floating-label">
+            <textarea type="text" className="floating-input" name="description" placeholder=" " maxLength="255" rows="9" onChange={() => console.log('salut la map')} />
+            <label htmlFor="description"> Description (255 caractères maximum) </label>
+          </div>
+
+          <FormInput
+            type="text"
+            name="step_date"
+            content="Date (JJ/MM/AAAA)"
+            onChange={() => console.log('salut la map')}
+          />
         </div>
 
-        <FormInput
-          type="text"
-          name="step_date"
-          content="Date (JJ/MM/AAAA)"
-          onChange={() => console.log('salut la map')}
-        />
-
-        <div className="divElement_form">
-          <input className="formStep__element--submit" type="submit" value="Enregistrer l'étape" />
+        <div className="FormUpdateStep__formElt--pictures">
+          <div className="carre" />
+          <div className="carre" />
+          <div className="carre" />
+          <div className="carre" />
         </div>
-        <div className="non">
-          <input className="non" type="submit" value="Supprimer l'étape" />
+
+        <div className="FormUpdateStep__formElt--finalInput">
+          <input className="formStep__element--submit FormUpdateStep__submit" type="submit" value="Enregistrer l'étape" />
+          <input className="formStep__element--submit FormUpdateStep__delete" type="submit" value="Supprimer l'étape" />
         </div>
       </div>
 

@@ -14,6 +14,24 @@
   border-radius: 10px;
   backdrop-filter: blur(2px);
   box-shadow: 0px 2px 14px -8px rgba(0,0,0,0.75);
+  &__delete {
+    background-color: rgb(241, 122, 122);
+  }
+  &__formElt{
+    &--pictures {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+  
+}
+
+.carre {
+  min-height: 7em;
+  min-width: 7em;
+  background-color: lightblue;
+  margin: 1em;
 }
 
 @media only screen and (min-width : 426px) {
@@ -26,13 +44,19 @@
   .FormUpdateStep {
     width: 70%;
   }
+
+  .carre {
+    min-height: 9em;
+    min-width: 13em;
+  }
+  
 }
 
 @media only screen and (min-width : 769px) {
 
   .UpdateStep {
     height: 100vh;
-    background-position:  bottom -6% right -30px, bottom -10% left -100px;
+    background-position:  bottom -10% right -30px, bottom -10% left -100px;
     background-size: 40%, 40%;
   }
 
@@ -41,8 +65,64 @@
     background-color: transparent;
     box-shadow: none;
     backdrop-filter: blur(0px);
+    margin:0;
     &__formElt {
       display: flex;
+      &--pictures{
+        order: 1;
+      } 
+      &--allInput {
+        order: 2;
+        margin: .5em;
+        justify-content: start;
+      }
+      &--finalInput {
+        position: relative;
+        order: 4;
+        display: flex;
+      }
     }
-  } 
+    &__submit {
+      position: relative;
+      width: 40%;
+      padding: 1em;
+      right:0%;
+    }
+    &__delete {
+      position: relative;
+      width: 40%;
+      padding: 1em;
+      right:0%;
+    }
+  
+  }
+  .carre {
+    min-height: 4em;
+    min-width: 8em;
+    margin: .5em;
+  }
+}
+
+@media only screen and (min-width : 1440px) {
+  .UpdateStep {
+    height: 100vh;
+    background-position:  bottom -6% right -30px, bottom -50% left -100px;
+    background-size: 20%, 25%;
+  }
+
+  .FormUpdateStep{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__formElt {
+      height: 70vh;
+      align-items: center;
+      &--allInput {
+        justify-content: space-between;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
 }
