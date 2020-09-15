@@ -98,7 +98,7 @@ const FormStep = ({
           <ImageUploader
             withIcon
             onChange={handleChangePicture}
-            imgExtension={['.jpg', '.gif', '.png', '.gif']}
+            imgExtension={['.jpg', '.gif', '.png', '.jpeg']}
             maxFileSize={5242880}
             withPreview
           />

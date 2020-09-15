@@ -59,8 +59,8 @@ const RegisterForm = ({
         autoDismiss: true,
       });
     }
-    else if (response === 'true') {
-      addToast('L\'inscription a échoué', {
+    else if (response === 'Success') {
+      addToast('L\'inscription à réussi, veuillez vérifier vos mails', {
         appearance: 'success',
         autoDismiss: true,
       });
