@@ -57,10 +57,12 @@ export const handlePicture = (evt, fctState) => {
       const promise = getBase64(elt);
       promise.then((result) => {
         const elementWanted = result;
+        const base64Split = elementWanted.split(',');
+        const base64Final = base64Split[1];
         const { name } = elt;
         const currentImg = {
           url: name,
-          data: elementWanted,
+          data: base64Final,
         };
         arrayForPicture.push(currentImg);
       });

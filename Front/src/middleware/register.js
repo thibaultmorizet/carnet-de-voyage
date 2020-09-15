@@ -5,7 +5,7 @@ const Register = (store) => (next) => (action) => {
   switch (action.type) {
     case REGISTER: {
       const state = store.getState();
-      console.log(state.register.password);
+      // console.log(state.register.password);
       const data = {
         last_name: state.register.last_name,
         first_name: state.register.first_name,
@@ -15,9 +15,9 @@ const Register = (store) => (next) => (action) => {
 
       const dataJSON = JSON.stringify(data);
 
-      axios.post('http://34.239.44.174/api/user/register', dataJSON)
+      axios.post('http://34.239.44.174/api/login/register', dataJSON)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           const actioToDispatch = saveRegisterResponse('Success');
           store.dispatch(actioToDispatch);
         })

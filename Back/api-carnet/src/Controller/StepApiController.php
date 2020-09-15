@@ -13,6 +13,7 @@ use App\Repository\StepRepository;
 use App\Repository\TravelRepository;
 use App\Repository\PictureRepository;
 use App\Repository\CommentRepository;
+use DateTime;
 use Symfony\Bundle\MakerBundle\Validator;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Filesystem\Filesystem;
@@ -103,7 +104,8 @@ class StepApiController extends AbstractController
         $requestArray = json_decode($request->getContent(), true);
 
         //add the date of the JSON request to the step object
-        $step->setStepDate(new \DateTime($requestArray['step_date']));
+        $date = DateTime::createFromFormat('j/m/Y', ($requestArray['step_date']));
+        $step->setStepDate($date);
 
         //add the travel object to the step object
         $step->setTravel($travel);
@@ -119,8 +121,8 @@ class StepApiController extends AbstractController
                 //we recover the uploaded file
                 /** @var UploadedFile $pictureFile */
                 //we recover the data and the url in variables
-                $pictureFile = $requestArray['picture'][$pictureJson + 1]['data'];
-                $pictureUrl = $requestArray['picture'][$pictureJson + 1]['url'];
+                $pictureFile = $requestArray['picture'][$pictureJson]['data'];
+                $pictureUrl = $requestArray['picture'][$pictureJson]['url'];
                 //we create a unique picture name with the extension of $pictureUrl 
                 $pictureName = uniqid() . strrchr($pictureUrl, '.');
                 $spl = new SplFileInfo($pictureName);
@@ -128,7 +130,7 @@ class StepApiController extends AbstractController
                 $extension = $spl->getExtension();
                 //we test if the extension is "jpeg" or "png":
                 //-if it isn't 
-                if ($extension != "jpeg" and $extension != "png") {
+                if ($extension != "jpeg" and $extension != "png" and $extension != "jpg") {
                     //we return an error
                     return $this->json(
                         [
