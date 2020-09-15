@@ -6,6 +6,7 @@ use App\Repository\TravelRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -18,57 +19,68 @@ class Travel
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"travel:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"travel:read"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"travel:read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"travel:read"})
      */
     private $status;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"travel:read"})
      */
     private $pictureUrl;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"travel:read"})
      */
     private $creationDate;
 
     /**
      * @ORM\Column(type="datetime")
+     * 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * 
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="travel")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"travel:read"})
      */
     private $creator;
 
     /**
      * @ORM\OneToMany(targetEntity=Step::class, mappedBy="travel", orphanRemoval=true)
+     * @Groups({"travel:read"})
      */
     private $steps;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="follower")
+     * @Groups({"travel:read"})
      */
     private $followers;
 

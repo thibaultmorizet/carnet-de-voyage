@@ -19,6 +19,15 @@ class TravelRepository extends ServiceEntityRepository
         parent::__construct($registry, Travel::class);
     }
 
+    public function findAllTravelPerUserId($id) {
+
+        $queryBuilder = $this->createQueryBuilder('travel');
+        
+        $queryBuilder->where(
+            $queryBuilder->expr()->eq('id', $id)
+        );
+    }
+
     // /**
     //  * @return Travel[] Returns an array of Travel objects
     //  */

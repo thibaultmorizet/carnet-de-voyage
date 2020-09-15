@@ -6,6 +6,7 @@ use App\Repository\StepRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=StepRepository::class)
@@ -17,41 +18,49 @@ class Step
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"travel:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"travel:read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"travel:read"})
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"travel:read"})
      */
     private $longitude;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"travel:read"})
      */
     private $stepLike;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"travel:read"})
      */
     private $stepDate;
 
     /**
      * @ORM\Column(type="datetime")
+     * 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * 
      */
     private $updatedAt;
 
@@ -68,6 +77,7 @@ class Step
 
     /**
      * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="step", orphanRemoval=true)
+     * @Groups({"travel:read"})
      */
     private $pictures;
 
