@@ -55,6 +55,9 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.35",
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@fortawesome/react-fontawesome": "^0.1.11",
     "@material/floating-label": "^7.0.0",
     "axios": "^0.20.0",
     "base64-img": "^1.0.4",

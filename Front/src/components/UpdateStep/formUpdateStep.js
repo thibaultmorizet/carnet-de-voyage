@@ -19,6 +19,7 @@ const FormUpdateStep = ({
   picture,
   changeDataStep,
   loading,
+  deletePictureUpdate,
 }) => {
   console.log(picture);
   const { id, type } = useParams();
@@ -36,6 +37,7 @@ const FormUpdateStep = ({
         key={elt.url}
         src={elt.data}
         url={elt.url}
+        onDelete={deletePictureUpdate}
       />
     ),
   );

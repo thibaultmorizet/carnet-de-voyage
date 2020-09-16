@@ -40,6 +40,10 @@
   }
 }
 
+.pictures__icon {
+  color: red;
+}
+
 @media only screen and (min-width : 426px) {
   .UpdateStep {
     background-image: url('../../assets/images/background-men-phone.svg'), url('../../assets/images/globe.svg');

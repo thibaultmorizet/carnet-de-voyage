@@ -1,4 +1,4 @@
-import { CHANGE_DATA_STEP, SAVE_DATA_STEP } from '../actions/updateStep';
+import { CHANGE_DATA_STEP, SAVE_DATA_STEP, DELETE_PICTURE_UPDATE } from '../actions/updateStep';
 
 export const initialState = {
   title: '',
@@ -12,6 +12,7 @@ export const initialState = {
   id: 0,
   type: 0,
   loading: true,
+  picture_delete: '',
 };
 
 const updateStep = (state = initialState, action = {}) => {
@@ -34,6 +35,14 @@ const updateStep = (state = initialState, action = {}) => {
         id: action.data.id,
         loading: false,
       }; }
+    case DELETE_PICTURE_UPDATE:
+      return {
+        ...state,
+        picture_delete: [
+          ...state.picture_delete,
+          { id: action.value },
+        ],
+      };
     default:
       return state;
   }
