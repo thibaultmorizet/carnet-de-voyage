@@ -5,7 +5,6 @@
   background-size: 70%;
 }
 
-
 .essai {
   display: block;
 }
@@ -55,6 +54,50 @@
   color: red;
 }
 
+
+.modalEx {
+  background-color: white;
+  width: 80%;
+  margin: 100% auto;
+  box-shadow: -1px -1px 21px -8px rgba(0,0,0,0.64);
+  border: none;
+  &__content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    &--title {
+    padding: 2em;
+    text-align: center;
+    display: block;
+    }
+    &--close {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background-color: #FFD900;
+      padding: 1em;
+      margin: 0em 1em 2em;
+      border: none;
+      border-radius: 10px;
+      width: 30%;
+      &:hover {
+        background-color: rgb(189, 163, 17);
+      }
+
+    }
+    &--delete {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background-color: rgb(248, 126, 44);
+      padding: 1em;
+      margin: 0em 1em 2em;
+      border: none;
+      border-radius: 10px;
+      width: 30%;
+      &:hover {
+        background-color: rgb(192, 96, 32);
+      }
+    }
+  }
+}
+
 @media only screen and (min-width : 426px) {
   .UpdateStep {
     background-image: url('../../assets/images/background-men-phone.svg'), url('../../assets/images/globe.svg');
@@ -69,6 +112,11 @@
   .carre {
     min-height: 9em;
     min-width: 13em;
+  }
+
+  .modalEx {
+    width: 70%;
+    margin: 60% auto;
   }
   
 }
@@ -121,6 +169,11 @@
     min-width: 8em;
     margin: .5em;
   }
+
+  .modalEx {
+    width: 50%;
+    margin: 45% auto;
+  }
 }
 
 @media only screen and (min-width : 1440px) {
@@ -141,4 +194,12 @@
     }
   }
 
+  .modalEx {
+    width: 30%;
+    margin: 25em auto;
+  }
+
 }
+
+
+

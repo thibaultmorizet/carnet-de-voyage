@@ -1,5 +1,6 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Map from 'src/components/Map';
 import FormInput from 'src/components/FormInput';
 import { useParams } from 'react-router-dom';
@@ -7,10 +8,13 @@ import Spinner from 'src/components/Spinner';
 import {
   handlePicture,
 } from 'src/selectors/carnetDeVoyage';
+import Modal from 'react-modal';
 
 import ImageUploader from 'react-images-upload';
 import './styles.scss';
 import Picture from './picture';
+
+Modal.setAppElement('#root');
 
 const FormUpdateStep = ({
   fetchDataStep,
@@ -27,6 +31,8 @@ const FormUpdateStep = ({
   sendDateUpdate,
 }) => {
   const { id, type } = useParams();
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
   useEffect(() => {
     changeDataStep(id, 'id');
     changeDataStep(type, 'type');
@@ -58,6 +64,14 @@ const FormUpdateStep = ({
   const handleOnSubmit = (evt) => {
     evt.preventDefault();
     sendDateUpdate();
+  };
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -112,9 +126,26 @@ const FormUpdateStep = ({
               />
             </div>
 
-            <div className="FormUpdateStep__formElt--finalInput">
+            <div className="FormUpdateStep__formElt--finalInput" id="roro">
               <input className="formStep__element--submit FormUpdateStep__submit" type="submit" value="Enregistrer l'étape" />
-              <input className="formStep__element--submit FormUpdateStep__delete" type="button" value="Supprimer l'étape" />
+              <input className="formStep__element--submit FormUpdateStep__delete" type="button" value="Supprimer l'étape" onClick={openModal} />
+              <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Example Modal"
+                className="modalEx"
+                style={{
+                  overlay: {
+                    'backdrop-filter': 'blur(5px)',
+                  },
+                }}
+              >
+                <div className="modalEx__content">
+                  <h2 className="modalEx__content--title">Êtes vous sur de vouloir supprimer cette étape ?</h2>
+                  <button className="modalEx__content--delete" onClick={closeModal}>Supprimer</button>
+                  <button className="modalEx__content--close" onClick={closeModal}>Annuler</button>
+                </div>
+              </Modal>
             </div>
           </div>
 
