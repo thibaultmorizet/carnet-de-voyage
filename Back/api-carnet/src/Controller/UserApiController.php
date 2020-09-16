@@ -111,7 +111,7 @@ class UserApiController extends AbstractController
             $userList,
             200,
             [],
-            ["groups" => "user"]
+            ["groups" => ["user"]]
         );
     }
 }
