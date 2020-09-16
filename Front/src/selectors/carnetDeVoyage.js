@@ -80,7 +80,7 @@ export const toastNotification = (addToast, history, response) => {
       autoDismiss: true,
     });
   }
-  else if (response === 'true') {
+  else if (response === 'Success') {
     addToast('Votre étape à bien été enregistrée !', {
       appearance: 'success',
       autoDismiss: true,

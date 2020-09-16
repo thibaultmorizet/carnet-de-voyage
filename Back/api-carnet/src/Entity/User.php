@@ -21,14 +21,14 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"step:show", "user"})
+     * @Groups({"step:show", "user", "userlist", "userlist:search"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"travel:read"})
-     * @Groups("user")
+     * @Groups({"user", "userlist:search", "travel:read"})
+
      */
     private $email;
 
@@ -47,21 +47,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"travel:read"})
-     * @Groups({"step:show", "user"})
+     * @Groups({"step:show", "user", "userlist", "userlist:search", "travel:read"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"travel:read"})
-     * @Groups({"step:show", "user"})
+     * @Groups({"step:show", "user", "userlist", "userlist:search", "travel:read"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"step:show"})
+     * @Groups({"step:show", "userlist", "userlist:search"})
      */
     private $avatar;
 

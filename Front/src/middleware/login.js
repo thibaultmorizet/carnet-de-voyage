@@ -22,4 +22,5 @@ const Login = (store) => (next) => (action) => {
       next(action);
   }
 };
+
 export default Login;

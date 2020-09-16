@@ -1,13 +1,13 @@
 import React from 'react';
-import MenuDesktop from '../MenuDesktop';
 import Title from './travels';
 import './styles.scss';
+import Footer from '../Footer';
 
 const TravelsList = () => (
 
   <div className="travelsList">
-    <MenuDesktop />
     <Title />
+    <Footer />
   </div>
 );
 

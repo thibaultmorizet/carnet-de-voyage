@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SAVE_STEP, saveDataStep } from 'src/actions/createStep';
+import { SAVE_STEP, saveDataStep } from '../actions/createStep';
 
 const CreateStep = (store) => (next) => (action) => {
   switch (action.type) {
@@ -18,7 +18,8 @@ const CreateStep = (store) => (next) => (action) => {
         travel_id: state.createStep.travel_id,
       }, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
-          console.log(response);
+          const actioToDispatch = saveDataStep('Success');
+          store.dispatch(actioToDispatch);
         })
         .catch((error) => {
           console.log(error);
