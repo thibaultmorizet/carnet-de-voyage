@@ -317,7 +317,7 @@ class TravelApiController extends AbstractController
     }
 
     /**
-     *  @Route("api/travels/{id}", name="api_travels_show", methods={"GET"})
+     *  @Route("api/travels/{id}", name="api_travels_show", methods={"GET"}, requirements={"id"="\d+"})
      * 
      */
     public function show (travelRepository $travelRepository, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface, $id) {
@@ -328,7 +328,7 @@ class TravelApiController extends AbstractController
             return $this->json(
                 [
                     "success" => false,
-                    "operation" => "Travel " . $id . "not found"
+                    "operation" => "Travel " . $id . " not found"
                 ],
                 Response::HTTP_BAD_REQUEST // HTTP Response 400
             );
