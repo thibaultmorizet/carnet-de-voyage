@@ -20,6 +20,7 @@ const enhancers = composeEnhancers(
     register,
     loginCheck,
     login,
+    loginCheck,
     user,
     // secondMiddleware,
   ),

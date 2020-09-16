@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SAVE_STEP, saveDataStep } from 'src/actions/createStep';
+import { SAVE_STEP, saveDataStep } from '../actions/createStep';
 
 const CreateStep = (store) => (next) => (action) => {
   switch (action.type) {
