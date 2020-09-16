@@ -7,7 +7,7 @@ const Check = (store) => (next) => (action) => {
     case CHECK: {
       const state = store.getState();
 
-      axios.post('http://localhost:8000/api/login/checkactivation', {
+      axios.post('http://34.239.44.174/api/login/checkactivation', {
         username: state.register.email,
         password: state.register.password,
       })

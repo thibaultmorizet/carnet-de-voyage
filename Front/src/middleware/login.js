@@ -7,7 +7,7 @@ const Login = (store) => (next) => (action) => {
     case LOGIN: {
       const state = store.getState();
 
-      axios.post('http://localhost:8000/api/login_check', {
+      axios.post('http://34.239.44.174/api/login_check', {
         username: state.register.email,
         password: state.register.password,
       })
