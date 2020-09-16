@@ -1,29 +1,85 @@
-.travels{
+.travelsList {
+  background-image: url(../../assets/images/texture.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
 
+.travels {
   &__container {
 
-    &--title {
-      font-family: 'Pacifico', cursive;
-      font-size: 2.3em;
-      text-align: center;
-      padding: 1em 1em 0em 1em;
-      margin-top: .5em;
-      display: flex;
-    }
-    #travelsInput {
-      display: flex;
-      margin: 2em auto 0em;
-      background-color: white;
-      border: none;
-      border-radius: 20px;
-      padding: .5em 2em;
-      box-shadow: -1px 2px 15px -6px rgba(0,0,0,0.75);
-      font-family: 'IBM Plex Sans', sans-serif;
-      cursor: pointer;
-      &:hover {
-        background-color: lightblue;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+
+      &--title {
+        font-family: 'Pacifico', cursive;
+        font-size: 1.2em;
+        margin: auto;
+        position: relative;
       }
-    }
+
+      #travelsInput {
+        display: flex;
+        margin: 2em auto 0em;
+        background-color: white;
+        border: none;
+        border-radius: 10px;
+        padding: .5em 2em;
+        box-shadow: -1px 2px 15px -6px rgba(0,0,0,0.75);
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-size: 0.6em;
+        font-weight: bold;
+        cursor: pointer;
+        &:hover {
+          background-color: lightblue;
+        }
+      }
+
+      img {
+        width: 15em; 
+        height: 8em; 
+        object-fit: cover;
+        padding-top: 1em;
+        position: static;
+      }
   }
 
+  &__inProgress {
+    padding-top: 4em;
+  }
+
+  &__finish {
+    padding-top: 2em;
+  }
+  &--icon {
+    width: 1.2%;
+    color: red;
+    font-weight: bolder;
+    position: relative;
+    top: 2.2em;
+    left: 0.4em;
+    cursor: pointer;
+  }
+  &__commentary {
+    background-color: rgba(5, 197, 255, 0.233);
+    padding: 0.4em;
+    width: 7.8em;
+    border-radius: 5px;
+    backdrop-filter: blur(2px);
+    position: relative;
+    bottom: 1em;
+    right: 0.5em;
+
+    h3 {
+      font-family: 'Pacifico', cursive;
+      font-size: 0.6em;
+      padding-bottom: 0.5em;
+    }
+
+    p {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.5em;
+      padding-left: 1em;
+    }
+  }
 }

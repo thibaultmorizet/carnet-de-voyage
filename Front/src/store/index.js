@@ -7,6 +7,7 @@ import logMiddleware from '../middleware/logMiddleware';
 import createStep from '../middleware/createStep';
 import register from '../middleware/register';
 import login from '../middleware/login';
+import loginCheck from '../middleware/loginCheck';
 import user from '../middleware/user';
 import updateStep from '../middleware/updateStep';
 
@@ -18,7 +19,9 @@ const enhancers = composeEnhancers(
     logMiddleware,
     createStep,
     register,
+    loginCheck,
     login,
+    loginCheck,
     user,
     updateStep,
     // secondMiddleware,
