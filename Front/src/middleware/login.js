@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { LOGIN } from '../actions/login';
+import { keepToken } from '../actions/keepToken';
 
 const Login = (store) => (next) => (action) => {
   switch (action.type) {
@@ -11,7 +12,8 @@ const Login = (store) => (next) => (action) => {
         password: state.register.password,
       })
         .then((response) => {
-          console.log(response);
+          const tokenString = JSON.parse(response.request.response);
+          store.dispatch(keepToken(tokenString.token));
         })
         .catch((error) => console.log(error));
       break;

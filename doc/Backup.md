@@ -1,3 +1,8 @@
+# Backup server
+
+## Htaccess
+
+```
 # when compiling LESS/Sass/CoffeScript assets.
 # Options +FollowSymlinks
 
@@ -58,3 +63,12 @@
         # RedirectTemp cannot be used instead
     </IfModule>
 </IfModule>
+```
+
+## dotenv.local
+
+```
+DATABASE_URL=mysql://hyperion:hyperionOclock2020@127.0.0.1:3306/carnet_db?serverVersion=8
+MAILER_DSN=gmail://sebtoorop:zhcnqdduuvjhwtii@default
+JWT_PASSPHRASE=C@rnetDeVoyageSecret
+```

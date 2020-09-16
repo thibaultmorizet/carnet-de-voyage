@@ -12,8 +12,6 @@ const mapDispatchToProps = (dispatch) => ({
   handleLogin: () => {
     const actionCheck = saveLoginCheck();
     dispatch(actionCheck);
-    const action = saveLogin();
-    dispatch(action);
   },
   changeField: (value, name) => {
     const actionCheck = changeValueCheck(value, name);

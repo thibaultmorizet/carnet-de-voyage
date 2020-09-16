@@ -20,7 +20,7 @@ class UserApiController extends AbstractController
 {
 
     /**
-     * @Route("/api/user/register", name="user_register", methods={"POST"})
+     * @Route("/api/login/register", name="user_register", methods={"POST"})
      */
     public function register(UserPasswordEncoderInterface $passwordEncoder, SerializerInterface $serializer, Request $request, ValidatorInterface $validator, MailerInterface $mailerInterface, MailerController $mailerController)
     {
@@ -111,7 +111,7 @@ class UserApiController extends AbstractController
             $userList,
             200,
             [],
-            ["groups" => "user"]
+            ["groups" => ["user"]]
         );
     }
 }

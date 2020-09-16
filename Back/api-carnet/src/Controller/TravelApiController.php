@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Travel;
 use App\Repository\UserRepository;
 use App\Repository\TravelRepository;
-use Symfony\Component\Finder\Finder;
+//use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
-use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+//use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -113,17 +113,16 @@ class TravelApiController extends AbstractController
         // New object FileSystem for filesystem operations
         $fileSystem = new FileSystem();
         // Path + image file name
-        $filenameWithPath = getcwd()."\\uploads\\pictures\\travel" . $travel->getId() . "\\" . $fileNameUnique;
+        $filenameWithPath = getcwd(). "/uploads/pictures/travel" . $travel->getId() . "/" . $fileNameUnique;
         // Create file on disk
         $fileSystem->dumpFile($filenameWithPath,$dataImage);
               
-
         // returns OK message (201): Object created in DataBase
         return $this->json(
             [
                 "success" => true,
                 "id" => $travel->getId(),
-                "imageFile" => $filenameWithPath
+                "imageFile" => $fileNameUnique
             ],
             Response::HTTP_CREATED
         );
@@ -185,9 +184,9 @@ class TravelApiController extends AbstractController
             // New object FileSystem for filesystem operations
             $fileSystem = new FileSystem();
             // Path + new image file name
-            $newFilenameWithPath = getcwd()."\\uploads\\pictures\\travel" . $travel->getId() . "\\" . $fileNameUnique;
+            $newFilenameWithPath = getcwd()."/uploads/pictures/travel" . $travel->getId() . "/" . $fileNameUnique;
             // Path + old image file name
-            $oldFilenameWithPath = getcwd()."\\uploads\\pictures\\travel" . $travel->getId() . "\\" . $travel->getPictureUrl();
+            $oldFilenameWithPath = getcwd()."/uploads/pictures/travel" . $travel->getId() . "/" . $travel->getPictureUrl();
             // Delete old file image on disk
             $fileSystem->remove($oldFilenameWithPath);
             // Create new file image on disk
@@ -205,7 +204,8 @@ class TravelApiController extends AbstractController
         return $this->json(
             [
                 "success" => true,
-                "id" => $travel->getId()
+                "id" => $travel->getId(),
+                "imageFile" => $fileNameUnique
             ],
             Response::HTTP_CREATED
         );
@@ -223,7 +223,7 @@ class TravelApiController extends AbstractController
             return $this->json(
                 [
                     "success" => false,
-                    "id" => $id
+                    "operation" => "Travel " . $id . "not found"
                 ],
                 Response::HTTP_BAD_REQUEST // HTTP Response 400
             );
@@ -231,7 +231,7 @@ class TravelApiController extends AbstractController
 
         $fileSystem = new Filesystem();
         // Path to delete
-        $pathDelete = getcwd()."\\uploads\\pictures\\travel" . $travel->getId() . "\\";
+        $pathDelete = getcwd()."/uploads/pictures/travel" . $travel->getId() . "/";
         
         // Delete the Travel, Steps and Comments
         $manager = $this->getDoctrine()->getManager();
@@ -244,7 +244,7 @@ class TravelApiController extends AbstractController
         return $this->json(
             [
                 "success" => true,
-                "id" => $id
+                "operation" => "Travel " . $id . " deleted"
             ],
             Response::HTTP_OK
         );
@@ -257,32 +257,10 @@ class TravelApiController extends AbstractController
     /**
      *  @Route("/{id}/test", name="api_travel_test", methods={"DELETE"})
      */
+    /*
     public function test(travelRepository $travelRepository, $id) {
         
     }
-
-
-
-
-    /* Exemple JSON POST : /api/travel/create
-       {
-           "user_id" : 30,
-           "title" : "Voyage en Tanzanie",
-           "description" : "un long voyage en Tanzanie",
-           "status" : 0,
-           "picture_travel" : "picture5.jpeg",
-           "travel_date" : "2020-03-18"
-       } 
     */
-
-    /* Exemple JSON PUT : /api/travel/'id}/update
-        {
-            "user_id" : 30,
-            "title" : "Voyage2 en Tanzanie",
-            "description" : "un super super long voyage en Tanzanie",
-            "picture_travel" : "picture5.jpeg",
-            "travel_date" : "2020-12-12"
-        }
-    */    
 
 }

@@ -18,6 +18,7 @@ const enhancers = composeEnhancers(
     logMiddleware,
     createStep,
     register,
+    loginCheck,
     login,
     loginCheck,
     user,

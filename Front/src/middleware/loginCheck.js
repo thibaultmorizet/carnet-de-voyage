@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { CHECK } from '../actions/loginCheck';
+import { saveLogin } from '../actions/login';
 
 const Check = (store) => (next) => (action) => {
   switch (action.type) {
@@ -11,9 +12,10 @@ const Check = (store) => (next) => (action) => {
         password: state.register.password,
       })
         .then((response) => {
-          console.log(response);
+          console.log('response');
+          store.dispatch(saveLogin());
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log('error'));
       break;
     }
     default:
