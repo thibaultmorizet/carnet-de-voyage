@@ -11,10 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class GeneratorController extends AbstractController
 {
     /**
-     * @Route("/api/generate_url", name="generate_url")
+     * @Route("/api/generate_url/{id}", name="generate_url", requirements={"id"="\d+"})
      */
-    public function generateUrlToken(Travel $travel)
+    public function generateUrlToken(Travel $travel = null)
     {
+        
         // Return bad request if $travel = null
         if(!$travel) {
             return $this->json(
@@ -27,18 +28,17 @@ class GeneratorController extends AbstractController
         }
 
         // Return token
-        if($travel->getToken) {
+        if($travel->getToken()) {
             return $this->json(
                 [
                     "succes" => true,
-                    "url_token" => $travel->getToken
+                    "url_token" => $travel->getToken()
                 ],
                 Response::HTTP_OK
             );
         }
 
         if(!$travel->getToken()) {
-
             $travel->setToken(md5(uniqid()));
             $travel->setTokenCreation(new DateTime('NOW'));
             $manager = $this->getDoctrine()->getManager();
@@ -48,9 +48,9 @@ class GeneratorController extends AbstractController
             return $this->json(
                 [
                     "succes" => true,
-                    "url_token" => $travel->getToken
+                    "url_token" => $travel->getToken()
                 ],
-                Response::HTTP_OK
+                Response::HTTP_CREATED
             );
         }
     }
