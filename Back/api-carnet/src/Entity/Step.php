@@ -5,8 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\StepRepository;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 
 /**
@@ -19,12 +20,14 @@ class Step
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"travel:read"})
      * @Groups({"step:show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"travel:read"})
      * @Groups({"step:show"})
      */
     private $title;
@@ -37,36 +40,42 @@ class Step
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"travel:read"})
      * @Groups({"step:show"})
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"travel:read"})
      * @Groups({"step:show"})
      */
     private $longitude;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"travel:read"})
      * @Groups({"step:show"})
      */
     private $stepLike;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"travel:read"})
      * @Groups({"step:show"})
      */
     private $stepDate;
 
     /**
      * @ORM\Column(type="datetime")
+     * 
      * @Groups({"step:show"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * 
      * @Groups({"step:show"})
      */
     private $updatedAt;
@@ -86,6 +95,7 @@ class Step
 
     /**
      * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="step", orphanRemoval=true)
+     * @Groups({"travel:read"})
      * @Groups({"step:show"})
      */
     private $pictures;
