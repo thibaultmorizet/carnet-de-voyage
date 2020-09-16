@@ -15,53 +15,49 @@ import Login from '../Login';
 import TravelsList from '../TravelsList';
 
 import './styles.css';
-import Spinner from '../Spinner';
 
 // == Composant
-const CarnetDeVoyage = ({ loading }) => {
-  console.log(loading);
-  return (
-    <div className="carnetDeVoyage">
-      <Route exact path="/">
-        <Page>
-          <HomePage />
-        </Page>
-      </Route>
-      <Route exact path="/register">
-        <Page>
-          <Register />
-        </Page>
-      </Route>
-      <Route exact path="/admin/user/list">
-        <User />
-      </Route>
-      <Route exact path="/login">
-        <Page>
-          <Login />
-        </Page>
-      </Route>
-      <Route exact path="/travels/list">
-        <Page>
-          <TravelsList />
-        </Page>
-      </Route>
-      <Route exact path="/travel/:id/add">
-        <Page>
-          <CreateStep />
-        </Page>
-      </Route>
-      <Route exact path="/travel/:id/update/:type">
-        <Page>
-          <UpdateStep />
-        </Page>
-      </Route>
+const CarnetDeVoyage = () => (
+  <div className="carnetDeVoyage">
+    <Route exact path="/">
+      <Page>
+        <HomePage />
+      </Page>
+    </Route>
+    <Route exact path="/register">
+      <Page>
+        <Register />
+      </Page>
+    </Route>
+    <Route exact path="/admin/user/list">
+      <User />
+    </Route>
+    <Route exact path="/login">
+      <Page>
+        <Login />
+      </Page>
+    </Route>
+    <Route exact path="/travels/list">
+      <Page>
+        <TravelsList />
+      </Page>
+    </Route>
+    <Route exact path="/travel/:id/add">
+      <Page>
+        <CreateStep />
+      </Page>
+    </Route>
+    <Route exact path="/travel/:id/update/:type">
+      <Page>
+        <UpdateStep />
+      </Page>
+    </Route>
 
-      <Route exact path="/spinner" />
+    <Route exact path="/spinner" />
 
-      <Footer />
-    </div>
-  );
-};
+    <Footer />
+  </div>
+);
 
 // == Export
 export default CarnetDeVoyage;

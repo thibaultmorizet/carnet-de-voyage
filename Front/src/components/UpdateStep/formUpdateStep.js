@@ -4,6 +4,8 @@ import Map from 'src/components/Map';
 import FormInput from 'src/components/FormInput';
 import { useParams } from 'react-router-dom';
 import Spinner from 'src/components/Spinner';
+
+import ImageUploader from 'react-images-upload';
 import './styles.scss';
 
 const FormUpdateStep = ({
@@ -17,6 +19,7 @@ const FormUpdateStep = ({
   changeDataStep,
   loading,
 }) => {
+  console.log(picture);
   const { id, type } = useParams();
   useEffect(() => {
     changeDataStep(id, 'id');
@@ -64,7 +67,9 @@ const FormUpdateStep = ({
               <div className="carre" />
               <div className="carre" />
               <div className="carre" />
+              <img src={picture[0].data} alt="" />
               <div className="carre" />
+              <input type="file" name="" id="" />
             </div>
 
             <div className="FormUpdateStep__formElt--finalInput">

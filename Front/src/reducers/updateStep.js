@@ -30,7 +30,7 @@ const updateStep = (state = initialState, action = {}) => {
         latitude: action.data.latitude,
         longitude: action.data.longitude,
         step_date: action.data.step_date,
-        picture: action.data.pictures,
+        picture: action.data.AllPictures,
         id: action.data.id,
         loading: false,
       }; }
