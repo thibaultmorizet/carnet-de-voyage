@@ -212,7 +212,7 @@ class TravelApiController extends AbstractController
     }
 
     /**
-     *  @Route("/{id}/delete", name="api_travel_delete", methods={"DELETE"})
+     *  @Route("/{id}/delete", name="api_travel_delete", methods={"DELETE"}, requirements={"id"="\d+"})
      */
     public function delete(travelRepository $travelRepository, $id)
     {
