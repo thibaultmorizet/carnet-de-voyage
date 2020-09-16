@@ -164,11 +164,8 @@ const FormUpdateStep = ({
 
         </form>
         )}
-
     </div>
   );
 };
 
 export default FormUpdateStep;
-
-// /api/travel/{id}/delete/{id2}
