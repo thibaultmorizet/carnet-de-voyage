@@ -90,6 +90,16 @@ class Travel
      */
     private $followers;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $tokenCreation;
+
     public function __construct()
     {
         $this->steps = new ArrayCollection();
@@ -258,6 +268,30 @@ class Travel
         if ($this->followers->contains($follower)) {
             $this->followers->removeElement($follower);
         }
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getTokenCreation(): ?\DateTimeInterface
+    {
+        return $this->tokenCreation;
+    }
+
+    public function setTokenCreation(?\DateTimeInterface $tokenCreation): self
+    {
+        $this->tokenCreation = $tokenCreation;
 
         return $this;
     }
