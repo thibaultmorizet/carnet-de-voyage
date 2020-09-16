@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import FormUpdateStep from '../components/UpdateStep/formUpdateStep';
-import { fetchDataStep, changeDataStep, deletePictureUpdate } from '../actions/updateStep';
+import {
+  fetchDataStep, changeDataStep, deletePictureUpdate, savePictureUpdate, sendDateUpdate,
+} from '../actions/updateStep';
 
 const mapStateToProps = (state) => ({
   title: state.updateStep.title,
@@ -14,6 +16,7 @@ const mapStateToProps = (state) => ({
   type: state.updateStep.type,
   loading: state.updateStep.loading,
   picture_delete: state.updateStep.picture_delete,
+  pictures_new: state.updateStep.pictures_new,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -28,6 +31,14 @@ const mapDispatchToProps = (dispatch) => ({
   deletePictureUpdate: (value) => {
     console.log('valeur', value);
     dispatch(deletePictureUpdate(value));
+  },
+  savePictureUpdate: (value, name) => {
+    console.log('ha que coucou', value, name);
+    dispatch(savePictureUpdate(value, name));
+  },
+  sendDateUpdate: () => {
+    console.log('sendDateUpdate');
+    dispatch(sendDateUpdate());
   },
 });
 

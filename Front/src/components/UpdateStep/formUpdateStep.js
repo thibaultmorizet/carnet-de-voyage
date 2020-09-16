@@ -4,6 +4,9 @@ import Map from 'src/components/Map';
 import FormInput from 'src/components/FormInput';
 import { useParams } from 'react-router-dom';
 import Spinner from 'src/components/Spinner';
+import {
+  handlePicture,
+} from 'src/selectors/carnetDeVoyage';
 
 import ImageUploader from 'react-images-upload';
 import './styles.scss';
@@ -20,8 +23,9 @@ const FormUpdateStep = ({
   changeDataStep,
   loading,
   deletePictureUpdate,
+  savePictureUpdate,
+  sendDateUpdate,
 }) => {
-  console.log(picture);
   const { id, type } = useParams();
   useEffect(() => {
     changeDataStep(id, 'id');
@@ -42,6 +46,20 @@ const FormUpdateStep = ({
     ),
   );
 
+  const changeValueTextArea = (evt) => {
+    console.log(evt.target.value);
+    changeDataStep(evt.target.value, 'description');
+  };
+
+  const handleChangePicture = (evt) => {
+    handlePicture(evt, savePictureUpdate);
+  };
+
+  const handleOnSubmit = (evt) => {
+    evt.preventDefault();
+    sendDateUpdate();
+  };
+
   return (
 
     <div className="FormUpdateStep">
@@ -50,7 +68,7 @@ const FormUpdateStep = ({
       )}
       {!loading
         && (
-        <form action="" className="FormUpdateStep__formElt">
+        <form action="" className="FormUpdateStep__formElt" onSubmit={handleOnSubmit}>
 
           <Map onChange={changeDataStep} latitude={latitude} longitude={longitude} />
 
@@ -65,7 +83,7 @@ const FormUpdateStep = ({
               />
 
               <div className="floating-label">
-                <textarea type="text" className="floating-input" name="description" placeholder=" " maxLength="255" rows="9" value={description} onChange={changeDataStep} />
+                <textarea type="text" className="floating-input" name="description" placeholder=" " maxLength="255" rows="9" value={description} onChange={changeValueTextArea} />
                 <label htmlFor="description"> Description (255 caractères maximum) </label>
               </div>
 
@@ -80,12 +98,23 @@ const FormUpdateStep = ({
 
             <div className="FormUpdateStep__formElt--pictures">
               {imgElement()}
-              <input type="file" name="" id="" />
+            </div>
+            <div className="essai">
+              <ImageUploader
+                withIcon
+                imgExtension={['.jpg', '.png', '.jpeg']}
+                maxFileSize={5242880}
+                onChange={handleChangePicture}
+                label="Max file size: 5mb, accepted: jpg, png"
+                buttonText="Selectionner"
+                withPreview
+                className="essai"
+              />
             </div>
 
             <div className="FormUpdateStep__formElt--finalInput">
               <input className="formStep__element--submit FormUpdateStep__submit" type="submit" value="Enregistrer l'étape" />
-              <input className="formStep__element--submit FormUpdateStep__delete" type="submit" value="Supprimer l'étape" />
+              <input className="formStep__element--submit FormUpdateStep__delete" type="button" value="Supprimer l'étape" />
             </div>
           </div>
 

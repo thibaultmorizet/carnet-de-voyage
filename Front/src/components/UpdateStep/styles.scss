@@ -1,9 +1,20 @@
 .UpdateStep{
-  height: auto;
   background-image: url('../../assets/images/background-men-phone.svg');
   background-repeat: no-repeat;
   background-position:  bottom 0% right 0px;
   background-size: 70%;
+}
+
+
+.essai {
+  display: block;
+}
+.uploadPictureContainer {
+  display: block;
+}
+
+.uploadPicture{
+  max-width: 2em;
 }
 
 .FormUpdateStep {
@@ -65,7 +76,6 @@
 @media only screen and (min-width : 769px) {
 
   .UpdateStep {
-    height: 100vh;
     background-position:  bottom -10% right -30px, bottom -10% left -100px;
     background-size: 40%, 40%;
   }
@@ -79,16 +89,16 @@
     &__formElt {
       display: flex;
       &--pictures{
-        order: 1;
+        // order: 1;
       } 
       &--allInput {
-        order: 2;
+        // order: 2;
         margin: .5em;
         justify-content: start;
       }
       &--finalInput {
         position: relative;
-        order: 4;
+        // order: 4;
         display: flex;
       }
     }
@@ -115,7 +125,6 @@
 
 @media only screen and (min-width : 1440px) {
   .UpdateStep {
-    height: 100vh;
     background-position:  bottom -6% right -30px, bottom -50% left -100px;
     background-size: 20%, 25%;
   }
@@ -123,10 +132,7 @@
   .FormUpdateStep{
     display: flex;
     justify-content: center;
-    align-items: center;
     &__formElt {
-      height: 70vh;
-      align-items: center;
       &--allInput {
         justify-content: space-between;
         display: flex;

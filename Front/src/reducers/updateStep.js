@@ -1,4 +1,6 @@
-import { CHANGE_DATA_STEP, SAVE_DATA_STEP, DELETE_PICTURE_UPDATE } from '../actions/updateStep';
+import {
+  CHANGE_DATA_STEP, SAVE_DATA_STEP, DELETE_PICTURE_UPDATE, SAVE_PICTURE_UPDATE,
+} from '../actions/updateStep';
 
 export const initialState = {
   title: '',
@@ -12,7 +14,8 @@ export const initialState = {
   id: 0,
   type: 0,
   loading: true,
-  picture_delete: '',
+  pictures_delete: '',
+  pictures_new: '',
 };
 
 const updateStep = (state = initialState, action = {}) => {
@@ -33,16 +36,23 @@ const updateStep = (state = initialState, action = {}) => {
         step_date: action.data.step_date,
         picture: action.data.AllPictures,
         id: action.data.id,
+        travel_id: action.data.travelId,
         loading: false,
       }; }
     case DELETE_PICTURE_UPDATE:
       return {
         ...state,
-        picture_delete: [
-          ...state.picture_delete,
+        pictures_delete: [
+          ...state.pictures_delete,
           { id: action.value },
         ],
       };
+    case SAVE_PICTURE_UPDATE: {
+      console.log('picture121', action.value);
+      return {
+        ...state,
+        pictures_new: action.value,
+      }; }
     default:
       return state;
   }

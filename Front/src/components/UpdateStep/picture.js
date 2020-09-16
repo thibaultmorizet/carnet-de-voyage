@@ -5,8 +5,11 @@ import './styles.scss';
 
 const Picture = ({ url, src, onDelete }) => {
   const essai = (evt) => {
+    console.log('je suis dans essai');
     const elt = evt.currentTarget;
+    console.log('je suis dans essai2');
     const parent = elt.parentElement;
+    console.log('je suis dans essai3');
     onDelete(parent.firstChild.id);
     parent.style.display = 'none';
   };
