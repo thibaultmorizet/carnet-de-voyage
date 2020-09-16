@@ -1,3 +1,6 @@
+/* eslint-disable no-dupe-keys */
+/* eslint-disable camelcase */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
