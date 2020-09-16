@@ -17,30 +17,21 @@ export const changeDataStep = (value, name) => ({
   name,
 });
 
-export const saveDataStep = (data) => {
-  console.log('dara', data);
-  return ({
-    type: SAVE_DATA_STEP,
-    data,
-  });
-};
+export const saveDataStep = (data) => ({
+  type: SAVE_DATA_STEP,
+  data,
+});
 
-export const deletePictureUpdate = (value) => {
-  console.log('je suis dans actions');
-  return ({
-    type: DELETE_PICTURE_UPDATE,
-    value,
-  });
-};
+export const deletePictureUpdate = (value) => ({
+  type: DELETE_PICTURE_UPDATE,
+  value,
+});
 
-export const savePictureUpdate = (value, name) => {
-  console.log(value, name);
-  return ({
-    type: SAVE_PICTURE_UPDATE,
-    value,
-    name,
-  });
-};
+export const savePictureUpdate = (value, name) => ({
+  type: SAVE_PICTURE_UPDATE,
+  value,
+  name,
+});
 
 export const sendDateUpdate = () => ({
   type: SEND_DATA_UPDATE,

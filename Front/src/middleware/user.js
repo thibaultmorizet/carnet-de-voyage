@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_USER } from '../actions/user';
 
-console.log('je passe ici');
+// console.log('je passe ici');
 
 const user = (store) => (next) => (action) => {
   switch (action.type) {

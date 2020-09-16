@@ -1,19 +1,18 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Map from 'src/components/Map';
 import FormInput from 'src/components/FormInput';
 import { useParams, useHistory } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 import Spinner from 'src/components/Spinner';
-import {
-  handlePicture, toastNotification,
-} from 'src/selectors/carnetDeVoyage';
+import { handlePicture, toastNotification } from 'src/selectors/carnetDeVoyage';
 import Modal from 'react-modal';
-
 import ImageUploader from 'react-images-upload';
-import './styles.scss';
+import PropTypes from 'prop-types';
 import Picture from './picture';
+
+import './styles.scss';
 
 Modal.setAppElement('#root');
 
@@ -52,8 +51,6 @@ const FormUpdateStep = ({
     toastFailOrSuccess();
   }, [response]);
 
-  console.log('dalut', picture);
-
   const imgElement = () => picture.map(
     (elt) => (
       <Picture
@@ -66,7 +63,6 @@ const FormUpdateStep = ({
   );
 
   const changeValueTextArea = (evt) => {
-    console.log(evt.target.value);
     changeDataStep(evt.target.value, 'description');
   };
 
@@ -169,6 +165,26 @@ const FormUpdateStep = ({
   );
 };
 
-export default FormUpdateStep;
+FormUpdateStep.propTypes = {
+  fetchDataStep: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
+  step_date: PropTypes.string.isRequired,
+  picture: PropTypes.array,
+  changeDataStep: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  deletePictureUpdate: PropTypes.func.isRequired,
+  savePictureUpdate: PropTypes.func.isRequired,
+  sendDateUpdate: PropTypes.func.isRequired,
+  deleteStep: PropTypes.func.isRequired,
+  response: PropTypes.string,
+};
 
-// /api/travel/{id}/delete/{id2}
+FormUpdateStep.defaultProps = {
+  picture: [],
+  response: '',
+};
+
+export default FormUpdateStep;

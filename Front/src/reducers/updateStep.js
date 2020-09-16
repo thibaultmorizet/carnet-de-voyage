@@ -1,5 +1,9 @@
 import {
-  CHANGE_DATA_STEP, SAVE_DATA_STEP, DELETE_PICTURE_UPDATE, SAVE_PICTURE_UPDATE, RESPONSE_UPDATE_STEP,
+  CHANGE_DATA_STEP,
+  SAVE_DATA_STEP,
+  DELETE_PICTURE_UPDATE,
+  SAVE_PICTURE_UPDATE,
+  RESPONSE_UPDATE_STEP,
 } from '../actions/updateStep';
 
 export const initialState = {
@@ -8,7 +12,7 @@ export const initialState = {
   latitude: 0,
   longitude: 0,
   step_date: '',
-  picture: '',
+  picture: [],
   travel_id: '',
   response: '',
   id: 0,
@@ -25,8 +29,7 @@ const updateStep = (state = initialState, action = {}) => {
         ...state,
         [action.name]: action.value,
       };
-    case SAVE_DATA_STEP: {
-      console.log(action.data);
+    case SAVE_DATA_STEP:
       return {
         ...state,
         title: action.data.title,
@@ -38,7 +41,7 @@ const updateStep = (state = initialState, action = {}) => {
         id: action.data.id,
         travel_id: action.data.travelId,
         loading: false,
-      }; }
+      };
     case DELETE_PICTURE_UPDATE:
       return {
         ...state,
@@ -48,7 +51,6 @@ const updateStep = (state = initialState, action = {}) => {
         ],
       };
     case SAVE_PICTURE_UPDATE: {
-      console.log('picture121', action.value);
       return {
         ...state,
         pictures_new: action.value,

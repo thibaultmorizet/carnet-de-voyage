@@ -21,27 +21,21 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchDataStep: () => {
-    console.log('je passe dans fetchDataStep');
     dispatch(fetchDataStep());
   },
   changeDataStep: (value, name) => {
-    console.log('je passe dans changeDataStep');
     dispatch(changeDataStep(value, name));
   },
   deletePictureUpdate: (value) => {
-    console.log('valeur', value);
     dispatch(deletePictureUpdate(value));
   },
   savePictureUpdate: (value, name) => {
-    console.log('ha que coucou', value, name);
     dispatch(savePictureUpdate(value, name));
   },
   sendDateUpdate: () => {
-    console.log('sendDateUpdate');
     dispatch(sendDateUpdate());
   },
   deleteStep: () => {
-    console.log('delete');
     dispatch(deleteStep());
   },
 });
