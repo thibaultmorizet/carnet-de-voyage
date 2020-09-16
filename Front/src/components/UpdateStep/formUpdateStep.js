@@ -3,10 +3,11 @@
 import React, { useEffect, useState } from 'react';
 import Map from 'src/components/Map';
 import FormInput from 'src/components/FormInput';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+import { useToasts } from 'react-toast-notifications';
 import Spinner from 'src/components/Spinner';
 import {
-  handlePicture,
+  handlePicture, toastNotification,
 } from 'src/selectors/carnetDeVoyage';
 import Modal from 'react-modal';
 
@@ -29,15 +30,27 @@ const FormUpdateStep = ({
   deletePictureUpdate,
   savePictureUpdate,
   sendDateUpdate,
+  deleteStep,
+  response,
 }) => {
   const { id, type } = useParams();
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const { addToast } = useToasts();
+  const history = useHistory();
 
   useEffect(() => {
     changeDataStep(id, 'id');
     changeDataStep(type, 'type');
     fetchDataStep();
   }, []);
+
+  const toastFailOrSuccess = () => {
+    toastNotification(addToast, history, response);
+  };
+
+  useEffect(() => {
+    toastFailOrSuccess();
+  }, [response]);
 
   console.log('dalut', picture);
 
@@ -136,13 +149,13 @@ const FormUpdateStep = ({
                 className="modalEx"
                 style={{
                   overlay: {
-                    'backdrop-filter': 'blur(5px)',
+                    backdropFilter: 'blur(5px)',
                   },
                 }}
               >
                 <div className="modalEx__content">
                   <h2 className="modalEx__content--title">Êtes vous sur de vouloir supprimer cette étape ?</h2>
-                  <button className="modalEx__content--delete" onClick={closeModal}>Supprimer</button>
+                  <button className="modalEx__content--delete" onClick={deleteStep}>Supprimer</button>
                   <button className="modalEx__content--close" onClick={closeModal}>Annuler</button>
                 </div>
               </Modal>

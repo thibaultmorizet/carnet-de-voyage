@@ -4,6 +4,8 @@ export const SAVE_DATA_STEP = 'SAVE_DATA_STEP';
 export const DELETE_PICTURE_UPDATE = 'DELETE_PICTURE_UPDATE';
 export const SAVE_PICTURE_UPDATE = 'SAVE_PICTURE_UPDATE';
 export const SEND_DATA_UPDATE = 'SEND_DATA_UPDATE';
+export const DELETE_STEP = 'DELETE_STEP';
+export const RESPONSE_UPDATE_STEP = 'RESPONSE_UPDATE_STEP';
 
 export const fetchDataStep = () => ({
   type: FETCH_DATA_STEP,
@@ -42,4 +44,13 @@ export const savePictureUpdate = (value, name) => {
 
 export const sendDateUpdate = () => ({
   type: SEND_DATA_UPDATE,
+});
+
+export const deleteStep = () => ({
+  type: DELETE_STEP,
+});
+
+export const responseUpdateStep = (value) => ({
+  type: RESPONSE_UPDATE_STEP,
+  value,
 });

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import FormUpdateStep from '../components/UpdateStep/formUpdateStep';
 import {
-  fetchDataStep, changeDataStep, deletePictureUpdate, savePictureUpdate, sendDateUpdate,
+  fetchDataStep, changeDataStep, deletePictureUpdate, savePictureUpdate, sendDateUpdate, deleteStep,
 } from '../actions/updateStep';
 
 const mapStateToProps = (state) => ({
@@ -39,6 +39,10 @@ const mapDispatchToProps = (dispatch) => ({
   sendDateUpdate: () => {
     console.log('sendDateUpdate');
     dispatch(sendDateUpdate());
+  },
+  deleteStep: () => {
+    console.log('delete');
+    dispatch(deleteStep());
   },
 });
 

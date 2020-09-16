@@ -1,5 +1,5 @@
 import {
-  CHANGE_DATA_STEP, SAVE_DATA_STEP, DELETE_PICTURE_UPDATE, SAVE_PICTURE_UPDATE,
+  CHANGE_DATA_STEP, SAVE_DATA_STEP, DELETE_PICTURE_UPDATE, SAVE_PICTURE_UPDATE, RESPONSE_UPDATE_STEP,
 } from '../actions/updateStep';
 
 export const initialState = {
@@ -52,7 +52,13 @@ const updateStep = (state = initialState, action = {}) => {
       return {
         ...state,
         pictures_new: action.value,
-      }; }
+      };
+    }
+    case RESPONSE_UPDATE_STEP:
+      return {
+        ...state,
+        response: action.value,
+      };
     default:
       return state;
   }
