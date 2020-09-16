@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { changeValueContact, changeCheckboxContact, sendEmailContact } from 'src/actions/contact';
 import FormContact from '../components/Contact/formContact';
 
 const mapStateToProps = (state) => ({
@@ -9,6 +10,16 @@ const mapStateToProps = (state) => ({
   response: state.contact.response,
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  changeValueContact: (value, name) => {
+    dispatch(changeValueContact(value, name));
+  },
+  changeCheckboxContact: () => {
+    dispatch(changeCheckboxContact());
+  },
+  sendEmailContact: () => {
+    console.log('sendEmailContact');
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormContact);

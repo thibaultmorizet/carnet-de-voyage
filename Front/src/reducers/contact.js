@@ -1,4 +1,4 @@
-import { CHANGE_VALUE_CONTACT } from 'src/actions/contact';
+import { CHANGE_VALUE_CONTACT, CHANGE_CHECKBOX_CONTACT } from 'src/actions/contact';
 
 export const initialState = {
   email: '',
@@ -12,7 +12,15 @@ export const initialState = {
 const contact = (state = initialState, action = {}) => {
   switch (action.type) {
     case CHANGE_VALUE_CONTACT:
-      return state;
+      return {
+        ...state,
+        [action.name]: action.value,
+      };
+    case CHANGE_CHECKBOX_CONTACT:
+      return {
+        ...state,
+        checked: !state.checked,
+      };
     default:
       return state;
   }
