@@ -43,11 +43,11 @@ class SecurityController extends AbstractController
         }
 
         
-        // return $this->json(
-        //     $userData,
-        //     200,
-        //     []
-        // );
+        return $this->json(
+            $userData,
+            200,
+            []
+        );
     }
 
     /**

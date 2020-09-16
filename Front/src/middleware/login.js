@@ -6,11 +6,10 @@ const Login = (store) => (next) => (action) => {
     case LOGIN: {
       const state = store.getState();
 
-      axios.post('http://localhost:8000/api/login/checkactivation', {
+      axios.post('http://localhost:8000/api/login_check', {
         username: state.register.email,
         password: state.register.password,
-      }
-      )
+      })
         .then((response) => {
           console.log(response);
         })
@@ -21,4 +20,5 @@ const Login = (store) => (next) => (action) => {
       next(action);
   }
 };
+
 export default Login;
