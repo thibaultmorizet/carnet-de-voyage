@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\StepRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\StepRepository;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Doctrine\Common\Collections\ArrayCollection;
+
+
 
 /**
  * @ORM\Entity(repositoryClass=StepRepository::class)
@@ -19,65 +21,82 @@ class Step
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * @Groups({"travel:read"})
+     * @Groups({"step:show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"travel:read"})
+     * @Groups({"step:show"})
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"step:show"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="float")
      * @Groups({"travel:read"})
+     * @Groups({"step:show"})
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="float")
      * @Groups({"travel:read"})
+     * @Groups({"step:show"})
      */
     private $longitude;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Groups({"travel:read"})
+     * @Groups({"step:show"})
      */
     private $stepLike;
 
     /**
      * @ORM\Column(type="date")
      * @Groups({"travel:read"})
+     * @Groups({"step:show"})
      */
     private $stepDate;
 
     /**
      * @ORM\Column(type="datetime")
      * 
+     * @Groups({"step:show"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * 
+     * @Groups({"step:show"})
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Travel::class, inversedBy="steps")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"step:show"})
      */
     private $travel;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="step", orphanRemoval=true)
+     * @Groups({"step:show"})
      */
     private $comments;
 
     /**
      * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="step", orphanRemoval=true)
      * @Groups({"travel:read"})
+     * @Groups({"step:show"})
      */
     private $pictures;
 
@@ -98,6 +117,18 @@ class Step
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
     }
 
     public function getDescription(): ?string

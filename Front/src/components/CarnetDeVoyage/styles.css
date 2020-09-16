@@ -1,13 +1,4 @@
 .carnetDeVoyage {
-  background-image: url(../../assets/images/background-machu.jpg);
-  background-size: cover;
-  background-position: center;
+  position: relative;
   height: 100vh;
-  padding-top: 1em;
-}
-
-@media only screen and (min-width : 1224px) {
-  .carnetDeVoyage {
-    padding-top: 0;
-  }
 }

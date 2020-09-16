@@ -6,6 +6,7 @@ use App\Repository\PictureRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
+
 /**
  * @ORM\Entity(repositoryClass=PictureRepository::class)
  * @ORM\HasLifecycleCallbacks()
@@ -17,24 +18,26 @@ class Picture
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * @Groups({"travel:read"})
+     * @Groups({"step:show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"travel:read"})
+     * @Groups({"step:show"})
      */
     private $url;
 
     /**
-     * @ORM\Column(type="datetime")
-     * 
+     * @ORM\Column(type="datetime") 
+     * @Groups({"step:show"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * 
+     * @Groups({"step:show"})
      */
     private $updatedAt;
 

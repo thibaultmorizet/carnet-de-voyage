@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 /**
@@ -20,40 +21,47 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"step:show", "user"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"travel:read"})
+     * @Groups("user")
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups("user")
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups("user")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"travel:read"})
+     * @Groups({"step:show", "user"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"travel:read"})
+     * @Groups({"step:show", "user"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"step:show"})
      */
     private $avatar;
 
@@ -68,14 +76,24 @@ class User implements UserInterface
     private $updatedAt;
 
     /**
+     * @ORM\OneToMany(targetEntity=Travel::class, mappedBy="creator", orphanRemoval=true)
+     */
+    private $travel;
+
+    /**
      * @ORM\ManyToMany(targetEntity=Travel::class, mappedBy="followers")
      */
     private $follower;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="userId", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
 
     public function __construct()
     {
@@ -282,6 +300,49 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getUser() === $this) {
                 $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Travel[]
+     */
+    public function getTravel(): Collection
+    {
+        return $this->travel;
+    }
+
+    public function addTravel(Travel $travel): self
+    {
+        if (!$this->travel->contains($travel)) {
+            $this->travel[] = $travel;
+            $travel->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTravel(Travel $travel): self
+    {
+        if ($this->travel->contains($travel)) {
+            $this->travel->removeElement($travel);
+            // set the owning side to null (unless already changed)
+            if ($travel->getCreator() === $this) {
+                $travel->setCreator(null);
             }
         }
 
