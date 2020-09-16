@@ -56,17 +56,15 @@
   "dependencies": {
     "@material/floating-label": "^7.0.0",
     "axios": "^0.20.0",
-
-    "leaflet": "^1.7.1",
-    "leaflet-geosearch": "^3.0.6",
-
     "bcryptjs": "^2.4.3",
     "http-proxy-middleware": "^1.0.5",
-
+    "leaflet": "^1.7.1",
+    "leaflet-geosearch": "^3.0.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-burger-menu": "^2.7.1",
     "react-dom": "^16.13.1",
+    "react-icons": "^3.11.0",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-toast-notifications": "^2.4.0",

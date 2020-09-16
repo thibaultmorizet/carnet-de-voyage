@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { LOGIN } from '../actions/login';
+import { CHECK } from '../actions/loginCheck';
 
-const Login = (store) => (next) => (action) => {
+const Check = (store) => (next) => (action) => {
   switch (action.type) {
-    case LOGIN: {
+    case CHECK: {
       const state = store.getState();
 
-      axios.post('http://localhost:8000/api/login_check', {
+      axios.post('http://localhost:8000/api/login/checkactivation', {
         username: state.register.email,
         password: state.register.password,
       })
@@ -21,4 +21,4 @@ const Login = (store) => (next) => (action) => {
   }
 };
 
-export default Login;
+export default Check;
