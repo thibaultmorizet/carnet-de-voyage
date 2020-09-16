@@ -7,6 +7,7 @@ import Spinner from 'src/components/Spinner';
 
 import ImageUploader from 'react-images-upload';
 import './styles.scss';
+import Picture from './picture';
 
 const FormUpdateStep = ({
   fetchDataStep,
@@ -26,6 +27,18 @@ const FormUpdateStep = ({
     changeDataStep(type, 'type');
     fetchDataStep();
   }, []);
+
+  console.log('dalut', picture);
+
+  const imgElement = () => picture.map(
+    (elt) => (
+      <Picture
+        key={elt.url}
+        src={elt.data}
+        url={elt.url}
+      />
+    ),
+  );
 
   return (
 
@@ -64,11 +77,7 @@ const FormUpdateStep = ({
             </div>
 
             <div className="FormUpdateStep__formElt--pictures">
-              <div className="carre" />
-              <div className="carre" />
-              <div className="carre" />
-              <img src={picture[0].data} alt="" />
-              <div className="carre" />
+              {imgElement()}
               <input type="file" name="" id="" />
             </div>
 
