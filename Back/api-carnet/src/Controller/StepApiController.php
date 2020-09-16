@@ -127,15 +127,15 @@ class StepApiController extends AbstractController
             $step->setStepLike(0);
 
             //if the array picture exists in the JSON request and it is not empty
-            if (array_key_exists('picture', $requestArray) && $requestArray['picture'] != null) {
+            if (array_key_exists('pictures', $requestArray) && $requestArray['pictures'] != null) {
                 //for each picture array in request
-                for ($pictureJson = 0; $pictureJson < count($requestArray['picture']); $pictureJson++) {
+                for ($pictureJson = 0; $pictureJson < count($requestArray['pictures']); $pictureJson++) {
 
                     //we recover the uploaded file
                     /** @var UploadedFile $pictureFile */
                     //we recover the data and the url in variables
-                    $pictureFile = $requestArray['picture'][$pictureJson]['data'];
-                    $pictureUrl = $requestArray['picture'][$pictureJson]['url'];
+                    $pictureFile = $requestArray['pictures'][$pictureJson]['data'];
+                    $pictureUrl = $requestArray['pictures'][$pictureJson]['url'];
                     //we create a unique picture name with the extension of $pictureUrl
                     $pictureName = uniqid() . strrchr($pictureUrl, '.');
                     $spl = new SplFileInfo($pictureName);
@@ -226,12 +226,17 @@ class StepApiController extends AbstractController
 
             //we select the desired step object with the url id
             $step = $stepRepository->find($id2);
-
-            //we create an array of picture belonging to the step
-            $pictures = $pictureRepository->findBy(['step' => $step->getId()]);
             //transforms JSON content into Array
             $requestArray = json_decode($request->getContent(), true);
 
+            //we recover the picture Id to delete 
+            $picturesIdDelete = $requestArray['pictures-delete'];
+
+            //we create an array of object pictures to delete
+            $picturesDelete = array();
+            foreach ($picturesIdDelete as $id) {
+                array_push($picturesDelete, $pictureRepository->find($id));
+            }
             //we save the date of the update
             $step->setUpdatedAt(new \DateTime());
 
@@ -260,22 +265,26 @@ class StepApiController extends AbstractController
                 $step->setStepDate(new \DateTime($requestArray['step_date']));
             }
 
-            //if the array picture exists in the JSON request and it is not empty
-            if (array_key_exists('picture', $requestArray) && $requestArray['picture'] != null) {
-                foreach ($pictures as $picture) {
-                    //we delete the old pictures of the database and of the file "pictures"
+            //if the array pictures-delete exists in the JSON request and it is not empty
+            if (array_key_exists('pictures-delete', $requestArray) && $requestArray['pictures-delete'] != null) {
+                foreach ($picturesDelete as $picture) {
+                    //we delete the pictures of $picturesDelete of the database and of the file "pictures"
                     $step->removePicture($picture);
                     unlink(__DIR__ . "/../../public/uploads/pictures/" . $picture->getUrl());
                 }
+            }
+            //if the array pictures-new exists in the JSON request and it is not empty
+            if (array_key_exists('pictures-new', $requestArray) && $requestArray['pictures-new'] != null) {
+
                 //for each picture array in request
-                for ($pictureJson = 0; $pictureJson < count($requestArray['picture']); $pictureJson++) {
+                for ($pictureJson = 1; $pictureJson < count($requestArray['pictures-new'])+1; $pictureJson++) {
                     //we create a new FileSystem object
                     $fileSystem = new Filesystem();
                     //we recover the uploaded file
                     /** @var UploadedFile $pictureFile */
                     //we recover the data and the url in variables
-                    $pictureFile = $requestArray['picture'][$pictureJson]['data'];
-                    $pictureUrl = $requestArray['picture'][$pictureJson]['url'];
+                    $pictureFile = $requestArray['pictures-new'][$pictureJson]['data'];
+                    $pictureUrl = $requestArray['pictures-new'][$pictureJson]['url'];
                     //we create a unique picture name with the extension of $pictureUrl
                     $pictureName = uniqid() . strrchr($pictureUrl, '.');
                     $spl = new SplFileInfo($pictureName);
@@ -309,6 +318,7 @@ class StepApiController extends AbstractController
                         $manager->persist($picture);
                     }
                 }
+            
             }
 
             // if everything is ok then we save the object in Database
