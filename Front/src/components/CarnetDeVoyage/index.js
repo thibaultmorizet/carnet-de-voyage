@@ -1,8 +1,9 @@
 // == Import npm
 import React from 'react';
 
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
+import Cookies from 'js-cookie';
 import HomePage from '../HomePage';
 import Footer from '../Footer';
 import Page from '../Page';
@@ -41,31 +42,41 @@ const CarnetDeVoyage = () => (
         <Register />
       </Page>
     </Route>
+    <Route exact path="/login">
+      {Cookies.get('loggedIn') ? <Redirect to="/travels/list" /> : (
+        <Page>
+          <Login />
+        </Page>
+      )}
+    </Route>
     <Route exact path="/admin/user/list">
       <User />
     </Route>
-    <Route exact path="/login">
-      <Page>
-        <Login />
-      </Page>
-    </Route>
+
     <Route exact path="/travels/list">
-      <Page>
-        <TravelsList />
-      </Page>
+      {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+        <Page>
+          <TravelsList />
+        </Page>
+      )}
+
     </Route>
     <Route exact path="/travel/:id/add">
-      <Page>
-        <CreateStep />
-      </Page>
+      {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+        <Page>
+          <CreateStep />
+        </Page>
+      )}
+
     </Route>
     <Route exact path="/travel/:id/update/:type">
-      <Page>
-        <UpdateStep />
-      </Page>
-    </Route>
+      {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+        <Page>
+          <UpdateStep />
+        </Page>
+      )}
 
-    <Route exact path="/spinner" />
+    </Route>
 
     <Footer />
   </div>
