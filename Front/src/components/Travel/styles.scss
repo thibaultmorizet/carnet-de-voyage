@@ -1,10 +1,51 @@
 .travelPage {
   &__header {
+    margin: 1em;
     &--title {
       font-family: 'Pacifico', cursive;
       font-size: 3em;
       text-align: center;
       margin: 1em 0em;
     }
+    &--follow {
+      background-color: lightblue;
+      border: none;
+      padding: .5em 1em;
+      border-radius: 10px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      display: block;
+      margin: 0em auto 1em;
+    }
   }
 }
+
+#travelPage__map {
+  height: 50em;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: rgba(white, $alpha: .6);
+  backdrop-filter: blur(10px);
+  font-size:16px;
+  line-height:24px;
+  width: 23em;
+  right: -185px;
+}
+
+.leaflet-popup-close-button {
+  font: 5em;
+}
+
+.map__picture {
+  width: 100%;
+}
+
+// .my-div-icon {
+//   background-color: white;
+//   // background-image: url('https://media1.popsugar-assets.com/files/thumbor/NiU8Gj-i_HbjlfUgXrRK_jW3MeM/fit-in/550x550/filters:format_auto-!!-:strip_icc-!!-/2018/01/10/765/n/43463692/12a22f695a564bb32c3379.99027066_edit_img_image_44490285_1515603002/i/PicsArt-POPSUGAR-Travel-Challenge-Winners.jpg');
+//   background-size: 80%;
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   height: 20px;
+//   width: 20em;
+// }
