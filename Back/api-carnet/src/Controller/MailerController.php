@@ -8,10 +8,10 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class MailerController extends AbstractController
 {
-    
     public function sendEmail(MailerInterface $mailer, $userMail, $subject, $html, $username, $token)
     {
         $email = (new TemplatedEmail())
@@ -42,6 +42,11 @@ class MailerController extends AbstractController
             
         $mailer->send($email);
 
-        
+	return $this->json(
+            [
+                "success" => true
+            ],
+            Response::HTTP_OK
+        );
     }
 }
