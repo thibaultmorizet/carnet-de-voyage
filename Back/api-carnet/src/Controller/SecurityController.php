@@ -78,28 +78,33 @@ class SecurityController extends AbstractController
      */
     public function emailForgotPassword(Request $request, UserRepository $userRepository, MailerInterface $mailerInterface, MailerController $mailerController, TokenGeneratorInterface $tokenGenerator)
     {
+        //transforms JSON content into Array
         $requestArray = (json_decode($request->getContent(), true));
+        //we recover the object user by the email of the request
         $user = $userRepository->findOneByUsername($requestArray['email']);
+        //if the user doesn't exist
         if ($user === null) {
+            //we return an error with "HTTP_BAD_REQUEST"
             return $this->json(
                 [
                     "success" => false,
-                    "errors" => "Cette adresse e-mail est inconnue"
+                    "errors" => "Unknown email"
                 ],
                 Response::HTTP_BAD_REQUEST
             );
         }
+        //we generate a new token
         $token = $tokenGenerator->generateToken();
 
+        //we save the token in the database
         try {
             $user->setToken($token);
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($user);
             $manager->flush();
         } catch (NotEncodableValueException $exception) {
+
             // we then send an error to the one who calls the API
-
-
             return $this->json(
                 [
                     "success" => false,
@@ -109,12 +114,18 @@ class SecurityController extends AbstractController
             );
         }
 
+        //we send an email
         $mailerController->sendEmail(
-            $mailerInterface, 
-            $user->getEmail(), 
-            'Réinitialisation de mot de passe', 
-            'emails/reset_password.twig.html', 
+            $mailerInterface,
+            //to the email of the user
+            $user->getEmail(),
+            //with the subject
+            'Réinitialisation de mot de passe',
+            //the email contain
+            'emails/reset_password.twig.html',
+            //the username is the firstname of the user
             $user->getFirstName(),
+            //the token is the token of the user
             $user->getToken()
         );
 
@@ -130,37 +141,43 @@ class SecurityController extends AbstractController
     /**
      * @Route("/reset-password/{token}", name="app_reset_password", methods={"POST"})
      */
-    public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder)
+    public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder, UserRepository $userRepository)
     {
+        //transforms JSON content into Array
         $requestArray = json_decode($request->getContent(), true);
-        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['token' => $token]);
+        //we recover the object user by the token
+        $user = $userRepository->findOneBy(['token' => $token]);
+        //if the user doesn't exist
         if ($user === null) {
+            //we return an error with "HTTP_BAD_REQUEST"
             return $this->json(
                 [
                     "success" => false,
-                    "errors" => "Token Inconnu"
+                    "errors" => "Unknown token"
                 ],
                 Response::HTTP_BAD_REQUEST
             );
         }
-        
-        if ($request->isMethod('POST')) {
-            $user->setToken(null);
-            $user->setPassword($passwordEncoder->encodePassword($user, $requestArray['password']));
-            //we save the date of the update
-            $user->setUpdatedAt(new \DateTime());
 
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($user);
-            $manager->flush();
+        //we put the token to null
+        $user->setToken(null);
+        //we save the new password after encode this
+        $user->setPassword($passwordEncoder->encodePassword($user, $requestArray['password']));
+        //we save the date of the update
+        $user->setUpdatedAt(new \DateTime());
 
-            // we return confirmation message of everything is OK
-            return $this->json(
-                [
-                    "success" => true
-                ],
-                Response::HTTP_OK
-            );
-        }
+        // if everything is ok then we save the object in Database
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($user);
+        $manager->flush();
+
+
+        // we return confirmation message of everything is OK
+        return $this->json(
+            [
+                "success" => true
+            ],
+            Response::HTTP_OK
+        );
     }
 }
