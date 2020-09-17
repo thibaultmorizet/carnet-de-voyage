@@ -27,7 +27,7 @@
       background-color: white;
       box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
       font-family: 'Pacifico', cursive;
-      font-size: 1.5em;
+      font-size: 1.9em;
       position: relative;
       top: -50px;
       left: -20px;
@@ -145,4 +145,43 @@
 
 .map__picture {
   width: 100%;
+}
+
+@media only screen and (min-width : 426px) {
+  .singleComment__bubble {
+    width: 65%;
+  }
+
+  #travelPage__map {
+    height: 55em;
+  }
+  .travelPage {
+    &__header {
+      padding-left: 1em;
+      &--title {
+        text-align: left;
+        display: inline-block;
+        padding-right: .5em;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width : 769px) {
+   .travelPage__content {
+     width: 50%;
+   }
+  #travelPage__map {
+    height: 55em;
+  }
+
+  .singleComment__bubble {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width : 1440px) {
+  .singleComment__bubble {
+    width: 60%;
+  }
 }

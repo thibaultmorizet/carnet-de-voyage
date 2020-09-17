@@ -7,7 +7,9 @@ import L from 'leaflet';
 import Comments from './comments';
 import './styles.scss';
 
-const TravelPage = () => {
+const TravelPage = ({ travel, step, fetchDataForSingleTravel }) => {
+  console.log(travel, step);
+
   const onClick = (evt) => {
     console.log(evt);
     const divElement = document.querySelector('.travelPage__content');
@@ -57,6 +59,7 @@ const TravelPage = () => {
 
   useEffect(() => {
     generateMap();
+    fetchDataForSingleTravel();
   }, []);
 
   return (
