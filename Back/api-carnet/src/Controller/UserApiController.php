@@ -76,7 +76,7 @@ class UserApiController extends AbstractController
     }
 
     /**
-     * @Route("/activation/{token}", name="activation")
+     * @Route("/activation/{token}", name="activation", methods={"GET"})
      */
     public function activation($token, UserRepository $userRepository)
     {

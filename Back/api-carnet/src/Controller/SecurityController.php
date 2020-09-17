@@ -158,6 +158,7 @@ class SecurityController extends AbstractController
                 Response::HTTP_BAD_REQUEST
             );
         }
+
         //we put the token to null
         $user->setToken(null);
         //we save the new password after encode this
@@ -169,6 +170,7 @@ class SecurityController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $manager->persist($user);
         $manager->flush();
+
 
         // we return confirmation message of everything is OK
         return $this->json(
