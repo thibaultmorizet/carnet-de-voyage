@@ -7,7 +7,7 @@
 |`/register`|`POST`|`UserController`|`register`|`inscription`|`formulaire d'inscription`|`permet de se créer un compte`|
 |`/visit`|`GET`|`VisitController`|`visit`|`visiteur`|`visite d'un voyage`|`possibilité de se connecter`|
 |`/email-forgot-password`|`GET`|`SecurityController`|`emailForgotPassword`|`demande de modification de mot de passe oublié`|`formulaire de demande d'envoi d'email de modification de mot de passe`|`permet de recevoir un email de modification du mot de passe`|
-|`/forgot-password/{id}`|`POST`|`SecurityController`|`forgotPassword`|`mot de passe oublié`|`formulaire de récupération de mot de passe`|`permet de modifier son mot de passe via un formulaire, {id} en fonction de l'email reçu`|
+|`/reset-password/{token}`|`POST`|`SecurityController`|`resetPassword`|`mot de passe oublié`|`formulaire de récupération de mot de passe`|`permet de modifier son mot de passe via un formulaire, {id} en fonction de l'email reçu`|
 
 | URL | HTTP Method | Controller | Method | Title | Content | Comment |
 |--|--|--|--|--|--|--|
@@ -39,7 +39,7 @@
 |`/user/{id}/logout`|`GET`|`SecurityController`|`logout`|`deconnexion`|`permet de se deconnecter`|
 |`/user/{id}`|`GET`|`UserController`|`user`|`mon profil`|`accès aux informations utilisateur`|`gestion du compte`|
 |`/user/{id}/update`|`PUT`|`UserController`|`update`|`Modifier mon profil`|`Modification des informations de l'utilisateur`|`gestion du compte`|
-|`/user/{id}/delete`|`DELETE`|`UserController`|`delete`|`supprimer mon profil`|`supprime l'utilisateur`|`gestion du compte`|
+|`/user/{id}/delete`|`DELETE`|`UserController`|`delete`|`supprimer mon profil`|`supprime l'utilisateur`|`le compte peut être supprimé par son propriétaire ou un admin`|
 
 | URL | HTTP Method | Controller | Method | Title | Content | Comment |
 |--|--|--|--|--|--|--|
@@ -51,4 +51,4 @@
 |--|--|--|--|--|--|--|
 |`/admin/userlist/search`|`GET`|`AdminController`|`user`|`recherche d'un des utilisateurs`|`accès aux utilisateurs`|`recherche d'un utilisateur`|
 |`/admin/userlist`|`GET`|`AdminController`|`userlist`|`liste de tous les utilisateurs`|`accès aux utilisateurs`|`liste des utilisateurs`|
-|`/admin/userlist/{id}/delete`|`DELETE`|`AdminController`|`delete`|`Supprimer un utilisateur`|`Supprimer un utilisateur`|`gestion des utilisateurs`|
+

@@ -21,54 +21,56 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"step:show", "user", "userlist", "userlist:search"})
+     * @Groups({"step:show", "user", "userlist", "userlist:search", "user:information"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"user", "userlist:search"})
+     * @Groups({"user", "userlist:search", "user:information"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups("user")
+     * @Groups({"user", "user:information"})
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Groups("user")
+     * @Groups({"user", "user:information"})
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"step:show", "user", "userlist", "userlist:search"})
+     * @Groups({"step:show", "user", "userlist", "userlist:search", "user:information"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"step:show", "user", "userlist", "userlist:search"})
+     * @Groups({"step:show", "user", "userlist", "userlist:search", "user:information"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"step:show", "userlist", "userlist:search"})
+     * @Groups({"step:show", "userlist", "userlist:search", "user:information"})
      */
     private $avatar;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"user:information"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"user:information"})
      */
     private $updatedAt;
 
