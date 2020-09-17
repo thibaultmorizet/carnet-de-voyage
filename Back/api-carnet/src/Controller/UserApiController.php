@@ -134,8 +134,21 @@ class UserApiController extends AbstractController
         //we recover the Id of the connected user
         $userConnectedId = $userRepository->findOneByUsername($tokenArray['username'])->getId();
 
+        //we recover the roles of the connected user in a variable
+        $userRoles = $tokenArray["roles"];
+        //we create a boolean for the autorization of the user
+        $userAuthorization = false;
+        //for each role of the user
+        foreach ($userRoles as $role) {
+            //if the role is equal to "ROLE_ADMIN"
+            if ($role == "ROLE_ADMIN") {
+                //we put the boolean to True
+                $userAuthorization = true;
+            }
+        }
+
         //if the id of the connected user is same of the id in the URL
-        if ($userConnectedId == $id) {
+        if ($userConnectedId == $id or $userAuthorization == true) {
             //we return the informations of the user
             return $this->json(
                 $user,
@@ -147,7 +160,8 @@ class UserApiController extends AbstractController
             //we return an error "HTTP_UNAUTHORIZED"
             return $this->json(
                 [
-                    "success" => false
+                    "success" => false,
+                    "error" => "you're not this user and you're not an Administrator"
                 ],
                 Response::HTTP_UNAUTHORIZED
             );
@@ -213,7 +227,8 @@ class UserApiController extends AbstractController
                     //we return an error
                     return $this->json(
                         [
-                            "success" => false
+                            "success" => false,
+                            "error" => "Bad extension file"
                         ],
                         Response::HTTP_NOT_ACCEPTABLE
                     );
@@ -251,7 +266,8 @@ class UserApiController extends AbstractController
             //we return an error "HTTP_UNAUTHORIZED"
             return $this->json(
                 [
-                    "success" => false
+                    "success" => false,
+                    "error" => "you're not this user"
                 ],
                 Response::HTTP_UNAUTHORIZED
             );
@@ -305,7 +321,8 @@ class UserApiController extends AbstractController
                 //we return an error with "HTTP_UNAUTHORIZED"
                 return $this->json(
                     [
-                        "success" => false
+                        "success" => false,
+                        "error" => "you're can't delete an Administrator account"
                     ],
                     Response::HTTP_UNAUTHORIZED
                 );
@@ -326,7 +343,8 @@ class UserApiController extends AbstractController
             //we return an error "HTTP_UNAUTHORIZED"
             return $this->json(
                 [
-                    "success" => false
+                    "success" => false,
+                    "error" => "you're not this user and you're not an Administrator"
                 ],
                 Response::HTTP_UNAUTHORIZED
             );
