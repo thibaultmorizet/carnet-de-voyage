@@ -72,7 +72,3 @@ DATABASE_URL=mysql://hyperion:hyperionOclock2020@127.0.0.1:3306/carnet_db?server
 MAILER_DSN=gmail://sebtoorop:zhcnqdduuvjhwtii@default
 JWT_PASSPHRASE=C@rnetDeVoyageSecret
 ```
-
-
-
-
