@@ -43,7 +43,7 @@
 
 | URL | HTTP Method | Controller | Method | Title | Content | Comment |
 |--|--|--|--|--|--|--|
-|`/contact`|`POST`|`ContactController`|`contact`|`contact`|`contact avec un administrateur`|`Moyen de contact avec les administrateurs`|
+|`/contact`|`POST`|`MailerController`|`contact`|`contact`|`contact avec un administrateur`|`Moyen de contact avec les administrateurs`|
 |`/presentation`|`GET`|`DefaultController`|`presentation`|`présentation de l'équipe`|`Présentation de l'équipe des créateurs du site`|`Présentation des 5 membres de l'équipe`|
 |`/privacy`|`GET`|`DefaultController`|`privacy`|`mentions legales`|`accès aux mentions legales`|`Présentations des mentions légales, RGPD`|
 

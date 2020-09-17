@@ -7,6 +7,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\HttpFoundation\Request;
 
 class MailerController extends AbstractController
 {
@@ -24,6 +25,22 @@ class MailerController extends AbstractController
                 'username' => $username,
                 'token' => $token
             ]);
+            
+        $mailer->send($email);
+    }
+
+    /**
+     * @Route("/contact", name="contact")
+     */
+    public function sendEmailContact(MailerInterface $mailer, Request $request)
+    {
+        $requestArray = json_decode($request->getContent(), true);
+        $email = (new TemplatedEmail())
+            ->from($requestArray["email"])
+            ->to("sebtoorop@gmail.com")
+            ->subject($requestArray["object"])
+            ->htmlTemplate($requestArray["text"]);
+            
             
         $mailer->send($email);
     }
