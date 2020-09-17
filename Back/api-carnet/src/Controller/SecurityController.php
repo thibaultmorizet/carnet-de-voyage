@@ -143,7 +143,7 @@ class SecurityController extends AbstractController
                 Response::HTTP_BAD_REQUEST
             );
         }
-        //dd($user);
+        
         if ($request->isMethod('POST')) {
             $user->setToken(null);
             $user->setPassword($passwordEncoder->encodePassword($user, $requestArray['password']));

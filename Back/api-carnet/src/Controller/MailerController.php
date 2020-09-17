@@ -11,9 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MailerController extends AbstractController
 {
-    /**
-     * @Route("/email")
-     */
+    
     public function sendEmail(MailerInterface $mailer, $userMail, $subject, $html, $username, $token)
     {
         $email = (new TemplatedEmail())
@@ -30,7 +28,7 @@ class MailerController extends AbstractController
     }
 
     /**
-     * @Route("/contact", name="contact")
+     * @Route("/contact", name="contact", methods={"POST"})
      */
     public function sendEmailContact(MailerInterface $mailer, Request $request)
     {
@@ -39,9 +37,11 @@ class MailerController extends AbstractController
             ->from($requestArray["email"])
             ->to("sebtoorop@gmail.com")
             ->subject($requestArray["object"])
-            ->htmlTemplate($requestArray["text"]);
+            ->text($requestArray["text"]);
             
             
         $mailer->send($email);
+
+        
     }
 }
