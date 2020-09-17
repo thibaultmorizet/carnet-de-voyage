@@ -5,7 +5,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
 import FormInput from 'src/components/FormInput';
-import Map from 'src/components/CreateStep/map';
+import Map from 'src/components/Map';
 import PropTypes from 'prop-types';
 import { useParams, useHistory } from 'react-router-dom';
 import {
@@ -76,7 +76,7 @@ const FormStep = ({
     <div className="formStep">
 
       <form action="" className="formStep__element" onSubmit={handleForm}>
-        <Map onChange={changeField} />
+        <Map onChange={changeField} latitude={51.505} longitude={-0.09} />
 
         <div className="formStep__element--allInput">
           <FormInput
