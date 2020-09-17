@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles.scss';
+
 import img1 from '../../assets/images/background-machu.jpg';
 
 const Container = () => (

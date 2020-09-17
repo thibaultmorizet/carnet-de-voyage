@@ -9,7 +9,7 @@ import { CookiesProvider } from 'react-cookie';
 
 // == Impogrt : local
 // Composants
-import CarnetDeVoyage from 'src/components/CarnetDeVoyage';
+import CarnetDeVoyage from 'src/containers/carnetDeVoyage';
 // Store
 import store from 'src/store';
 

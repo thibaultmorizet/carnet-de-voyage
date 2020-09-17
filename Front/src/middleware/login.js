@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { LOGIN } from '../actions/login';
-import { keepToken } from '../actions/keepToken';
+import { keepToken, login } from '../actions/keepToken';
 
 const Login = (store) => (next) => (action) => {
   switch (action.type) {

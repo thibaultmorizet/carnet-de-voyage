@@ -41,6 +41,11 @@ export const tryAgain = () => {
   );
 };
 
+/**
+ * This function allows to transform image in Base64
+ * @param {*} file
+ * @param {*} onLoadCallback
+ */
 export const getBase64 = (file, onLoadCallback) => new Promise((resolve, reject) => {
   const reader = new FileReader();
   reader.onload = () => {
@@ -50,6 +55,11 @@ export const getBase64 = (file, onLoadCallback) => new Promise((resolve, reject)
   reader.readAsDataURL(file);
 });
 
+/**
+ * This function allows to transform image in Base64 and put in a array for send it to the state
+ * @param {*} evt
+ * @param {*} fctState function for change the state
+ */
 export const handlePicture = (evt, fctState) => {
   if (evt.length > 0) {
     const arrayForPicture = [];
@@ -73,6 +83,13 @@ export const handlePicture = (evt, fctState) => {
   }
 };
 
+/**
+ *
+ * @param {*} addToast hook for show notification success or error
+ * @param {*} history hook to comeback to a other page
+ * @param {*} response response of API, give us the error message or success message
+ * this function is for show a little notification for success or error actions
+ */
 export const toastNotification = (addToast, history, response) => {
   if (response === 'Error') {
     addToast('Il y a eu une erreur dans l\'envoi de l\'étape. Veuillez réessayer plus tard', {

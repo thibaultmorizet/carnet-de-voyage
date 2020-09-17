@@ -8,7 +8,7 @@ export const initialState = {
   role: '',
 };
 
-console.log('je passe dans le reducer'); 
+// console.log('je passe dans le reducer');
 
 const user = (state = initialState, action = {}) => {
   switch (action.type) {

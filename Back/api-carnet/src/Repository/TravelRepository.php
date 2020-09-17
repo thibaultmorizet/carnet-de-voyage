@@ -19,6 +19,7 @@ class TravelRepository extends ServiceEntityRepository
         parent::__construct($registry, Travel::class);
     }
 
+
     // /**
     //  * @return Travel[] Returns an array of Travel objects
     //  */
