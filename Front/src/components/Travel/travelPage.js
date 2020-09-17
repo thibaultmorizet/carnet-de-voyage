@@ -15,7 +15,8 @@ const TravelPage = () => {
   };
 
   const onClose = () => {
-    console.log('onClose');
+    const divElement = document.querySelector('.travelPage__content');
+    divElement.style.display = 'none';
   };
   const generateMap = () => {
     const mymap = L.map('travelPage__map').setView([51.505, -0.09], 13);
@@ -41,17 +42,17 @@ const TravelPage = () => {
       shadowAnchor: [30, 101],
     });
 
-    const littleton = L.marker([39.61, -105.02], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap).on('mouseover', onClick);
-    const denver = L.marker([39.74, -104.99], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap).on('mouseover', onClick);
-    const aurora = L.marker([39.73, -104.8], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap).on('mouseover', onClick);
-    const golden = L.marker([39.77, -105.23], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap).on('mouseover', onClick);
+    const littleton = L.marker([39.61, -105.02], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap).on('popupopen', onClick);
+    const denver = L.marker([39.74, -104.99], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap).on('popupopen', onClick);
+    const aurora = L.marker([39.73, -104.8], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap).on('popupopen', onClick);
+    const golden = L.marker([39.77, -105.23], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap).on('popupopen', onClick);
     const group = new L.featureGroup([littleton, denver, aurora, golden]);
 
     const closeElt = document.querySelector('.leaflet-popup-close-button');
     console.log(closeElt);
     // closeElt.addEventListener('click', onClose);
 
-    mymap.fitBounds(group.getBounds());
+    mymap.fitBounds(group.getBounds()).on('popupclose', onClose);
   };
 
   useEffect(() => {
@@ -61,9 +62,9 @@ const TravelPage = () => {
   return (
     <div className="travelPage">
       <div className="travelPage__header">
-        <h2 className="travelPage__header--title">Voyage au pérou</h2>
+        <h2 className="travelPage__header--title">Voyage au Pérou</h2>
         <FontAwesomeIcon className="travelPage__header--icon" icon={faPen} />
-        <button type="button" className="travelPage__header--follow">Suivre</button>
+        {/* <button type="button" className="travelPage__header--follow">Suivre</button> */}
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nisi obcaecati beatae pariatur
           quis earum quaerat. Nemo cupiditate mollitia, molestias vero saepe labore distinctio quam.
           Quam fugiat quisquam amet error placeat.
