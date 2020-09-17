@@ -170,7 +170,7 @@ class TravelApiController extends AbstractController
     }
 
     /**
-     *  @Route("/api/travels/{id}/update", name="api_travels_update", methods={"PUT"})
+     *  @Route("/api/travels/{id}/update", name="api_travels_update", requirements={"id"="\d+"}, methods={"PUT"})
      * 
      */
     public function update (Request $request, TravelRepository $travelRepository, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface, $id) {
@@ -212,6 +212,9 @@ class TravelApiController extends AbstractController
         if (array_key_exists('travel_date', $requestArray) && $requestArray['travel_date'] != null) {
             $travel->setCreationDate(new \DateTime($requestArray['travel_date']));
         }
+        if (array_key_exists('status', $requestArray) && $requestArray['status'] != null ) {
+            $travel->setStatus($requestArray['status']);
+        }
         if (array_key_exists('picture_travel', $requestArray) && $requestArray['picture_travel'] && array_key_exists('picture_data', $requestArray) && $requestArray['picture_data'] != null) {
             // Get the namefile of the request
             $fileNameImage = $requestArray['picture_travel'];
@@ -252,19 +255,30 @@ class TravelApiController extends AbstractController
         $manager->persist($travel);
         $manager->flush();
 
-        // returns OK message (201): Object created in DataBase
-        return $this->json(
-            [
-                "success" => true,
-                "id" => $travel->getId(),
-                "imageFile" => $fileNameUnique
-            ],
-            Response::HTTP_CREATED
-        );
+        // returns OK message (201): Object update in DataBase
+        if (isset($fileNameUnique)) {
+            return $this->json(
+                [
+                    "success" => true,
+                    "id" => $travel->getId(),
+                    "imageFile" => $fileNameUnique
+                ],
+                Response::HTTP_CREATED
+            );
+        }
+        else {
+            return $this->json(
+                [
+                    "success" => true,
+                    "id" => $travel->getId()
+                ],
+                Response::HTTP_CREATED
+            );
+        }    
     }
 
     /**
-     *  @Route("/api/travels/{id}/delete", name="api_travels_delete", methods={"DELETE"})
+     *  @Route("/api/travels/{id}/delete", name="api_travels_delete", requirements={"id"="\d+"}, methods={"DELETE"})
      */
     public function delete(travelRepository $travelRepository, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface, $id)
     {
@@ -355,23 +369,33 @@ class TravelApiController extends AbstractController
         );    
     }
     
-
     /**
+     * 
      *  @Route("api/travels/list", name="api_travels_list", methods={"GET"})
      * 
      */
-    public function list () {
-        dd("coucou");
-        
+    public function list (travelRepository $travelRepository, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface) {
+        $userArrayToken = $this->checkTokenRequest($jWTEncoderInterface, $userRepository);
+        if ($userArrayToken == null) {
+            return $this->json(
+                [
+                    "success" => false,
+                    "errors" => "Bad Token"
+                ],
+                Response::HTTP_BAD_REQUEST
+            );        
+        }
+        // Find UserId in Database and create a User object
+        $user = $userRepository->find($userArrayToken['userId']);
+        // Get all the Travels of a user
+        $allTravels = $travelRepository->findByCreator($user);
+        return $this->json(
+            $allTravels,
+            200,
+            [],
+            ["groups" => ["travel:list"]]
+        );
     }
     
-    /**
-     *  @Route("api/travels/test", name="api_travels_test", methods={"GET"})
-     * 
-     */
-    public function test (travelRepository $travelRepository, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface) {
-        $userArrayToken = $this->checkTokenRequest($jWTEncoderInterface, $userRepository);
-        dd($userArrayToken);
-    }
 
 }

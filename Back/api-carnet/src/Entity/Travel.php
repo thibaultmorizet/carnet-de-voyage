@@ -19,35 +19,35 @@ class Travel
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"travel:read"})
+     * @Groups({"travel:read","travel:list"})
      * @Groups({"step:show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"travel:read"})
+     * @Groups({"travel:read","travel:list"})
      * @Groups({"step:show"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"travel:read"})
+     * @Groups({"travel:read","travel:list"})
      * @Groups({"step:show"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"travel:read"})
+     * @Groups({"travel:read","travel:list"})
      * @Groups({"step:show"})
      */
     private $status;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"travel:read"})
+     * @Groups({"travel:read","travel:list"})
      * @Groups({"step:show"})
      */
     private $pictureUrl;
