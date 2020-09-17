@@ -1,12 +1,20 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './styles.scss';
 
 const MenuDesktop = () => (
-
   <div className="menuDesktop">
+    <span className="menu__nav--icon">
+      <NavLink
+        to="/admin/userlist"
+        exact
+      >
+        🏠
+      </NavLink>
+    </span>
     <nav className="menuDesktop__nav">
-      <li className="menuDesktop__nav--li">
+      <li className="menu__nav--li">
         <NavLink
           to="/admin/userlist"
           exact
