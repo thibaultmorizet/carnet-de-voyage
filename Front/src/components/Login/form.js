@@ -1,10 +1,11 @@
 /* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, useHistory } from 'react-router-dom';
 import { errorMessage } from '../../selectors/carnetDeVoyage';
 import FormInput from '../FormInput';
+import { useCookies } from 'react-cookie';
 import './styles.scss';
 
 const LoginForm = ({
@@ -12,8 +13,22 @@ const LoginForm = ({
   changeField,
   email,
   password,
+  token,
 }) => {
   const history = useHistory();
+  const [cookies, setCookie] = useCookies(['name']);
+
+  const addTokenCookie = () => {
+    if (token !== '') {
+      setCookie('token', token, { path: '/' });
+      history.push('/travels/list');
+    }
+  };
+
+  useEffect(() => {
+    addTokenCookie();
+    console.log('token');
+  }, [token]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -27,7 +42,6 @@ const LoginForm = ({
     }
     else {
       handleLogin();
-      history.push('/travels/list');
     }
   };
 
