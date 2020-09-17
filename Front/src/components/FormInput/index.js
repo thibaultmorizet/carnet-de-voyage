@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 const FormInput = ({
-  type, name, content, onChange,
+  type, name, content, onChange, value = null,
 }) => {
   // console.log(onChange);
   const handleChange = (evt) => {
@@ -12,7 +12,7 @@ const FormInput = ({
   };
   return (
     <div className="floating-label">
-      <input className="floating-input" name={name} type={type} placeholder=" " onChange={handleChange} />
+      <input className="floating-input" name={name} type={type} placeholder=" " onChange={handleChange} value={value} />
       <label htmlFor={name}>{content}</label>
     </div>
   );

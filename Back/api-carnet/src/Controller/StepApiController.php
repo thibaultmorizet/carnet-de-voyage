@@ -228,14 +228,18 @@ class StepApiController extends AbstractController
             //transforms JSON content into Array
             $requestArray = json_decode($request->getContent(), true);
 
-            //we recover the picture Id to delete 
-            $picturesIdDelete = $requestArray['pictures-delete'];
+           if (array_key_exists('pictures-delete', $requestArray) && $requestArray['pictures-delete'] != null) {
 
-            //we create an array of object pictures to delete
-            $picturesDelete = array();
-            foreach ($picturesIdDelete as $id) {
-                array_push($picturesDelete, $pictureRepository->find($id));
+                //we recover the picture Id to delete
+                $picturesIdDelete = $requestArray['pictures-delete'];
+
+                //we create an array of object pictures to delete
+                $picturesDelete = array();
+                foreach ($picturesIdDelete as $id) {
+                    array_push($picturesDelete, $pictureRepository->find($id));
+                }
             }
+
             //we save the date of the update
             $step->setUpdatedAt(new \DateTime());
 
@@ -261,7 +265,8 @@ class StepApiController extends AbstractController
 
             //if the request contains a step_date, we replace the old one with the step_date of the request
             if (array_key_exists('step_date', $requestArray) && $requestArray['step_date'] != null) {
-                $step->setStepDate(new \DateTime($requestArray['step_date']));
+             	$date = DateTime::createFromFormat('j/m/Y', ($requestArray['step_date']));
+                $step->setStepDate($date);
             }
 
             //if the array pictures-delete exists in the JSON request and it is not empty
@@ -276,7 +281,7 @@ class StepApiController extends AbstractController
             if (array_key_exists('pictures-new', $requestArray) && $requestArray['pictures-new'] != null) {
 
                 //for each picture array in request
-                for ($pictureJson = 1; $pictureJson < count($requestArray['pictures-new'])+1; $pictureJson++) {
+                for ($pictureJson = 0; $pictureJson < count($requestArray['pictures-new']); $pictureJson++) {
                     //we create a new FileSystem object
                     $fileSystem = new Filesystem();
                     //we recover the uploaded file

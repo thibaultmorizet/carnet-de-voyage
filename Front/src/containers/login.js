@@ -6,6 +6,8 @@ import { changeValueCheck, saveLoginCheck } from '../actions/loginCheck';
 const mapStateToProps = (state) => ({
   email: state.login.email,
   password: state.login.password,
+  token: state.keepToken.token,
+  loggedIn: state.keepToken.loggedIn,
 });
 
 const mapDispatchToProps = (dispatch) => ({
