@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Controller;
@@ -41,6 +42,7 @@ class StepApiController extends AbstractController
      */
     public function show(StepRepository $stepRepository, $id2)
     {
+        
         //we select the desired step object with the url id
         $step = $stepRepository->find($id2);
 
@@ -84,8 +86,6 @@ class StepApiController extends AbstractController
                 // the deserializer will throw an exception
             } catch (NotEncodableValueException $exception) {
                 // we then send an error to the one who calls the API
-
-
                 return $this->json(
                     [
                         "success" => false,
@@ -147,7 +147,8 @@ class StepApiController extends AbstractController
                         //we return an error
                         return $this->json(
                             [
-                                "success" => false
+                                "success" => false,
+                                "error" => "Bad extension"
                             ],
                             Response::HTTP_NOT_ACCEPTABLE
                         );
@@ -173,15 +174,14 @@ class StepApiController extends AbstractController
             } else {
                 return $this->json(
                     [
-                        "success" => false
+                        "success" => false,
+                        "error" => "No picture"
                     ],
                     Response::HTTP_NOT_ACCEPTABLE
                 );
             }
 
             // if everything is ok then we save the object in Database
-
-
             $manager->persist($step);
             $manager->flush();
 
@@ -197,7 +197,8 @@ class StepApiController extends AbstractController
             //we return an error "HTTP_UNAUTHORIZED"
             return $this->json(
                 [
-                    "success" => false
+                    "success" => false,
+                    "error" => "you're not the creator of the travel"
                 ],
                 Response::HTTP_UNAUTHORIZED
             );
@@ -228,7 +229,7 @@ class StepApiController extends AbstractController
             //transforms JSON content into Array
             $requestArray = json_decode($request->getContent(), true);
 
-           if (array_key_exists('pictures-delete', $requestArray) && $requestArray['pictures-delete'] != null) {
+            if (array_key_exists('pictures-delete', $requestArray) && $requestArray['pictures-delete'] != null) {
 
                 //we recover the picture Id to delete
                 $picturesIdDelete = $requestArray['pictures-delete'];
@@ -265,7 +266,7 @@ class StepApiController extends AbstractController
 
             //if the request contains a step_date, we replace the old one with the step_date of the request
             if (array_key_exists('step_date', $requestArray) && $requestArray['step_date'] != null) {
-             	$date = DateTime::createFromFormat('j/m/Y', ($requestArray['step_date']));
+                $date = DateTime::createFromFormat('j/m/Y', ($requestArray['step_date']));
                 $step->setStepDate($date);
             }
 
@@ -300,7 +301,8 @@ class StepApiController extends AbstractController
                         //we return an error
                         return $this->json(
                             [
-                                "success" => false
+                                "success" => false,
+                                "error" => "Bad extension file"
                             ],
                             Response::HTTP_NOT_ACCEPTABLE
                         );
@@ -322,7 +324,6 @@ class StepApiController extends AbstractController
                         $manager->persist($picture);
                     }
                 }
-            
             }
 
             // if everything is ok then we save the object in Database
@@ -341,7 +342,8 @@ class StepApiController extends AbstractController
             //we return an error "HTTP_UNAUTHORIZED"
             return $this->json(
                 [
-                    "success" => false
+                    "success" => false,
+                    "error" => "you're not the creator of the travel"
                 ],
                 Response::HTTP_UNAUTHORIZED
             );
@@ -364,18 +366,18 @@ class StepApiController extends AbstractController
         //we recover the roles of the connected user in a variable
         $userRoles = $tokenArray["roles"];
         //we create a boolean for the autorization of the user
-        $userAuthorization = False;
+        $userAuthorization = false;
         //for each role of the user
         foreach ($userRoles as $role) {
             //if the role is equal to "ROLE_ADMIN"
             if ($role == "ROLE_ADMIN") {
                 //we put the boolean to True
-                $userAuthorization = True;
+                $userAuthorization = true;
             }
         }
 
         //if the Id of the connected user is same of the Id of the creator of the travel
-        if ($userId == $travelCreatorId or $userAuthorization == True) {
+        if ($userId == $travelCreatorId or $userAuthorization == true) {
 
             //we select the desired step object with the url id
             $step = $stepRepository->find($id2);
@@ -404,7 +406,8 @@ class StepApiController extends AbstractController
             //we return an error "HTTP_UNAUTHORIZED"
             return $this->json(
                 [
-                    "success" => false
+                    "success" => false,
+                    "error" => "you're not the creator of the travel and you're not an Administrator"
                 ],
                 Response::HTTP_UNAUTHORIZED
             );
@@ -461,7 +464,8 @@ class StepApiController extends AbstractController
             //we return an error "HTTP_UNAUTHORIZED"
             return $this->json(
                 [
-                    "success" => false
+                    "success" => false,
+                    "error" => "you're not connected"
                 ],
                 Response::HTTP_UNAUTHORIZED
             );
@@ -517,7 +521,8 @@ class StepApiController extends AbstractController
             //we return an error "HTTP_UNAUTHORIZED"
             return $this->json(
                 [
-                    "success" => false
+                    "success" => false,
+                    "error" => "you're not connected"
                 ],
                 Response::HTTP_UNAUTHORIZED
             );
@@ -587,7 +592,8 @@ class StepApiController extends AbstractController
             //we return an error "HTTP_UNAUTHORIZED"
             return $this->json(
                 [
-                    "success" => false
+                    "success" => false,
+                    "error" => "you're not connected"
                 ],
                 Response::HTTP_UNAUTHORIZED
             );
@@ -613,18 +619,18 @@ class StepApiController extends AbstractController
         //we recover the roles of the connected user in a variable
         $userRoles = $tokenArray["roles"];
         //we create a boolean for the autorization of the user
-        $userAuthorization = False;
+        $userAuthorization = false;
         //for each role of the user
         foreach ($userRoles as $role) {
             //if the role is equal to "ROLE_ADMIN"
             if ($role == "ROLE_ADMIN") {
                 //we put the boolean to True
-                $userAuthorization = True;
+                $userAuthorization = true;
             }
         }
 
         //if the Id of the connected user is same of the Id of the creator of the comment
-        if ($userId == $commentCreatorId or $userAuthorization == True) {
+        if ($userId == $commentCreatorId or $userAuthorization == true) {
             //we remove the comment and save the change in Database
             $manager->remove($comment);
             $manager->flush();
@@ -641,7 +647,8 @@ class StepApiController extends AbstractController
         else {
             return $this->json(
                 [
-                    "success" => false
+                    "success" => false,
+                    "error" => "you're not the creator of the comment and you're not an Administrator"
                 ],
                 Response::HTTP_UNAUTHORIZED
             );

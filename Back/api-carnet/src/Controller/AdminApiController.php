@@ -57,7 +57,8 @@ class AdminApiController extends AbstractController
             //we return an error "HTTP_UNAUTHORIZED"
             return $this->json(
                 [
-                    "success" => false
+                    "success" => false,
+                    "error" => "you're not an Administrator"
                 ],
                 Response::HTTP_UNAUTHORIZED
             );
@@ -103,7 +104,8 @@ class AdminApiController extends AbstractController
             //we return an error "HTTP_UNAUTHORIZED"
             return $this->json(
                 [
-                    "success" => false
+                    "success" => false,
+                    "error" => "you're not an Administrator"
                 ],
                 Response::HTTP_UNAUTHORIZED
             );
