@@ -282,7 +282,7 @@ class StepApiController extends AbstractController
             if (array_key_exists('pictures-new', $requestArray) && $requestArray['pictures-new'] != null) {
 
                 //for each picture array in request
-                for ($pictureJson = 1; $pictureJson < count($requestArray['pictures-new'])+1; $pictureJson++) {
+                for ($pictureJson = 0; $pictureJson < count($requestArray['pictures-new']); $pictureJson++) {
                     //we create a new FileSystem object
                     $fileSystem = new Filesystem();
                     //we recover the uploaded file
