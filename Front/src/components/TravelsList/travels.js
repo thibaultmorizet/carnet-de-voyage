@@ -1,10 +1,10 @@
 import React from 'react';
-import { withCookies, Cookie } from 'react-cookie';
 import './styles.scss';
 import img1 from '../../assets/images/background-machu.jpg';
+import Cookies from 'js-cookie';
 
 const Container = () => {
-  console.log(Cookie);
+  console.log(Cookies.get());
   return(
     <div className="travels__container">
 
