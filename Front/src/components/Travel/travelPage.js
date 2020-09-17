@@ -1,10 +1,22 @@
+/* eslint-disable new-cap */
+/* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import L from 'leaflet';
+import Comments from './comments';
 import './styles.scss';
 
 const TravelPage = () => {
+  const onClick = (evt) => {
+    console.log(evt);
+    const divElement = document.querySelector('.travelPage__content');
+    divElement.style.display = 'block';
+  };
+
+  const onClose = () => {
+    console.log('onClose');
+  };
   const generateMap = () => {
     const mymap = L.map('travelPage__map').setView([51.505, -0.09], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png').addTo(mymap);
@@ -29,11 +41,15 @@ const TravelPage = () => {
       shadowAnchor: [30, 101],
     });
 
-    const littleton = L.marker([39.61, -105.02], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap);
-    const denver = L.marker([39.74, -104.99], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap);
-    const aurora = L.marker([39.73, -104.8], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap);
-    const golden = L.marker([39.77, -105.23], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap);
+    const littleton = L.marker([39.61, -105.02], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap).on('mouseover', onClick);
+    const denver = L.marker([39.74, -104.99], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap).on('mouseover', onClick);
+    const aurora = L.marker([39.73, -104.8], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap).on('mouseover', onClick);
+    const golden = L.marker([39.77, -105.23], { icon: myIcon }).bindPopup(customPopup, customOptions).addTo(mymap).on('mouseover', onClick);
     const group = new L.featureGroup([littleton, denver, aurora, golden]);
+
+    const closeElt = document.querySelector('.leaflet-popup-close-button');
+    console.log(closeElt);
+    // closeElt.addEventListener('click', onClose);
 
     mymap.fitBounds(group.getBounds());
   };
@@ -53,8 +69,11 @@ const TravelPage = () => {
           Quam fugiat quisquam amet error placeat.
         </p>
       </div>
-      <div id="travelPage__map">
-        d
+      <div id="travelPage__map" />
+      <div className="travelPage__content">
+        <h3 className="travelPage__content--title">Titre de l'étape</h3>
+        <p className="travelPage__content--excerpt">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate exercitationem suscipit, labore neque ea aut aperiam officiis. Porro error neque impedit corrupti quo iusto non nisi vero officiis odit? Suscipit!</p>
+        <Comments />
       </div>
     </div>
   );
