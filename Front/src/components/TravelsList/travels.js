@@ -1,11 +1,11 @@
 import React from 'react';
 import './styles.scss';
-import img1 from '../../assets/images/background-machu.jpg';
 import Cookies from 'js-cookie';
+import img1 from '../../assets/images/background-machu.jpg';
 
 const Container = () => {
   console.log(Cookies.get());
-  return(
+  return (
     <div className="travels__container">
 
       <input type="submit" name="travelsInput" id="travelsInput" value="Créer un nouveau voyage" />
