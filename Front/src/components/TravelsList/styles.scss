@@ -1,13 +1,13 @@
 .travelsList {
-  background-image: url(../../assets/images/texture.jpg);
+  /*background-image: url(../../assets/images/texture.jpg);
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 100vh;*/
 }
 
 .travels {
   &__container {
-
+    padding-top: 1.5em;
     margin-left: 1.5em;
     margin-right: 1.5em;
 
@@ -20,7 +20,7 @@
 
       #travelsInput {
         display: flex;
-        margin: 2em auto 0em;
+        margin: auto;
         background-color: white;
         border: none;
         border-radius: 10px;
@@ -82,4 +82,19 @@
       padding-left: 1em;
     }
   }
+}
+
+@media only screen and (min-width : 426px) {
+  @import url(../MenuDesktop/index.js);
+  .container {
+    width: 10%;
+  }
+}
+
+@media only screen and (min-width : 769px) {
+
+}
+
+@media only screen and (min-width : 1440px) {
+
 }
