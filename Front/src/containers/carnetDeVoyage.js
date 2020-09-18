@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import CarnetDeVoyage from 'src/components/CarnetDeVoyage';
+import CarnetDeVoyage from '../components/CarnetDeVoyage';
 
 const mapStateToProps = (state) => ({
   loading: state.updateStep.loading,

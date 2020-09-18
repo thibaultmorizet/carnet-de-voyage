@@ -6,7 +6,7 @@ import img1 from '../../assets/images/background-machu.jpg';
 const Container = () => (
   <div className="travels__container">
 
-    <input type="submit" name="travelsInput" id="travelsInput" value="Créer un nouveau voyage" />
+    <input type="submit" name="travelsInput" className="travelsInput" value="Créer un nouveau voyage" />
 
     <div className="travels__inProgress">
       <h2 className="travels__container--title"> Voyages en cours </h2>
