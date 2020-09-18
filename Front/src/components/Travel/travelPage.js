@@ -5,19 +5,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import L from 'leaflet';
 import Spinner from 'src/components/Spinner';
-import { changeDateFormat } from 'src/selectors/carnetDeVoyage';
+import { changeDateFormat, addImage } from 'src/selectors/carnetDeVoyage';
+import Comments from 'src/containers/comment';
 import Map from './map';
-import Comments from './comments';
 import './styles.scss';
 
 const TravelPage = ({
-  travel, step, fetchDataForSingleTravel, loading, saveDataForSingleStep, title,
+  travel, step, fetchDataForSingleTravel, loading, saveDataForSingleStep, title, currentPicture, like, description,
 }) => {
-  console.log('loadin', loading);
+  console.log('loadin', step);
 
   useEffect(() => {
     fetchDataForSingleTravel();
   }, []);
+
+  useEffect(() => {
+    addImage(currentPicture);
+  }, [currentPicture]);
 
   return (
     <div className="travelPage">
@@ -38,8 +42,10 @@ const TravelPage = ({
 
           <div className="travelPage__content">
             <h3 className="travelPage__content--title">{title}</h3>
-            <p className="travelPage__content--excerpt">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate exercitationem suscipit, labore neque ea aut aperiam officiis. Porro error neque impedit corrupti quo iusto non nisi vero officiis odit? Suscipit!</p>
-            <Comments />
+            <p className="travelPage__content--excerpt">{description}</p>
+            <div className="travelPage__content--images"> </div>
+            <Comments like={like} />
+
           </div>
         </>
       )}

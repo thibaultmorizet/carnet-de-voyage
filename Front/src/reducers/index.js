@@ -7,6 +7,7 @@ import keepToken from './keepToken';
 import updateStep from './updateStep';
 import contact from './contact';
 import travel from './travel';
+import comment from './comment';
 
 export default combineReducers({
   register,
@@ -17,4 +18,5 @@ export default combineReducers({
   updateStep,
   contact,
   travel,
+  comment,
 });

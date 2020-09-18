@@ -113,3 +113,19 @@ export const changeDateFormat = (dateWanted) => {
   const step_date = middleDate.replace('.', '/').replace('.', '/');
   return step_date;
 };
+
+export const addImage = (pictures) => {
+  console.log('pictur', pictures);
+  if (pictures !== null) {
+    const divElement = document.querySelector('.travelPage__content--images');
+    const newDivElement = document.createElement('div');
+    newDivElement.className = 'stepImages';
+    divElement.appendChild(newDivElement);
+    pictures.map((elt) => {
+      const imgElement = document.createElement('img');
+      imgElement.className = 'stepImages__picture';
+      imgElement.src = elt.data;
+      newDivElement.appendChild(imgElement);
+    });
+  }
+};

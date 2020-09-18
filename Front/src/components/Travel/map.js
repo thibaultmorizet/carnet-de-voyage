@@ -4,16 +4,24 @@ import './styles.scss';
 
 const Map = ({ step, onClickStep }) => {
   console.log(step);
-  const AllImages = [];
+  let AllImages = [];
   const AddStep = [];
-  const description = 'Salut';
 
   const onClick = (evt) => {
     const target = evt.target.options.icon.options.className;
     const result = step.filter((elt) => elt.id === target);
     console.log('result', result);
-    const { title } = result[0];
-    onClickStep(title);
+    const {
+      title, stepLike, id, description, pictures, comments,
+    } = result[0];
+    pictures.map((image) => {
+      const currentImg = {
+        url: image.id,
+        data: `http://34.239.44.174/uploads/pictures/${image.url}`,
+      };
+      AllImages.push(currentImg);
+    });
+    onClickStep(title, AllImages, stepLike, id, description, comments);
     const divElement = document.querySelector('.travelPage__content');
     divElement.style.display = 'block';
   };
@@ -21,23 +29,22 @@ const Map = ({ step, onClickStep }) => {
   const onClose = () => {
     const divElement = document.querySelector('.travelPage__content');
     divElement.style.display = 'none';
+    onClickStep('', null, '', '', '', null);
+    const essai = document.querySelector('.stepImages');
+    essai.remove();
+    AllImages = [];
   };
 
   const addPhotoStep = (map) => {
-    step.map((elt) => {
-      elt.pictures.map((image) => {
-        const currentImg = {
-          url: elt.id,
-          data: `http://34.239.44.174/uploads/pictures/${image.url}`,
-        };
-        AllImages.push(currentImg);
-      });
+    step.map((elt, key) => {
+      const currentImg = {
+        url: elt.pictures[key].id,
+        data: `http://34.239.44.174/uploads/pictures/${elt.pictures[key].url}`,
+      };
 
-      const customPopup = `<img class='map__picture' src=${AllImages[0].data} alt='maptime logo gif' width='150px'/> <br/>`;
+      const customPopup = `<img class='map__picture' src=${currentImg.data} alt='maptime logo gif' width='150px'/> <br/>`;
       const myIcon = L.icon({
-        // className: 'my-div-icon',
-        // iconSize: [60, 60],
-        iconUrl: AllImages[0].data,
+        iconUrl: currentImg.data,
         shadowUrl: 'https://www.quevilly-habitat.fr/wp-content/uploads/2019/01/carr%C3%A9-blanc-300x300.png',
         iconSize: [55, 55],
         iconAnchor: [22, 94],

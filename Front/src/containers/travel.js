@@ -13,7 +13,11 @@ const mapStateToProps = (state) => ({
   },
   step: state.travel.step,
   loading: state.travel.loading,
+  description: state.travel.description,
   title: state.travel.title,
+  like: state.travel.like,
+  currentId: state.travel.id,
+  currentPicture: state.travel.currentPicture,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -21,9 +25,9 @@ const mapDispatchToProps = (dispatch) => ({
     console.log('je passe dans fetchDataForSingleTravel');
     dispatch(fetchDataForSingleTravel());
   },
-  saveDataForSingleStep: (value) => {
+  saveDataForSingleStep: (value, images, like, id, description, comment) => {
     console.log('je passe dans saveDataForSingleStep');
-    dispatch(saveDataForSingleStep(value));
+    dispatch(saveDataForSingleStep(value, images, like, id, description, comment));
   },
 
 });

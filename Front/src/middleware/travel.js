@@ -8,7 +8,7 @@ const travel = (store) => (next) => (action) => {
       const state = store.getState();
       const token = Cookies.get('token');
 
-      axios.get('http://34.239.44.174/api/travels/53', { headers: { Authorization: `Bearer ${token}` } })
+      axios.get('http://34.239.44.174/api/travels/56', { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
           console.log(response.data);
           store.dispatch(saveDataForSingleTravel(response.data));

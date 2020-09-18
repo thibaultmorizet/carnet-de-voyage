@@ -9,7 +9,12 @@ export const initialState = {
   },
   step: {},
   title: '',
+  description: '',
+  currentPicture: null,
+  like: '',
   loading: true,
+  currentId: '',
+  currentComment: null,
 };
 
 // console.log('je passe dans le reducer');
@@ -36,6 +41,11 @@ const travel = (state = initialState, action = {}) => {
       return {
         ...state,
         title: action.value,
+        currentPicture: action.images,
+        like: action.like,
+        currentId: action.id,
+        description: action.description,
+        currentComment: action.comment,
       };
     default:
       return state;

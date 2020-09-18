@@ -40,6 +40,17 @@
   }
 }
 
+.stepImages {
+  display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+}
+
+.stepImages__picture {
+  max-width: 43%;
+  padding: 1em;
+}
+
 .comment {
   &__title {
     font-family: 'Pacifico', cursive;
@@ -165,6 +176,11 @@
       }
     }
   }
+  .stepImages__picture {
+    max-width: 40%;
+    padding: 1em;
+  }
+  
 }
 
 @media only screen and (min-width : 769px) {
@@ -177,6 +193,11 @@
 
   .singleComment__bubble {
     width: 70%;
+  }
+
+  .stepImages__picture {
+    max-width: 30%;
+    padding: 1em;
   }
 }
 
