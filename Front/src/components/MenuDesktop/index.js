@@ -2,18 +2,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './styles.scss';
+import { GiGiantSquid } from 'react-icons/gi';
 
 const MenuDesktop = () => (
   <div className="menuDesktop">
-    <span className="menu__nav--icon">
-      <NavLink
-        to="/admin/userlist"
-        exact
-      >
-        🏠
-      </NavLink>
-    </span>
     <nav className="menuDesktop__nav">
+      <span className="menu__nav--icon">
+        <NavLink
+          to="/"
+          exact
+        >
+          <GiGiantSquid size={30} />
+        </NavLink>
+      </span>
       <li className="menu__nav--li">
         <NavLink
           to="/admin/userlist"
