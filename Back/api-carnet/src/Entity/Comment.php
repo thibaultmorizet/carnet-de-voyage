@@ -17,15 +17,13 @@ class Comment
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"travel:read"})
-     * @Groups({"step:show"})
+     * @Groups({"travel:read", "step:show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"travel:read"})
-     * @Groups({"step:show"})
+     * @Groups({"travel:read", "step:show"})
      */
     private $comment;
 

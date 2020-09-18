@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 // == Import : npm
 import React from 'react';
 import { render } from 'react-dom';
@@ -9,9 +8,9 @@ import { CookiesProvider } from 'react-cookie';
 
 // == Impogrt : local
 // Composants
-import CarnetDeVoyage from 'src/containers/carnetDeVoyage';
+import CarnetDeVoyage from '../src/containers/carnetDeVoyage';
 // Store
-import store from 'src/store';
+import store from '../src/store';
 
 // == Render
 // 1. Élément React racine (celui qui contient l'ensemble de l'app)
