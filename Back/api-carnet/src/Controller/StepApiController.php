@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Controller;
@@ -15,6 +14,7 @@ use App\Repository\StepRepository;
 use App\Repository\TravelRepository;
 use App\Repository\PictureRepository;
 use App\Repository\CommentRepository;
+use App\Repository\TravelUserRepository;
 use Symfony\Bundle\MakerBundle\Validator;
 use Symfony\Component\Mime\Header\Headers;
 use Symfony\Component\Serializer\Serializer;
@@ -40,19 +40,58 @@ class StepApiController extends AbstractController
     /**
      *  @Route("/step/{id2}", name="api_step_show", methods={"GET"}, requirements={"id"="\d+"})
      */
-    public function show(StepRepository $stepRepository, $id2)
+    public function show(StepRepository $stepRepository, $id2, JWTEncoderInterface $jWTEncoderInterface, UserRepository $userRepository, Travel $travel, TravelRepository $travelRepository)
     {
-        
-        //we select the desired step object with the url id
-        $step = $stepRepository->find($id2);
+        //we put the token of the header in a variable
+        $token = substr(apache_request_headers()["Authorization"], 7);
+        //we decode the token
+        $tokenArray = $jWTEncoderInterface->decode($token);
+        //we recover the Id of the connected user
+        $userId = $userRepository->findOneByUsername($tokenArray['username'])->getId();
+        //we recover the Id of the creator of the travel
+        $travelCreatorId = $travel->getCreator()->getId();
+        $followers = $travel->getFollowers()->getValues();
+        $isFollower = false;
+        foreach ($followers as $follower) {
+            if ($follower->getId() == $userId) {
+                $isFollower = true;
+            }
+        }
+        //we recover the roles of the connected user in a variable
+        $userRoles = $tokenArray["roles"];
+        //we create a boolean for the autorization of the user
+        $userAuthorization = false;
+        //for each role of the user
+        foreach ($userRoles as $role) {
+            //if the role is equal to "ROLE_ADMIN"
+            if ($role == "ROLE_ADMIN") {
+                //we put the boolean to True
+                $userAuthorization = true;
+            }
+        }
 
-        //we return in JSON all the important variables for the display of the step pages
-        return $this->json(
-            $step,
-            200,
-            [],
-            ["groups" => ["step:show"]]
-        );
+        //if the Id of the connected user is same of the Id of the creator of the travel
+        if ($userId == $travelCreatorId or $userAuthorization == true or $isFollower == true) {
+            //we select the desired step object with the url id
+            $step = $stepRepository->find($id2);
+            //we return in JSON all the important variables for the display of the step pages
+            return $this->json(
+                $step,
+                200,
+                [],
+                ["groups" => ["step:show"]]
+            );
+        }
+        else {
+            //we return an error "HTTP_UNAUTHORIZED"
+            return $this->json(
+                [
+                    "success" => false,
+                    "error" => "you're not the creator of the travel or an Administrator or a follower of the travel"
+                ],
+                Response::HTTP_UNAUTHORIZED
+            );
+        }
     }
 
     /**
@@ -530,7 +569,7 @@ class StepApiController extends AbstractController
     }
 
     /**
-     *  @Route("/comment/{id2}", name="api_step_comment", methods={"GET"}, requirements={"id"="\d+"})
+     *  @Route("/comment/{id2}", name="api_step_comment", methods={"POST"}, requirements={"id"="\d+"})
      */
     public function comment(StepRepository $stepRepository, $id2, Request $request, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface)
     {
