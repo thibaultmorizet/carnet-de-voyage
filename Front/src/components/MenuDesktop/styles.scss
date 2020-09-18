@@ -36,12 +36,52 @@
   .menuDesktop {
     padding-bottom: 0.2em;
     .menu__nav--li {
-      font-size: 0.72em;
+      font-size: 0.59em;
+      margin-right: auto;
     }
     .menu__nav--icon {
       position: relative;
       bottom: 0.5em;
       padding-right: 7em;
+    }
+  }
+}
+@media only screen and (min-width : 1024px) {
+  .menuDesktop {
+    padding-bottom: 0.6em;
+    .menu__nav--li {
+      font-size: 0.8em;
+      margin: auto;
+    }
+    .menu__nav--icon {
+      position: relative;
+      bottom: 0.5em;
+    }
+  }
+}
+@media only screen and (min-width : 1224px) {
+  .menuDesktop {
+    padding-bottom: 0.6em;
+    .menu__nav--li {
+      font-size: 0.9em;
+      margin: auto;
+    }
+    .menu__nav--icon {
+      position: relative;
+      bottom: 0.5em;
+    }
+  }
+}
+@media only screen and (min-width : 2560px) {
+  .menuDesktop {
+    padding-bottom: 1em;
+    .menu__nav--li {
+      font-size: 1.2em;
+      margin: auto;
+    }
+    .menu__nav--icon {
+      position: relative;
+      bottom: 0.5em;
     }
   }
 }
