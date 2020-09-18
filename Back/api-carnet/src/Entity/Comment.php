@@ -30,7 +30,7 @@ class Comment
     /**
      * @ORM\Column(type="datetime")
      * 
-     * @Groups({"step:show"})
+     * @Groups({"step:show","travel:read"})
      */
     private $createdAt;
 
@@ -50,7 +50,7 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"step:show"})
+     * @Groups({"step:show","travel:read"})
      */
     private $user;
 

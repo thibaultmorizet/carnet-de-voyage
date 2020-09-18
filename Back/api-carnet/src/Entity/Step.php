@@ -35,6 +35,7 @@ class Step
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"step:show","travel:read"})
+     * 
      */
     private $description;
 
