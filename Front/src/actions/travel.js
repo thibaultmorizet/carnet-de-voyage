@@ -10,3 +10,13 @@ export const saveDataForSingleTravel = (value) => ({
   type: SAVE_DATA_FOR_SINGLE_TRAVEL,
   value,
 });
+
+export const SAVE_DATA_FOR_SINGLE_STEP = 'SAVE_DATA_FOR_SINGLE_STEP';
+
+export const saveDataForSingleStep = (value) => {
+  console.log('vale', value);
+  return ({
+    type: SAVE_DATA_FOR_SINGLE_STEP,
+    value,
+  });
+};

@@ -1,4 +1,4 @@
-import { SAVE_DATA_FOR_SINGLE_TRAVEL } from '../actions/travel';
+import { SAVE_DATA_FOR_SINGLE_TRAVEL, SAVE_DATA_FOR_SINGLE_STEP } from '../actions/travel';
 
 export const initialState = {
   travel: {
@@ -6,9 +6,10 @@ export const initialState = {
     title: '',
     description: '',
     creation_date: '',
-    loading: true,
   },
   step: {},
+  title: '',
+  loading: true,
 };
 
 // console.log('je passe dans le reducer');
@@ -16,23 +17,26 @@ export const initialState = {
 const travel = (state = initialState, action = {}) => {
   switch (action.type) {
     case SAVE_DATA_FOR_SINGLE_TRAVEL: {
-      console.log('action', action);
       const {
         id, title, description, creationDate, steps,
       } = action.value;
-      console.log(action.id);
       return {
         ...state,
         travel: {
           id,
           title,
           description,
-          creationDate,
-          loading: !state.travel.loading,
+          creation_date: creationDate,
         },
         step: steps,
+        loading: !state.loading,
       };
     }
+    case SAVE_DATA_FOR_SINGLE_STEP:
+      return {
+        ...state,
+        title: action.value,
+      };
     default:
       return state;
   }

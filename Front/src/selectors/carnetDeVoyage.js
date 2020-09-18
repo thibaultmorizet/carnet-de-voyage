@@ -105,3 +105,11 @@ export const toastNotification = (addToast, history, response) => {
     history.push('/');
   }
 };
+
+export const changeDateFormat = (dateWanted) => {
+  const newDate = new Date(dateWanted);
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  const middleDate = newDate.toLocaleDateString('de-DE', options);
+  const step_date = middleDate.replace('.', '/').replace('.', '/');
+  return step_date;
+};
