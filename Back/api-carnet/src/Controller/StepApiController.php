@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Controller;
@@ -530,7 +529,7 @@ class StepApiController extends AbstractController
     }
 
     /**
-     *  @Route("/comment/{id2}", name="api_step_comment", methods={"GET"}, requirements={"id"="\d+"})
+     *  @Route("/comment/{id2}", name="api_step_comment", methods={"POST"}, requirements={"id"="\d+"})
      */
     public function comment(StepRepository $stepRepository, $id2, Request $request, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface)
     {
