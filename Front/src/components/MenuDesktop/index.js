@@ -1,10 +1,16 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import './styles.scss';
 import { GiGiantSquid } from 'react-icons/gi';
 
-const MenuDesktop = () => (
+const MenuDesktop = () => {
+  const deleteCookie = () => {
+    Cookies.remove('token');
+    Cookies.remove('loggedIn');
+  };
+  return (
   <div className="menuDesktop">
     <nav className="menuDesktop__nav">
       <span className="menu__nav--icon">
@@ -51,12 +57,13 @@ const MenuDesktop = () => (
         <NavLink
           to="/"
           exact
+          onClick={deleteCookie}
         >
           Déconnexion
         </NavLink>
       </li>
     </nav>
   </div>
-);
+)};
 
 export default MenuDesktop;
