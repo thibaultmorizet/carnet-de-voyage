@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import FormInput from 'src/components/FormInput';
 import { Link } from 'react-router-dom';
+import { errorMessage } from 'src/selectors/carnetDeVoyage';
 import SingleComment from './singleComment';
 import './styles.scss';
 
@@ -26,7 +27,15 @@ const Comments = ({
   ));
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    sendComment();
+    const inputElement = evt.target.querySelector('input');
+    if (inputElement.length > 2 && inputElement.length < 255) {
+      // sendComment();
+      inputElement.value = '';
+    }
+    else {
+      const message = 'Votre commentaire doit contenir entre 2 et 255 caractères';
+      errorMessage(message, '.comment__add--div');
+    }
   };
   return (
     <div className="comment">
@@ -36,15 +45,6 @@ const Comments = ({
       </h4>
       <div className="comment__allComment">
         {oldComment !== null && showAllComment()}
-        {/* {!essai && (
-        <SingleComment
-          key={comment}
-          date={date}
-          firstName="En cours"
-          lastName="de validation"
-          comment={comment}
-        />
-        )} */}
       </div>
       {Cookies.get('loggedIn') && (
       <form action="" className="comment__add" onSubmit={handleSubmit}>
@@ -56,7 +56,10 @@ const Comments = ({
         />
         <p className="comment__add--span">255 caractères maximum</p>
 
-        <input className="comment__add--comment" type="submit" value="Ajouter un commentaire" />
+        <div className="comment__add--div">
+          <input className="comment__add--comment" type="submit" value="Ajouter un commentaire" />
+        </div>
+
       </form>
       )}
 

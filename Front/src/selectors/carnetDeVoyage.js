@@ -9,7 +9,6 @@ export const errorMessage = (message, submitElement) => {
   const buttonSubmit = document.querySelector(submitElement);
   const errorMessageElt = document.querySelector('.errorMessage');
   if (errorMessageElt === null) {
-    console.log('lala');
     const createDiv = document.createElement('div');
     createDiv.className = 'errorMessage';
     createDiv.textContent = message;
