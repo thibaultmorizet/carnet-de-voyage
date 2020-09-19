@@ -18,6 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeCheckboxContact());
   },
   sendEmailContact: () => {
+    dispatch(sendEmailContact());
     console.log('sendEmailContact');
   },
 });
