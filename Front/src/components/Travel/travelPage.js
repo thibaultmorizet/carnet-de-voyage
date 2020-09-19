@@ -1,9 +1,10 @@
 /* eslint-disable new-cap */
 /* eslint-disable max-len */
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
-import L from 'leaflet';
+import { Link, useParams } from 'react-router-dom';
 import Spinner from 'src/components/Spinner';
 import { changeDateFormat, addImage } from 'src/selectors/carnetDeVoyage';
 import Comments from 'src/containers/comment';
@@ -13,7 +14,7 @@ import './styles.scss';
 const TravelPage = ({
   travel, step, fetchDataForSingleTravel, loading, saveDataForSingleStep, title, currentPicture, like, description,
 }) => {
-  console.log('loadin', step);
+  const { id } = useParams();
 
   useEffect(() => {
     fetchDataForSingleTravel();
@@ -32,9 +33,12 @@ const TravelPage = ({
         <>
           <div className="travelPage__header">
             <h2 className="travelPage__header--title">{travel.title}</h2>
-            <FontAwesomeIcon className="travelPage__header--icon" icon={faPen} />
-            <p> {changeDateFormat(travel.creation_date)} </p>
-            <p>{travel.description}
+            <Link to={`/travel/${id}/update`}>
+              <FontAwesomeIcon className="travelPage__header--icon" icon={faPen} />
+            </Link>
+
+            <p className="travelPage__header--date"> {changeDateFormat(travel.creation_date)} </p>
+            <p className="travelPage__header--description">{travel.description}
             </p>
           </div>
           <div id="travelPage__map" />
@@ -51,6 +55,22 @@ const TravelPage = ({
       )}
     </div>
   );
+};
+
+TravelPage.propTypes = {
+  travel: PropTypes.object.isRequired,
+  step: PropTypes.array.isRequired,
+  fetchDataForSingleTravel: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  saveDataForSingleStep: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  currentPicture: PropTypes.array,
+  like: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+};
+
+TravelPage.defaultProps = {
+  currentPicture: null,
 };
 
 export default TravelPage;

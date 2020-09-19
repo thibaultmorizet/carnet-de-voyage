@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import L from 'leaflet';
 import './styles.scss';
 
 const Map = ({ step, onClickStep }) => {
-  console.log(step);
   let AllImages = [];
   const AddStep = [];
 
   const onClick = (evt) => {
     const target = evt.target.options.icon.options.className;
     const result = step.filter((elt) => elt.id === target);
-    console.log('result', result);
     const {
       title, stepLike, id, description, pictures, comments,
     } = result[0];
@@ -29,9 +28,9 @@ const Map = ({ step, onClickStep }) => {
   const onClose = () => {
     const divElement = document.querySelector('.travelPage__content');
     divElement.style.display = 'none';
-    onClickStep('', null, '', '', '', null);
-    const essai = document.querySelector('.stepImages');
-    essai.remove();
+    onClickStep('', null, 0, '', '', []);
+    const imageDiv = document.querySelector('.stepImages');
+    imageDiv.remove();
     AllImages = [];
   };
 
@@ -83,6 +82,11 @@ const Map = ({ step, onClickStep }) => {
   return (
     <div className="travelPage__map" />
   );
+};
+
+Map.propTypes = {
+  step: PropTypes.array.isRequired,
+  onClickStep: PropTypes.func.isRequired,
 };
 
 export default Map;

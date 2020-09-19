@@ -25,3 +25,11 @@ export const saveDataForSingleStep = (value, images, like, id, description, comm
     comment,
   });
 };
+
+export const ADD_COMMENT = 'ADD_COMMENT';
+
+export const addComment = (value, date) => ({
+  type: ADD_COMMENT,
+  value,
+  date,
+});

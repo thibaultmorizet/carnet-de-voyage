@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
@@ -8,13 +9,21 @@ import SingleComment from './singleComment';
 import './styles.scss';
 
 const Comments = ({
-  changeValueComment, sendComment, like, oldComment,
+  changeValueComment, sendComment, like, oldComment, comment,
 }) => {
-  console.log('oldComment', like);
-  const showAllComment = () => {
-    console.log('je suis dans sshowAll');
-    return oldComment.map((elt) => <SingleComment key={elt.id} data={elt} />);
-  };
+  const today = new Date();
+  const date = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
+  console.log(oldComment);
+
+  const showAllComment = () => oldComment.map((elt) => (
+    <SingleComment
+      key={elt.id}
+      date={elt.createdAt}
+      firstName={elt.user.firstName}
+      lastName={elt.user.lastName}
+      comment={elt.comment}
+    />
+  ));
   const handleSubmit = (evt) => {
     evt.preventDefault();
     sendComment();
@@ -25,7 +34,18 @@ const Comments = ({
         <span className="comment__title--nblike">{like} likes</span>
         <FontAwesomeIcon className="comment__title--icon" icon={faThumbsUp} />
       </h4>
-      {oldComment !== null && showAllComment()}
+      <div className="comment__allComment">
+        {oldComment !== null && showAllComment()}
+        {/* {!essai && (
+        <SingleComment
+          key={comment}
+          date={date}
+          firstName="En cours"
+          lastName="de validation"
+          comment={comment}
+        />
+        )} */}
+      </div>
       {Cookies.get('loggedIn') && (
       <form action="" className="comment__add" onSubmit={handleSubmit}>
         <FormInput
@@ -46,6 +66,13 @@ const Comments = ({
 
     </div>
   );
+};
+
+Comments.propTypes = {
+  changeValueComment: PropTypes.func.isRequired,
+  sendComment: PropTypes.func.isRequired,
+  like: PropTypes.number.isRequired,
+  oldComment: PropTypes.array.isRequired,
 };
 
 export default Comments;

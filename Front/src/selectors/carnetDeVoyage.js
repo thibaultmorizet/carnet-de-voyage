@@ -1,6 +1,7 @@
 /* eslint-disable no-multi-assign */
 /* eslint-disable import/prefer-default-export */
 import { useToasts } from 'react-toast-notifications';
+
 /**
  * function for add error message
  */
@@ -115,7 +116,6 @@ export const changeDateFormat = (dateWanted) => {
 };
 
 export const addImage = (pictures) => {
-  console.log('pictur', pictures);
   if (pictures !== null) {
     const divElement = document.querySelector('.travelPage__content--images');
     const newDivElement = document.createElement('div');
