@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 const FormInput = ({
-  type, name, content, onChange, value = null,
+  type, name, content, onChange, value = undefined,
 }) => {
   // console.log(onChange);
   const handleChange = (evt) => {
@@ -23,6 +23,11 @@ FormInput.propTypes = {
   name: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+};
+
+FormInput.defaultProps = {
+  value: undefined,
 };
 
 export default FormInput;

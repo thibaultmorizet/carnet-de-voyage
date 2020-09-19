@@ -12,6 +12,7 @@ const PresentationTeam = () => {
       spe={elt.specialization}
       job={elt.job}
       photo={elt.photo}
+      link={elt.link}
     />
   ));
   return (
