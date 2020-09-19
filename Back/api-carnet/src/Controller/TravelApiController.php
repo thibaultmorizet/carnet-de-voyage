@@ -109,7 +109,7 @@ class TravelApiController extends AbstractController
         // Transform the json request into an array
         $requestArray = json_decode($request->getContent(), true);
         
-        $travel->setCreationDate(DateTime::createFromFormat('j/m/Y', ($requestArray['step_date'])));
+        $travel->setCreationDate(DateTime::createFromFormat('j/m/Y', ($requestArray['travel_date'])));
         
         // Get a User object with the Id
         $user = $userRepository->find($requestArray['user_id']);
@@ -211,7 +211,7 @@ class TravelApiController extends AbstractController
             $travel->setDescription($requestArray['description']);
         }
         if (array_key_exists('travel_date', $requestArray) && $requestArray['travel_date'] != null) {
-            $travel->setCreationDate(DateTime::createFromFormat('j/m/Y', ($requestArray['step_date'])));
+            $travel->setCreationDate(DateTime::createFromFormat('j/m/Y', ($requestArray['travel_date'])));
         }
         if (array_key_exists('status', $requestArray) && $requestArray['status'] != null ) {
             $travel->setStatus($requestArray['status']);
