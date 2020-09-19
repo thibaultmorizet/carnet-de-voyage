@@ -1,19 +1,18 @@
 import axios from 'axios';
-import { sendEmailContact } from '../actions/contact';
+import { SEND_EMAIL_CONTACT } from '../actions/contact';
 
 const Contact = (store) => (next) => (action) => {
   switch (action.type) {
     case SEND_EMAIL_CONTACT: {
       const state = store.getState();
 
-      axios.post('http:34.239.44.174/contact', {
-        email: state.formContact.email,
-        object: state.formContact.objet,
-        text: state.formContact.message,
+      axios.post('http://34.239.44.174/contact', {
+        email: state.contact.email,
+        object: state.contact.objet,
+        text: state.contact.message,
       })
         .then((response) => {
-          const actionToDispatch = sendEmailContact();
-          store.dispatch(actionToDispatch);
+          console.log('200');
         })
         .catch((error) => console.log(error));
       break;
