@@ -44,7 +44,9 @@ const FormUpdateStep = ({
   }, []);
 
   const toastFailOrSuccess = () => {
-    toastNotification(addToast, history, response);
+    const messageSuccess = 'Votre étape a bien été modifiée';
+    const destination = '/travels/list';
+    toastNotification(addToast, history, response, messageSuccess, destination);
   };
 
   useEffect(() => {

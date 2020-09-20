@@ -90,19 +90,19 @@ export const handlePicture = (evt, fctState) => {
  * @param {*} response response of API, give us the error message or success message
  * this function is for show a little notification for success or error actions
  */
-export const toastNotification = (addToast, history, response) => {
+export const toastNotification = (addToast, history, response, message, destination) => {
   if (response === 'Error') {
-    addToast('Il y a eu une erreur dans l\'envoi de l\'étape. Veuillez réessayer plus tard', {
+    addToast('Une erreur s\'est produite. Veuillez réessayer plus tard', {
       appearance: 'error',
       autoDismiss: true,
     });
   }
   else if (response === 'Success') {
-    addToast('Votre étape à bien été enregistrée !', {
+    addToast(message, {
       appearance: 'success',
       autoDismiss: true,
     });
-    history.push('/');
+    history.push(destination);
   }
 };
 

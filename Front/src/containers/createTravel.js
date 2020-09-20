@@ -6,7 +6,7 @@ const mapStateToProps = (state) => ({
   title: state.createTravel.title,
   description: state.createTravel.description,
   creation_date: state.createTravel.creation_date,
-  picture_url: state.createTravel.picture_url,
+  picture_url: state.createTravel.picture,
   response: state.createTravel.response,
 });
 

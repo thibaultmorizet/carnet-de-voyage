@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './styles.scss';
 import { useToasts } from 'react-toast-notifications';
 import { useHistory } from 'react-router-dom';
@@ -13,12 +14,19 @@ import {
 import FormInput from '../FormInput';
 
 const FormTravel = ({
-  changeFieldCreateTravel, saveDateCreateTravel, title, description, creation_date, picture_url, response,
+  changeFieldCreateTravel,
+  saveDateCreateTravel,
+  title, description,
+  creation_date,
+  picture_url,
+  response,
 }) => {
   const { addToast } = useToasts();
   const history = useHistory();
   const toastFailOrSuccess = () => {
-    toastNotification(addToast, history, response);
+    const message = 'Votre voyage à bien été enregistré. Vous pouvez dès maintenant ajouter une étape :)';
+    const destination = '/travels/list';
+    toastNotification(addToast, history, response, message, destination);
   };
 
   useEffect(() => {
@@ -105,6 +113,16 @@ const FormTravel = ({
       </form>
     </div>
   );
+};
+
+FormTravel.propTypes = {
+  changeFieldCreateTravel: PropTypes.func.isRequired,
+  saveDateCreateTravel: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  creation_date: PropTypes.string.isRequired,
+  picture_url: PropTypes.string.isRequired,
+  response: PropTypes.string.isRequired,
 };
 
 export default FormTravel;
