@@ -34,7 +34,7 @@ const travel = (state = initialState, action = {}) => {
           creation_date: creationDate,
         },
         step: steps,
-        loading: !state.loading,
+        loading: false,
       };
     }
     case SAVE_DATA_FOR_SINGLE_STEP:
