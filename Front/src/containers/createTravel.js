@@ -7,6 +7,7 @@ const mapStateToProps = (state) => ({
   description: state.createTravel.description,
   creation_date: state.createTravel.creation_date,
   picture_url: state.createTravel.picture_url,
+  response: state.createTravel.response,
 });
 
 const mapDispatchToProps = (dispatch) => ({

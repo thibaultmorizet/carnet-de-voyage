@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { SAVE_DATA_CREATE_TRAVEL } from '../actions/createTravel';
+import { SAVE_DATA_CREATE_TRAVEL, saveDataResponseCreateTravel } from '../actions/createTravel';
 
 const Login = (store) => (next) => (action) => {
   switch (action.type) {
@@ -16,8 +16,14 @@ const Login = (store) => (next) => (action) => {
       }, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
           console.log(response);
+          const actionToDispatch = saveDataResponseCreateTravel('Success');
+          store.dispatch(actionToDispatch);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          const actionToDispatch = saveDataResponseCreateTravel('Error');
+          store.dispatch(actionToDispatch);
+        });
       break;
     }
     default:

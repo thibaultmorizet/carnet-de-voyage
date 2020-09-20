@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import './styles.scss';
+import { useToasts } from 'react-toast-notifications';
+import { useHistory } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
 import {
   errorMessage,
@@ -10,7 +12,19 @@ import {
 } from 'src/selectors/carnetDeVoyage';
 import FormInput from '../FormInput';
 
-const FormTravel = ({ changeFieldCreateTravel, saveDateCreateTravel }) => {
+const FormTravel = ({
+  changeFieldCreateTravel, saveDateCreateTravel, title, description, creation_date, picture_url, response,
+}) => {
+  const { addToast } = useToasts();
+  const history = useHistory();
+  const toastFailOrSuccess = () => {
+    toastNotification(addToast, history, response);
+  };
+
+  useEffect(() => {
+    toastFailOrSuccess();
+  }, [response]);
+
   const handleDescriptionChange = (evt) => {
     changeFieldCreateTravel(evt.target.value, 'description');
   };
@@ -21,7 +35,25 @@ const FormTravel = ({ changeFieldCreateTravel, saveDateCreateTravel }) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    saveDateCreateTravel();
+    const allDataForRegister = [title, description, creation_date, picture_url];
+    const isEmptyElement = allDataForRegister.includes('');
+    const submitElt = '.formTravel__form--div';
+
+    if (isEmptyElement === true) {
+      const message = 'Veuillez remplir tous les champs';
+      errorMessage(message, submitElt);
+    }
+    else if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(creation_date)) {
+      const message = 'Veuillez rentrer une date au format JJ/MM/AAAA';
+      errorMessage(message, submitElt);
+    }
+    else if (handleDate(creation_date) === false) {
+      const message = 'Veuillez rentrer une date correcte';
+      errorMessage(message, submitElt);
+    }
+    else {
+      saveDateCreateTravel();
+    }
   };
 
   return (
