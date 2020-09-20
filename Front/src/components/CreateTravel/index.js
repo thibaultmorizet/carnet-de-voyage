@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.scss';
+import FormTravel from 'src/containers/createTravel';
 import MenuDesktop from '../MenuDesktop';
-import FormTravel from './formTravel';
 
 const CreateTravel = () => (
   <div className="createTravel">
