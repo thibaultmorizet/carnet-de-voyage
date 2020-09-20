@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Button from '../Button';
 import Menu from '../Menu';
 import './styles.scss';
@@ -7,9 +7,12 @@ import './styles.scss';
 const Header = () => (
   <header className="headerHomePage">
     <div className="headerHomePage__mobile">
-      <Link to="/login">
+      <NavLink
+        to="/login"
+        exact
+      >
         <Button text="Connexion" />
-      </Link>
+      </NavLink>
     </div>
     <div className="headerHomePage__desktop">
       <Menu />
