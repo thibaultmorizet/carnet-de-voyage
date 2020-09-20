@@ -112,7 +112,7 @@ class TravelApiController extends AbstractController
         $travel->setCreationDate(DateTime::createFromFormat('j/m/Y', ($requestArray['travel_date'])));
         
         // Get a User object with the Id
-        $user = $userRepository->find($requestArray['user_id']);
+        $user = $userRepository->find($userArrayToken['userId']);
         if ($user == NULL) {  // User not found !
             return $this->json(
                 [

@@ -16,7 +16,7 @@ const mapStateToProps = (state) => ({
   description: state.travel.description,
   title: state.travel.title,
   like: state.travel.like,
-  currentId: state.travel.id,
+  currentId: state.travel.currentId,
   currentPicture: state.travel.currentPicture,
 });
 

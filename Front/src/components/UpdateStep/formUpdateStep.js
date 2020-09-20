@@ -3,8 +3,10 @@
 import React, { useEffect } from 'react';
 import Map from 'src/components/Map';
 import FormInput from 'src/components/FormInput';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import Spinner from 'src/components/Spinner';
 import { handlePicture, toastNotification } from 'src/selectors/carnetDeVoyage';
 import Modal from 'react-modal';
@@ -86,12 +88,16 @@ const FormUpdateStep = ({
   };
 
   return (
-
-    <div className="FormUpdateStep">
-      {loading && (
-      <Spinner />
-      )}
-      {!loading
+    <>
+      <Link to={`/travel/${id}`} className="travelPage__header--return updatePageReturn">
+        <FontAwesomeIcon icon={faArrowCircleLeft} />
+        <p>Revenir au voyage</p>
+      </Link>
+      <div className="FormUpdateStep">
+        {loading && (
+        <Spinner />
+        )}
+        {!loading
         && (
         <form action="" className="FormUpdateStep__formElt" onSubmit={handleOnSubmit}>
 
@@ -162,7 +168,8 @@ const FormUpdateStep = ({
 
         </form>
         )}
-    </div>
+      </div>
+    </>
   );
 };
 

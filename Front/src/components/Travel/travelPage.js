@@ -3,8 +3,8 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { Link, useParams } from 'react-router-dom';
+import { faPen, faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import Spinner from 'src/components/Spinner';
 import { changeDateFormat, addImage } from 'src/selectors/carnetDeVoyage';
 import Comments from 'src/containers/comment';
@@ -12,9 +12,10 @@ import Map from './map';
 import './styles.scss';
 
 const TravelPage = ({
-  travel, step, fetchDataForSingleTravel, loading, saveDataForSingleStep, title, currentPicture, like, description,
+  travel, step, fetchDataForSingleTravel, loading, saveDataForSingleStep, title, currentPicture, like, description, currentId,
 }) => {
   const { id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     fetchDataForSingleTravel(id);
@@ -32,6 +33,11 @@ const TravelPage = ({
       {!loading && (
         <>
           <div className="travelPage__header">
+            <Link to="/travels/list" className="travelPage__header--return">
+              <FontAwesomeIcon icon={faArrowCircleLeft} />
+              <p>Revenir</p>
+            </Link>
+
             <h2 className="travelPage__header--title">{travel.title}</h2>
             <Link to={`/travel/${id}/update`}>
               <FontAwesomeIcon className="travelPage__header--icon" icon={faPen} />
@@ -40,6 +46,9 @@ const TravelPage = ({
             <p className="travelPage__header--date"> {changeDateFormat(travel.creation_date)} </p>
             <p className="travelPage__header--description">{travel.description}
             </p>
+            <Link to={`/travel/${id}/add`}>
+              <input type="button" className="travelPage__header--addStep" value="Ajouter une étape" />
+            </Link>
           </div>
           <div id="travelPage__map" />
           <Map step={step} onClickStep={saveDataForSingleStep} />
@@ -48,6 +57,9 @@ const TravelPage = ({
             <h3 className="travelPage__content--title">{title}</h3>
             <p className="travelPage__content--excerpt">{description}</p>
             <div className="travelPage__content--images"> </div>
+            <Link to={`/travel/${id}/update/${currentId}`}>
+              <input type="button" className="travelPage__content--updateStep" value="Modifier cette étape" />
+            </Link>
             <Comments like={like} />
 
           </div>

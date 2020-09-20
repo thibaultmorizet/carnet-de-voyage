@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Button from '../Button';
 import Menu from '../Menu';
@@ -9,9 +9,12 @@ import MenuDesktop from '../MenuDesktop';
 const Header = () => (
   <header className="headerHomePage">
     <div className="headerHomePage__mobile">
-      <Link to="/login">
+      <NavLink
+        to="/login"
+        exact
+      >
         <Button text="Connexion" />
-      </Link>
+      </NavLink>
     </div>
 
     <div className="headerHomePage__desktop">
