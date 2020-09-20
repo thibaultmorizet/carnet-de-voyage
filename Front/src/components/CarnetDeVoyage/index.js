@@ -1,7 +1,7 @@
 // == Import npm
 import React from 'react';
 
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Routes } from 'react-router-dom';
 
 import Cookies from 'js-cookie';
 import HomePage from '../HomePage';
@@ -20,6 +20,7 @@ import PresentationTeam from '../PresentationTeam';
 import Contact from '../Contact';
 import Travel from '../Travel';
 import Privacy from '../Privacy';
+import CreateTravel from '../CreateTravel';
 
 // == Composant
 const CarnetDeVoyage = () => (
@@ -84,18 +85,18 @@ const CarnetDeVoyage = () => (
       )}
     </Route>
 
+    <Route exact path="/travels/create">
+      {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+        <Page>
+          <CreateTravel />
+        </Page>
+      )}
+    </Route>
+
     <Route exact path="/travel/:id">
       <Page>
         <Travel />
       </Page>
-    </Route>
-
-    <Route exact path="/travel/create">
-      {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
-        <Page>
-          coucou
-        </Page>
-      )}
     </Route>
 
     <Footer />
