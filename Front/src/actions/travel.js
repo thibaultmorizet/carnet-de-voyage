@@ -1,7 +1,8 @@
 export const FETCH_DATA_FOR_SINGLE_TRAVEL = 'FETCH_DATA_FOR_SINGLE_TRAVEL';
 
-export const fetchDataForSingleTravel = () => ({
+export const fetchDataForSingleTravel = (id) => ({
   type: FETCH_DATA_FOR_SINGLE_TRAVEL,
+  id,
 });
 
 export const SAVE_DATA_FOR_SINGLE_TRAVEL = 'SAVE_DATA_FOR_SINGLE_TRAVEL';
@@ -33,3 +34,9 @@ export const addComment = (value, date) => ({
   value,
   date,
 });
+
+// export const FETCH_ID_TRAVEL = 'FETCH_ID_TRAVEL';
+// export const fetchIdTravel = (value) => ({
+//   type: FETCH_ID_TRAVEL,
+//   value,
+// });

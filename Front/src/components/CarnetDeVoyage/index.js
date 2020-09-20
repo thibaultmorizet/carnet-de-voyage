@@ -90,6 +90,14 @@ const CarnetDeVoyage = () => (
       </Page>
     </Route>
 
+    <Route exact path="/travel/create">
+      {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+        <Page>
+          coucou
+        </Page>
+      )}
+    </Route>
+
     <Footer />
   </div>
 );

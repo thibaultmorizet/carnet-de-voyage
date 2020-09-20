@@ -17,7 +17,7 @@ const TravelPage = ({
   const { id } = useParams();
 
   useEffect(() => {
-    fetchDataForSingleTravel();
+    fetchDataForSingleTravel(id);
   }, []);
 
   useEffect(() => {

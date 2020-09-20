@@ -8,6 +8,12 @@
       margin: .5em 0em;
 
     }
+    &--icon {
+      display: block;
+      float: right;
+      position: relative;
+      top: -2em;
+    }
     &--follow {
       background-color: lightblue;
       border: none;
@@ -180,6 +186,12 @@
         text-align: left;
         display: inline-block;
         padding-right: .5em;
+      }
+      &--icon {
+        display: inline;
+        float: none;
+        position: relative;
+        top:0;
       }
     }
   }
