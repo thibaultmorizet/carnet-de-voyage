@@ -1,7 +1,7 @@
 // == Import npm
 import React from 'react';
 
-import { Route, Redirect, Routes } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 import Cookies from 'js-cookie';
 import HomePage from '../HomePage';
