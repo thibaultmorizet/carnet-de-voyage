@@ -121,7 +121,7 @@ FormTravel.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   creation_date: PropTypes.string.isRequired,
-  picture_url: PropTypes.string.isRequired,
+  picture_url: PropTypes.array.isRequired,
   response: PropTypes.string.isRequired,
 };
 

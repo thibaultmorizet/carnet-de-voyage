@@ -4,7 +4,7 @@ export const initialState = {
   title: '',
   description: '',
   creation_date: '',
-  picture: '',
+  picture: [],
   response: '',
 };
 
