@@ -11,59 +11,60 @@ const MenuDesktop = () => {
     Cookies.remove('loggedIn');
   };
   return (
-  <div className="menuDesktop">
-    <nav className="menuDesktop__nav">
-      <span className="menu__nav--icon">
-        <NavLink
-          to="/"
-          exact
-        >
-          <GiGiantSquid size={30} />
-        </NavLink>
-      </span>
-      <li className="menu__nav--li">
-        <NavLink
-          to="/admin/userlist"
-          exact
-        >
-          Administration
-        </NavLink>
-      </li>
-      <li className="menu__nav--li">
-        <NavLink
-          to="/user/{id}"
-          exact
-        >
-          Mon profil
-        </NavLink>
-      </li>
-      <li className="menu__nav--li">
-        <NavLink
-          to="/travels/list"
-          exact
-        >
-          Mes voyages
-        </NavLink>
-      </li>
-      <li className="menu__nav--li">
-        <NavLink
-          to="/travels/follow/list"
-          exact
-        >
-          Voyages suivis
-        </NavLink>
-      </li>
-      <li className="menu__nav--li">
-        <NavLink
-          to="/"
-          exact
-          onClick={deleteCookie}
-        >
-          Déconnexion
-        </NavLink>
-      </li>
-    </nav>
-  </div>
-)};
+    <div className="menuDesktop">
+      <nav className="menuDesktop__nav">
+        <span className="menu__nav--icon">
+          <NavLink
+            to="/"
+            exact
+          >
+            <GiGiantSquid size={30} />
+          </NavLink>
+        </span>
+        <li className="menu__nav--li">
+          <NavLink
+            to="/admin/userlist"
+            exact
+          >
+            Administration
+          </NavLink>
+        </li>
+        <li className="menu__nav--li">
+          <NavLink
+            to="/user/{id}"
+            exact
+          >
+            Mon profil
+          </NavLink>
+        </li>
+        <li className="menu__nav--li">
+          <NavLink
+            to="/travels/list"
+            exact
+          >
+            Mes voyages
+          </NavLink>
+        </li>
+        <li className="menu__nav--li">
+          <NavLink
+            to="/travels/follow/list"
+            exact
+          >
+            Voyages suivis
+          </NavLink>
+        </li>
+        <li className="menu__nav--li">
+          <NavLink
+            to="/"
+            exact
+            onClick={deleteCookie}
+          >
+            Déconnexion
+          </NavLink>
+        </li>
+      </nav>
+    </div>
+  );
+};
 
 export default MenuDesktop;

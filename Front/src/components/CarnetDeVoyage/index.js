@@ -20,6 +20,7 @@ import PresentationTeam from '../PresentationTeam';
 import Contact from '../Contact';
 import Travel from '../Travel';
 import Privacy from '../Privacy';
+import CreateTravel from '../CreateTravel';
 
 // == Composant
 const CarnetDeVoyage = () => (
@@ -80,6 +81,14 @@ const CarnetDeVoyage = () => (
       {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
         <Page>
           <UpdateStep />
+        </Page>
+      )}
+    </Route>
+
+    <Route exact path="/travels/create">
+      {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+        <Page>
+          <CreateTravel />
         </Page>
       )}
     </Route>

@@ -1,8 +1,10 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import Button from '../Button';
 import Menu from '../Menu';
 import './styles.scss';
+import MenuDesktop from '../MenuDesktop';
 
 const Header = () => (
   <header className="headerHomePage">
@@ -14,8 +16,14 @@ const Header = () => (
         <Button text="Connexion" />
       </NavLink>
     </div>
+
     <div className="headerHomePage__desktop">
+      {!Cookies.get('loggedIn') && (
       <Menu />
+      )}
+      {Cookies.get('loggedIn') && (
+      <MenuDesktop />
+      )}
     </div>
   </header>
 );
