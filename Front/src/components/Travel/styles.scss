@@ -6,7 +6,21 @@
       font-size: 3em;
       text-align: center;
       margin: .5em 0em;
-
+    }
+    &--return {
+      background-color: transparent;
+      display: block;
+      border: none;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: .8em;
+      & p {
+        display: inline;
+        padding-left: .5em;
+        text-decoration: underline;
+        &:hover {
+          text-decoration: none;
+        }
+      }
     }
     &--follow {
       background-color: lightblue;
@@ -21,6 +35,18 @@
       font-style: italic;
       position: relative;
       top: -10px;
+    }
+    &--addStep {
+      background-color: rgb(142, 211, 235);
+      border-radius: 20px;
+      border: none;
+      padding: .5em 2em;
+      display: block;
+      margin: 1em auto;
+      cursor: pointer;
+      &:hover {
+        background-color: rgb(107, 180, 204);
+      }
     }
   }
   &__content {
@@ -42,6 +68,18 @@
     &--excerpt {
       position: relative;
       top: -20px;
+    }
+    &--updateStep {
+      background-color: rgb(199, 235, 142);
+      border-radius: 20px;
+      border: none;
+      padding: .5em 2em;
+      display: block;
+      margin: 1em auto 2em;
+      cursor: pointer;
+      &:hover {
+        background-color: rgb(153, 185, 100);
+      }
     }
   }
 }
@@ -205,6 +243,13 @@
   .stepImages__picture {
     max-width: 30%;
     padding: 1em;
+  }
+
+  .travelPage__header--addStep {
+    float: right;
+    position: absolute;
+    top: 12%;
+    right: 2%;
   }
 }
 
