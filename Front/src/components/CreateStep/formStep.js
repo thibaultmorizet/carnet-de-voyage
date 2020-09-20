@@ -7,7 +7,7 @@ import React, { useEffect } from 'react';
 import FormInput from 'src/components/FormInput';
 import Map from 'src/components/Map';
 import PropTypes from 'prop-types';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import {
   errorMessage,
   handleDate,
@@ -15,6 +15,8 @@ import {
   toastNotification,
 } from 'src/selectors/carnetDeVoyage';
 import { useToasts } from 'react-toast-notifications';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import ImageUploader from 'react-images-upload';
 import './styles.scss';
 
@@ -74,6 +76,11 @@ const FormStep = ({
 
   return (
     <div className="formStep">
+
+      <Link to={`/travel/${id}`} className="travelPage__header--return">
+        <FontAwesomeIcon icon={faArrowCircleLeft} />
+        <p>Revenir au voyage</p>
+      </Link>
 
       <form action="" className="formStep__element" onSubmit={handleForm}>
         <Map onChange={changeField} latitude={51.505} longitude={-0.09} />
