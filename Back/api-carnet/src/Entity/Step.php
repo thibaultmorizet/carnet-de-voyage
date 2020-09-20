@@ -34,7 +34,8 @@ class Step
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"step:show"})
+     * @Groups({"step:show","travel:read"})
+     * 
      */
     private $description;
 
@@ -89,14 +90,13 @@ class Step
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="step", orphanRemoval=true)
-     * @Groups({"step:show"})
+     * @Groups({"step:show", "travel:read"})
      */
     private $comments;
 
     /**
      * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="step", orphanRemoval=true)
-     * @Groups({"travel:read"})
-     * @Groups({"step:show"})
+     * @Groups({"step:show", "travel:read"})
      */
     private $pictures;
 

@@ -17,22 +17,20 @@ class Comment
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"travel:read"})
-     * @Groups({"step:show"})
+     * @Groups({"travel:read", "step:show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"travel:read"})
-     * @Groups({"step:show"})
+     * @Groups({"travel:read", "step:show"})
      */
     private $comment;
 
     /**
      * @ORM\Column(type="datetime")
      * 
-     * @Groups({"step:show"})
+     * @Groups({"step:show","travel:read"})
      */
     private $createdAt;
 
@@ -52,7 +50,7 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"step:show"})
+     * @Groups({"step:show","travel:read"})
      */
     private $user;
 

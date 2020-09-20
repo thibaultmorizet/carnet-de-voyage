@@ -1,6 +1,7 @@
 /* eslint-disable no-multi-assign */
 /* eslint-disable import/prefer-default-export */
 import { useToasts } from 'react-toast-notifications';
+
 /**
  * function for add error message
  */
@@ -8,7 +9,6 @@ export const errorMessage = (message, submitElement) => {
   const buttonSubmit = document.querySelector(submitElement);
   const errorMessageElt = document.querySelector('.errorMessage');
   if (errorMessageElt === null) {
-    console.log('lala');
     const createDiv = document.createElement('div');
     createDiv.className = 'errorMessage';
     createDiv.textContent = message;
@@ -103,5 +103,28 @@ export const toastNotification = (addToast, history, response) => {
       autoDismiss: true,
     });
     history.push('/');
+  }
+};
+
+export const changeDateFormat = (dateWanted) => {
+  const newDate = new Date(dateWanted);
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  const middleDate = newDate.toLocaleDateString('de-DE', options);
+  const step_date = middleDate.replace('.', '/').replace('.', '/');
+  return step_date;
+};
+
+export const addImage = (pictures) => {
+  if (pictures !== null) {
+    const divElement = document.querySelector('.travelPage__content--images');
+    const newDivElement = document.createElement('div');
+    newDivElement.className = 'stepImages';
+    divElement.appendChild(newDivElement);
+    pictures.map((elt) => {
+      const imgElement = document.createElement('img');
+      imgElement.className = 'stepImages__picture';
+      imgElement.src = elt.data;
+      newDivElement.appendChild(imgElement);
+    });
   }
 };

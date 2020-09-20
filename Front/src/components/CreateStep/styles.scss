@@ -8,6 +8,20 @@
   &__title, &__span{
     font-family: 'Pacifico', cursive;
   }
+  &__return {
+    background-color: transparent;
+    display: block;
+    border: none;
+    font-family: 'IBM Plex Sans', sans-serif;
+    & p {
+      display: inline;
+      padding-left: .5em;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
 
   &__title {
     font-size: 2.5em;

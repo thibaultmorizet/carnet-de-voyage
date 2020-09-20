@@ -18,6 +18,8 @@ import TravelsList from '../TravelsList';
 import './styles.css';
 import PresentationTeam from '../PresentationTeam';
 import Contact from '../Contact';
+import Travel from '../Travel';
+import Privacy from '../Privacy';
 
 // == Composant
 const CarnetDeVoyage = () => (
@@ -30,6 +32,11 @@ const CarnetDeVoyage = () => (
     <Route exact path="/presentation">
       <Page>
         <PresentationTeam />
+      </Page>
+    </Route>
+    <Route exact path="/privacy">
+      <Page>
+        <Privacy />
       </Page>
     </Route>
     <Route exact path="/contact">
@@ -75,7 +82,12 @@ const CarnetDeVoyage = () => (
           <UpdateStep />
         </Page>
       )}
+    </Route>
 
+    <Route exact path="/travel/:id">
+      <Page>
+        <Travel />
+      </Page>
     </Route>
 
     <Footer />

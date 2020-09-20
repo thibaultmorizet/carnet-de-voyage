@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\User;
 use App\Entity\Travel;
 use App\Repository\UserRepository;
@@ -51,7 +52,7 @@ class TravelApiController extends AbstractController
 
 
     /**
-     *  @Route("/api/travels/create", name="api_travels_create", methods={"POST"})
+     * @Route("/api/travels/create", name="api_travels_create", methods={"POST"})
      * 
      * Creation Travel and addition to BDD
      */
@@ -108,10 +109,10 @@ class TravelApiController extends AbstractController
         // Transform the json request into an array
         $requestArray = json_decode($request->getContent(), true);
         
-        $travel->setCreationDate(new \DateTime($requestArray['travel_date']));
-
+        $travel->setCreationDate(DateTime::createFromFormat('j/m/Y', ($requestArray['travel_date'])));
+        
         // Get a User object with the Id
-        $user = $userRepository->find($requestArray['user_id']);
+        $user = $userRepository->find($userArrayToken['userId']);
         if ($user == NULL) {  // User not found !
             return $this->json(
                 [
@@ -210,7 +211,7 @@ class TravelApiController extends AbstractController
             $travel->setDescription($requestArray['description']);
         }
         if (array_key_exists('travel_date', $requestArray) && $requestArray['travel_date'] != null) {
-            $travel->setCreationDate(new \DateTime($requestArray['travel_date']));
+            $travel->setCreationDate(DateTime::createFromFormat('j/m/Y', ($requestArray['travel_date'])));
         }
         if (array_key_exists('status', $requestArray) && $requestArray['status'] != null ) {
             $travel->setStatus($requestArray['status']);
@@ -396,6 +397,15 @@ class TravelApiController extends AbstractController
             ["groups" => ["travel:list"]]
         );
     }
-    
 
+    /**
+     * 
+     *  @Route("travels/{id}/{token}", name="travel_url", methods={"GET"}, requirements={"id"="\d+"})
+     */
+    public function showToken (travelRepository $travelRepository, $token) {
+        // exemple token : 5599730f81933c40cd8512c7cc2604aa
+        // search and recover in BDD the Travel id
+        //$travel = $travelRepository->find($id);
+        dd($token);
+    } 
 }
