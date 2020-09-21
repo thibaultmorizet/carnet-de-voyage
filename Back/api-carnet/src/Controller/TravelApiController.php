@@ -76,7 +76,7 @@ class TravelApiController extends AbstractController
                 $request->getContent(),
                 Travel::class,
                 'json',
-                ['attributes' => ['title', 'description', 'status']]
+                ['attributes' => ['title', 'description']]
             );
 
             // Exception if JSON is not correct
@@ -110,6 +110,9 @@ class TravelApiController extends AbstractController
         $requestArray = json_decode($request->getContent(), true);
         
         $travel->setCreationDate(DateTime::createFromFormat('j/m/Y', ($requestArray['travel_date'])));
+
+	// Set status code
+	$travel->setStatus(0);
         
         // Get a User object with the Id
         $user = $userRepository->find($userArrayToken['userId']);
