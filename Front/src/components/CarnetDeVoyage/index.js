@@ -21,6 +21,7 @@ import Contact from '../Contact';
 import Travel from '../Travel';
 import Privacy from '../Privacy';
 import CreateTravel from '../CreateTravel';
+import UpdateTravel from '../UpdateTravel';
 
 // == Composant
 const CarnetDeVoyage = ({ loggedIn }) => {
@@ -98,6 +99,12 @@ const CarnetDeVoyage = ({ loggedIn }) => {
       <Route exact path="/travel/:id">
         <Page>
           <Travel />
+        </Page>
+      </Route>
+
+      <Route exact path="/travel/:id/update">
+        <Page>
+          <UpdateTravel />
         </Page>
       </Route>
 
