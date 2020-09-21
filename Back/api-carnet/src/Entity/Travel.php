@@ -81,7 +81,6 @@ class Travel
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"travel:read"})
      * @Groups({"step:show"})
-     * @Assert\NotBlank
      */
     private $creator;
 
