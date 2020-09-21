@@ -35,7 +35,10 @@ const Map = ({ step, onClickStep }) => {
   };
 
   const addPhotoStep = (map) => {
+    console.log(step);
     step.map((elt, key) => {
+      console.log('______________', key);
+      console.log('keu', elt.pictures[key].id);
       const currentImg = {
         url: elt.pictures[key].id,
         data: `http://34.239.44.174/uploads/pictures/${elt.pictures[key].url}`,

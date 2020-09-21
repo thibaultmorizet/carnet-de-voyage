@@ -65,7 +65,7 @@ const CarnetDeVoyage = ({ loggedIn }) => {
       </Route>
 
       <Route exact path="/travels/list">
-        {!loggedIn ? <Redirect to="/login" /> : (
+        {!loggedIn || !Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
           <Page>
             <TravelsList />
           </Page>
