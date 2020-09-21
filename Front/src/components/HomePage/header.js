@@ -7,7 +7,6 @@ import Button from '../Button';
 import Menu from '../Menu';
 import MenuDesktop from '../MenuDesktop';
 import './styles.scss';
-import MenuDesktop from '../MenuDesktop';
 
 const Header = () => (
   <header className="headerHomePage">
