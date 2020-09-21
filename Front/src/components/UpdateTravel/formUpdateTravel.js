@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import ImageUploader from 'react-images-upload';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faPaperPlane, faPlaneArrival } from '@fortawesome/free-solid-svg-icons';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import Spinner from 'src/components/Spinner';
-import { handlePicture } from 'src/selectors/carnetDeVoyage';
+import { handlePicture, errorMessage, handleDate } from 'src/selectors/carnetDeVoyage';
 import Toggle from 'react-toggle';
 import FormInput from '../FormInput';
 import './styles.scss';
@@ -11,7 +12,9 @@ import './styles.scss';
 const FormUpdateTravel = ({
   fetchDataForUpdateTravel, title, loading, creation_date, description, picture_url, changeDateForUpdateTravel, status, sendDataForUpdateTravel,
 }) => {
+  const { id } = useParams();
   useEffect(() => {
+    changeDateForUpdateTravel(id, 'id');
     fetchDataForUpdateTravel();
   }, []);
 
@@ -48,7 +51,26 @@ const FormUpdateTravel = ({
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    sendDataForUpdateTravel();
+
+    const allDataForRegister = [title, description, creation_date, picture_url];
+    const isEmptyElement = allDataForRegister.includes('');
+    const submitElt = '.errorDivUpdateTravel';
+
+    if (isEmptyElement === true) {
+      const message = 'Veuillez remplir tous les champs';
+      errorMessage(message, submitElt);
+    }
+    else if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(creation_date)) {
+      const message = 'Veuillez rentrer une date au format JJ/MM/AAAA';
+      errorMessage(message, submitElt);
+    }
+    else if (handleDate(creation_date) === false) {
+      const message = 'Veuillez rentrer une date correcte';
+      errorMessage(message, submitElt);
+    }
+    else {
+      sendDataForUpdateTravel();
+    }
   };
 
   return (
@@ -122,6 +144,8 @@ const FormUpdateTravel = ({
             <div className="formTravel__form--div">
               <input className="formTravel__submit" type="submit" value="Enregistrer mon nouveau voyage" />
             </div>
+
+            <div className="errorDivUpdateTravel" />
 
           </form>
         </div>

@@ -9,8 +9,9 @@ const updateTravel = (store) => (next) => (action) => {
     case FETCH_DATA_FOR_UPDATE_TRAVEL: {
       const state = store.getState();
       const token = Cookies.get('token');
+      console.log(state);
 
-      axios.get('http://34.239.44.174/api/travels/57', { headers: { Authorization: `Bearer ${token}` } })
+      axios.get(`http://34.239.44.174/api/travels/${state.updateTravel.id}`, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
           console.log(response.data);
           const newDate = new Date(response.data.creationDate);
@@ -26,7 +27,7 @@ const updateTravel = (store) => (next) => (action) => {
       const state = store.getState();
       const token = Cookies.get('token');
 
-      axios.put('http://34.239.44.174/api/travels/57/update', {
+      axios.put(`http://34.239.44.174/api/travels/${state.updateTravel.id}/update`, {
         title: state.updateTravel.title,
         description: state.updateTravel.description,
         creation_date: state.updateTravel.creation_date,
