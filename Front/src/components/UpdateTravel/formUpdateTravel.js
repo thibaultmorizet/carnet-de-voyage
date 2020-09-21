@@ -37,15 +37,13 @@ const FormUpdateTravel = ({
 
   const handleToggleChange = () => {
     changeDateForUpdateTravel(!status, 'status');
-    const divElement = document.querySelector('.formUpdateTravel__toggle--span');
+  };
+
+  const travelStatus = () => {
     if (status) {
-      console.log('true');
-      divElement.innerHTML = 'Voyage en cours';
+      return 'Voyage terminé';
     }
-    else {
-      console.log('false');
-      divElement.innerHTML = 'Voyage terminé';
-    }
+    return 'Voyage en cours';
   };
 
   const handleSubmit = (evt) => {
@@ -118,7 +116,7 @@ const FormUpdateTravel = ({
                 }}
                 onChange={handleToggleChange}
               />
-              <span className="formUpdateTravel__toggle--span">Voyage en cours</span>
+              <span className="formUpdateTravel__toggle--span">{travelStatus()}</span>
             </div>
 
             <div className="formTravel__form--div">
