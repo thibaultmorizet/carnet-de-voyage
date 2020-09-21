@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import ImageUploader from 'react-images-upload';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faPaperPlane, faPlaneArrival } from '@fortawesome/free-solid-svg-icons';
 import Spinner from 'src/components/Spinner';
 import { handlePicture } from 'src/selectors/carnetDeVoyage';
+import Toggle from 'react-toggle';
 import FormInput from '../FormInput';
 import './styles.scss';
 
@@ -32,6 +33,10 @@ const FormUpdateTravel = ({
     if (imgElement) {
       imgElement.remove();
     }
+  };
+
+  const handleToggleChange = () => {
+    console.log('salut');
   };
 
   return (
@@ -88,6 +93,18 @@ const FormUpdateTravel = ({
                 withPreview
                 singleImage
               />
+            </div>
+
+            <div className="formUpdateTravel__toggle">
+              <Toggle
+                defaultChecked
+                icons={{
+                  checked: <FontAwesomeIcon color="white" icon={faPaperPlane} size="xs" />,
+                  unchecked: <FontAwesomeIcon color="white" icon={faPlaneArrival} size="xs" />,
+                }}
+                onChange={() => console.log('to')}
+              />
+              <span className="formUpdateTravel__toggle--span">Voyage en cours</span>
             </div>
 
             <div className="formTravel__form--div">
