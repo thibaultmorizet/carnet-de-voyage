@@ -1,11 +1,13 @@
 import React from 'react';
 import './styles.scss';
+import { NavLink, useHistory, Redirect } from 'react-router-dom';
 import { errorMessage } from 'src/selectors/carnetDeVoyage';
 import FormInput from '../FormInput';
 
 const FormContact = ({
   changeValueContact, changeCheckboxContact, checked, email, objet, description, sendEmailContact,
 }) => {
+  const history = useHistory();
   const handleOnChange = (evt) => {
     console.log(evt.target.value);
     changeValueContact(evt.target.value, 'message');
@@ -28,6 +30,7 @@ const FormContact = ({
     }
     else {
       sendEmailContact();
+      history.push('/');
     }
   };
   return (

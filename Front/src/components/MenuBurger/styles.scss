@@ -1,10 +1,10 @@
 /* Position and sizing of burger button */
 .bm-burger-button {
-  position: fixed;
-  width: 36px;
-  height: 30px;
-  left: 36px;
-  top: 36px;
+  position: relative;
+  width: 30px;
+  height: 24px;
+  left: 20px;
+  top: 15px;
 }
 
 /* Color/shape of burger icon bars */
@@ -19,6 +19,8 @@
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
+  position: relative;
+  margin-right: 10%;
   height: 24px;
   width: 24px;
 }
@@ -52,15 +54,23 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Wrapper for item list */
 .bm-item-list {
   color: #b8b7ad;
-  padding: 0.8em;
+  padding-bottom: 1.5em;
+
 }
 
 /* Individual item */
 .bm-item {
+  padding: 1.5em;
   display: inline-block;
 }
 
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+}
+
+@media only screen and (min-width : 767px) {
+  .bm-burger-button {
+    display: none;
+  }
 }

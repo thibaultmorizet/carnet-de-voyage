@@ -64,7 +64,13 @@ class UserApiController extends AbstractController
         $manager->persist($user);
         $manager->flush();
 
-        $mailerController->sendEmail($mailerInterface, $user->getEmail(), 'Merci de vous inscrire!', 'emails/activation.twig.html', $user->getFirstName(), $user->getToken());
+        $mailerController->sendEmail(
+            $mailerInterface, $user->getEmail(), 
+            'Merci de vous inscrire!', 
+            'emails/activation.twig.html', 
+            $user->getFirstName(), 
+            $user->getToken()
+        );
 
         return $this->json(
             [

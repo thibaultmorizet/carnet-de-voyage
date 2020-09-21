@@ -6,6 +6,10 @@
     margin: 1em;
     font-size: 2em;
   }
+  &__cards {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 
@@ -54,6 +58,7 @@
     &__cards {
       display: flex;
       flex-wrap: wrap;
+      flex-direction: row;
     }
   }
   .card {

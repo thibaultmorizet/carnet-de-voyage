@@ -56,7 +56,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/api/login_check", name="app_api_login_check")
+     * @Route("/api/login_check", name="app_api_login_check", methods={"POST"})
      */
     public function apiLoginCheck()
     {
