@@ -28,6 +28,8 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"user", "userlist:search", "travel:read", "user:information"})
+     * @Assert\NotBlank
+     * @Assert\Email
      */
     private $email;
 
@@ -47,12 +49,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"step:show", "user", "userlist", "userlist:search", "travel:read", "user:information"})
+     * @Assert\Length(max=255, maxMessage="Cette valeur est trop longue (maximum {{ limit }} caractères)")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"step:show", "user", "userlist", "userlist:search", "travel:read", "user:information"})
+     * @Assert\Length(max=255, maxMessage="Cette valeur est trop longue (maximum {{ limit }} caractères)")
      */
     private $firstName;
 
@@ -65,12 +69,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="datetime")
      * @Groups({"user:information"})
+     * @Assert\Type("\DateTime")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"user:information"})
+     * @Assert\Type("\DateTime")
      */
     private $updatedAt;
 

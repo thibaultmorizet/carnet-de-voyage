@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PictureRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -26,18 +27,22 @@ class Picture
      * @ORM\Column(type="string", length=255)
      * @Groups({"travel:read"})
      * @Groups({"step:show"})
+     * @Assert\NotBlank
+     * @Assert\Length(max=255, maxMessage="Cette valeur est trop longue (maximum {{ limit }} caractères)")
      */
     private $url;
 
     /**
      * @ORM\Column(type="datetime") 
      * @Groups({"step:show"})
+     * @Assert\Type("\DateTime") 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"step:show"})
+     * @Assert\Type("\DateTime") 
      */
     private $updatedAt;
 

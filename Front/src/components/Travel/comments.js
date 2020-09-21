@@ -28,8 +28,8 @@ const Comments = ({
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const inputElement = evt.target.querySelector('input');
-    if (inputElement.length > 2 && inputElement.length < 255) {
-      // sendComment();
+    if (inputElement.value.length > 2 && inputElement.value.length < 255) {
+      sendComment();
       inputElement.value = '';
     }
     else {
