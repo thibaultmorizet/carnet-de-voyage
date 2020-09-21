@@ -1,11 +1,13 @@
 import React from 'react';
 import './styles.scss';
 import FormContact from 'src/containers/contact';
-import Menu from '../Menu';
+import MenuBurger from '../MenuBurger';
+import MenuDesktop from '../MenuDesktop';
 
 const Contact = () => (
   <div className="contact">
-    <Menu />
+    <MenuBurger />
+    <MenuDesktop />
     <FormContact />
   </div>
 );

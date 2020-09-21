@@ -50,7 +50,7 @@ const CarnetDeVoyage = () => (
       </Page>
     </Route>
     <Route exact path="/login">
-      {Cookies.get('loggedIn') ? <Redirect to="/travels/list" /> : (
+      {Cookies.get('loggedIn') ? <Redirect to="/" /> : (
         <Page>
           <Login />
         </Page>
