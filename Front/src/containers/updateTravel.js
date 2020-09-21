@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
-import { fetchDataForUpdateTravel, changeDateForUpdateTravel, sendDataForUpdateTravel } from 'src/actions/updateTravel';
+import {
+  fetchDataForUpdateTravel, changeDateForUpdateTravel, sendDataForUpdateTravel, deleteTravel,
+} from 'src/actions/updateTravel';
 import FormUpdateTravel from 'src/components/UpdateTravel/formUpdateTravel';
 
 const mapStateToProps = (state) => ({
@@ -22,6 +24,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   sendDataForUpdateTravel: () => {
     dispatch(sendDataForUpdateTravel());
+  },
+  deleteTravel: () => {
+    dispatch(deleteTravel());
   },
 });
 

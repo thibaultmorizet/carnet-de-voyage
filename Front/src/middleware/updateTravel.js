@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import {
-  FETCH_DATA_FOR_UPDATE_TRAVEL, keepDataForUpdateTravel, SEND_DATA_FOR_UPDATE_TRAVEL, changeDateForUpdateTravel,
+  FETCH_DATA_FOR_UPDATE_TRAVEL, keepDataForUpdateTravel, SEND_DATA_FOR_UPDATE_TRAVEL, changeDateForUpdateTravel, DELETE_TRAVEL,
 } from '../actions/updateTravel';
 
 const updateTravel = (store) => (next) => (action) => {
@@ -40,6 +40,17 @@ const updateTravel = (store) => (next) => (action) => {
           store.dispatch(changeDateForUpdateTravel('Success', 'response'));
         })
         .catch((error) => store.dispatch(changeDateForUpdateTravel('Error', 'response')));
+      break;
+    }
+
+    case DELETE_TRAVEL: {
+      const state = store.getState();
+      const token = Cookies.get('token');
+      axios.delete(`http://34.239.44.174/api/travels/${state.updateTravel.id}/delete`, { headers: { Authorization: `Bearer ${token}` } })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => console.log(error));
       break;
     }
     default:

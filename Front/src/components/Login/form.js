@@ -24,7 +24,7 @@ const LoginForm = ({
     if (loggedIn === true) {
       setCookie('token', token, { path: '/' });
       setCookie('loggedIn', 'true', { path: '/' });
-      history.push('/');
+      history.go('/');
     }
   };
 

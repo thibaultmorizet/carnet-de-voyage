@@ -1,18 +1,39 @@
 import React, { useEffect } from 'react';
 import ImageUploader from 'react-images-upload';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
 import { faTimes, faPaperPlane, faPlaneArrival } from '@fortawesome/free-solid-svg-icons';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
 import Spinner from 'src/components/Spinner';
-import { handlePicture, errorMessage, handleDate } from 'src/selectors/carnetDeVoyage';
+import {
+  handlePicture, errorMessage, handleDate, toastNotification,
+} from 'src/selectors/carnetDeVoyage';
+import { useToasts } from 'react-toast-notifications';
 import Toggle from 'react-toggle';
+import Modal from 'react-modal';
 import FormInput from '../FormInput';
 import './styles.scss';
 
+Modal.setAppElement('#root');
+
 const FormUpdateTravel = ({
-  fetchDataForUpdateTravel, title, loading, creation_date, description, picture_url, changeDateForUpdateTravel, status, sendDataForUpdateTravel,
+  fetchDataForUpdateTravel, title, loading, creation_date, description, picture_url, changeDateForUpdateTravel, status, sendDataForUpdateTravel, response, deleteTravel,
 }) => {
   const { id } = useParams();
+  const { addToast } = useToasts();
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const history = useHistory();
+
+  const toastFailOrSuccess = () => {
+    const messageSuccess = 'Votre voyage a bien été modifié !';
+    const destination = `/travel/${id}`;
+    toastNotification(addToast, history, response, messageSuccess, destination);
+  };
+
+  useEffect(() => {
+    toastFailOrSuccess();
+  }, [response]);
+
   useEffect(() => {
     changeDateForUpdateTravel(id, 'id');
     fetchDataForUpdateTravel();
@@ -21,21 +42,21 @@ const FormUpdateTravel = ({
   const handleDescription = (evt) => {
     changeDateForUpdateTravel(evt.target.value, 'description');
   };
-
-  const handleChangePicture = (evt) => {
-    handlePicture(evt, changeDateForUpdateTravel);
+  const removePictureFromDom = () => {
     const imgElement = document.querySelector('.picturediv_updateTravel');
     if (imgElement) {
       imgElement.remove();
     }
   };
 
+  const handleChangePicture = (evt) => {
+    handlePicture(evt, changeDateForUpdateTravel);
+    removePictureFromDom();
+  };
+
   const handleRemovePicture = () => {
     changeDateForUpdateTravel('', 'picture');
-    const imgElement = document.querySelector('.picturediv_updateTravel');
-    if (imgElement) {
-      imgElement.remove();
-    }
+    removePictureFromDom();
   };
 
   const handleToggleChange = () => {
@@ -71,6 +92,19 @@ const FormUpdateTravel = ({
     else {
       sendDataForUpdateTravel();
     }
+  };
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const handleDeleteTravel = () => {
+    deleteTravel();
+    return <Redirect push to="/travels/list" />;
   };
 
   return (
@@ -115,7 +149,7 @@ const FormUpdateTravel = ({
 
             <div className="FormUpdateStep__formElt--pictures picturediv_updateTravel">
               <img className="picture_updateTravel" src={`http://34.239.44.174/uploads/pictures/${picture_url}`} alt="pictureTravel" />
-              <FontAwesomeIcon icon={faTimes} className="pictures__icon" onClick={handleRemovePicture} />
+              <FontAwesomeIcon icon={faTimes} className="pictures__icon" onClick={handleRemovePicture()} />
             </div>
 
             <div className="formTravel__form--picture">
@@ -126,6 +160,8 @@ const FormUpdateTravel = ({
                 maxFileSize={5242880}
                 withPreview
                 singleImage
+                label="Taille max: 5mb, jpg, png, jpeg"
+                buttonText="Choisir une autre photo"
               />
             </div>
 
@@ -142,8 +178,30 @@ const FormUpdateTravel = ({
             </div>
 
             <div className="formTravel__form--div">
-              <input className="formTravel__submit" type="submit" value="Enregistrer mon nouveau voyage" />
+              <input className="formTravel__submit" type="submit" value="Enregistrer mon voyage" />
             </div>
+
+            <div className="formTravel__form--div">
+              <input className="formTravel__submit updateTravelDelete" type="button" value="Supprimer mon voyage" onClick={openModal} />
+            </div>
+
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              contentLabel="Example Modal"
+              className="modalEx"
+              style={{
+                overlay: {
+                  backdropFilter: 'blur(5px)',
+                },
+              }}
+            >
+              <div className="modalEx__content">
+                <h2 className="modalEx__content--title">Êtes vous sur de vouloir supprimer ce voyage ?</h2>
+                <button className="modalEx__content--delete" onClick={handleDeleteTravel}>Supprimer</button>
+                <button className="modalEx__content--close" onClick={closeModal}>Annuler</button>
+              </div>
+            </Modal>
 
             <div className="errorDivUpdateTravel" />
 
@@ -153,6 +211,23 @@ const FormUpdateTravel = ({
 
     </div>
   );
+};
+
+FormUpdateTravel.propTypes = {
+  fetchDataForUpdateTravel: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+  creation_date: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  picture_url: PropTypes.array,
+  changeDateForUpdateTravel: PropTypes.func.isRequired,
+  status: PropTypes.bool.isRequired,
+  sendDataForUpdateTravel: PropTypes.func.isRequired,
+  response: PropTypes.string.isRequired,
+};
+
+FormUpdateTravel.defaultProps = {
+  picture_url: [],
 };
 
 export default FormUpdateTravel;
