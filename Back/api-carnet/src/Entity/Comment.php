@@ -24,20 +24,22 @@ class Comment
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"travel:read", "step:show"})
+     * @Assert\NotBlank
+     * @Assert\Length(max=255, maxMessage="Cette valeur est trop longue (maximum {{ limit }} caractères)")
      */
     private $comment;
 
     /**
      * @ORM\Column(type="datetime")
-     * 
      * @Groups({"step:show","travel:read"})
+     * @Assert\Type("\DateTime") 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * 
      * @Groups({"step:show"})
+     * @Assert\Type("\DateTime") 
      */
     private $updatedAt;
 

@@ -28,6 +28,8 @@ class Travel
      * @ORM\Column(type="string", length=255)
      * @Groups({"travel:read","travel:list"})
      * @Groups({"step:show"})
+     * @Assert\NotBlank
+     * @Assert\Length(max=255, maxMessage="Cette valeur est trop longue (maximum {{ limit }} caractères)")
      */
     private $title;
 
@@ -35,6 +37,7 @@ class Travel
      * @ORM\Column(type="text")
      * @Groups({"travel:read","travel:list"})
      * @Groups({"step:show"})
+     * @Assert\NotBlank
      */
     private $description;
 
@@ -49,6 +52,7 @@ class Travel
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"travel:read","travel:list"})
      * @Groups({"step:show"})
+     * @Assert\Length(max=255, maxMessage="Cette valeur est trop longue (maximum {{ limit }} caractères)")
      */
     private $pictureUrl;
 
@@ -60,13 +64,13 @@ class Travel
 
     /**
      * @ORM\Column(type="datetime")
-     * 
+     * @Assert\Type("\DateTime") 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * 
+     * @Assert\Type("\DateTime")
      */
     private $updatedAt;
 
@@ -75,6 +79,7 @@ class Travel
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"travel:read"})
      * @Groups({"step:show"})
+     * @Assert\NotBlank
      */
     private $creator;
 

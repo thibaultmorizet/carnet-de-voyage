@@ -29,13 +29,16 @@ class Step
      * @ORM\Column(type="string", length=255)
      * @Groups({"travel:read"})
      * @Groups({"step:show"})
+     * @Assert\NotBlank
+     * @Assert\Length(max=255, maxMessage="Cette valeur est trop longue (maximum {{ limit }} caractères)")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"step:show","travel:read"})
-     * 
+     * @Assert\NotBlank
+     * @Assert\Length(max=255, maxMessage="Cette valeur est trop longue (maximum {{ limit }} caractères)")
      */
     private $description;
 
@@ -69,15 +72,15 @@ class Step
 
     /**
      * @ORM\Column(type="datetime")
-     * 
      * @Groups({"step:show"})
+     * @Assert\Type("\DateTime") 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * 
      * @Groups({"step:show"})
+     * @Assert\Type("\DateTime") 
      */
     private $updatedAt;
 
