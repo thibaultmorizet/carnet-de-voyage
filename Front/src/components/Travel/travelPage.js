@@ -4,7 +4,9 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
-import { Link, useParams, useHistory } from 'react-router-dom';
+import {
+  Link, useParams, useHistory, Redirect,
+} from 'react-router-dom';
 import Spinner from 'src/components/Spinner';
 import { changeDateFormat, addImage } from 'src/selectors/carnetDeVoyage';
 import Comments from 'src/containers/comment';
@@ -16,6 +18,8 @@ const TravelPage = ({
 }) => {
   const { id } = useParams();
   const history = useHistory();
+
+  console.log('step', step);
 
   useEffect(() => {
     fetchDataForSingleTravel(id);
@@ -30,7 +34,7 @@ const TravelPage = ({
       {loading && (
       <Spinner />
       )}
-      {!loading && (
+      {!loading && step.length !== 0 && (
         <>
           <div className="travelPage__header">
             <Link to="/travels/list" className="travelPage__header--return">
@@ -65,6 +69,9 @@ const TravelPage = ({
           </div>
         </>
       )}
+      {!loading && step.length === 0 && (
+        <Redirect to={`/travel/${id}/add`} />
+      )}
     </div>
   );
 };
@@ -79,10 +86,12 @@ TravelPage.propTypes = {
   currentPicture: PropTypes.array,
   like: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
+  currentId: PropTypes.number,
 };
 
 TravelPage.defaultProps = {
   currentPicture: null,
+  currentId: 0,
 };
 
 export default TravelPage;

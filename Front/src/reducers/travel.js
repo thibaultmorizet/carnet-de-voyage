@@ -13,7 +13,7 @@ export const initialState = {
   currentPicture: null,
   like: 0,
   loading: true,
-  currentId: '',
+  currentId: 0,
   currentComment: [],
 };
 
