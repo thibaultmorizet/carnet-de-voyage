@@ -8,9 +8,9 @@ import { CookiesProvider } from 'react-cookie';
 
 // == Impogrt : local
 // Composants
-import CarnetDeVoyage from '../src/containers/carnetDeVoyage';
+import CarnetDeVoyage from './containers/carnetDeVoyage';
 // Store
-import store from '../src/store';
+import store from './store';
 
 // == Render
 // 1. Élément React racine (celui qui contient l'ensemble de l'app)

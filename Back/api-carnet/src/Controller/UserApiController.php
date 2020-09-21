@@ -7,7 +7,6 @@ use App\Entity\User;
 use App\Entity\Picture;
 use App\Repository\UserRepository;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +15,12 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use OpenApi\Annotations as OA;
+use Swagger\Annotations as SWG;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
 
 class UserApiController extends AbstractController
 {
@@ -113,6 +114,12 @@ class UserApiController extends AbstractController
 
     /**
      * @Route("/api/admin/user/list", name="user_list", methods={"GET"})
+     * 
+     * @SWG\Response(
+     *     response=200,
+     *     description="a list of User"
+     * )
+     * @Security(name="Bearer")
      */
     public function list(UserRepository $userRepository)
     {

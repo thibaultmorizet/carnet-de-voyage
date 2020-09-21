@@ -1,15 +1,15 @@
 import React from 'react';
 import Title from './travels';
 import './styles.scss';
-import Footer from '../Footer';
+import MenuBurger from '../MenuBurger';
 import MenuDesktop from '../MenuDesktop';
 
 const TravelsList = () => (
 
   <div className="travelsList">
     <MenuDesktop />
+    <MenuBurger />
     <Title />
-    <Footer />
   </div>
 );
 

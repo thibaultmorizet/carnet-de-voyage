@@ -1,6 +1,7 @@
 /* eslint-disable no-multi-assign */
 /* eslint-disable import/prefer-default-export */
 import { useToasts } from 'react-toast-notifications';
+
 /**
  * function for add error message
  */
@@ -8,7 +9,6 @@ export const errorMessage = (message, submitElement) => {
   const buttonSubmit = document.querySelector(submitElement);
   const errorMessageElt = document.querySelector('.errorMessage');
   if (errorMessageElt === null) {
-    console.log('lala');
     const createDiv = document.createElement('div');
     createDiv.className = 'errorMessage';
     createDiv.textContent = message;
@@ -90,18 +90,41 @@ export const handlePicture = (evt, fctState) => {
  * @param {*} response response of API, give us the error message or success message
  * this function is for show a little notification for success or error actions
  */
-export const toastNotification = (addToast, history, response) => {
+export const toastNotification = (addToast, history, response, message, destination) => {
   if (response === 'Error') {
-    addToast('Il y a eu une erreur dans l\'envoi de l\'étape. Veuillez réessayer plus tard', {
+    addToast('Une erreur s\'est produite. Veuillez réessayer plus tard', {
       appearance: 'error',
       autoDismiss: true,
     });
   }
   else if (response === 'Success') {
-    addToast('Votre étape à bien été enregistrée !', {
+    addToast(message, {
       appearance: 'success',
       autoDismiss: true,
     });
-    history.push('/');
+    history.push(destination);
+  }
+};
+
+export const changeDateFormat = (dateWanted) => {
+  const newDate = new Date(dateWanted);
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  const middleDate = newDate.toLocaleDateString('de-DE', options);
+  const step_date = middleDate.replace('.', '/').replace('.', '/');
+  return step_date;
+};
+
+export const addImage = (pictures) => {
+  if (pictures !== null) {
+    const divElement = document.querySelector('.travelPage__content--images');
+    const newDivElement = document.createElement('div');
+    newDivElement.className = 'stepImages';
+    divElement.appendChild(newDivElement);
+    pictures.map((elt) => {
+      const imgElement = document.createElement('img');
+      imgElement.className = 'stepImages__picture';
+      imgElement.src = elt.data;
+      newDivElement.appendChild(imgElement);
+    });
   }
 };

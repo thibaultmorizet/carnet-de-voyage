@@ -18,69 +18,93 @@ import TravelsList from '../TravelsList';
 import './styles.css';
 import PresentationTeam from '../PresentationTeam';
 import Contact from '../Contact';
+import Travel from '../Travel';
+import Privacy from '../Privacy';
+import CreateTravel from '../CreateTravel';
 
 // == Composant
-const CarnetDeVoyage = () => (
-  <div className="carnetDeVoyage">
-    <Route exact path="/">
-      <Page>
-        <HomePage />
-      </Page>
-    </Route>
-    <Route exact path="/presentation">
-      <Page>
-        <PresentationTeam />
-      </Page>
-    </Route>
-    <Route exact path="/contact">
-      <Page>
-        <Contact />
-      </Page>
-    </Route>
-    <Route exact path="/register">
-      <Page>
-        <Register />
-      </Page>
-    </Route>
-    <Route exact path="/login">
-      {Cookies.get('loggedIn') ? <Redirect to="/travels/list" /> : (
+const CarnetDeVoyage = ({ loggedIn }) => {
+  console.log(loggedIn);
+  return (
+    <div className="carnetDeVoyage">
+      <Route exact path="/">
         <Page>
-          <Login />
+          <HomePage />
         </Page>
-      )}
-    </Route>
-    <Route exact path="/admin/user/list">
-      <User />
-    </Route>
-
-    <Route exact path="/travels/list">
-      {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+      </Route>
+      <Route exact path="/presentation">
         <Page>
-          <TravelsList />
+          <PresentationTeam />
         </Page>
-      )}
-
-    </Route>
-    <Route exact path="/travel/:id/add">
-      {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+      </Route>
+      <Route exact path="/privacy">
         <Page>
-          <CreateStep />
+          <Privacy />
         </Page>
-      )}
-
-    </Route>
-    <Route exact path="/travel/:id/update/:type">
-      {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+      </Route>
+      <Route exact path="/contact">
         <Page>
-          <UpdateStep />
+          <Contact />
         </Page>
-      )}
+      </Route>
+      <Route exact path="/register">
+        <Page>
+          <Register />
+        </Page>
+      </Route>
+      <Route exact path="/login">
+        {Cookies.get('loggedIn') ? <Redirect to="/travels/list" /> : (
+          <Page>
+            <Login />
+          </Page>
+        )}
+      </Route>
+      <Route exact path="/admin/user/list">
+        <User />
+      </Route>
 
-    </Route>
+      <Route exact path="/travels/list">
+        {!loggedIn ? <Redirect to="/login" /> : (
+          <Page>
+            <TravelsList />
+          </Page>
+        )}
 
-    <Footer />
-  </div>
-);
+      </Route>
+      <Route exact path="/travel/:id/add">
+        {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+          <Page>
+            <CreateStep />
+          </Page>
+        )}
+
+      </Route>
+      <Route exact path="/travel/:id/update/:type">
+        {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+          <Page>
+            <UpdateStep />
+          </Page>
+        )}
+      </Route>
+
+      <Route exact path="/travels/create">
+        {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+          <Page>
+            <CreateTravel />
+          </Page>
+        )}
+      </Route>
+
+      <Route exact path="/travel/:id">
+        <Page>
+          <Travel />
+        </Page>
+      </Route>
+
+      <Footer />
+    </div>
+  );
+};
 
 // == Export
 export default CarnetDeVoyage;

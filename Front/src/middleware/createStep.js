@@ -15,7 +15,7 @@ const CreateStep = (store) => (next) => (action) => {
         latitude: state.createStep.latitude,
         longitude: state.createStep.longitude,
         step_date: state.createStep.step_date,
-        picture: state.createStep.picture,
+        pictures: state.createStep.picture,
         travel_id: state.createStep.travel_id,
       }, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {

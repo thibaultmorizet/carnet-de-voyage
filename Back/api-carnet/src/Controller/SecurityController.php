@@ -15,9 +15,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Annotations as OA;
+
 
 
 class SecurityController extends AbstractController
@@ -25,6 +23,7 @@ class SecurityController extends AbstractController
     /**
      * 
      * @Route("/api/login/checkactivation", name="api_login_checkactivation")
+     * 
      */
     public function apiCheckActivation(Request $request, UserRepository $userRepository)
     {
