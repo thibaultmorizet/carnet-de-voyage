@@ -35,18 +35,19 @@ const Map = ({ step, onClickStep }) => {
   };
 
   const addPhotoStep = (map) => {
-    console.log(step);
-    step.map((elt, key) => {
-      console.log('______________', key);
-      console.log('keu', elt.pictures[key].id);
-      const currentImg = {
-        url: elt.pictures[key].id,
-        data: `http://34.239.44.174/uploads/pictures/${elt.pictures[key].url}`,
-      };
+    step.map((elt) => {
+      const currentImg = [];
 
-      const customPopup = `<img class='map__picture' src=${currentImg.data} alt='maptime logo gif' width='150px'/> <br/>`;
+      for (let i = 0; i < elt.pictures.length; i++) {
+        const currentEssai = {
+          url: elt.pictures[i].id,
+          data: `http://34.239.44.174/uploads/pictures/${elt.pictures[i].url}`,
+        };
+        currentImg.push(currentEssai);
+      }
+      const customPopup = `<img class='map__picture' src=${currentImg[0].data} alt='maptime logo gif' width='150px'/> <br/>`;
       const myIcon = L.icon({
-        iconUrl: currentImg.data,
+        iconUrl: currentImg[0].data,
         shadowUrl: 'https://www.quevilly-habitat.fr/wp-content/uploads/2019/01/carr%C3%A9-blanc-300x300.png',
         iconSize: [55, 55],
         iconAnchor: [22, 94],
