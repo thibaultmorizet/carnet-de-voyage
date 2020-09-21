@@ -30,7 +30,8 @@ const updateTravel = (store) => (next) => (action) => {
         title: state.updateTravel.title,
         description: state.updateTravel.description,
         creation_date: state.updateTravel.creation_date,
-        picture: state.updateTravel.picture[0],
+        picture_travel: state.updateTravel.picture[0].url,
+        picture_data: state.updateTravel.picture[0].data,
         status: state.updateTravel.status,
       }, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
