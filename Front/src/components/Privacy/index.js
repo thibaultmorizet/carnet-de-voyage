@@ -2,9 +2,13 @@
 import React from 'react';
 import Header from 'src/components/HomePage/header';
 import './styles.scss';
+import MenuBurger from '../MenuBurger';
+import MenuDesktop from '../MenuDesktop';
 
 const Privacy = () => (
   <div className="privacy">
+    <MenuBurger />
+    <MenuDesktop />
     <Header />
     <article className="privacy__content">
       <h2 className="privacy__content--bigTitle">Mentions légales</h2>

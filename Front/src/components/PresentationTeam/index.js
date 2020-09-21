@@ -3,6 +3,8 @@ import Header from 'src/components/HomePage/header';
 import data from 'src/assets/data';
 import './styles.scss';
 import Card from './card';
+import MenuBurger from '../MenuBurger';
+import MenuDesktop from '../MenuDesktop';
 
 const PresentationTeam = () => {
   const AllCard = data.map((elt) => (
@@ -17,6 +19,8 @@ const PresentationTeam = () => {
   ));
   return (
     <div className="presentationTeam">
+      <MenuBurger />
+      <MenuDesktop />
       <Header />
       <h1 className="presentationTeam__title">Présentation</h1>
       {/* <Card /> */}

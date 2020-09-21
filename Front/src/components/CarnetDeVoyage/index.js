@@ -23,7 +23,6 @@ import Privacy from '../Privacy';
 import CreateTravel from '../CreateTravel';
 import UpdateTravel from '../UpdateTravel';
 
-// == Composant
 const CarnetDeVoyage = ({ loggedIn }) => {
   console.log(loggedIn);
   return (
