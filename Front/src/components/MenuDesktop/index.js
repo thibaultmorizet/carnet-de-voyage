@@ -54,13 +54,12 @@ const MenuDesktop = () => {
           </NavLink>
         </li>
         <li className="menu__nav--li">
-          <NavLink
-            to="/"
-            exact
+          <a
+            href="/"
             onClick={deleteCookie}
           >
             Déconnexion
-          </NavLink>
+          </a>
         </li>
       </nav>
     </div>
