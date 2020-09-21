@@ -216,8 +216,13 @@ class TravelApiController extends AbstractController
         if (array_key_exists('travel_date', $requestArray) && $requestArray['travel_date'] != null) {
             $travel->setCreationDate(DateTime::createFromFormat('j/m/Y', ($requestArray['travel_date'])));
         }
-        if (array_key_exists('status', $requestArray) && $requestArray['status'] != null ) {
-            $travel->setStatus($requestArray['status']);
+        if (array_key_exists('status', $requestArray)) {
+            if ($requestArray['status'] == true) {
+                $travel->setStatus(true);
+            }
+            else {
+                $travel->setStatus(false);
+            }    
         }
         if (array_key_exists('picture_travel', $requestArray) && $requestArray['picture_travel'] && array_key_exists('picture_data', $requestArray) && $requestArray['picture_data'] != null) {
             // Get the namefile of the request
@@ -401,14 +406,41 @@ class TravelApiController extends AbstractController
         );
     }
 
-    /**
+     /**
      * 
-     *  @Route("travels/{id}/{token}", name="travel_url", methods={"GET"}, requirements={"id"="\d+"})
+     *  @Route("travels/{id}/{token}", name="travel_url", methods={"GET"}, requirements={"id"="\d+","token"="[a-z0-9]{32}"})
      */
-    public function showToken (travelRepository $travelRepository, $token) {
-        // exemple token : 5599730f81933c40cd8512c7cc2604aa
-        // search and recover in BDD the Travel id
-        //$travel = $travelRepository->find($id);
-        dd($token);
-    } 
+    public function showToken (travelRepository $travelRepository, UserRepository $userRepository, $token, $id) {
+        // exemples token : 5599730f81933c40cd8512c7cc2604aa
+        //                  d6885d0e149c4f007450c6563f3d94b9
+        $travel = $travelRepository->find($id);
+        if ($travel == null) {
+            return $this->json(
+                [
+                    "success" => false,
+                    "errors" => "Travel not found"
+                ],
+                Response::HTTP_BAD_REQUEST
+            );    
+        }
+        // Get token of travel
+        $tokenTravel = $travel->getToken();
+        if ($tokenTravel != $token) {
+            return $this->json(
+                [
+                    "success" => false,
+                    "errors" => "Token incorrect or token expired"
+                ],
+                Response::HTTP_BAD_REQUEST
+            ); 
+        }
+        //dd($token, $tokenTravel);
+        return $this->json(
+            $travel,
+            200,
+            [],
+            ["groups" => ["travel:read"]]
+        );
+    }
+
 }
