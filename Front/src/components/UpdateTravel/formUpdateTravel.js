@@ -17,7 +17,17 @@ import './styles.scss';
 Modal.setAppElement('#root');
 
 const FormUpdateTravel = ({
-  fetchDataForUpdateTravel, title, loading, creation_date, description, picture_url, changeDateForUpdateTravel, status, sendDataForUpdateTravel, response, deleteTravel,
+  fetchDataForUpdateTravel,
+  title,
+  loading,
+  creation_date,
+  description,
+  picture_url,
+  changeDateForUpdateTravel,
+  status,
+  sendDataForUpdateTravel,
+  response,
+  deleteTravel,
 }) => {
   const { id } = useParams();
   const { addToast } = useToasts();
@@ -42,6 +52,7 @@ const FormUpdateTravel = ({
   const handleDescription = (evt) => {
     changeDateForUpdateTravel(evt.target.value, 'description');
   };
+
   const removePictureFromDom = () => {
     const imgElement = document.querySelector('.picturediv_updateTravel');
     if (imgElement) {
@@ -149,7 +160,7 @@ const FormUpdateTravel = ({
 
             <div className="FormUpdateStep__formElt--pictures picturediv_updateTravel">
               <img className="picture_updateTravel" src={`http://34.239.44.174/uploads/pictures/${picture_url}`} alt="pictureTravel" />
-              <FontAwesomeIcon icon={faTimes} className="pictures__icon" onClick={handleRemovePicture()} />
+              <FontAwesomeIcon icon={faTimes} className="pictures__icon" onClick={handleRemovePicture} />
             </div>
 
             <div className="formTravel__form--picture">
@@ -224,6 +235,7 @@ FormUpdateTravel.propTypes = {
   status: PropTypes.bool.isRequired,
   sendDataForUpdateTravel: PropTypes.func.isRequired,
   response: PropTypes.string.isRequired,
+  deleteTravel: PropTypes.func.isRequired,
 };
 
 FormUpdateTravel.defaultProps = {

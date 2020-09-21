@@ -19,7 +19,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchDataForUpdateTravel());
   },
   changeDateForUpdateTravel: (value, name) => {
-    // console.log(value, name);
     dispatch(changeDateForUpdateTravel(value, name));
   },
   sendDataForUpdateTravel: () => {

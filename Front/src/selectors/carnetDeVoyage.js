@@ -104,6 +104,7 @@ export const toastNotification = (addToast, history, response, message, destinat
       autoDismiss: true,
     });
     history.push(destination);
+    // location.reload();
   }
 };
 

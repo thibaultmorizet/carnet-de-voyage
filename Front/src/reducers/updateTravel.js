@@ -13,6 +13,7 @@ export const initialState = {
 const updateTravel = (state = initialState, action = {}) => {
   switch (action.type) {
     case KEEP_DATA_FOR_UPDATE_TRAVEL:
+      console.log(action.value.pictureUrl);
       return {
         ...state,
         title: action.value.title,

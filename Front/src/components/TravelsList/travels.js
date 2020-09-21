@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './styles.scss';
 
 import img1 from '../../assets/images/background-machu.jpg';
@@ -7,6 +8,10 @@ const Container = () => (
   <div className="travels__container">
 
     <input type="submit" name="travelsInput" className="travelsInput" value="Créer un nouveau voyage" />
+
+    <Link to="/travel/63">
+      Coucou
+    </Link>
 
     <div className="travels__inProgress">
       <h2 className="travels__container--title"> Voyages en cours </h2>
