@@ -9,7 +9,7 @@ import FormInput from '../FormInput';
 import './styles.scss';
 
 const FormUpdateTravel = ({
-  fetchDataForUpdateTravel, title, loading, creation_date, description, picture_url, changeDateForUpdateTravel,
+  fetchDataForUpdateTravel, title, loading, creation_date, description, picture_url, changeDateForUpdateTravel, status, sendDataForUpdateTravel,
 }) => {
   useEffect(() => {
     fetchDataForUpdateTravel();
@@ -36,7 +36,21 @@ const FormUpdateTravel = ({
   };
 
   const handleToggleChange = () => {
-    console.log('salut');
+    changeDateForUpdateTravel(!status, 'status');
+    const divElement = document.querySelector('.formUpdateTravel__toggle--span');
+    if (status) {
+      console.log('true');
+      divElement.innerHTML = 'Voyage en cours';
+    }
+    else {
+      console.log('false');
+      divElement.innerHTML = 'Voyage terminé';
+    }
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    sendDataForUpdateTravel();
   };
 
   return (
@@ -47,7 +61,7 @@ const FormUpdateTravel = ({
       {!loading && (
         <div className="formTravel">
           <h2 className="createTravel__title formUpdateTravel__title">Modifier mon Voyage</h2>
-          <form action="" className="formTravel__form">
+          <form action="" className="formTravel__form" onSubmit={handleSubmit}>
             <div className="formTravel__form--firstInput">
               <FormInput
                 type="text"
@@ -97,12 +111,12 @@ const FormUpdateTravel = ({
 
             <div className="formUpdateTravel__toggle">
               <Toggle
-                defaultChecked
+                defaultChecked={!status}
                 icons={{
                   checked: <FontAwesomeIcon color="white" icon={faPaperPlane} size="xs" />,
                   unchecked: <FontAwesomeIcon color="white" icon={faPlaneArrival} size="xs" />,
                 }}
-                onChange={() => console.log('to')}
+                onChange={handleToggleChange}
               />
               <span className="formUpdateTravel__toggle--span">Voyage en cours</span>
             </div>
