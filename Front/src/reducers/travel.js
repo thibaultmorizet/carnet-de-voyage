@@ -1,4 +1,6 @@
-import { SAVE_DATA_FOR_SINGLE_TRAVEL, SAVE_DATA_FOR_SINGLE_STEP, ADD_COMMENT } from '../actions/travel';
+import {
+  SAVE_DATA_FOR_SINGLE_TRAVEL, SAVE_DATA_FOR_SINGLE_STEP, ADD_COMMENT, CLOSE_PAGE_TRAVEL,
+} from '../actions/travel';
 
 export const initialState = {
   travel: {
@@ -13,7 +15,7 @@ export const initialState = {
   currentPicture: null,
   like: 0,
   loading: true,
-  currentId: '',
+  currentId: 0,
   currentComment: [],
 };
 
@@ -34,7 +36,7 @@ const travel = (state = initialState, action = {}) => {
           creation_date: creationDate,
         },
         step: steps,
-        loading: !state.loading,
+        loading: false,
       };
     }
     case SAVE_DATA_FOR_SINGLE_STEP:

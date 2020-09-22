@@ -4,10 +4,13 @@ import L from 'leaflet';
 import './styles.scss';
 
 const Map = ({ step, onClickStep }) => {
+  console.log('steponMap', step);
   let AllImages = [];
   const AddStep = [];
 
   const onClick = (evt) => {
+    console.log('onClick');
+    console.log('step', step);
     const target = evt.target.options.icon.options.className;
     const result = step.filter((elt) => elt.id === target);
     const {
@@ -35,15 +38,20 @@ const Map = ({ step, onClickStep }) => {
   };
 
   const addPhotoStep = (map) => {
-    step.map((elt, key) => {
-      const currentImg = {
-        url: elt.pictures[key].id,
-        data: `http://34.239.44.174/uploads/pictures/${elt.pictures[key].url}`,
-      };
+    console.log('je recharge');
+    step.map((elt) => {
+      const currentImg = [];
 
-      const customPopup = `<img class='map__picture' src=${currentImg.data} alt='maptime logo gif' width='150px'/> <br/>`;
+      for (let i = 0; i < elt.pictures.length; i++) {
+        const currentEssai = {
+          url: elt.pictures[i].id,
+          data: `http://34.239.44.174/uploads/pictures/${elt.pictures[i].url}`,
+        };
+        currentImg.push(currentEssai);
+      }
+      const customPopup = `<img class='map__picture' src=${currentImg[0].data} alt='maptime logo gif' width='150px'/> <br/>`;
       const myIcon = L.icon({
-        iconUrl: currentImg.data,
+        iconUrl: currentImg[0].data,
         shadowUrl: 'https://www.quevilly-habitat.fr/wp-content/uploads/2019/01/carr%C3%A9-blanc-300x300.png',
         iconSize: [55, 55],
         iconAnchor: [22, 94],

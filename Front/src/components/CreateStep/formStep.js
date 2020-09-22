@@ -39,7 +39,9 @@ const FormStep = ({
   };
 
   const toastFailOrSuccess = () => {
-    toastNotification(addToast, history, response);
+    const messageSuccess = 'Votre étape a bien été enregistrée. Votre voyage se passe bien ? :)';
+    const destination = `/travel/${id}`;
+    toastNotification(addToast, history, response, messageSuccess, destination);
   };
 
   useEffect(() => {
@@ -108,7 +110,8 @@ const FormStep = ({
           <ImageUploader
             withIcon
             onChange={handleChangePicture}
-            imgExtension={['.jpg', '.gif', '.png', '.jpeg']}
+            imgExtension={['.jpg', '.png', '.jpeg']}
+            label="Max file size: 5mb, accepted: jpeg, jpg, png"
             maxFileSize={5242880}
             withPreview
           />

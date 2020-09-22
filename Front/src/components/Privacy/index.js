@@ -1,18 +1,28 @@
 /* eslint-disable max-len */
 import React from 'react';
-import Header from 'src/components/HomePage/header';
+import Menu from 'src/components/Menu';
 import './styles.scss';
+import Cookies from 'js-cookie';
 import MenuBurger from '../MenuBurger';
 import MenuDesktop from '../MenuDesktop';
 
 const Privacy = () => (
   <div className="privacy">
-    <MenuBurger />
-    <MenuDesktop />
-    <Header />
+    {Cookies.get('loggedIn') && (
+      <>
+        <MenuBurger />
+        <MenuDesktop />
+      </>
+    )}
+
+    {!Cookies.get('loggedIn') && (
+      <>
+        <Menu />
+      </>
+    )}
     <article className="privacy__content">
       <h2 className="privacy__content--bigTitle">Mentions légales</h2>
-      <p className="privacy__content--text">Conformément aux dispositions des Articles 6-III et 19 de la Loi n°2004-575 du 21 juin 2004 pour la Confiance dans l'économie numérique, dite L.C.E.N., il est porté à la connaissance des Utilisateurs du site CarnetDeVoyage les présentes mentions légales.La connexion et la navigation sur le site (indiquer le nom du site) par l'Utilisateur implique acceptation intégrale et sans réserve des présentes mentions légales.Ces dernières sont accessibles sur le site à la rubrique « Mentions légales ».</p>
+      <p className="privacy__content--text">Conformément aux dispositions des Articles 6-III et 19 de la Loi n°2004-575 du 21 juin 2004 pour la Confiance dans l'économie numérique, dite L.C.E.N., il est porté à la connaissance des Utilisateurs du site CarnetDeVoyage les présentes mentions légales.La connexion et la navigation sur le site "Carnet de Voyage" par l'Utilisateur implique acceptation intégrale et sans réserve des présentes mentions légales.Ces dernières sont accessibles sur le site à la rubrique « Mentions légales ».</p>
       <h3 className="privacy__content--title">ARTICLE 1 :</h3>
       <p className="privacy__content--text">Le site CarnetDeVoyage est réalisé dans le cadre d'un projet de fin d'année pour l'école O'Clock. Les propriétaires sont Monsieur Sébastien CAILLEAU,  Monsieur Quentin Garcia, Monsieur Thibault MORIZET-MARMINC, Mademoiselle Chloé TALOUR et Monsieur Christophe VASSEUR.</p>
       <h3 className="privacy__content--title">ARTICLE 2 :</h3>

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import CarnetDeVoyage from '../components/CarnetDeVoyage';
 
 const mapStateToProps = (state) => ({
-  loading: state.updateStep.loading,
+  loggedIn: state.keepToken.loggedIn,
 });
 
 const mapDispatchToProps = (dispatch) => ({

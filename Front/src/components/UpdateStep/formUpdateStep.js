@@ -46,7 +46,9 @@ const FormUpdateStep = ({
   }, []);
 
   const toastFailOrSuccess = () => {
-    toastNotification(addToast, history, response);
+    const messageSuccess = 'Votre étape a bien été modifiée';
+    const destination = `/travel/${id}`;
+    toastNotification(addToast, history, response, messageSuccess, destination);
   };
 
   useEffect(() => {
@@ -134,7 +136,7 @@ const FormUpdateStep = ({
                 imgExtension={['.jpg', '.png', '.jpeg']}
                 maxFileSize={5242880}
                 onChange={handleChangePicture}
-                label="Max file size: 5mb, accepted: jpg, png"
+                label="Max file size: 5mb, accepted: jpeg, jpg, png"
                 buttonText="Choisir"
                 withPreview
                 className="essai"
