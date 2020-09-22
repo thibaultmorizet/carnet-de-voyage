@@ -1,5 +1,5 @@
 import {
-  SAVE_DATA_FOR_SINGLE_TRAVEL, SAVE_DATA_FOR_SINGLE_STEP, ADD_COMMENT, FETCH_DATA_FOR_URL_SHARE,
+  SAVE_DATA_FOR_SINGLE_TRAVEL, SAVE_DATA_FOR_SINGLE_STEP, ADD_COMMENT, FETCH_DATA_FOR_URL_SHARE, ERROR_UNTHORIZED_TRAVEL,
 } from '../actions/travel';
 
 export const initialState = {
@@ -18,6 +18,8 @@ export const initialState = {
   currentId: 0,
   currentComment: [],
   urlShare: '',
+  response: true,
+
 };
 
 // console.log('je passe dans le reducer');
@@ -66,10 +68,16 @@ const travel = (state = initialState, action = {}) => {
           },
         ],
       };
+
     case FETCH_DATA_FOR_URL_SHARE:
       return {
         ...state,
         urlShare: action.value,
+      }
+    case ERROR_UNTHORIZED_TRAVEL:
+      return {
+        ...state,
+        response: false,
       };
     default:
       return state;

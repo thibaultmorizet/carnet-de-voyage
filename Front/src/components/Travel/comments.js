@@ -10,7 +10,11 @@ import SingleComment from './singleComment';
 import './styles.scss';
 
 const Comments = ({
-  changeValueComment, sendComment, like, oldComment, comment,
+  changeValueComment,
+  sendComment,
+  like,
+  oldComment,
+  comment,
 }) => {
   const today = new Date();
   const date = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
@@ -76,6 +80,7 @@ Comments.propTypes = {
   sendComment: PropTypes.func.isRequired,
   like: PropTypes.number.isRequired,
   oldComment: PropTypes.array.isRequired,
+  comment: PropTypes.string.isRequired,
 };
 
 export default Comments;

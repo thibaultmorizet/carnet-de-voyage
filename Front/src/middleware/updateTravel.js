@@ -1,7 +1,12 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import {
-  FETCH_DATA_FOR_UPDATE_TRAVEL, keepDataForUpdateTravel, SEND_DATA_FOR_UPDATE_TRAVEL, changeDateForUpdateTravel, DELETE_TRAVEL,
+  FETCH_DATA_FOR_UPDATE_TRAVEL,
+  keepDataForUpdateTravel,
+  SEND_DATA_FOR_UPDATE_TRAVEL,
+  changeDateForUpdateTravel,
+  DELETE_TRAVEL,
+  errorUnthorizedUpdateTravel,
 } from '../actions/updateTravel';
 
 const updateTravel = (store) => (next) => (action) => {
@@ -20,7 +25,7 @@ const updateTravel = (store) => (next) => (action) => {
           const creationDate = middleDate.replace('.', '/').replace('.', '/');
           store.dispatch(keepDataForUpdateTravel(response.data, creationDate));
         })
-        .catch((error) => console.log(error));
+        .catch((error) => store.dispatch(errorUnthorizedUpdateTravel()));
       break;
     }
     case SEND_DATA_FOR_UPDATE_TRAVEL: {

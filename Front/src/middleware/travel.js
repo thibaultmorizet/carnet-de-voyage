@@ -7,7 +7,9 @@ import {
   fetchDataForGuest,
   FETCH_DATA_FOR_URL_SHARE,
   saveDataForUrlShare,
+  errorUnthorizedTravel,
 } from '../actions/travel';
+
 
 const travel = (store) => (next) => (action) => {
   switch (action.type) {
@@ -32,7 +34,7 @@ const travel = (store) => (next) => (action) => {
           console.log(response.data);
           store.dispatch(saveDataForSingleTravel(response.data));
         })
-        .catch((error) => console.log((error)));
+        .catch((error) => store.dispatch(errorUnthorizedTravel()));
       break;
     }
     case FETCH_DATA_FOR_URL_SHARE: {

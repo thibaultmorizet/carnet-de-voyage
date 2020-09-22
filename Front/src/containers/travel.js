@@ -19,6 +19,7 @@ const mapStateToProps = (state) => ({
   currentId: state.travel.currentId,
   currentPicture: state.travel.currentPicture,
   urlShare: state.travel.urlShare,
+  response: state.travel.response,
 });
 
 const mapDispatchToProps = (dispatch) => ({

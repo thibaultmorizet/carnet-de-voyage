@@ -17,6 +17,7 @@ const mapStateToProps = (state) => ({
   loading: state.updateStep.loading,
   picture_delete: state.updateStep.picture_delete,
   pictures_new: state.updateStep.pictures_new,
+  unthorizedResponse: state.updateStep.unthorizedResponse,
 });
 
 const mapDispatchToProps = (dispatch) => ({

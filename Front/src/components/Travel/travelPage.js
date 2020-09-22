@@ -15,7 +15,18 @@ import Map from 'src/containers/mapShowTravel';
 import './styles.scss';
 
 const TravelPage = ({
-  travel, step, fetchDataForSingleTravel, loading, saveDataForSingleStep, title, currentPicture, like, description, currentId, urlShare,
+  travel,
+  step,
+  fetchDataForSingleTravel,
+  loading,
+  saveDataForSingleStep,
+  title,
+  currentPicture,
+  like,
+  description,
+  currentId,
+  response,
+  urlShare,
 }) => {
   const { id, type } = useParams();
   const history = useHistory();
@@ -99,6 +110,9 @@ const TravelPage = ({
       {!loading && step.length === 0 && (
         <Redirect to={`/travel/${id}/add`} />
       )}
+      {!response && (
+        <Redirect to="/" />
+      )}
     </div>
   );
 };
@@ -115,6 +129,7 @@ TravelPage.propTypes = {
   description: PropTypes.string.isRequired,
   currentId: PropTypes.number,
   urlShare: PropTypes.string.isRequired,
+  response: PropTypes.bool.isRequired,
 };
 
 TravelPage.defaultProps = {

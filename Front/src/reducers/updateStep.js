@@ -4,6 +4,7 @@ import {
   DELETE_PICTURE_UPDATE,
   SAVE_PICTURE_UPDATE,
   RESPONSE_UPDATE_STEP,
+  ERROR_UNTHORIZED_UPDATE_STEP,
 } from '../actions/updateStep';
 
 export const initialState = {
@@ -20,6 +21,7 @@ export const initialState = {
   loading: true,
   pictures_delete: '',
   pictures_new: '',
+  unthorizedResponse: true,
 };
 
 const updateStep = (state = initialState, action = {}) => {
@@ -60,6 +62,11 @@ const updateStep = (state = initialState, action = {}) => {
       return {
         ...state,
         response: action.value,
+      };
+    case ERROR_UNTHORIZED_UPDATE_STEP:
+      return {
+        ...state,
+        unthorizedResponse: false,
       };
     default:
       return state;
