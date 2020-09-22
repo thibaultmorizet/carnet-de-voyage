@@ -10,7 +10,6 @@ import {
   errorUnthorizedTravel,
 } from '../actions/travel';
 
-
 const travel = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_DATA_FOR_SINGLE_TRAVEL: {
@@ -38,7 +37,21 @@ const travel = (store) => (next) => (action) => {
       break;
     }
     case FETCH_DATA_FOR_URL_SHARE: {
-      console.log('coucou');
+      console.log(action);
+      const token = Cookies.get('token');
+      axios.get(`http://34.239.44.174/api/generate_url/${action.value}`, { headers: { Authorization: `Bearer ${token}` } })
+        .then((response) => {
+          console.log(response.data);
+          const allUrl = `http://34.239.44.174/travel/${response.data.id}/${response.data.url_token}`;
+          console.log(allUrl);
+          const pCreate = document.createElement('p');
+          const divElement = document.querySelector('.travelPage__shareDiv');
+          pCreate.className = 'shareUrl';
+          pCreate.innerHTML = allUrl;
+          divElement.appendChild(pCreate);
+          store.dispatch(saveDataForUrlShare(allUrl));
+        })
+        .catch((error) => console.log(error));
       // store.dispatch(saveDataForUrlShare(url))
       break;
     }
