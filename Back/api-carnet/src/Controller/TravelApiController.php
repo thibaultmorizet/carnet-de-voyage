@@ -406,7 +406,7 @@ class TravelApiController extends AbstractController
         );
     }
 
-     /**
+    /**
      * 
      *  @Route("travels/{id}/{token}", name="travel_url", methods={"GET"}, requirements={"id"="\d+","token"="[a-z0-9]{32}"})
      */

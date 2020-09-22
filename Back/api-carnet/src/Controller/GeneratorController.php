@@ -7,6 +7,7 @@ use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Serializer\JsonEncoder;
 
 class GeneratorController extends AbstractController
 {
@@ -15,30 +16,31 @@ class GeneratorController extends AbstractController
      */
     public function generateUrlToken(Travel $travel = null)
     {
-        
+
         // Return bad request if $travel = null
-        if(!$travel) {
+        if (!$travel) {
             return $this->json(
                 [
-                    "succes" =>false,
+                    "succes" => false,
                     "errors" => "Bad Travel id"
                 ],
                 Response::HTTP_BAD_REQUEST
             );
         }
 
+
         // Return token
-        if($travel->getToken()) {
+        if ($travel->getToken()) {
             return $this->json(
                 [
-                    "succes" => true,
-                    "url_token" => $travel->getToken()
-                ],
-                Response::HTTP_OK
+                    "id" => $travel->getId(),
+                    "url_token" => $travel->getToken(),
+                    Response::HTTP_OK
+                ]
             );
         }
 
-        if(!$travel->getToken()) {
+        if (!$travel->getToken()) {
             $travel->setToken(md5(uniqid()));
             $travel->setTokenCreation(new DateTime('NOW'));
             $manager = $this->getDoctrine()->getManager();
@@ -47,10 +49,10 @@ class GeneratorController extends AbstractController
 
             return $this->json(
                 [
-                    "succes" => true,
-                    "url_token" => $travel->getToken()
-                ],
-                Response::HTTP_CREATED
+                    "id" => $travel->getId(),
+                    "url_token" => $travel->getToken(),
+                    Response::HTTP_OK
+                ]
             );
         }
     }
