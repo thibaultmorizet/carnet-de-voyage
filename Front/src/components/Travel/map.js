@@ -4,10 +4,13 @@ import L from 'leaflet';
 import './styles.scss';
 
 const Map = ({ step, onClickStep }) => {
+  console.log('steponMap', step);
   let AllImages = [];
   const AddStep = [];
 
   const onClick = (evt) => {
+    console.log('onClick');
+    console.log('step', step);
     const target = evt.target.options.icon.options.className;
     const result = step.filter((elt) => elt.id === target);
     const {
@@ -35,6 +38,7 @@ const Map = ({ step, onClickStep }) => {
   };
 
   const addPhotoStep = (map) => {
+    console.log('je recharge');
     step.map((elt) => {
       const currentImg = [];
 

@@ -34,9 +34,3 @@ export const addComment = (value, date) => ({
   value,
   date,
 });
-
-// export const FETCH_ID_TRAVEL = 'FETCH_ID_TRAVEL';
-// export const fetchIdTravel = (value) => ({
-//   type: FETCH_ID_TRAVEL,
-//   value,
-// });

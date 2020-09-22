@@ -23,7 +23,6 @@ const PresentationTeam = () => {
       <MenuDesktop />
       <Header />
       <h1 className="presentationTeam__title">Présentation</h1>
-      {/* <Card /> */}
       <div className="presentationTeam__cards">
         {AllCard}
       </div>

@@ -40,7 +40,7 @@ const FormStep = ({
 
   const toastFailOrSuccess = () => {
     const messageSuccess = 'Votre étape a bien été enregistrée. Votre voyage se passe bien ? :)';
-    const destination = '/';
+    const destination = `/travel/${id}`;
     toastNotification(addToast, history, response, messageSuccess, destination);
   };
 

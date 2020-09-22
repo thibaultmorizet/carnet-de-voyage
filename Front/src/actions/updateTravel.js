@@ -2,6 +2,7 @@ export const FETCH_DATA_FOR_UPDATE_TRAVEL = 'FETCH_DATA_FOR_UPDATE_TRAVEL';
 export const KEEP_DATA_FOR_UPDATE_TRAVEL = 'KEEP_DATA_FOR_UPDATE_TRAVEL';
 export const CHANGE_DATA_FOR_UPDATE_TRAVEL = 'CHANGE_DATA_FOR_UPDATE_TRAVEL';
 export const SEND_DATA_FOR_UPDATE_TRAVEL = 'SEND_DATA_FOR_UPDATE_TRAVEL';
+export const DELETE_TRAVEL = 'DELETE_TRAVEL';
 
 export const fetchDataForUpdateTravel = () => ({
   type: FETCH_DATA_FOR_UPDATE_TRAVEL,
@@ -21,4 +22,8 @@ export const changeDateForUpdateTravel = (value, name) => ({
 
 export const sendDataForUpdateTravel = () => ({
   type: SEND_DATA_FOR_UPDATE_TRAVEL,
+});
+
+export const deleteTravel = () => ({
+  type: DELETE_TRAVEL,
 });
