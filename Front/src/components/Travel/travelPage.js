@@ -27,7 +27,9 @@ const TravelPage = ({
   currentId,
   response,
   urlShare,
+  fetchDataForUrlShare,
 }) => {
+  console.log('url', urlShare);
   const { id, type } = useParams();
   const history = useHistory();
 
@@ -41,12 +43,13 @@ const TravelPage = ({
 
   const shareTravel = (evt) => {
     console.log(evt.target);
+    fetchDataForUrlShare(id);
     evt.target.remove();
-    const pCreate = document.createElement('p');
-    const divElement = document.querySelector('.travelPage__shareDiv');
-    pCreate.className = 'shareUrl';
-    pCreate.innerHTML = 'je suis un URL';
-    divElement.appendChild(pCreate);
+    // const pCreate = document.createElement('p');
+    // const divElement = document.querySelector('.travelPage__shareDiv');
+    // pCreate.className = 'shareUrl';
+    // pCreate.innerHTML = urlShare;
+    // divElement.appendChild(pCreate);
   };
 
   return (
