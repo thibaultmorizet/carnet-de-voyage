@@ -10,7 +10,6 @@ import {
   errorUnthorizedTravel,
 } from '../actions/travel';
 
-
 const travel = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_DATA_FOR_SINGLE_TRAVEL: {

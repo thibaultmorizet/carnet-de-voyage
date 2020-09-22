@@ -7,7 +7,6 @@ const urlInput = () => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const inputElement = document.querySelector('.urlInput__form--url').value;
-    console.log(inputElement);
     location.replace(inputElement);
   };
   return (

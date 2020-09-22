@@ -29,6 +29,7 @@ const TravelPage = ({
 }) => {
   const { id, type } = useParams();
   const history = useHistory();
+  console.log('type', type);
 
   useEffect(() => {
     fetchDataForSingleTravel(id, type);
@@ -39,7 +40,6 @@ const TravelPage = ({
   }, [currentPicture]);
 
   const shareTravel = (evt) => {
-    console.log(evt.target);
     evt.target.remove();
     const pCreate = document.createElement('p');
     const divElement = document.querySelector('.travelPage__shareDiv');
