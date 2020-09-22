@@ -111,6 +111,7 @@ const FormStep = ({
             withIcon
             onChange={handleChangePicture}
             imgExtension={['.jpg', '.png', '.jpeg']}
+            label="Max file size: 5mb, accepted: jpg, png"
             maxFileSize={5242880}
             withPreview
           />
