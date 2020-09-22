@@ -41,6 +41,14 @@ class MailerController extends AbstractController
             
         $mailer->send($email);
 
+        $emailCopy = (new TemplatedEmail())
+            ->from('carnetdevoyage@example.com')
+            ->to($requestArray["email"])
+            ->subject($requestArray["object"]. 'copie')
+            ->text('Vous venez de noud faire parvenir ce message : '$requestArray["text"]);
+
+        $mailer->send($emailCopy);
+
 	return $this->json(
             [
                 "success" => true
