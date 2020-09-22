@@ -12,7 +12,7 @@ use App\Serializer\JsonEncoder;
 class GeneratorController extends AbstractController
 {
     /**
-     * @Route("/api/generate_url/{id}", name="generate_url", requirements={"id"="\d+"})
+     * @Route("/api/generate_url/{id}", name="generate_url", requirements={"id"="\d+"}, methods={"GET"})
      */
     public function generateUrlToken(Travel $travel = null)
     {
@@ -29,17 +29,18 @@ class GeneratorController extends AbstractController
         }
 
 
-        // Return token
+        // Return token and travelID if token exist in DB
         if ($travel->getToken()) {
             return $this->json(
                 [
                     "id" => $travel->getId(),
                     "url_token" => $travel->getToken(),
-                    Response::HTTP_OK
-                ]
+                ],
+                Response::HTTP_OK
             );
         }
 
+        // Create token, save in DB and return token and travelID
         if (!$travel->getToken()) {
             $travel->setToken(md5(uniqid()));
             $travel->setTokenCreation(new DateTime('NOW'));
@@ -51,8 +52,8 @@ class GeneratorController extends AbstractController
                 [
                     "id" => $travel->getId(),
                     "url_token" => $travel->getToken(),
-                    Response::HTTP_OK
-                ]
+                ],
+                Response::HTTP_OK
             );
         }
     }
