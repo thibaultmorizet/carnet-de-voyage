@@ -45,11 +45,6 @@ const TravelPage = ({
     console.log(evt.target);
     fetchDataForUrlShare(id);
     evt.target.remove();
-    // const pCreate = document.createElement('p');
-    // const divElement = document.querySelector('.travelPage__shareDiv');
-    // pCreate.className = 'shareUrl';
-    // pCreate.innerHTML = urlShare;
-    // divElement.appendChild(pCreate);
   };
 
   return (
@@ -86,7 +81,7 @@ const TravelPage = ({
 
             {Cookies.get('loggedIn') && type === undefined && (
             <div className="travelPage__shareDiv">
-              <input type="button" className="travelPage__header--addStep shareTravel" value="Partager ce voyage" onClick={shareTravel} />
+              <input type="button" className="travelPage__header--addStep shareTravel" value="Créer un lien de partage" onClick={shareTravel} />
             </div>
             )}
 
