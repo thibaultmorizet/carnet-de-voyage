@@ -80,12 +80,17 @@
       border-radius: 20px;
       border: none;
       padding: .5em 2em;
-      display: block;
-      margin: 1em auto 2em;
+      display: inline-block;
+      margin: 1em;
       cursor: pointer;
       &:hover {
         background-color: rgb(153, 185, 100);
       }
+    }
+    &--updateDiv {
+      display: block;
+      text-align: center;
+      margin: auto;
     }
   }
 }

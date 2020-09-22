@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import {
-  FETCH_DATA_FOR_UPDATE_TRAVEL, keepDataForUpdateTravel, SEND_DATA_FOR_UPDATE_TRAVEL, changeDateForUpdateTravel,
+  FETCH_DATA_FOR_UPDATE_TRAVEL, keepDataForUpdateTravel, SEND_DATA_FOR_UPDATE_TRAVEL, changeDateForUpdateTravel, DELETE_TRAVEL,
 } from '../actions/updateTravel';
 
 const updateTravel = (store) => (next) => (action) => {
@@ -9,8 +9,9 @@ const updateTravel = (store) => (next) => (action) => {
     case FETCH_DATA_FOR_UPDATE_TRAVEL: {
       const state = store.getState();
       const token = Cookies.get('token');
+      console.log(state);
 
-      axios.get('http://34.239.44.174/api/travels/57', { headers: { Authorization: `Bearer ${token}` } })
+      axios.get(`http://34.239.44.174/api/travels/${state.updateTravel.id}`, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
           console.log(response.data);
           const newDate = new Date(response.data.creationDate);
@@ -26,11 +27,12 @@ const updateTravel = (store) => (next) => (action) => {
       const state = store.getState();
       const token = Cookies.get('token');
 
-      axios.put('http://34.239.44.174/api/travels/57/update', {
+      axios.put(`http://34.239.44.174/api/travels/${state.updateTravel.id}/update`, {
         title: state.updateTravel.title,
         description: state.updateTravel.description,
         creation_date: state.updateTravel.creation_date,
-        picture: state.updateTravel.picture[0],
+        picture_travel: state.updateTravel.picture[0].url,
+        picture_data: state.updateTravel.picture[0].data,
         status: state.updateTravel.status,
       }, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
@@ -38,6 +40,17 @@ const updateTravel = (store) => (next) => (action) => {
           store.dispatch(changeDateForUpdateTravel('Success', 'response'));
         })
         .catch((error) => store.dispatch(changeDateForUpdateTravel('Error', 'response')));
+      break;
+    }
+
+    case DELETE_TRAVEL: {
+      const state = store.getState();
+      const token = Cookies.get('token');
+      axios.delete(`http://34.239.44.174/api/travels/${state.updateTravel.id}/delete`, { headers: { Authorization: `Bearer ${token}` } })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => console.log(error));
       break;
     }
     default:

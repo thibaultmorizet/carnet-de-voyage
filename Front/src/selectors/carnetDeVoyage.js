@@ -1,6 +1,7 @@
 /* eslint-disable no-multi-assign */
 /* eslint-disable import/prefer-default-export */
 import { useToasts } from 'react-toast-notifications';
+import { Redirect } from 'react-router-dom';
 
 /**
  * function for add error message
@@ -103,6 +104,7 @@ export const toastNotification = (addToast, history, response, message, destinat
       autoDismiss: true,
     });
     history.push(destination);
+    // location.reload();
   }
 };
 

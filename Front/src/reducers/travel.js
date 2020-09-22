@@ -1,4 +1,6 @@
-import { SAVE_DATA_FOR_SINGLE_TRAVEL, SAVE_DATA_FOR_SINGLE_STEP, ADD_COMMENT } from '../actions/travel';
+import {
+  SAVE_DATA_FOR_SINGLE_TRAVEL, SAVE_DATA_FOR_SINGLE_STEP, ADD_COMMENT, CLOSE_PAGE_TRAVEL,
+} from '../actions/travel';
 
 export const initialState = {
   travel: {

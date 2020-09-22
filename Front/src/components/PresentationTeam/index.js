@@ -1,6 +1,7 @@
 import React from 'react';
-import Header from 'src/components/HomePage/header';
+import Menu from 'src/components/Menu';
 import data from 'src/assets/data';
+import Cookies from 'js-cookie';
 import './styles.scss';
 import Card from './card';
 import MenuBurger from '../MenuBurger';
@@ -19,11 +20,20 @@ const PresentationTeam = () => {
   ));
   return (
     <div className="presentationTeam">
-      <MenuBurger />
-      <MenuDesktop />
-      <Header />
+      {Cookies.get('loggedIn') && (
+      <>
+        <MenuBurger />
+        <MenuDesktop />
+      </>
+      )}
+
+      {!Cookies.get('loggedIn') && (
+      <>
+        <Menu />
+      </>
+      )}
+
       <h1 className="presentationTeam__title">Présentation</h1>
-      {/* <Card /> */}
       <div className="presentationTeam__cards">
         {AllCard}
       </div>

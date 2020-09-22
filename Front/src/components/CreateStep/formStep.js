@@ -40,7 +40,7 @@ const FormStep = ({
 
   const toastFailOrSuccess = () => {
     const messageSuccess = 'Votre étape a bien été enregistrée. Votre voyage se passe bien ? :)';
-    const destination = '/';
+    const destination = `/travel/${id}`;
     toastNotification(addToast, history, response, messageSuccess, destination);
   };
 
@@ -111,6 +111,7 @@ const FormStep = ({
             withIcon
             onChange={handleChangePicture}
             imgExtension={['.jpg', '.png', '.jpeg']}
+            label="Max file size: 5mb, accepted: jpeg, jpg, png"
             maxFileSize={5242880}
             withPreview
           />

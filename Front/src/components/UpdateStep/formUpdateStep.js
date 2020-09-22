@@ -47,7 +47,7 @@ const FormUpdateStep = ({
 
   const toastFailOrSuccess = () => {
     const messageSuccess = 'Votre étape a bien été modifiée';
-    const destination = '/travels/list';
+    const destination = `/travel/${id}`;
     toastNotification(addToast, history, response, messageSuccess, destination);
   };
 
@@ -136,7 +136,7 @@ const FormUpdateStep = ({
                 imgExtension={['.jpg', '.png', '.jpeg']}
                 maxFileSize={5242880}
                 onChange={handleChangePicture}
-                label="Max file size: 5mb, accepted: jpg, png"
+                label="Max file size: 5mb, accepted: jpeg, jpg, png"
                 buttonText="Choisir"
                 withPreview
                 className="essai"

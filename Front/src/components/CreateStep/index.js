@@ -9,7 +9,7 @@ const CreateStep = () => (
   <div className="createStep">
     <MenuBurger />
     <MenuDesktop />
-    <h2 className="createStep__title">Voyage au Pérou</h2>
+    <h2 className="createStep__title">Votre Voyage</h2>
     <span className="createStep__span">Ajouter une étape</span>
     <Form />
 

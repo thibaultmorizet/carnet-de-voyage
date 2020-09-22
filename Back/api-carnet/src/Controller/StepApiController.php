@@ -415,7 +415,7 @@ class StepApiController extends AbstractController
             //we recover an array with authorizations of the connected user
             $userArray = $checkAuthorization->checkAuthorization($jWTEncoderInterface, $userRepository, $travel);
             //if the user is connected and follow this step
-            if ($userArray["connected"] and $userArray["follow"]) {
+            if ($userArray["connected"]) {
                 //we select the desired step object with the url id
                 $step = $stepRepository->find($id2);
                 //we recover the actual number of like
@@ -439,7 +439,7 @@ class StepApiController extends AbstractController
                 return $this->json(
                     [
                         "success" => false,
-                        "error" => "you're not connected and/or you're not a follower of this travel"
+                        "error" => "you're not connected"
                     ],
                     Response::HTTP_UNAUTHORIZED
                 );
@@ -466,7 +466,7 @@ class StepApiController extends AbstractController
             //we recover an array with authorizations of the connected user
             $userArray = $checkAuthorization->checkAuthorization($jWTEncoderInterface, $userRepository, $travel);
             //if the user is connected and follow this step
-            if ($userArray["connected"] and $userArray["follow"]) {
+            if ($userArray["connected"]) {
                 //we select the desired step object with the url id
                 $step = $stepRepository->find($id2);
                 //we recover the actual number of like
@@ -490,7 +490,7 @@ class StepApiController extends AbstractController
                 return $this->json(
                     [
                         "success" => false,
-                        "error" => "you're not connected and/or you're not a follower of this travel"
+                        "error" => "you're not connected"
                     ],
                     Response::HTTP_UNAUTHORIZED
                 );
@@ -517,7 +517,7 @@ class StepApiController extends AbstractController
             //we recover an array with authorizations of the connected user
             $userArray = $checkAuthorization->checkAuthorization($jWTEncoderInterface, $userRepository, $travel);
             //if the user is connected and follow this step
-            if ($userArray["connected"] and $userArray["follow"]) {
+            if ($userArray["connected"]) {
                 //transforms JSON content into Array
                 $requestArray = json_decode($request->getContent(), true);
                 $user = $userArray["user"];
@@ -554,7 +554,7 @@ class StepApiController extends AbstractController
                 return $this->json(
                     [
                         "success" => false,
-                        "error" => "you're not connected and/or you're not a follower of this travel"
+                        "error" => "you're not connected"
                     ],
                     Response::HTTP_UNAUTHORIZED
                 );
