@@ -30,6 +30,7 @@ class UserApiController extends AbstractController
     public function register(UserPasswordEncoderInterface $passwordEncoder, SerializerInterface $serializer, Request $request, ValidatorInterface $validator, MailerInterface $mailerInterface, MailerController $mailerController)
     {
 
+        // Deserialize Json into User object
         try {
             $user = $serializer->deserialize(
                 $request->getContent(),
@@ -57,13 +58,18 @@ class UserApiController extends AbstractController
                 Response::HTTP_BAD_REQUEST
             );
         }
+
+        // Encode the password
         $password = $passwordEncoder->encodePassword($user, $user->getPassword());
         $user->setPassword($password);
         $user->setToken(md5(uniqid()));
+        
+        // Save user in DB
         $manager = $this->getDoctrine()->getManager();
         $manager->persist($user);
         $manager->flush();
 
+        // Send email to user for activate account
         $mailerController->sendEmail(
             $mailerInterface, $user->getEmail(), 
             'Merci de vous inscrire!', 
@@ -72,6 +78,7 @@ class UserApiController extends AbstractController
             $user->getToken()
         );
 
+        
         return $this->json(
             [
                 "success" => true,
