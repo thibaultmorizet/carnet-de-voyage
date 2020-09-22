@@ -60,21 +60,28 @@
     display: block;
     width: 100%;
     &__form {
-       width: 70%;
-       padding: 14% 2em 1em;
+      //  padding: 14% 2em 1em;
        width: 40%;
        margin-left: 60%;
        height: 100%;
+       align-content: center;
        align-items: center;
-      //  padding-top: 14%;
-       background-color: white;
+      background-color: rgba(255, 255, 255, .7);
+      border-radius: 0%;
        backdrop-filter: blur(0px);
        box-shadow: none;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+
        &--content {
          display: flex;
+         width: 100%;
          flex-wrap: wrap;
+         justify-content: center;
          & div {
            margin: 1em;
+          //  width: 80%;
          }
        }
     }
@@ -83,7 +90,26 @@
 
 @media only screen and (min-width : 1440px) {
   .formProfile {
-    background-size: 70%;
+    background-size: 60%;
+    
+    &__form {
+      background-color: transparent;
+      &--content {
+        width: 80%;
+        
+      }
+    }
   }
+}
 
+@media only screen and (min-width : 1824px) {
+  .formProfile {
+    background-size: 50%;
+    background-position: top 50% left 10%;
+    &__form {
+      &--content {
+        width: 80%;
+      }
+    }
+  }
 }
