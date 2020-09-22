@@ -171,7 +171,7 @@ const FormUpdateTravel = ({
                 maxFileSize={5242880}
                 withPreview
                 singleImage
-                label="Taille max: 5mb, jpg, png, jpeg"
+                label="Taille max: 5mb, jpeg, jpg, png"
                 buttonText="Choisir une autre photo"
               />
             </div>
