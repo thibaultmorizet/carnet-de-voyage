@@ -26,7 +26,6 @@ const TravelPage = ({
   description,
   currentId,
   response,
-  urlShare,
 }) => {
   const { id, type } = useParams();
   const history = useHistory();

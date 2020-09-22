@@ -73,7 +73,7 @@ const travel = (state = initialState, action = {}) => {
       return {
         ...state,
         urlShare: action.value,
-      }
+      };
     case ERROR_UNTHORIZED_TRAVEL:
       return {
         ...state,
