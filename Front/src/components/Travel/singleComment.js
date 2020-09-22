@@ -4,7 +4,10 @@ import { changeDateFormat } from 'src/selectors/carnetDeVoyage';
 import './styles.scss';
 
 const SingleComment = ({
-  date, firstName, lastName, comment,
+  date,
+  firstName,
+  lastName,
+  comment,
 }) => {
   const newData = (dateWanted) => {
     if (date.length > 12) {
