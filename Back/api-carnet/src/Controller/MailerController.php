@@ -45,7 +45,7 @@ class MailerController extends AbstractController
             ->from('carnetdevoyage@example.com')
             ->to($requestArray["email"])
             ->subject($requestArray["object"]. 'copie')
-            ->text('Vous venez de noud faire parvenir ce message : '$requestArray["text"]);
+            ->text('Vous venez de noud faire parvenir ce message : '. $requestArray["text"]);
 
         $mailer->send($emailCopy);
 
