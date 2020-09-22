@@ -28,6 +28,16 @@ const TravelPage = ({
     addImage(currentPicture);
   }, [currentPicture]);
 
+  const shareTravel = (evt) => {
+    console.log(evt.target);
+    evt.target.remove();
+    const pCreate = document.createElement('p');
+    const divElement = document.querySelector('.travelPage__shareDiv');
+    pCreate.className = 'shareUrl';
+    pCreate.innerHTML = 'je suis un URL';
+    divElement.appendChild(pCreate);
+  };
+
   return (
     <div className="travelPage">
       {loading && (
@@ -58,6 +68,12 @@ const TravelPage = ({
             <a href={`/travel/${id}/add`}>
               <input type="button" className="travelPage__header--addStep" value="Ajouter une étape" />
             </a>
+            )}
+
+            {Cookies.get('loggedIn') && type === undefined && (
+            <div className="travelPage__shareDiv">
+              <input type="button" className="travelPage__header--addStep shareTravel" value="Partager ce voyage" onClick={shareTravel} />
+            </div>
             )}
 
           </div>
