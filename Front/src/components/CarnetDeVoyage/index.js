@@ -102,6 +102,12 @@ const CarnetDeVoyage = ({ loggedIn }) => {
         </Page>
       </Route>
 
+      <Route exact path="/travel/:id/:type">
+        <Page>
+          <Travel />
+        </Page>
+      </Route>
+
       <Route exact path="/travel/:id/update">
         <Page>
           <UpdateTravel />
