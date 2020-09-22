@@ -18,17 +18,21 @@ const mapStateToProps = (state) => ({
   like: state.travel.like,
   currentId: state.travel.currentId,
   currentPicture: state.travel.currentPicture,
+  urlShare: state.travel.urlShare,
   response: state.travel.response,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchDataForSingleTravel: (id) => {
+  fetchDataForSingleTravel: (id, type) => {
     console.log('je passe dans fetchDataForSingleTravel');
-    dispatch(fetchDataForSingleTravel(id));
+    dispatch(fetchDataForSingleTravel(id, type));
   },
   saveDataForSingleStep: (value, images, like, id, description, comment) => {
     console.log('je passe dans saveDataForSingleStep');
     dispatch(saveDataForSingleStep(value, images, like, id, description, comment));
+  },
+  fetchDataForUrlShare: () => {
+    console.log('fetchDataForUrlShare');
   },
 
 });
