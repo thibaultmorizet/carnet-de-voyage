@@ -1,7 +1,12 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import {
-  FETCH_DATA_FOR_SINGLE_TRAVEL, FETCH_DATA_FOR_GUEST, saveDataForSingleTravel, fetchDataForGuest,
+  FETCH_DATA_FOR_SINGLE_TRAVEL,
+  FETCH_DATA_FOR_GUEST,
+  saveDataForSingleTravel,
+  fetchDataForGuest,
+  FETCH_DATA_FOR_URL_SHARE,
+  saveDataForUrlShare,
 } from '../actions/travel';
 
 const travel = (store) => (next) => (action) => {
@@ -28,6 +33,11 @@ const travel = (store) => (next) => (action) => {
           store.dispatch(saveDataForSingleTravel(response.data));
         })
         .catch((error) => console.log((error)));
+      break;
+    }
+    case FETCH_DATA_FOR_URL_SHARE: {
+      console.log('coucou');
+      // store.dispatch(saveDataForUrlShare(url))
       break;
     }
     default:

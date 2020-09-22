@@ -15,7 +15,7 @@ import Map from 'src/containers/mapShowTravel';
 import './styles.scss';
 
 const TravelPage = ({
-  travel, step, fetchDataForSingleTravel, loading, saveDataForSingleStep, title, currentPicture, like, description, currentId,
+  travel, step, fetchDataForSingleTravel, loading, saveDataForSingleStep, title, currentPicture, like, description, currentId, urlShare,
 }) => {
   const { id, type } = useParams();
   const history = useHistory();
@@ -114,6 +114,7 @@ TravelPage.propTypes = {
   like: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
   currentId: PropTypes.number,
+  urlShare: PropTypes.string.isRequired,
 };
 
 TravelPage.defaultProps = {

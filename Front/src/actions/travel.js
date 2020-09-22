@@ -3,6 +3,8 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const SAVE_DATA_FOR_SINGLE_TRAVEL = 'SAVE_DATA_FOR_SINGLE_TRAVEL';
 export const SAVE_DATA_FOR_SINGLE_STEP = 'SAVE_DATA_FOR_SINGLE_STEP';
 export const FETCH_DATA_FOR_GUEST = 'FETCH_DATA_FOR_GUEST';
+export const FETCH_DATA_FOR_URL_SHARE = 'FETCH_DATA_FOR_URL_SHARE';
+export const SAVE_DATA_FOR_URL_SHARE = 'SAVE_DATA_FOR_URL_SHARE';
 
 export const fetchDataForSingleTravel = (id, token) => ({
   type: FETCH_DATA_FOR_SINGLE_TRAVEL,
@@ -42,3 +44,12 @@ export const fetchDataForGuest = (id, slug) => {
     slug,
   });
 };
+
+export const fetchDataForUrlShare = () => ({
+  type: FETCH_DATA_FOR_URL_SHARE,
+});
+
+export const saveDataForUrlShare = (value) => ({
+  type: FETCH_DATA_FOR_URL_SHARE,
+  value,
+});
