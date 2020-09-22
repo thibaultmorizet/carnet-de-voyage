@@ -136,7 +136,7 @@ const FormUpdateStep = ({
                 imgExtension={['.jpg', '.png', '.jpeg']}
                 maxFileSize={5242880}
                 onChange={handleChangePicture}
-                label="Max file size: 5mb, accepted: jpg, png"
+                label="Max file size: 5mb, accepted: jpeg, jpg, png"
                 buttonText="Choisir"
                 withPreview
                 className="essai"
