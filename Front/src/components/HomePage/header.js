@@ -9,7 +9,7 @@ import './styles.scss';
 
 const Header = () => (
   <header className="headerHomePage">
-    <div className="headerHomePage__mobile">
+    <div clcassName="headerHomePage__mobile">
       <NavLink
         to="/login"
         exact
