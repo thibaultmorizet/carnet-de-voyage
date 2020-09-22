@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 const FormInput = ({
-  type, name, content, onChange, value = undefined,
+  type,
+  name,
+  content,
+  onChange,
+  value = undefined,
 }) => {
   // console.log(onChange);
   const handleChange = (evt) => {

@@ -3,7 +3,9 @@
 import React, { useEffect } from 'react';
 import Map from 'src/components/Map';
 import FormInput from 'src/components/FormInput';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import {
+  useParams, useHistory, Link, Redirect,
+} from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
@@ -33,6 +35,7 @@ const FormUpdateStep = ({
   sendDateUpdate,
   deleteStep,
   response,
+  unthorizedResponse,
 }) => {
   const { id, type } = useParams();
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -168,6 +171,10 @@ const FormUpdateStep = ({
 
         </form>
         )}
+
+        {!unthorizedResponse && (
+        <Redirect to="/" />
+        )}
       </div>
     </>
   );
@@ -188,6 +195,7 @@ FormUpdateStep.propTypes = {
   sendDateUpdate: PropTypes.func.isRequired,
   deleteStep: PropTypes.func.isRequired,
   response: PropTypes.string,
+  unthorizedResponse: PropTypes.bool.isRequired,
 };
 
 FormUpdateStep.defaultProps = {

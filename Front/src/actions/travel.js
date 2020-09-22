@@ -34,3 +34,9 @@ export const addComment = (value, date) => ({
   value,
   date,
 });
+
+export const ERROR_UNTHORIZED_TRAVEL = 'ERROR_UNTHORIZED';
+
+export const errorUnthorizedTravel = () => ({
+  type: ERROR_UNTHORIZED_TRAVEL,
+});

@@ -6,6 +6,7 @@ export const SAVE_PICTURE_UPDATE = 'SAVE_PICTURE_UPDATE';
 export const SEND_DATA_UPDATE = 'SEND_DATA_UPDATE';
 export const DELETE_STEP = 'DELETE_STEP';
 export const RESPONSE_UPDATE_STEP = 'RESPONSE_UPDATE_STEP';
+export const ERROR_UNTHORIZED_UPDATE_STEP = 'ERROR_UNTHORIZED_UPDATE_STEP';
 
 export const fetchDataStep = () => ({
   type: FETCH_DATA_STEP,
@@ -44,4 +45,8 @@ export const deleteStep = () => ({
 export const responseUpdateStep = (value) => ({
   type: RESPONSE_UPDATE_STEP,
   value,
+});
+
+export const errorUnthorizedUpdateStep = () => ({
+  type: ERROR_UNTHORIZED_UPDATE_STEP,
 });

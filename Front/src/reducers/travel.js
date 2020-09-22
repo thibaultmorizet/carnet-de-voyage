@@ -1,5 +1,5 @@
 import {
-  SAVE_DATA_FOR_SINGLE_TRAVEL, SAVE_DATA_FOR_SINGLE_STEP, ADD_COMMENT, CLOSE_PAGE_TRAVEL,
+  SAVE_DATA_FOR_SINGLE_TRAVEL, SAVE_DATA_FOR_SINGLE_STEP, ADD_COMMENT, CLOSE_PAGE_TRAVEL, ERROR_UNTHORIZED_TRAVEL,
 } from '../actions/travel';
 
 export const initialState = {
@@ -17,6 +17,7 @@ export const initialState = {
   loading: true,
   currentId: 0,
   currentComment: [],
+  response: true,
 };
 
 // console.log('je passe dans le reducer');
@@ -64,6 +65,11 @@ const travel = (state = initialState, action = {}) => {
             comment: action.value,
           },
         ],
+      };
+    case ERROR_UNTHORIZED_TRAVEL:
+      return {
+        ...state,
+        response: false,
       };
     default:
       return state;

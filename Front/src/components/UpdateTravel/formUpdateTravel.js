@@ -28,6 +28,7 @@ const FormUpdateTravel = ({
   sendDataForUpdateTravel,
   response,
   deleteTravel,
+  unthorizedResponse,
 }) => {
   const { id } = useParams();
   const { addToast } = useToasts();
@@ -219,7 +220,9 @@ const FormUpdateTravel = ({
           </form>
         </div>
       )}
-
+      {!unthorizedResponse && (
+        <Redirect to="/" />
+      )}
     </div>
   );
 };
@@ -236,6 +239,7 @@ FormUpdateTravel.propTypes = {
   sendDataForUpdateTravel: PropTypes.func.isRequired,
   response: PropTypes.string.isRequired,
   deleteTravel: PropTypes.func.isRequired,
+  unthorizedResponse: PropTypes.bool.isRequired,
 };
 
 FormUpdateTravel.defaultProps = {

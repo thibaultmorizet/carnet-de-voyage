@@ -18,6 +18,7 @@ const mapStateToProps = (state) => ({
   like: state.travel.like,
   currentId: state.travel.currentId,
   currentPicture: state.travel.currentPicture,
+  response: state.travel.response,
 });
 
 const mapDispatchToProps = (dispatch) => ({

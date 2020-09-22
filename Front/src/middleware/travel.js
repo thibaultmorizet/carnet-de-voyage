@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { FETCH_DATA_FOR_SINGLE_TRAVEL, saveDataForSingleTravel } from '../actions/travel';
+import { FETCH_DATA_FOR_SINGLE_TRAVEL, saveDataForSingleTravel, errorUnthorizedTravel } from '../actions/travel';
 
 const travel = (store) => (next) => (action) => {
   switch (action.type) {
@@ -13,7 +13,7 @@ const travel = (store) => (next) => (action) => {
           console.log(response.data);
           store.dispatch(saveDataForSingleTravel(response.data));
         })
-        .catch((error) => console.log(error));
+        .catch((error) => store.dispatch(errorUnthorizedTravel()));
       break;
     }
     default:
