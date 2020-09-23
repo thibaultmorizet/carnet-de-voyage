@@ -32,29 +32,37 @@ const Container = ({
 
       {!loading && (
         <>
-          <input type="submit" name="travelsInput" className="travelsInput" value="Créer un nouveau voyage" />
+          <a href="/travels/create">
+            <input type="button" name="travelsInput" className="travelsInput" value="Créer un nouveau voyage" />
+          </a>
 
           <div className="travels__inProgress">
             <h2 className="travels__container--title"> Voyages en cours </h2>
-            <p className="travels--icon">˟</p>
-            {travelsInProgress.map((elt) => (
-              <CardTravel
-                key={elt.id}
-                title={elt.title}
-                description={elt.description}
-                image={elt.pictureUrl}
-                url={elt.id}
-              />
-            ))}
+            <div className="travels__allTravels">
+              {travelsInProgress.map((elt) => (
+                <CardTravel
+                  key={elt.id}
+                  title={elt.title}
+                  description={elt.description}
+                  image={elt.pictureUrl}
+                  url={elt.id}
+                />
+              ))}
+            </div>
           </div>
 
           <div className="travels__finish">
             <h2 className="travels__container--title"> Voyages terminés </h2>
-            <p className="travels--icon">˟</p>
-            <img src={img1} alt="" />
-            <div className="travels__commentary">
-              <h3 className="commentary--title">Voyage au Pérou</h3>
-              <p className="commentary--text">Trop bien, ça dure deux jours</p>
+            <div className="travels__allTravels">
+              {travelsDone.map((elt) => (
+                <CardTravel
+                  key={elt.id}
+                  title={elt.title}
+                  description={elt.description}
+                  image={elt.pictureUrl}
+                  url={elt.id}
+                />
+              ))}
             </div>
           </div>
         </>

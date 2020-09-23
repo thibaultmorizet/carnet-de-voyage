@@ -94,9 +94,11 @@ export const toastNotification = (addToast, history, response, message, destinat
     });
   }
   else if (response === 'Success') {
+    console.log('je passe la ');
     addToast(message, {
       appearance: 'success',
       autoDismiss: true,
+      autoDismissTimeout: '3000',
     });
     history.push(destination);
     // location.reload();

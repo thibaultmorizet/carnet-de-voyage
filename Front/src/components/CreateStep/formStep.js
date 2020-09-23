@@ -3,11 +3,13 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import FormInput from 'src/components/FormInput';
 import Map from 'src/components/Map';
 import PropTypes from 'prop-types';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import {
+  useParams, useHistory, Link,
+} from 'react-router-dom';
 import {
   errorMessage,
   handleDate,
@@ -34,14 +36,30 @@ const FormStep = ({
   const { addToast } = useToasts();
   const history = useHistory();
   const { id } = useParams();
+  const [count, setCount] = useState(0);
+
   const handleChange = (evt) => {
     changeField(evt.target.value, 'description');
   };
 
   const toastFailOrSuccess = () => {
-    const messageSuccess = 'Votre étape a bien été enregistrée. Votre voyage se passe bien ? :)';
-    const destination = `/travel/${id}`;
-    toastNotification(addToast, history, response, messageSuccess, destination);
+    if (count < 1) {
+      if (response === 'Error') {
+        addToast('Une erreur s\'est produite. Veuillez réessayer plus tard', {
+          appearance: 'error',
+          autoDismiss: true,
+        });
+      }
+      else if (response === 'Success') {
+        console.log('Votre étape a bien été crée. Votre voyage se passe bien ? :)');
+        addToast('ca passe', {
+          appearance: 'success',
+          autoDismiss: true,
+          autoDismissTimeout: '3000',
+        });
+        history.push(`/travel/${id}`);
+      }
+    }
   };
 
   useEffect(() => {
@@ -107,14 +125,16 @@ const FormStep = ({
             onChange={changeField}
           />
 
-          <ImageUploader
-            withIcon
-            onChange={handleChangePicture}
-            imgExtension={['.jpg', '.png', '.jpeg']}
-            label="Max file size: 5mb, accepted: jpeg, jpg, png"
-            maxFileSize={5242880}
-            withPreview
-          />
+          <div className="essai">
+            <ImageUploader
+              withIcon
+              onChange={handleChangePicture}
+              imgExtension={['.jpg', '.png', '.jpeg']}
+              label="Max file size: 5mb, accepted: jpeg, jpg, png"
+              maxFileSize={5242880}
+              withPreview
+            />
+          </div>
 
           <div className="divElement_form">
             <input className="formStep__element--submit" type="submit" value="Enregistrer l'étape" />
