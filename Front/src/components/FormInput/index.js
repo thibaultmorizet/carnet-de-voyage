@@ -10,7 +10,6 @@ const FormInput = ({
   onChange,
   value = undefined,
 }) => {
-  // console.log(onChange);
   const handleChange = (evt) => {
     onChange(evt.target.value, name);
   };

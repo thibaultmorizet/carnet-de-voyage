@@ -18,8 +18,7 @@ const myProfile = (state = initialState, action = {}) => {
         ...state,
         [action.name]: action.value,
       };
-    case SAVE_DATA_FOR_USER: {
-      console.log(action);
+    case SAVE_DATA_FOR_USER:
       return {
         ...state,
         id: action.value.id,
@@ -27,7 +26,7 @@ const myProfile = (state = initialState, action = {}) => {
         firstname: action.value.firstName,
         email: action.value.email,
         loading: false,
-      }; }
+      };
     default:
       return state;
   }

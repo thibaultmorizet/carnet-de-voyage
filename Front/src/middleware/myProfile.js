@@ -8,7 +8,6 @@ const Register = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_DATA_FOR_USER: {
       const state = store.getState();
-      console.log(state);
       // store.dispatch(saveDataForUser());
       const token = Cookies.get('token');
 
@@ -22,7 +21,6 @@ const Register = (store) => (next) => (action) => {
       const token = Cookies.get('token');
       const { id } = state.myProfile;
 
-      console.log(id);
       axios.put(`http://34.239.44.174/api/user/${id}/update`, {
         lastName: state.myProfile.lastname,
         firstName: state.myProfile.firstname,
@@ -36,7 +34,6 @@ const Register = (store) => (next) => (action) => {
     }
     case DELETE_USER: {
       const state = store.getState();
-      console.log(state);
       const { id } = state.myProfile;
       // store.dispatch(saveDataForUser());
       const token = Cookies.get('token');

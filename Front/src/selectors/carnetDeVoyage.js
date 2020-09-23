@@ -1,7 +1,6 @@
 /* eslint-disable no-multi-assign */
 /* eslint-disable import/prefer-default-export */
 import { useToasts } from 'react-toast-notifications';
-import { Redirect } from 'react-router-dom';
 
 /**
  * function for add error message
@@ -19,10 +18,6 @@ export const errorMessage = (message, submitElement) => {
     errorMessageElt.innerHTML = message;
   }
 };
-
-// export const fileChangedHandler = (evt) => {
-//   console.log(evt.target.files[0]);
-// };
 
 export const handleDate = (date) => {
   const splitDate = date.split('/');

@@ -15,7 +15,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeFieldCreateTravel(value, name));
   },
   saveDateCreateTravel: () => {
-    console.log('saveDateCreateTravel');
     dispatch(saveDateCreateTravel());
   },
 });

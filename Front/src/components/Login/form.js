@@ -18,7 +18,6 @@ const LoginForm = ({
 }) => {
   const history = useHistory();
   const [cookies, setCookie] = useCookies(['name']);
-  console.log(loggedIn);
 
   const addTokenCookie = () => {
     if (loggedIn === true) {

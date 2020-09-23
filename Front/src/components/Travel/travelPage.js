@@ -26,11 +26,10 @@ const TravelPage = ({
   description,
   currentId,
   response,
+  fetchDataForUrlShare,
 }) => {
-  console.log('url', urlShare);
   const { id, type } = useParams();
   const history = useHistory();
-  console.log('type', type);
 
   useEffect(() => {
     fetchDataForSingleTravel(id, type);
@@ -42,6 +41,7 @@ const TravelPage = ({
 
   const shareTravel = (evt) => {
     evt.target.remove();
+    fetchDataForUrlShare(id);
   };
 
   return (
@@ -93,7 +93,7 @@ const TravelPage = ({
 
             {Cookies.get('loggedIn') && type === undefined && (
               <div className="travelPage__content--updateDiv">
-                <a href={`/travel/${id}/update/${currentId}`} className="travelPage__content--updateStep"> Modifer cette étape </a>
+                <a href={`/travel/${id}/update/${currentId}`} className="travelPage__content--updateStep"> Modifier cette étape </a>
               </div>
             )}
 

@@ -18,11 +18,8 @@ export const saveDataStep = (value) => ({
   value,
 });
 
-export const changeValuePicture = (value, name) => {
-  console.log('changeFucntion', value);
-  return {
-    type: CHANGE_VALUE_PICTURE,
-    value,
-    name,
-  };
-};
+export const changeValuePicture = (value, name) => ({
+  type: CHANGE_VALUE_PICTURE,
+  value,
+  name,
+});

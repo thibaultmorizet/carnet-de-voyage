@@ -12,7 +12,6 @@ const Check = (store) => (next) => (action) => {
         password: state.register.password,
       })
         .then((response) => {
-          console.log('response');
           store.dispatch(saveLogin());
         })
         .catch((error) => console.log('error'));

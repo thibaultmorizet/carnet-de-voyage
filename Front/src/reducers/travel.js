@@ -22,8 +22,6 @@ export const initialState = {
 
 };
 
-// console.log('je passe dans le reducer');
-
 const travel = (state = initialState, action = {}) => {
   switch (action.type) {
     case SAVE_DATA_FOR_SINGLE_TRAVEL: {

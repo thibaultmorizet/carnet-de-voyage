@@ -14,11 +14,9 @@ const updateTravel = (store) => (next) => (action) => {
     case FETCH_DATA_FOR_UPDATE_TRAVEL: {
       const state = store.getState();
       const token = Cookies.get('token');
-      console.log(state);
 
       axios.get(`http://34.239.44.174/api/travels/${state.updateTravel.id}`, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
-          console.log(response.data);
           const newDate = new Date(response.data.creationDate);
           const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
           const middleDate = newDate.toLocaleDateString('de-DE', options);
@@ -41,7 +39,6 @@ const updateTravel = (store) => (next) => (action) => {
         status: state.updateTravel.status,
       }, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
-          console.log(response.data);
           store.dispatch(changeDateForUpdateTravel('Success', 'response'));
         })
         .catch((error) => store.dispatch(changeDateForUpdateTravel('Error', 'response')));
@@ -53,7 +50,6 @@ const updateTravel = (store) => (next) => (action) => {
       const token = Cookies.get('token');
       axios.delete(`http://34.239.44.174/api/travels/${state.updateTravel.id}/delete`, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
-          console.log(response.data);
         })
         .catch((error) => console.log(error));
       break;
