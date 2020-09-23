@@ -43,6 +43,7 @@ const Container = ({
                 title={elt.title}
                 description={elt.description}
                 image={elt.pictureUrl}
+                url={elt.id}
               />
             ))}
           </div>
