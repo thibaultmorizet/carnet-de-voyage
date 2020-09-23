@@ -10,6 +10,7 @@ import travel from './travel';
 import comment from './comment';
 import createTravel from './createTravel';
 import updateTravel from './updateTravel';
+import travelsList from './travelsList';
 
 export default combineReducers({
   register,
@@ -23,4 +24,5 @@ export default combineReducers({
   comment,
   createTravel,
   updateTravel,
+  travelsList,
 });

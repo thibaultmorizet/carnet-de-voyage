@@ -9,7 +9,7 @@ const updateStep = (store) => (next) => (action) => {
     case FETCH_DATA_STEP: {
       const state = store.getState();
       const token = Cookies.get('token');
-
+o
       axios.get(`http://34.239.44.174/api/travel/${state.updateStep.id}/step/${state.updateStep.type}`, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
           const travelId = response.data.travel.id;
