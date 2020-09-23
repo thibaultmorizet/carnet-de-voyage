@@ -52,7 +52,8 @@ export const fetchDataForUrlShare = () => ({
 
 export const saveDataForUrlShare = (value) => ({
   type: FETCH_DATA_FOR_URL_SHARE,
-  value,
+  value, 
+});
 
 export const ERROR_UNTHORIZED_TRAVEL = 'ERROR_UNTHORIZED';
 
