@@ -1,33 +1,102 @@
+/* eslint-disable camelcase */
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.scss';
+import ImageUploader from 'react-images-upload';
+import {
+  handlePicture,
+} from 'src/selectors/carnetDeVoyage';
 
-import img1 from '../../assets/images/background-machu.jpg';
+const Container = ({
+  title, description,
+  picture_url,
+}) => {
+  const handleDescriptionChange = (evt) => {
+    changeFieldTravelsList(evt.target.value, 'description');
+  };
 
-const Container = () => (
-  <div className="travels__container">
+  const handleChangePicture = (evt) => {
+    handlePicture(evt, changeFieldTravelsList);
+  };
 
-    <input type="submit" name="travelsInput" className="travelsInput" value="Créer un nouveau voyage" />
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const allDataForRegister = [title, description, picture_url];
+    const isEmptyElement = allDataForRegister.includes('');
+  };
 
-    <div className="travels__inProgress">
-      <h2 className="travels__container--title"> Voyages en cours </h2>
-      <p className="travels--icon">˟</p>
-      <img src={img1} alt="" />
-      <div className="travels__commentary">
-        <h3 className="commentary--title">Voyage au Pérou</h3>
-        <p className="commentary--text">Trop bien, ça dure deux jours</p>
+  return (
+    <div className="travels__container">
+
+      <input type="submit" name="travelsInput" className="travelsInput" value="Créer un nouveau voyage" />
+
+      <div className="travels__inProgress" onSubmit={handleSubmit}>
+        <h2 className="travels__container--title"> Voyages en cours </h2>
+        <FormInput
+          type="text"
+          name="title"
+          content="Titre"
+          onChange={changeFieldTravelsList}
+        />
+        <FormInput
+          type="text"
+          className="floating-input"
+          name="description"
+          placeholder=" "
+          maxLength="255"
+          rows="9"
+          onChange={handleDescriptionChange}
+        />
+        <div className="travelList--picture">
+          <ImageUploader
+            withIcon
+            onChange={handleChangePicture}
+            imgExtension={['.jpg', '.png', '.jpeg']}
+            label="Max file size: 5mb, accepted: jpeg, jpg, png"
+            maxFileSize={5242880}
+            withPreview
+            singleImage
+          />
+        </div>
+      </div>
+
+      <div className="travels__finish" onSubmit={handleSubmit}>
+        <h2 className="travels__container--title"> Voyages terminés </h2>
+        <FormInput
+          type="text"
+          name="title"
+          content="Titre"
+          onChange={changeFieldTravelsList}
+        />
+        <FormInput
+          type="text"
+          className="floating-input"
+          name="description"
+          placeholder=" "
+          maxLength="255"
+          rows="9"
+          onChange={handleDescriptionChange}
+        />
+        <div className="travelList--picture">
+          <ImageUploader
+            withIcon
+            onChange={handleChangePicture}
+            imgExtension={['.jpg', '.png', '.jpeg']}
+            label="Max file size: 5mb, accepted: jpeg, jpg, png"
+            maxFileSize={5242880}
+            withPreview
+            singleImage
+          />
+        </div>
       </div>
     </div>
+  );
+};
 
-    <div className="travels__finish">
-      <h2 className="travels__container--title"> Voyages terminés </h2>
-      <p className="travels--icon">˟</p>
-      <img src={img1} alt="" />
-      <div className="travels__commentary">
-        <h3 className="commentary--title">Voyage au Pérou</h3>
-        <p className="commentary--text">Trop bien, ça dure deux jours</p>
-      </div>
-    </div>
-  </div>
-);
+Container.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  picture_url: PropTypes.array.isRequired,
+};
 
 export default Container;

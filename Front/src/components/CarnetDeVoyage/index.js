@@ -22,12 +22,14 @@ import Travel from '../Travel';
 import Privacy from '../Privacy';
 import CreateTravel from '../CreateTravel';
 import UpdateTravel from '../UpdateTravel';
+import NotFound from '../404/page404';
 
 const CarnetDeVoyage = ({ loggedIn }) => {
   console.log('status', loggedIn);
   console.log('cookie', Cookies.get('loggedIn'));
   return (
     <div className="carnetDeVoyage">
+      <Route path="" component={NotFound} />
       <Route exact path="/">
         <Page>
           <HomePage />
