@@ -9,7 +9,6 @@ const FormContact = ({
 }) => {
   const history = useHistory();
   const handleOnChange = (evt) => {
-    console.log(evt.target.value);
     changeValueContact(evt.target.value, 'message');
   };
 

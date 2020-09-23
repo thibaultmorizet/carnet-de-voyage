@@ -4,10 +4,10 @@ namespace App\Controller;
 
 use SplFileInfo;
 use App\Entity\User;
+use App\Entity\Travel;
 use App\Entity\Picture;
 use App\Repository\UserRepository;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +16,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
 
 class UserApiController extends AbstractController
 {
@@ -30,6 +28,7 @@ class UserApiController extends AbstractController
     public function register(UserPasswordEncoderInterface $passwordEncoder, SerializerInterface $serializer, Request $request, ValidatorInterface $validator, MailerInterface $mailerInterface, MailerController $mailerController)
     {
 
+        // Deserialize Json into User object
         try {
             $user = $serializer->deserialize(
                 $request->getContent(),
@@ -57,13 +56,18 @@ class UserApiController extends AbstractController
                 Response::HTTP_BAD_REQUEST
             );
         }
+
+        // Encode the password
         $password = $passwordEncoder->encodePassword($user, $user->getPassword());
         $user->setPassword($password);
         $user->setToken(md5(uniqid()));
+        
+        // Save user in DB
         $manager = $this->getDoctrine()->getManager();
         $manager->persist($user);
         $manager->flush();
 
+        // Send email to user for activate account
         $mailerController->sendEmail(
             $mailerInterface, $user->getEmail(), 
             'Merci de vous inscrire!', 
@@ -72,6 +76,7 @@ class UserApiController extends AbstractController
             $user->getToken()
         );
 
+        
         return $this->json(
             [
                 "success" => true,
@@ -127,19 +132,17 @@ class UserApiController extends AbstractController
     }
 
     /**
-     * @Route("/api/user/{id}", name="user", methods={"GET"}, requirements={"id"="\d+"})
+     * @Route("/api/user", name="user", methods={"GET"})
      */
-    public function user(UserRepository $userRepository, $id, JWTEncoderInterface $jWTEncoderInterface)
+    public function user(UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface)
     {
-        //we recover the user object with the $id of the URL
-        $user = $userRepository->find($id);
         //we put the token of the header in a variable
         $token = substr(apache_request_headers()["Authorization"], 7);
         //we decode the token
         $tokenArray = $jWTEncoderInterface->decode($token);
         //we recover the Id of the connected user
         $userConnectedId = $userRepository->findOneByUsername($tokenArray['username'])->getId();
-
+        $user = $userRepository->find($userConnectedId);
         //we recover the roles of the connected user in a variable
         $userRoles = $tokenArray["roles"];
         //we create a boolean for the autorization of the user
@@ -153,8 +156,9 @@ class UserApiController extends AbstractController
             }
         }
 
-        //if the id of the connected user is same of the id in the URL
-        if ($userConnectedId == $id or $userAuthorization == true) {
+
+        //if the user is exist or user is admin
+        if ($userConnectedId or $userAuthorization == true) {
             //we return the informations of the user
             return $this->json(
                 $user,

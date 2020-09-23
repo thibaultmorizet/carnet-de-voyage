@@ -1,0 +1,24 @@
+.notFound { 
+    &__container {
+      height: 100vh;
+      background-color: fuchsia;
+      img {
+        width: 25em;
+        height: 15em;
+      }
+    }
+    &--title {
+      padding: 0.5em;
+      display: flex;
+      width: auto;
+      margin: auto;
+      font-family: 'Pacifico', cursive;
+      font-size: 2.5em;
+      margin: auto;
+    }
+    &--description {
+      padding: 0.5em;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+  }

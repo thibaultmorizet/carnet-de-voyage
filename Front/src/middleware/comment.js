@@ -10,7 +10,6 @@ const comment = (store) => (next) => (action) => {
       const token = Cookies.get('token');
       const idStep = state.travel.currentId;
       const idTravel = state.travel.travel.id;
-      console.log('state', idStep, idTravel);
 
       axios.post(`http://34.239.44.174/api/travel/${idTravel}/comment/${idStep}`, {
         comment: state.comment.message,
@@ -18,7 +17,6 @@ const comment = (store) => (next) => (action) => {
         .then((response) => {
           const today = new Date();
           const date = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
-          console.log(date);
           store.dispatch(addComment(state.comment.message, date));
         })
         .catch((error) => console.log(error));

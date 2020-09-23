@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import TravelPage from 'src/components/Travel/travelPage';
-import { fetchDataForSingleTravel, saveDataForSingleStep } from 'src/actions/travel';
+import { fetchDataForSingleTravel, saveDataForSingleStep, fetchDataForUrlShare } from 'src/actions/travel';
 
 const mapStateToProps = (state) => ({
   travel: {
@@ -18,16 +18,19 @@ const mapStateToProps = (state) => ({
   like: state.travel.like,
   currentId: state.travel.currentId,
   currentPicture: state.travel.currentPicture,
+  urlShare: state.travel.urlShare,
+  response: state.travel.response,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchDataForSingleTravel: (id) => {
-    console.log('je passe dans fetchDataForSingleTravel');
-    dispatch(fetchDataForSingleTravel(id));
+  fetchDataForSingleTravel: (id, type) => {
+    dispatch(fetchDataForSingleTravel(id, type));
   },
   saveDataForSingleStep: (value, images, like, id, description, comment) => {
-    console.log('je passe dans saveDataForSingleStep');
     dispatch(saveDataForSingleStep(value, images, like, id, description, comment));
+  },
+  fetchDataForUrlShare: (id) => {
+    dispatch(fetchDataForUrlShare(id));
   },
 
 });

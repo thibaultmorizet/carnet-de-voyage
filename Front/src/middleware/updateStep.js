@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import {
-  FETCH_DATA_STEP, saveDataStep, SEND_DATA_UPDATE, DELETE_STEP, responseUpdateStep,
+  FETCH_DATA_STEP, saveDataStep, SEND_DATA_UPDATE, DELETE_STEP, responseUpdateStep, errorUnthorizedUpdateStep,
 } from '../actions/updateStep';
 
 const updateStep = (store) => (next) => (action) => {
@@ -43,7 +43,7 @@ o
 
           store.dispatch(saveDataStep(dataStep));
         })
-        .catch((error) => console.log(error));
+        .catch((error) => store.dispatch(errorUnthorizedUpdateStep()));
       break;
     }
     case SEND_DATA_UPDATE: {

@@ -16,7 +16,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeValue(value, name));
   },
   handleSubmit: () => {
-    console.log('je fais un submit');
     dispatch(saveStep());
   },
   changePicture: (value, name) => {

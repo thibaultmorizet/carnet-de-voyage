@@ -1,4 +1,4 @@
-import { KEEP_DATA_FOR_UPDATE_TRAVEL, CHANGE_DATA_FOR_UPDATE_TRAVEL } from 'src/actions/updateTravel';
+import { KEEP_DATA_FOR_UPDATE_TRAVEL, CHANGE_DATA_FOR_UPDATE_TRAVEL, ERROR_UNTHORIZED_UPDATE_TRAVEL } from 'src/actions/updateTravel';
 
 export const initialState = {
   title: '',
@@ -8,12 +8,12 @@ export const initialState = {
   response: '',
   status: true,
   loading: true,
+  unthorizedResponse: true,
 };
 
 const updateTravel = (state = initialState, action = {}) => {
   switch (action.type) {
     case KEEP_DATA_FOR_UPDATE_TRAVEL:
-      console.log(action.value.pictureUrl);
       return {
         ...state,
         title: action.value.title,
@@ -27,6 +27,11 @@ const updateTravel = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.name]: action.value,
+      };
+    case ERROR_UNTHORIZED_UPDATE_TRAVEL:
+      return {
+        ...state,
+        unthorizedResponse: false,
       };
     default:
       return state;

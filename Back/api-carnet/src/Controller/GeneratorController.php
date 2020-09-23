@@ -7,38 +7,41 @@ use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Serializer\JsonEncoder;
 
 class GeneratorController extends AbstractController
 {
     /**
-     * @Route("/api/generate_url/{id}", name="generate_url", requirements={"id"="\d+"})
+     * @Route("/api/generate_url/{id}", name="generate_url", requirements={"id"="\d+"}, methods={"GET"})
      */
     public function generateUrlToken(Travel $travel = null)
     {
-        
+
         // Return bad request if $travel = null
-        if(!$travel) {
+        if (!$travel) {
             return $this->json(
                 [
-                    "succes" =>false,
+                    "succes" => false,
                     "errors" => "Bad Travel id"
                 ],
                 Response::HTTP_BAD_REQUEST
             );
         }
 
-        // Return token
-        if($travel->getToken()) {
+
+        // Return token and travelID if token exist in DB
+        if ($travel->getToken()) {
             return $this->json(
                 [
-                    "succes" => true,
-                    "url_token" => $travel->getToken()
+                    "id" => $travel->getId(),
+                    "url_token" => $travel->getToken(),
                 ],
                 Response::HTTP_OK
             );
         }
 
-        if(!$travel->getToken()) {
+        // Create token, save in DB and return token and travelID
+        if (!$travel->getToken()) {
             $travel->setToken(md5(uniqid()));
             $travel->setTokenCreation(new DateTime('NOW'));
             $manager = $this->getDoctrine()->getManager();
@@ -47,10 +50,10 @@ class GeneratorController extends AbstractController
 
             return $this->json(
                 [
-                    "succes" => true,
-                    "url_token" => $travel->getToken()
+                    "id" => $travel->getId(),
+                    "url_token" => $travel->getToken(),
                 ],
-                Response::HTTP_CREATED
+                Response::HTTP_OK
             );
         }
     }

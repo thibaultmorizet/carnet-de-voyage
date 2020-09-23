@@ -12,7 +12,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeValueComment(value, name));
   },
   sendComment: () => {
-    console.log('je suisdas sendComment');
     dispatch(sendComment());
   },
 });
