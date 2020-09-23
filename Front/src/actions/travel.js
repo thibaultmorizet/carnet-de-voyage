@@ -36,7 +36,6 @@ export const addComment = (value, date) => ({
   date,
 });
 
-
 export const fetchDataForGuest = (id, slug) => {
   console.log('id slug', id, slug);
   return ({
@@ -46,13 +45,14 @@ export const fetchDataForGuest = (id, slug) => {
   });
 };
 
-export const fetchDataForUrlShare = () => ({
+export const fetchDataForUrlShare = (value) => ({
   type: FETCH_DATA_FOR_URL_SHARE,
+  value,
 });
 
 export const saveDataForUrlShare = (value) => ({
-  type: FETCH_DATA_FOR_URL_SHARE,
-  value, 
+  type: SAVE_DATA_FOR_URL_SHARE,
+  value,
 });
 
 export const ERROR_UNTHORIZED_TRAVEL = 'ERROR_UNTHORIZED';
