@@ -1,8 +1,7 @@
-.notFound {
-  background-color: fuchsia;
-}
-  .notFound { 
+.notFound { 
     &__container {
+      height: 100vh;
+      background-color: fuchsia;
       img {
         width: 25em;
         height: 15em;

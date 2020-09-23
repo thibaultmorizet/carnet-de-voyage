@@ -1,7 +1,7 @@
 // == Import npm
 import React from 'react';
 
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 import Cookies from 'js-cookie';
 import HomePage from '../HomePage';
@@ -29,86 +29,92 @@ const CarnetDeVoyage = ({ loggedIn }) => {
   console.log('cookie', Cookies.get('loggedIn'));
   return (
     <div className="carnetDeVoyage">
-      <Route path="" component={NotFound} />
-      <Route exact path="/">
-        <Page>
-          <HomePage />
-        </Page>
-      </Route>
-      <Route exact path="/presentation">
-        <Page>
-          <PresentationTeam />
-        </Page>
-      </Route>
-      <Route exact path="/privacy">
-        <Page>
-          <Privacy />
-        </Page>
-      </Route>
-      <Route exact path="/contact">
-        <Page>
-          <Contact />
-        </Page>
-      </Route>
-      <Route exact path="/register">
-        <Page>
-          <Register />
-        </Page>
-      </Route>
-      <Route exact path="/login">
-        {Cookies.get('loggedIn') ? <Redirect push to="/travels/list" /> : (
+
+      <Switch>
+
+        <Route exact path="/">
           <Page>
-            <Login />
+            <HomePage />
           </Page>
-        )}
-      </Route>
-      <Route exact path="/admin/user/list">
-        <User />
-      </Route>
-
-      <Route exact path="/travels/list">
-        {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
+        </Route>
+        <Route exact path="/presentation">
           <Page>
-            <TravelsList />
+            <PresentationTeam />
           </Page>
-        )}
-
-      </Route>
-      <Route exact path="/travel/:id/add">
-        {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
+        </Route>
+        <Route exact path="/privacy">
           <Page>
-            <CreateStep />
+            <Privacy />
           </Page>
-        )}
-
-      </Route>
-      <Route exact path="/travel/:id/update/:type">
-        {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
+        </Route>
+        <Route exact path="/contact">
           <Page>
-            <UpdateStep />
+            <Contact />
           </Page>
-        )}
-      </Route>
-
-      <Route exact path="/travels/create">
-        {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
+        </Route>
+        <Route exact path="/register">
           <Page>
-            <CreateTravel />
+            <Register />
           </Page>
-        )}
-      </Route>
+        </Route>
+        <Route exact path="/login">
+          {Cookies.get('loggedIn') ? <Redirect push to="/travels/list" /> : (
+            <Page>
+              <Login />
+            </Page>
+          )}
+        </Route>
+        <Route exact path="/admin/user/list">
+          <User />
+        </Route>
 
-      <Route exact path="/travel/:id">
-        <Page>
-          <Travel />
-        </Page>
-      </Route>
+        <Route exact path="/travels/list">
+          {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
+            <Page>
+              <TravelsList />
+            </Page>
+          )}
 
-      <Route exact path="/travel/:id/update">
-        <Page>
-          <UpdateTravel />
-        </Page>
-      </Route>
+        </Route>
+        <Route exact path="/travel/:id/add">
+          {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
+            <Page>
+              <CreateStep />
+            </Page>
+          )}
+
+        </Route>
+        <Route exact path="/travel/:id/update/:type">
+          {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
+            <Page>
+              <UpdateStep />
+            </Page>
+          )}
+        </Route>
+
+        <Route exact path="/travels/create">
+          {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
+            <Page>
+              <CreateTravel />
+            </Page>
+          )}
+        </Route>
+
+        <Route exact path="/travel/:id">
+          <Page>
+            <Travel />
+          </Page>
+        </Route>
+
+        <Route exact path="/travel/:id/update">
+          <Page>
+            <UpdateTravel />
+          </Page>
+        </Route>
+
+        <Route exact path="" component={NotFound} />
+
+      </Switch>
 
       <Footer />
     </div>
