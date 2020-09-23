@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { CHECK } from '../actions/loginCheck';
-import { saveLogin } from '../actions/login';
+import { saveLogin, changeValue } from '../actions/login';
 
 const Check = (store) => (next) => (action) => {
   switch (action.type) {
@@ -14,7 +14,7 @@ const Check = (store) => (next) => (action) => {
         .then((response) => {
           store.dispatch(saveLogin());
         })
-        .catch((error) => console.log('error'));
+        .catch((error) => store.dispatch(changeValue('Error', 'response')));
       break;
     }
     default:

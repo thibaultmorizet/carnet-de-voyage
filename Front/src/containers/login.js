@@ -8,6 +8,7 @@ const mapStateToProps = (state) => ({
   password: state.login.password,
   token: state.keepToken.token,
   loggedIn: state.keepToken.loggedIn,
+  response: state.login.response,
 });
 
 const mapDispatchToProps = (dispatch) => ({

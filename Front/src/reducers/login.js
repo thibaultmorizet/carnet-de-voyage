@@ -3,6 +3,7 @@ import { CHANGE_VALUE } from '../actions/login';
 export const initialState = {
   email: '',
   password: '',
+  response: '',
 };
 
 const auth = (state = initialState, action = {}) => {

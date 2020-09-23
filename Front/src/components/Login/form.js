@@ -15,9 +15,22 @@ const LoginForm = ({
   password,
   token,
   loggedIn,
+  response,
 }) => {
   const history = useHistory();
   const [cookies, setCookie] = useCookies(['name']);
+
+  const handleErrorIndentification = () => {
+    if (response === 'Error') {
+      const divElement = '.login__form--submit';
+      const message = 'Vos identifiants et/ou mot de passe ne sont pas corrects';
+      errorMessage(message, divElement);
+    }
+  };
+
+  useEffect(() => {
+    handleErrorIndentification();
+  }, [response]);
 
   const addTokenCookie = () => {
     if (loggedIn === true) {
@@ -35,11 +48,11 @@ const LoginForm = ({
     evt.preventDefault();
     const allDataForLogin = [email, password];
     const emptyElement = allDataForLogin.includes('');
-
+    const divElement = '.login__form--submit';
     // If inputs are empty
     if (emptyElement === true) {
       const message = 'Veuillez remplir tous les champs';
-      errorMessage(message);
+      errorMessage(message, divElement);
     }
     else {
       handleLogin();
@@ -65,25 +78,18 @@ const LoginForm = ({
           onChange={changeField}
         />
 
-        <div>
+        {/* <div>
           <input type="checkbox" id="loginCheckbox" name="loginCheckbox" />
           <span className="check__span">
             Se souvenir de moi
           </span>
+        </div> */}
+
+        <div className="login__form--submit">
+          <input type="submit" name="loginSubmit" id="loginSubmit" value="Se connecter" />
         </div>
 
-        <input type="submit" name="loginSubmit" id="loginSubmit" value="Se connecter" />
-
         <div className="form__span">
-
-          <span>
-            <NavLink
-              to="/email-forgot-password"
-              exact
-            >
-              Mot de passe oublié ?
-            </NavLink>
-          </span>
 
           <span>
             <NavLink
