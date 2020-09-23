@@ -15,6 +15,7 @@ import travel from '../middleware/travel';
 import comment from '../middleware/comment';
 import createTravel from '../middleware/createTravel';
 import updateTravel from '../middleware/updateTravel';
+import myProfile from '../middleware/myProfile';
 
 // == Enhancers
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -33,6 +34,7 @@ const enhancers = composeEnhancers(
     comment,
     createTravel,
     updateTravel,
+    myProfile,
     // secondMiddleware,
   ),
 );

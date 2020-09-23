@@ -26,12 +26,11 @@ const TravelPage = ({
   description,
   currentId,
   response,
-  urlShare,
-  fetchDataForUrlShare,
 }) => {
   console.log('url', urlShare);
   const { id, type } = useParams();
   const history = useHistory();
+  console.log('type', type);
 
   useEffect(() => {
     fetchDataForSingleTravel(id, type);
@@ -42,8 +41,6 @@ const TravelPage = ({
   }, [currentPicture]);
 
   const shareTravel = (evt) => {
-    console.log(evt.target);
-    fetchDataForUrlShare(id);
     evt.target.remove();
   };
 

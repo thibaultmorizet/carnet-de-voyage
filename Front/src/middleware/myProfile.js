@@ -1,0 +1,41 @@
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import {
+  FETCH_DATA_FOR_USER, saveDataForUser, SEND_DATA_FOR_UPDATE_USER, changeFieldForDataUser,
+} from '../actions/myProfile';
+
+const Register = (store) => (next) => (action) => {
+  switch (action.type) {
+    case FETCH_DATA_FOR_USER: {
+      const state = store.getState();
+      console.log(state);
+      // store.dispatch(saveDataForUser());
+      const token = Cookies.get('token');
+
+      axios.get('http://34.239.44.174/api/user', { headers: { Authorization: `Bearer ${token}` } })
+        .then((response) => store.dispatch(saveDataForUser(response.data)))
+        .catch((error) => console.log(error));
+      break;
+    }
+    case SEND_DATA_FOR_UPDATE_USER: {
+      const state = store.getState();
+      const token = Cookies.get('token');
+      const { id } = state.myProfile;
+
+      console.log(id);
+      axios.put(`http://34.239.44.174/api/user/${id}/update`, {
+        lastName: state.myProfile.lastname,
+        firstName: state.myProfile.firstname,
+        password: state.myProfile.password,
+        email: state.myProfile.email,
+
+      }, { headers: { Authorization: `Bearer ${token}` } })
+        .then((response) => store.dispatch(changeFieldForDataUser('Success', 'response')))
+        .catch((error) => store.dispatch(changeFieldForDataUser('Error', 'response')));
+      break;
+    }
+    default:
+      next(action);
+  }
+};
+export default Register;

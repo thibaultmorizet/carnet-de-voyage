@@ -22,6 +22,7 @@ import Travel from '../Travel';
 import Privacy from '../Privacy';
 import CreateTravel from '../CreateTravel';
 import UpdateTravel from '../UpdateTravel';
+import MyProfile from '../MyProfile';
 
 const CarnetDeVoyage = ({ loggedIn }) => {
   console.log('status', loggedIn);
@@ -102,7 +103,7 @@ const CarnetDeVoyage = ({ loggedIn }) => {
         </Page>
       </Route>
 
-      <Route exact path="/travel/:id/:type">
+      <Route exact path="/travels/:id/:type">
         <Page>
           <Travel />
         </Page>
@@ -111,6 +112,12 @@ const CarnetDeVoyage = ({ loggedIn }) => {
       <Route exact path="/travel/:id/update">
         <Page>
           <UpdateTravel />
+        </Page>
+      </Route>
+
+      <Route exact path="/user/myprofile">
+        <Page>
+          <MyProfile />
         </Page>
       </Route>
 
