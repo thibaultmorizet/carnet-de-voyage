@@ -8,6 +8,7 @@ const mapStateToProps = (state) => ({
   firstname: state.myProfile.firstname,
   password: state.myProfile.password,
   verifyPassword: state.myProfile.verifyPassword,
+  email: state.myProfile.email,
   response: state.myProfile.response,
   loading: state.myProfile.loading,
 });

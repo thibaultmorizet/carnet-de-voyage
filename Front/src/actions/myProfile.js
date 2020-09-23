@@ -7,8 +7,9 @@ export const fetchDataForUser = () => ({
   type: FETCH_DATA_FOR_USER,
 });
 
-export const saveDataForUser = () => ({
+export const saveDataForUser = (value) => ({
   type: SAVE_DATA_FOR_USER,
+  value,
 });
 
 export const changeFieldForDataUser = (value, name) => ({

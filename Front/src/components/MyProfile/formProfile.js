@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import FormInput from 'src/components/FormInput';
 import PropTypes from 'prop-types';
-import { errorMessage } from 'src/selectors/carnetDeVoyage';
+import { errorMessage, toastNotification } from 'src/selectors/carnetDeVoyage';
+import { useToasts } from 'react-toast-notifications';
+import { useHistory } from 'react-router-dom';
 import Spinner from 'src/components/Spinner';
 import './styles.scss';
 
@@ -14,15 +16,29 @@ const FormProfile = ({
   changeFieldForDataUser,
   sendDataForUpdateUser,
   loading,
+  response,
+  email,
 }) => {
+  const history = useHistory();
+  const { addToast } = useToasts();
+
   useEffect(() => {
     fetchDataForUser();
   }, []);
 
+  const toastFailOrSuccess = () => {
+    const message = `Vos informations personnelles ont bien été modifiée ${firstname} ;)`;
+    const destination = '/travels/list';
+    toastNotification(addToast, history, response, message, destination);
+  };
+
+  useEffect(() => {
+    toastFailOrSuccess();
+  }, [response]);
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log('je submit');
-    const allDataForRegister = [firstname, lastname, password, verifyPassword];
+    const allDataForRegister = [firstname, lastname, email];
     const emptyElement = allDataForRegister.includes('');
     const divElt = '.formProfile__form--buttons';
 
@@ -32,7 +48,7 @@ const FormProfile = ({
       errorMessage(message, divElt);
     }
     // if password and passwordVerify are not the same
-    else if (password === verifyPassword) {
+    else if (password !== '' && password === verifyPassword) {
       // regex : lowerCase, upperCase, a number, eight letter minimum
       const regex = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/;
       const isItGoodPasswordCharacter = password.match(regex);
@@ -41,58 +57,69 @@ const FormProfile = ({
         errorMessage(message, divElt);
       }
       else {
-        console.log('je submit');
         sendDataForUpdateUser();
       }
     }
     else {
-      const message = 'Vos mots de passe ne sont pas identiques';
-      errorMessage(message, divElt);
+      sendDataForUpdateUser();
     }
   };
   return (
     <div className="formProfile">
-      {/* {loading && (
+      {loading && (
       <Spinner />
-      )} */}
+      )}
 
-      <form action="" className="formProfile__form" onSubmit={handleSubmit}>
-        <h2 className="formProfile__form--title">Mon profil</h2>
-        <div className="formProfile__form--content">
-          <FormInput
-            type="text"
-            name="lastname"
-            content="Nom"
-            onChange={changeFieldForDataUser}
-          />
+      {!loading && (
+        <form action="" className="formProfile__form" onSubmit={handleSubmit}>
+          <h2 className="formProfile__form--title">Mon profil</h2>
+          <div className="formProfile__form--content">
+            <FormInput
+              type="text"
+              name="lastname"
+              content="Nom"
+              onChange={changeFieldForDataUser}
+              value={lastname}
+            />
 
-          <FormInput
-            type="text"
-            name="firstname"
-            content="Prénom"
-            onChange={changeFieldForDataUser}
-          />
+            <FormInput
+              type="text"
+              name="firstname"
+              content="Prénom"
+              onChange={changeFieldForDataUser}
+              value={firstname}
+            />
 
-          <FormInput
-            type="password"
-            name="password"
-            content="Mot de passe"
-            onChange={changeFieldForDataUser}
-          />
+            <FormInput
+              type="email"
+              name="email"
+              content="Email"
+              onChange={changeFieldForDataUser}
+              value={email}
+            />
 
-          <FormInput
-            type="password"
-            name="verifyPassword"
-            content="Vérification du mot de passe "
-            onChange={changeFieldForDataUser}
-          />
+            <FormInput
+              type="password"
+              name="password"
+              content="Mot de passe"
+              onChange={changeFieldForDataUser}
+            />
 
-        </div>
-        <div className="formProfile__form--buttons">
-          <input type="submit" className="submitButtonUser" value="Enregistrer les modifications" />
-          <input type="button" className="deleteButtonUser" value="Supprimer mon compte" />
-        </div>
-      </form>
+            <FormInput
+              type="password"
+              name="verifyPassword"
+              content="Vérification du mot de passe "
+              onChange={changeFieldForDataUser}
+            />
+
+          </div>
+          <div className="formProfile__form--buttons">
+            <input type="submit" className="submitButtonUser" value="Enregistrer les modifications" />
+            <input type="button" className="deleteButtonUser" value="Supprimer mon compte" />
+          </div>
+        </form>
+      )}
+
     </div>
   );
 };
@@ -106,6 +133,8 @@ FormProfile.propTypes = {
   changeFieldForDataUser: PropTypes.func.isRequired,
   sendDataForUpdateUser: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  response: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
 export default FormProfile;
