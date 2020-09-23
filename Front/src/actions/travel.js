@@ -17,18 +17,15 @@ export const saveDataForSingleTravel = (value) => ({
   value,
 });
 
-export const saveDataForSingleStep = (value, images, like, id, description, comment) => {
-  console.log('vale', value);
-  return ({
-    type: SAVE_DATA_FOR_SINGLE_STEP,
-    value,
-    images,
-    like,
-    id,
-    description,
-    comment,
-  });
-};
+export const saveDataForSingleStep = (value, images, like, id, description, comment) => ({
+  type: SAVE_DATA_FOR_SINGLE_STEP,
+  value,
+  images,
+  like,
+  id,
+  description,
+  comment,
+});
 
 export const addComment = (value, date) => ({
   type: ADD_COMMENT,
@@ -36,14 +33,11 @@ export const addComment = (value, date) => ({
   date,
 });
 
-export const fetchDataForGuest = (id, slug) => {
-  console.log('id slug', id, slug);
-  return ({
-    type: FETCH_DATA_FOR_GUEST,
-    id,
-    slug,
-  });
-};
+export const fetchDataForGuest = (id, slug) => ({
+  type: FETCH_DATA_FOR_GUEST,
+  id,
+  slug,
+});
 
 export const fetchDataForUrlShare = (value) => ({
   type: FETCH_DATA_FOR_URL_SHARE,

@@ -18,7 +18,6 @@ const Comments = ({
 }) => {
   const today = new Date();
   const date = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
-  console.log(oldComment);
 
   const showAllComment = () => oldComment.map((elt) => (
     <SingleComment

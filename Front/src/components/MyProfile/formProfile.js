@@ -66,6 +66,10 @@ const FormProfile = ({
         sendDataForUpdateUser();
       }
     }
+    else if (password !== verifyPassword) {
+      const message = 'Vos mot de passe ne sont pas identiques';
+      errorMessage(message, divElt);
+    }
     else {
       sendDataForUpdateUser();
     }

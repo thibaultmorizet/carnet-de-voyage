@@ -12,7 +12,7 @@ const Contact = (store) => (next) => (action) => {
         text: state.contact.message,
       })
         .then((response) => {
-          console.log('200');
+          console.log(response);
         })
         .catch((error) => console.log(error));
       break;

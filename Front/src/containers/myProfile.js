@@ -17,7 +17,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchDataForUser: () => {
-    console.log('salut');
     dispatch(fetchDataForUser());
   },
   changeFieldForDataUser: (value, name) => {

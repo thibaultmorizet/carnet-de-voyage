@@ -6,17 +6,25 @@ import Cookies from 'js-cookie';
 import Button from '../Button';
 import Menu from '../Menu';
 import MenuDesktop from '../MenuDesktop';
+import MenuBurger from '../MenuBurger';
 import './styles.scss';
 
 const Header = () => (
   <header className="headerHomePage">
     <div className="headerHomePage__mobile">
+      {!Cookies.get('loggedIn') && (
       <NavLink
         to="/login"
         exact
       >
-        <Button text="Connexion" />
+        <Button className="headerHomePage__mobile--button" text="Connexion" />
       </NavLink>
+      )}
+
+      {Cookies.get('loggedIn') && (
+      <MenuBurger />
+      )}
+
     </div>
 
     <div className="headerHomePage__desktop">

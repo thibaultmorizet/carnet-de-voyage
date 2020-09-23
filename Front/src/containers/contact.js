@@ -19,7 +19,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   sendEmailContact: () => {
     dispatch(sendEmailContact());
-    console.log('sendEmailContact');
   },
 });
 

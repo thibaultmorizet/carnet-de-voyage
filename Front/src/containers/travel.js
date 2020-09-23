@@ -24,15 +24,12 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchDataForSingleTravel: (id, type) => {
-    console.log('je passe dans fetchDataForSingleTravel');
     dispatch(fetchDataForSingleTravel(id, type));
   },
   saveDataForSingleStep: (value, images, like, id, description, comment) => {
-    console.log('je passe dans saveDataForSingleStep');
     dispatch(saveDataForSingleStep(value, images, like, id, description, comment));
   },
   fetchDataForUrlShare: (id) => {
-    console.log('fetchDataForUrlShare', id);
     dispatch(fetchDataForUrlShare(id));
   },
 
