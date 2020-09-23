@@ -12,6 +12,7 @@ const mapStateToProps = (state) => ({
   status: state.updateTravel.status,
   response: state.updateTravel.response,
   loading: state.updateTravel.loading,
+  unthorizedResponse: state.updateTravel.unthorizedResponse,
 });
 
 const mapDispatchToProps = (dispatch) => ({

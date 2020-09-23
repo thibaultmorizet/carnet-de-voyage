@@ -22,6 +22,7 @@ import Travel from '../Travel';
 import Privacy from '../Privacy';
 import CreateTravel from '../CreateTravel';
 import UpdateTravel from '../UpdateTravel';
+import MyProfile from '../MyProfile';
 import NotFound from '../404/page404';
 
 const CarnetDeVoyage = ({ loggedIn }) => {
@@ -106,20 +107,31 @@ const CarnetDeVoyage = ({ loggedIn }) => {
           </Page>
         </Route>
 
+       <Route exact path="/travels/:id/:type">
+            <Page>
+              <Travel />
+            </Page>
+          </Route>
+
         <Route exact path="/travel/:id/update">
           <Page>
             <UpdateTravel />
           </Page>
         </Route>
 
-        <Route exact path="" component={NotFound} />
+        <Route exact path="/user/myprofile">
+      <Page>
+        <MyProfile />
+      </Page>
+    </Route>
+
+    <Route exact path="" component={NotFound} />
 
       </Switch>
 
-      <Footer />
-    </div>
-  );
-};
+    <Footer />
+  </div>
+);
 
 // == Export
 export default CarnetDeVoyage;

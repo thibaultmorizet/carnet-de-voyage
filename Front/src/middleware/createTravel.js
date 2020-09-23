@@ -16,12 +16,10 @@ const Login = (store) => (next) => (action) => {
         picture_data: state.createTravel.picture[0].data,
       }, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
-          console.log(response);
           const actionToDispatch = saveDataResponseCreateTravel('Success');
           store.dispatch(actionToDispatch);
         })
         .catch((error) => {
-          console.log(error);
           const actionToDispatch = saveDataResponseCreateTravel('Error');
           store.dispatch(actionToDispatch);
         });

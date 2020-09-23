@@ -16,10 +16,14 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 
+
+
 class SecurityController extends AbstractController
 {
     /**
+     * 
      * @Route("/api/login/checkactivation", name="api_login_checkactivation")
+     * 
      */
     public function apiCheckActivation(Request $request, UserRepository $userRepository)
     {

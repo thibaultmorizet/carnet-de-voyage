@@ -8,7 +8,6 @@
   background-size: cover;
   background-position: center;
   height: 100vh;
-  padding-top: 1em;
 
   &__form {
     
@@ -27,6 +26,9 @@
     margin-bottom: 1em;
 
   }
+  &--submit {
+    margin-top: 1em;
+  }
   & form {
 
     width: 80%;
@@ -35,6 +37,7 @@
   }
  }
 }
+
 
 .errorMessage {
   font-size: .8em;

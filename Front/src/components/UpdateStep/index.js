@@ -9,7 +9,7 @@ const UpdateStep = () => (
     <MenuBurger />
     <MenuDesktop />
     <h2 className="createStep__title">Votre Voyage</h2>
-    <span className="createStep__span">Modifier l'étape 1</span>
+    <span className="createStep__span">Modifier l'étape</span>
     <FormUpdateStep />
   </div>
 );
