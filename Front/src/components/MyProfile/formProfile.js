@@ -112,6 +112,13 @@ const FormProfile = ({
               onChange={changeFieldForDataUser}
             />
 
+            <div className="formProfile__form--span">
+              <span>
+                Le mot de passe doit contenir au minimum 8 caractères,
+                une majuscule et un chiffre
+              </span>
+            </div>
+
           </div>
           <div className="formProfile__form--buttons">
             <input type="submit" className="submitButtonUser" value="Enregistrer les modifications" />
