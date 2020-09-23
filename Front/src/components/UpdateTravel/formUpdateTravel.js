@@ -116,7 +116,7 @@ const FormUpdateTravel = ({
 
   const handleDeleteTravel = () => {
     deleteTravel();
-    return <Redirect push to="/travels/list" />;
+    return <Redirect push to="/" />;
   };
 
   return (

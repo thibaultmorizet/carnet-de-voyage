@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 
 import formProfile from 'src/components/MyProfile/formProfile';
-import { fetchDataForUser, changeFieldForDataUser, sendDataForUpdateUser } from '../actions/myProfile';
+import {
+  fetchDataForUser, changeFieldForDataUser, sendDataForUpdateUser, deleteUser,
+} from '../actions/myProfile';
 
 const mapStateToProps = (state) => ({
   lastname: state.myProfile.lastname,
@@ -24,6 +26,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   sendDataForUpdateUser: () => {
     dispatch(sendDataForUpdateUser());
+  },
+  deleteUser: () => {
+    dispatch(deleteUser());
   },
 
 });

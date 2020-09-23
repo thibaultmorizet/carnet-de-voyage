@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import {
-  FETCH_DATA_FOR_USER, saveDataForUser, SEND_DATA_FOR_UPDATE_USER, changeFieldForDataUser,
+  FETCH_DATA_FOR_USER, saveDataForUser, SEND_DATA_FOR_UPDATE_USER, changeFieldForDataUser, DELETE_USER,
 } from '../actions/myProfile';
 
 const Register = (store) => (next) => (action) => {
@@ -32,6 +32,18 @@ const Register = (store) => (next) => (action) => {
       }, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => store.dispatch(changeFieldForDataUser('Success', 'response')))
         .catch((error) => store.dispatch(changeFieldForDataUser('Error', 'response')));
+      break;
+    }
+    case DELETE_USER: {
+      const state = store.getState();
+      console.log(state);
+      const { id } = state.myProfile;
+      // store.dispatch(saveDataForUser());
+      const token = Cookies.get('token');
+
+      axios.delete(`http://34.239.44.174/api/user/${id}/delete`, { headers: { Authorization: `Bearer ${token}` } })
+        .then((response) => store.dispatch(saveDataForUser(response.data)))
+        .catch((error) => console.log(error));
       break;
     }
     default:
