@@ -9,6 +9,7 @@ import {
 const mapStateToProps = (state) => ({
   travelsInProgress: state.travelsList.travelsInProgress,
   travelsDone: state.travelsList.travelsDone,
+  loading: state.travelsList.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

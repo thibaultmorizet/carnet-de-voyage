@@ -14,7 +14,7 @@ const travelsList = (state = initialState, action = {}) => {
         travelsInProgress: action.travelsInProgress,
         travelsDone: action.travelsDone,
         loading: false,
-      }
+      };
     default:
       return state;
   }

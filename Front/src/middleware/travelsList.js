@@ -17,7 +17,7 @@ const travelsList = (store) => (next) => (action) => {
           const travelsDone = data.filter((elt) => elt.status === true);
           console.log('travelsdone', travelsDone);
 
-          store.dispatch(saveDataTravelsList(travelsInProgress, travelsDone ));
+          store.dispatch(saveDataTravelsList(travelsInProgress, travelsDone));
         })
         .catch((error) => console.log(error));
       break;
