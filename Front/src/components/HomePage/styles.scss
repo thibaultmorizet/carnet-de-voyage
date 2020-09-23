@@ -8,7 +8,10 @@
 .headerHomePage {
   &__mobile {
     display: block;
-    padding-top: 1em;
+    
+    & .button {
+      padding-top: 1em;
+    }
   }
   &__desktop {
     display: none;

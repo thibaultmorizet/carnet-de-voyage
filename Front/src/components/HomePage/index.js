@@ -8,7 +8,7 @@ import './styles.scss';
 const HomePage = () => (
   <div className="homePage">
     <Header />
-    <Title text="Carnets de Voyage" />
+    <Title text="Carnet de Voyage" />
     <Presentation />
     <UrlInput />
   </div>
