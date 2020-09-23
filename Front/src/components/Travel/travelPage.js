@@ -2,6 +2,7 @@
 /* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Cookies from 'js-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -10,24 +11,38 @@ import {
 import Spinner from 'src/components/Spinner';
 import { changeDateFormat, addImage } from 'src/selectors/carnetDeVoyage';
 import Comments from 'src/containers/comment';
-import Map from './map';
+import Map from 'src/containers/mapShowTravel';
 import './styles.scss';
 
 const TravelPage = ({
-  travel, step, fetchDataForSingleTravel, loading, saveDataForSingleStep, title, currentPicture, like, description, currentId,
+  travel,
+  step,
+  fetchDataForSingleTravel,
+  loading,
+  saveDataForSingleStep,
+  title,
+  currentPicture,
+  like,
+  description,
+  currentId,
+  response,
 }) => {
-  const { id } = useParams();
+  console.log('url', urlShare);
+  const { id, type } = useParams();
   const history = useHistory();
-
-  console.log('step', step);
+  console.log('type', type);
 
   useEffect(() => {
-    fetchDataForSingleTravel(id);
+    fetchDataForSingleTravel(id, type);
   }, []);
 
   useEffect(() => {
     addImage(currentPicture);
   }, [currentPicture]);
+
+  const shareTravel = (evt) => {
+    evt.target.remove();
+  };
 
   return (
     <div className="travelPage">
@@ -37,33 +52,51 @@ const TravelPage = ({
       {!loading && step.length !== 0 && (
         <>
           <div className="travelPage__header">
+            {Cookies.get('loggedIn') && type === undefined && (
             <Link to="/travels/list" className="travelPage__header--return">
               <FontAwesomeIcon icon={faArrowCircleLeft} />
               <p>Revenir</p>
             </Link>
+            )}
 
             <h2 className="travelPage__header--title">{travel.title}</h2>
-            <Link to={`/travel/${id}/update`}>
-              <FontAwesomeIcon className="travelPage__header--icon" icon={faPen} />
-            </Link>
+            {Cookies.get('loggedIn') && type === undefined && (
+              <a href={`/travel/${id}/update`}>
+                <FontAwesomeIcon className="travelPage__header--icon" icon={faPen} />
+              </a>
+            )}
 
             <p className="travelPage__header--date"> {changeDateFormat(travel.creation_date)} </p>
             <p className="travelPage__header--description">{travel.description}
             </p>
-            <Link to={`/travel/${id}/add`}>
+
+            {Cookies.get('loggedIn') && type === undefined && (
+            <a href={`/travel/${id}/add`}>
               <input type="button" className="travelPage__header--addStep" value="Ajouter une étape" />
-            </Link>
+            </a>
+            )}
+
+            {Cookies.get('loggedIn') && type === undefined && (
+            <div className="travelPage__shareDiv">
+              <input type="button" className="travelPage__header--addStep shareTravel" value="Créer un lien de partage" onClick={shareTravel} />
+            </div>
+            )}
+
           </div>
           <div id="travelPage__map" />
-          <Map step={step} onClickStep={saveDataForSingleStep} />
+          <Map onClickStep={saveDataForSingleStep} />
 
           <div className="travelPage__content">
             <h3 className="travelPage__content--title">{title}</h3>
             <p className="travelPage__content--excerpt">{description}</p>
             <div className="travelPage__content--images"> </div>
-            <Link to={`/travel/${id}/update/${currentId}`}>
-              <input type="button" className="travelPage__content--updateStep" value="Modifier cette étape" />
-            </Link>
+
+            {Cookies.get('loggedIn') && type === undefined && (
+              <div className="travelPage__content--updateDiv">
+                <a href={`/travel/${id}/update/${currentId}`} className="travelPage__content--updateStep"> Modifer cette étape </a>
+              </div>
+            )}
+
             <Comments like={like} />
 
           </div>
@@ -71,6 +104,9 @@ const TravelPage = ({
       )}
       {!loading && step.length === 0 && (
         <Redirect to={`/travel/${id}/add`} />
+      )}
+      {!response && (
+        <Redirect to="/" />
       )}
     </div>
   );
@@ -87,6 +123,8 @@ TravelPage.propTypes = {
   like: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
   currentId: PropTypes.number,
+  urlShare: PropTypes.string.isRequired,
+  response: PropTypes.bool.isRequired,
 };
 
 TravelPage.defaultProps = {

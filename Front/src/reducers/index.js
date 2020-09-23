@@ -9,6 +9,8 @@ import contact from './contact';
 import travel from './travel';
 import comment from './comment';
 import createTravel from './createTravel';
+import updateTravel from './updateTravel';
+import myProfile from './myProfile';
 
 export default combineReducers({
   register,
@@ -21,4 +23,6 @@ export default combineReducers({
   travel,
   comment,
   createTravel,
+  updateTravel,
+  myProfile,
 });

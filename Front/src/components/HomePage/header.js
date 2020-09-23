@@ -1,10 +1,12 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/jsx-no-undef */
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Button from '../Button';
 import Menu from '../Menu';
-import './styles.scss';
 import MenuDesktop from '../MenuDesktop';
+import './styles.scss';
 
 const Header = () => (
   <header className="headerHomePage">

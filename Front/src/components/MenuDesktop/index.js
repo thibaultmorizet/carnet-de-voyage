@@ -21,21 +21,20 @@ const MenuDesktop = () => {
             <GiGiantSquid size={30} />
           </NavLink>
         </span>
-        <li className="menu__nav--li">
+        {/* <li className="menu__nav--li">
           <NavLink
             to="/admin/userlist"
             exact
           >
             Administration
           </NavLink>
-        </li>
+        </li> */}
         <li className="menu__nav--li">
-          <NavLink
-            to="/user/{id}"
-            exact
+          <a
+            href="/user/myprofile"
           >
             Mon profil
-          </NavLink>
+          </a>
         </li>
         <li className="menu__nav--li">
           <NavLink
@@ -45,14 +44,14 @@ const MenuDesktop = () => {
             Mes voyages
           </NavLink>
         </li>
-        <li className="menu__nav--li">
+        {/* <li className="menu__nav--li">
           <NavLink
             to="/travels/follow/list"
             exact
           >
             Voyages suivis
           </NavLink>
-        </li>
+        </li> */}
         <li className="menu__nav--li">
           <a
             href="/"

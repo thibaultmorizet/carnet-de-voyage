@@ -12,7 +12,8 @@ const Login = (store) => (next) => (action) => {
         title: state.createTravel.title,
         description: state.createTravel.description,
         travel_date: state.createTravel.creation_date,
-        picture_url: state.createTravel.picture,
+        picture_travel: state.createTravel.picture[0].url,
+        picture_data: state.createTravel.picture[0].data,
       }, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
           console.log(response);

@@ -24,7 +24,7 @@ const CreateStep = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.log(error);
-          const actioToDispatch = saveDataStep(error.name);
+          const actioToDispatch = saveDataStep('Error');
           store.dispatch(actioToDispatch);
         });
       break;

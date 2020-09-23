@@ -21,10 +21,12 @@ import Contact from '../Contact';
 import Travel from '../Travel';
 import Privacy from '../Privacy';
 import CreateTravel from '../CreateTravel';
+import UpdateTravel from '../UpdateTravel';
+import MyProfile from '../MyProfile';
 
-// == Composant
 const CarnetDeVoyage = ({ loggedIn }) => {
-  console.log(loggedIn);
+  console.log('status', loggedIn);
+  console.log('cookie', Cookies.get('loggedIn'));
   return (
     <div className="carnetDeVoyage">
       <Route exact path="/">
@@ -53,7 +55,7 @@ const CarnetDeVoyage = ({ loggedIn }) => {
         </Page>
       </Route>
       <Route exact path="/login">
-        {Cookies.get('loggedIn') ? <Redirect to="/travels/list" /> : (
+        {Cookies.get('loggedIn') ? <Redirect push to="/travels/list" /> : (
           <Page>
             <Login />
           </Page>
@@ -64,7 +66,7 @@ const CarnetDeVoyage = ({ loggedIn }) => {
       </Route>
 
       <Route exact path="/travels/list">
-        {!loggedIn ? <Redirect to="/login" /> : (
+        {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
           <Page>
             <TravelsList />
           </Page>
@@ -72,7 +74,7 @@ const CarnetDeVoyage = ({ loggedIn }) => {
 
       </Route>
       <Route exact path="/travel/:id/add">
-        {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+        {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
           <Page>
             <CreateStep />
           </Page>
@@ -80,7 +82,7 @@ const CarnetDeVoyage = ({ loggedIn }) => {
 
       </Route>
       <Route exact path="/travel/:id/update/:type">
-        {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+        {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
           <Page>
             <UpdateStep />
           </Page>
@@ -88,7 +90,7 @@ const CarnetDeVoyage = ({ loggedIn }) => {
       </Route>
 
       <Route exact path="/travels/create">
-        {!Cookies.get('loggedIn') ? <Redirect to="/login" /> : (
+        {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
           <Page>
             <CreateTravel />
           </Page>
@@ -98,6 +100,24 @@ const CarnetDeVoyage = ({ loggedIn }) => {
       <Route exact path="/travel/:id">
         <Page>
           <Travel />
+        </Page>
+      </Route>
+
+      <Route exact path="/travels/:id/:type">
+        <Page>
+          <Travel />
+        </Page>
+      </Route>
+
+      <Route exact path="/travel/:id/update">
+        <Page>
+          <UpdateTravel />
+        </Page>
+      </Route>
+
+      <Route exact path="/user/myprofile">
+        <Page>
+          <MyProfile />
         </Page>
       </Route>
 

@@ -33,14 +33,24 @@ class MailerController extends AbstractController
     public function sendEmailContact(MailerInterface $mailer, Request $request)
     {
         $requestArray = json_decode($request->getContent(), true);
+
+        //Send email to preconfigure Mail
         $email = (new TemplatedEmail())
             ->from($requestArray["email"])
             ->to("sebtoorop@gmail.com")
             ->subject($requestArray["object"])
             ->text($requestArray["text"]);
             
-            
         $mailer->send($email);
+
+        //Send a copy
+        $emailCopy = (new TemplatedEmail())
+            ->from('carnetdevoyage@example.com')
+            ->to($requestArray["email"])
+            ->subject($requestArray["object"]. 'copie')
+            ->text('Vous venez de nous faire parvenir ce message : '. PHP_EOL . $requestArray["text"]);
+
+        $mailer->send($emailCopy);
 
 	return $this->json(
             [

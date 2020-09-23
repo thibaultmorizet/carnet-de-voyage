@@ -100,6 +100,7 @@ const FormTravel = ({
             withIcon
             onChange={handleChangePicture}
             imgExtension={['.jpg', '.png', '.jpeg']}
+            label="Max file size: 5mb, accepted: jpeg, jpg, png"
             maxFileSize={5242880}
             withPreview
             singleImage
