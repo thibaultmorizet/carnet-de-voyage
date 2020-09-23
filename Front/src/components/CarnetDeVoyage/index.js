@@ -107,11 +107,11 @@ const CarnetDeVoyage = ({ loggedIn }) => {
           </Page>
         </Route>
 
-       <Route exact path="/travels/:id/:type">
-            <Page>
-              <Travel />
-            </Page>
-          </Route>
+        <Route exact path="/travels/:id/:type">
+          <Page>
+            <Travel />
+          </Page>
+        </Route>
 
         <Route exact path="/travel/:id/update">
           <Page>
@@ -120,18 +120,19 @@ const CarnetDeVoyage = ({ loggedIn }) => {
         </Route>
 
         <Route exact path="/user/myprofile">
-      <Page>
-        <MyProfile />
-      </Page>
-    </Route>
+          <Page>
+            <MyProfile />
+          </Page>
+        </Route>
 
-    <Route exact path="" component={NotFound} />
+        <Route exact path="" component={NotFound} />
 
       </Switch>
 
-    <Footer />
-  </div>
-);
+      <Footer />
+    </div>
+  );
+};
 
 // == Export
 export default CarnetDeVoyage;
