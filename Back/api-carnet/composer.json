@@ -11,7 +11,6 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
         "lexik/jwt-authentication-bundle": "^2.8",
-        "nelmio/api-doc-bundle": "^3.7",
         "nelmio/cors-bundle": "^2.1",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^5.6",
@@ -42,6 +41,8 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "symfony/browser-kit": "5.1.*",
+        "symfony/css-selector": "5.1.*",
         "symfony/phpunit-bridge": "^5.1"
     },
     "config": {

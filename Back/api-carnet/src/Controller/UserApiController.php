@@ -17,10 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use OpenApi\Annotations as OA;
-use Swagger\Annotations as SWG;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
+
 
 class UserApiController extends AbstractController
 {
@@ -114,12 +111,6 @@ class UserApiController extends AbstractController
 
     /**
      * @Route("/api/admin/user/list", name="user_list", methods={"GET"})
-     * 
-     * @SWG\Response(
-     *     response=200,
-     *     description="a list of User"
-     * )
-     * @Security(name="Bearer")
      */
     public function list(UserRepository $userRepository)
     {
@@ -160,8 +151,8 @@ class UserApiController extends AbstractController
             }
         }
 
-        //if the id of the connected user is same of the id in the URL
-        if ($userConnectedId == $id or $userAuthorization == true) {
+        //if the user is exist or user is admin
+        if ($userConnectedId or $userAuthorization == true) {
             //we return the informations of the user
             return $this->json(
                 $user,
