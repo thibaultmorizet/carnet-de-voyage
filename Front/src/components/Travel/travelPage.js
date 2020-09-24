@@ -123,7 +123,6 @@ TravelPage.propTypes = {
   like: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
   currentId: PropTypes.number,
-  urlShare: PropTypes.string.isRequired,
   response: PropTypes.bool.isRequired,
 };
 
