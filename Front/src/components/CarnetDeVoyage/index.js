@@ -133,5 +133,4 @@ const CarnetDeVoyage = ({ loggedIn }) => {
   </div>
 );
 
-// == Export
 export default CarnetDeVoyage;
