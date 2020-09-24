@@ -257,7 +257,7 @@ class TravelApiController extends AbstractController
             // Path + old image file name
             $oldFilenameWithPath = getcwd() . "/uploads/pictures/" . $travel->getPictureUrl();
             // Delete old file image on disk
-            unlink(__DIR__ . "/../../public" . $oldFilenameWithPath);
+            unlink($oldFilenameWithPath);
             // Create new file image on disk
             $fileSystem->dumpFile($newFilenameWithPath, $dataImage);
             // updated the image name of the Travel object
