@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import TravelPage from 'src/components/Travel/travelPage';
-import { fetchDataForSingleTravel, saveDataForSingleStep, fetchDataForUrlShare } from 'src/actions/travel';
+import {
+  fetchDataForSingleTravel, saveDataForSingleStep, fetchDataForUrlShare,
+} from 'src/actions/travel';
 
 const mapStateToProps = (state) => ({
   travel: {

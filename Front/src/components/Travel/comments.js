@@ -15,6 +15,8 @@ const Comments = ({
   like,
   oldComment,
   comment,
+  likeStepForTravel,
+  unlikeStepForTravel,
 }) => {
   const today = new Date();
   const date = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
@@ -28,6 +30,20 @@ const Comments = ({
       comment={elt.comment}
     />
   ));
+
+  const handleClickLike = (evt) => {
+    console.log(evt.currentTarget);
+    const isItLike = evt.currentTarget.classList.contains('iconLike');
+    if (isItLike) {
+      evt.currentTarget.classList.remove('iconLike');
+      unlikeStepForTravel();
+    }
+    if (!isItLike) {
+      evt.currentTarget.classList.add('iconLike');
+      likeStepForTravel();
+    }
+  };
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const inputElement = evt.target.querySelector('input');
@@ -44,7 +60,7 @@ const Comments = ({
     <div className="comment">
       <h4 className="comment__title">Commentaires
         <span className="comment__title--nblike">{like} likes</span>
-        <FontAwesomeIcon className="comment__title--icon" icon={faThumbsUp} />
+        <FontAwesomeIcon className="comment__title--icon" icon={faThumbsUp} onClick={handleClickLike} />
       </h4>
       <div className="comment__allComment">
         {oldComment !== null && showAllComment()}

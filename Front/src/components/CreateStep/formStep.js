@@ -43,7 +43,7 @@ const FormStep = ({
   };
 
   const toastFailOrSuccess = () => {
-    if (count < 1) {
+    if (count === 1) {
       if (response === 'Error') {
         addToast('Une erreur s\'est produite. Veuillez réessayer plus tard', {
           appearance: 'error',
@@ -51,13 +51,13 @@ const FormStep = ({
         });
       }
       else if (response === 'Success') {
-        console.log('Votre étape a bien été crée. Votre voyage se passe bien ? :)');
-        addToast('ca passe', {
+        const message = 'Votre étape a bien été crée. Votre voyage se passe bien ? :)';
+        addToast(message, {
           appearance: 'success',
           autoDismiss: true,
-          autoDismissTimeout: '3000',
+          autoDismissTimeout: '2000',
         });
-        history.push(`/travel/${id}`);
+        history.push('/travels/list');
       }
     }
   };
@@ -137,7 +137,7 @@ const FormStep = ({
           </div>
 
           <div className="divElement_form">
-            <input className="formStep__element--submit" type="submit" value="Enregistrer l'étape" />
+            <input className="formStep__element--submit" type="submit" value="Enregistrer l'étape" onClick={() => setCount(1)} />
           </div>
         </div>
 
