@@ -28,19 +28,6 @@ const Comments = ({
     />
   ));
 
-  const handleClickLike = (evt) => {
-    console.log(evt.currentTarget);
-    const isItLike = evt.currentTarget.classList.contains('press');
-    if (isItLike) {
-      evt.currentTarget.classList.remove('iconLike');
-      unlikeStepForTravel();
-    }
-    if (!isItLike) {
-      evt.currentTarget.classList.add('iconLike');
-      likeStepForTravel();
-    }
-  };
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const inputElement = evt.target.querySelector('input');
