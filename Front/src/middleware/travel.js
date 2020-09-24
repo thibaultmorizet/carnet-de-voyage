@@ -36,7 +36,7 @@ const travel = (store) => (next) => (action) => {
       const token = Cookies.get('token');
       axios.get(`http://34.239.44.174/api/generate_url/${action.value}`, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
-          const allUrl = `http://34.239.44.174/travel/${response.data.id}/${response.data.url_token}`;
+          const allUrl = `http://34.202.233.128/travel/${response.data.id}/${response.data.url_token}`;
           const pCreate = document.createElement('p');
           const divElement = document.querySelector('.travelPage__shareDiv');
           pCreate.className = 'shareUrl';
