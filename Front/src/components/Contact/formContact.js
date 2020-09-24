@@ -1,11 +1,18 @@
 import React from 'react';
 import './styles.scss';
-import { NavLink, useHistory, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { errorMessage } from 'src/selectors/carnetDeVoyage';
 import FormInput from '../FormInput';
 
 const FormContact = ({
-  changeValueContact, changeCheckboxContact, checked, email, objet, description, sendEmailContact,
+  changeValueContact,
+  changeCheckboxContact,
+  checked,
+  email,
+  objet,
+  message,
+  sendEmailContact,
 }) => {
   const history = useHistory();
   const handleOnChange = (evt) => {
@@ -15,17 +22,17 @@ const FormContact = ({
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    const allDataForRegister = [email, objet, description];
+    const allDataForRegister = [email, objet, message];
     const isEmptyElement = allDataForRegister.includes('');
     const submitElt = '.contact__submit--div';
 
     if (isEmptyElement === true) {
-      const message = 'Veuillez remplir tous les champs';
-      errorMessage(message, submitElt);
+      const messageSend = 'Veuillez remplir tous les champs';
+      errorMessage(messageSend, submitElt);
     }
     else if (checked === false) {
-      const message = 'Veuillez acceptez la politique de confidentialité';
-      errorMessage(message, submitElt);
+      const messageSend = 'Veuillez acceptez la politique de confidentialité';
+      errorMessage(messageSend, submitElt);
     }
     else {
       sendEmailContact();
@@ -69,6 +76,16 @@ const FormContact = ({
       </form>
     </div>
   );
+};
+
+FormContact.propTypes = {
+  changeValueContact: PropTypes.func.isRequired,
+  changeCheckboxContact: PropTypes.func.isRequired,
+  checked: PropTypes.bool.isRequired,
+  email: PropTypes.string.isRequired,
+  objet: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+  sendEmailContact: PropTypes.func.isRequired,
 };
 
 export default FormContact;

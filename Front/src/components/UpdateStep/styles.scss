@@ -40,6 +40,9 @@
       justify-content: center;
       align-items: flex-start;
     }
+    &--finalInput {
+      flex-wrap: wrap;
+    }
   }
   
 }
@@ -57,6 +60,13 @@
     height: auto;
   }
 }
+
+.submit_update_travel {
+  display: none;
+  justify-content: center;
+}
+
+
 
 .pictures__icon {
   color: red;

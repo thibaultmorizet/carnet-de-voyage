@@ -17,7 +17,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(sendComment());
   },
   likeStepForTravel: () => {
-    console.log('je like');
     dispatch(likeStepForTravel());
   },
   unlikeStepForTravel: () => {

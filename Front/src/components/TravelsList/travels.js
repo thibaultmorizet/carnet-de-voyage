@@ -28,36 +28,73 @@ const Container = ({
             <input type="button" name="travelsInput" className="travelsInput" value="Créer un nouveau voyage" />
           </a>
 
-          <div className="travels__inProgress">
-            <h2 className="travels__container--title"> Voyages en cours </h2>
-            <div className="travels__allTravels">
-              {travelsInProgress.map((elt) => (
-                <CardTravel
-                  key={elt.id}
-                  title={elt.title}
-                  description={elt.description}
-                  image={elt.pictureUrl}
-                  url={elt.id}
-                  onClick={deleteTravel}
-                />
-              ))}
-            </div>
-          </div>
+          {travelsInProgress.length !== 0 && travelsDone !== 0 && (
+            <>
+              <div className="travels__inProgress">
+                <h2 className="travels__container--title"> Voyages en cours </h2>
+                <div className="travels__allTravels">
 
-          <div className="travels__finish">
-            <h2 className="travels__container--title"> Voyages terminés </h2>
-            <div className="travels__allTravels">
-              {travelsDone.map((elt) => (
-                <CardTravel
-                  key={elt.id}
-                  title={elt.title}
-                  description={elt.description}
-                  image={elt.pictureUrl}
-                  url={elt.id}
-                />
-              ))}
+                  {travelsInProgress.length !== 0 && (
+                  <>
+                    {travelsInProgress.map((elt) => (
+                      <CardTravel
+                        key={elt.id}
+                        title={elt.title}
+                        description={elt.description}
+                        image={elt.pictureUrl}
+                        url={elt.id}
+                        onClick={deleteTravel}
+                      />
+
+                    ))}
+
+                  </>
+                  )}
+
+                  {travelsInProgress.length === 0 && (
+                  <div>
+                    <h4 className="notTravelsDone">Vous n'avez pas encore de voyage en cours, n'hésitez pas à en ajouter :)</h4>
+                  </div>
+                  )}
+
+                </div>
+              </div>
+
+              <div className="travels__finish">
+                <h2 className="travels__container--title"> Voyages terminés </h2>
+                <div className="travels__allTravels">
+                  {travelsDone.length !== 0 && (
+                  <>
+                    {travelsDone.map((elt) => (
+
+                      <CardTravel
+                        key={elt.id}
+                        title={elt.title}
+                        description={elt.description}
+                        image={elt.pictureUrl}
+                        url={elt.id}
+                      />
+
+                    ))}
+                  </>
+                  )}
+
+                  {travelsDone.length === 0 && (
+                  <div>
+                    <h4 className="notTravelsDone">Vous n'avez pas encore fini de voyager, prenez votre temps et profiter de chaque minute</h4>
+                  </div>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+
+          {travelsInProgress.length === 0 && travelsDone === 0 && (
+            <div>
+              <h4 className="notTravelsDone">Vous n'avez pas aucun voyage, n'hésitez pas à en ajouter :)</h4>
             </div>
-          </div>
+          )}
+
         </>
       )}
 
@@ -70,6 +107,7 @@ Container.propTypes = {
   travelsInProgress: PropTypes.array.isRequired,
   travelsDone: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
+  deleteTravel: PropTypes.func.isRequired,
 };
 
 export default Container;

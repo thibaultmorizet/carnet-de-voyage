@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 const Card = ({
-  name, spe, job, photo, link,
+  name,
+  spe,
+  job,
+  photo,
+  link,
 }) => (
   <>
     <a href={link} className="card">

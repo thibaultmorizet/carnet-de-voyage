@@ -3,7 +3,9 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './styles.scss';
 import { useToasts } from 'react-toast-notifications';
-import { useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner, faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
 import {
   errorMessage,
@@ -22,6 +24,7 @@ const FormTravel = ({
   response,
 }) => {
   const { addToast } = useToasts();
+  const { id } = useParams();
   const history = useHistory();
   const toastFailOrSuccess = () => {
     const message = 'Votre voyage à bien été enregistré. Vous pouvez dès maintenant ajouter une étape :)';
@@ -60,12 +63,19 @@ const FormTravel = ({
       errorMessage(message, submitElt);
     }
     else {
+      const divElement = document.querySelector('.submit__loading');
       saveDateCreateTravel();
+      divElement.style.display = 'flex';
     }
   };
 
   return (
     <div className="formTravel">
+
+      <Link to="/travels/list" className="travelPage__header--return">
+        <FontAwesomeIcon icon={faArrowCircleLeft} />
+        <p>Revenir à ma liste de voyage</p>
+      </Link>
       <form action="" className="formTravel__form" onSubmit={handleSubmit}>
         <div className="formTravel__form--firstInput">
           <FormInput
@@ -108,6 +118,9 @@ const FormTravel = ({
         </div>
 
         <div className="formTravel__form--div">
+          <div className="submit__loading submit_create_travel">
+            <FontAwesomeIcon icon={faSpinner} spin />
+          </div>
           <input className="formTravel__submit" type="submit" value="Enregistrer mon nouveau voyage" />
         </div>
 
