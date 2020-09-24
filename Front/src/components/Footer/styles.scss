@@ -1,10 +1,11 @@
 .footer {
  position: relative;
  bottom: 2.35em;
+ letter-spacing: 0.2em;
   &__nav {
     // position: absolute;  
     width: 100%;
-    background-color: rgba(255, 255, 255, .2);
+    background-color: rgba(255, 255, 255, .4);
     backdrop-filter: blur(1px);
     bottom: 0;
     color: white;
@@ -13,11 +14,12 @@
       justify-content: center;
     }
     &--ul a:hover {
-      color: rgb(106, 189, 219);
+      color: #2B8BB0;
+      font-weight: bold;
     }
     &--li {
       padding: 1em;
-      text-shadow: 0px 1px 3px #000000;
+      text-shadow: 0px 0px 4px rgba(0,0,0,0.6);
       font-family: 'IBM Plex Sans', sans-serif;
       font-weight: bold;
       font-size: .8em;

@@ -36,7 +36,7 @@
       }
 
       img {
-        width: 18em; 
+        width: 17em; 
         height: 11em; 
         object-fit: cover;
         padding-top: 1em;
@@ -105,6 +105,18 @@
     .travels__finish {
       padding-top: 1.5em;
     }
+  }
+
+  .cardTravel {
+    display: inline;
+    padding: 1em;
+    
+  }
+
+  .travels__allTravels {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
   }
 }
 @media only screen and (min-width : 1024px) {

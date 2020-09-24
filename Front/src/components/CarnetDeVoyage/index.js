@@ -25,114 +25,110 @@ import UpdateTravel from '../UpdateTravel';
 import MyProfile from '../MyProfile';
 import NotFound from '../404/page404';
 
-const CarnetDeVoyage = ({ loggedIn }) => {
-  console.log('status', loggedIn);
-  console.log('cookie', Cookies.get('loggedIn'));
-  return (
-    <div className="carnetDeVoyage">
+const CarnetDeVoyage = ({ loggedIn }) => (
+  <div className="carnetDeVoyage">
 
-      <Switch>
+    <Switch>
 
-        <Route exact path="/">
+      <Route exact path="/">
+        <Page>
+          <HomePage />
+        </Page>
+      </Route>
+      <Route exact path="/presentation">
+        <Page>
+          <PresentationTeam />
+        </Page>
+      </Route>
+      <Route exact path="/privacy">
+        <Page>
+          <Privacy />
+        </Page>
+      </Route>
+      <Route exact path="/contact">
+        <Page>
+          <Contact />
+        </Page>
+      </Route>
+      <Route exact path="/register">
+        <Page>
+          <Register />
+        </Page>
+      </Route>
+      <Route exact path="/login">
+        {Cookies.get('loggedIn') ? <Redirect push to="/travels/list" /> : (
           <Page>
-            <HomePage />
+            <Login />
           </Page>
-        </Route>
-        <Route exact path="/presentation">
+        )}
+      </Route>
+      <Route exact path="/admin/user/list">
+        <User />
+      </Route>
+
+      <Route exact path="/travels/list">
+        {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
           <Page>
-            <PresentationTeam />
+            <TravelsList />
           </Page>
-        </Route>
-        <Route exact path="/privacy">
+        )}
+
+      </Route>
+      <Route exact path="/travel/:id/add">
+        {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
           <Page>
-            <Privacy />
+            <CreateStep />
           </Page>
-        </Route>
-        <Route exact path="/contact">
+        )}
+
+      </Route>
+      <Route exact path="/travel/:id/update/:type">
+        {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
           <Page>
-            <Contact />
+            <UpdateStep />
           </Page>
-        </Route>
-        <Route exact path="/register">
+        )}
+      </Route>
+
+      <Route exact path="/travels/create">
+        {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
           <Page>
-            <Register />
+            <CreateTravel />
           </Page>
-        </Route>
-        <Route exact path="/login">
-          {Cookies.get('loggedIn') ? <Redirect push to="/travels/list" /> : (
-            <Page>
-              <Login />
-            </Page>
-          )}
-        </Route>
-        <Route exact path="/admin/user/list">
-          <User />
-        </Route>
+        )}
+      </Route>
 
-        <Route exact path="/travels/list">
-          {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
-            <Page>
-              <TravelsList />
-            </Page>
-          )}
+      <Route exact path="/travel/:id">
+        <Page>
+          <Travel />
+        </Page>
+      </Route>
 
-        </Route>
-        <Route exact path="/travel/:id/add">
-          {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
-            <Page>
-              <CreateStep />
-            </Page>
-          )}
+      <Route exact path="/travels/:id/:type">
+        <Page>
+          <Travel />
+        </Page>
+      </Route>
 
-        </Route>
-        <Route exact path="/travel/:id/update/:type">
-          {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
-            <Page>
-              <UpdateStep />
-            </Page>
-          )}
-        </Route>
+      <Route exact path="/travel/:id/update">
+        <Page>
+          <UpdateTravel />
+        </Page>
+      </Route>
 
-        <Route exact path="/travels/create">
-          {!Cookies.get('loggedIn') ? <Redirect push to="/login" /> : (
-            <Page>
-              <CreateTravel />
-            </Page>
-          )}
-        </Route>
+      <Route exact path="/user/myprofile">
+        <Page>
+          <MyProfile />
+        </Page>
+      </Route>
 
-        <Route exact path="/travel/:id">
-          <Page>
-            <Travel />
-          </Page>
-        </Route>
+      <Route exact path="" component={NotFound} />
 
-        <Route exact path="/travels/:id/:type">
-          <Page>
-            <Travel />
-          </Page>
-        </Route>
+    </Switch>
 
-        <Route exact path="/travel/:id/update">
-          <Page>
-            <UpdateTravel />
-          </Page>
-        </Route>
-
-        <Route exact path="/user/myprofile">
-          <Page>
-            <MyProfile />
-          </Page>
-        </Route>
-
-        <Route exact path="" component={NotFound} />
-
-      </Switch>
-
-      <Footer />
-    </div>
-  );
-};
+    <Footer />
+  </div>
+);
 
 // == Export
 export default CarnetDeVoyage;

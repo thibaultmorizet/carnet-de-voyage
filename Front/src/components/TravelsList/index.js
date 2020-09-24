@@ -1,5 +1,6 @@
 import React from 'react';
-import Title from './travels';
+// eslint-disable-next-line import/no-named-as-default
+import Title from '../../containers/travelsList';
 import './styles.scss';
 import MenuBurger from '../MenuBurger';
 import MenuDesktop from '../MenuDesktop';
