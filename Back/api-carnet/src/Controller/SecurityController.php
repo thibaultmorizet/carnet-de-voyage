@@ -52,7 +52,7 @@ class SecurityController extends AbstractController
         }
 
 
-        return $this->json(
+   	return $this->json(
             $userData,
             200,
             []
