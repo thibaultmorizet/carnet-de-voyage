@@ -112,7 +112,7 @@ export const changeDateFormat = (dateWanted) => {
   return step_date;
 };
 
-export const addImage = (pictures) => {
+export const addImage = (pictures, openModal) => {
   if (pictures !== null) {
     const divElement = document.querySelector('.travelPage__content--images');
     const newDivElement = document.createElement('div');
@@ -122,6 +122,8 @@ export const addImage = (pictures) => {
       const imgElement = document.createElement('img');
       imgElement.className = 'stepImages__picture';
       imgElement.src = elt.data;
+      imgElement.addEventListener('click', openModal);
+
       newDivElement.appendChild(imgElement);
     });
   }
