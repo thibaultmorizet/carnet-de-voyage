@@ -5,6 +5,7 @@ import TravelsList from '../components/TravelsList/travels';
 import {
   fetchDataTravelsList,
 } from '../actions/travelsList';
+import { deleteTravel } from '../actions/updateTravel';
 
 const mapStateToProps = (state) => ({
   travelsInProgress: state.travelsList.travelsInProgress,
@@ -15,6 +16,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchDataTravelsList: () => {
     dispatch(fetchDataTravelsList());
+  },
+  deleteTravel: (id) => {
+    dispatch(deleteTravel(id));
   },
 });
 

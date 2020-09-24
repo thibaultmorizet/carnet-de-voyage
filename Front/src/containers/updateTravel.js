@@ -25,8 +25,8 @@ const mapDispatchToProps = (dispatch) => ({
   sendDataForUpdateTravel: () => {
     dispatch(sendDataForUpdateTravel());
   },
-  deleteTravel: () => {
-    dispatch(deleteTravel());
+  deleteTravel: (id) => {
+    dispatch(deleteTravel(id));
   },
 });
 

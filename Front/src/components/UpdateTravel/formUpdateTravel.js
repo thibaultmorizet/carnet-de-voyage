@@ -115,7 +115,7 @@ const FormUpdateTravel = ({
   };
 
   const handleDeleteTravel = () => {
-    deleteTravel();
+    deleteTravel(id);
     location.replace('/');
   };
 

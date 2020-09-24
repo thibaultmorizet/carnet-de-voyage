@@ -1,27 +1,19 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Spinner from 'src/components/Spinner';
 import './styles.scss';
 import CardTravel from './card';
-
-import img1 from '../../assets/images/background-machu.jpg';
 
 const Container = ({
   fetchDataTravelsList,
   travelsInProgress,
   travelsDone,
   loading,
+  deleteTravel,
 }) => {
   useEffect(() => {
     fetchDataTravelsList();
   }, []);
-
-  console.log('travel', travelsInProgress);
-
-  const travelsInProgressAddPage = () => {
-    console.log('trotot', travelsInProgress);
-  };
-
-  console.log('load', loading);
 
   return (
 
@@ -46,6 +38,7 @@ const Container = ({
                   description={elt.description}
                   image={elt.pictureUrl}
                   url={elt.id}
+                  onClick={deleteTravel}
                 />
               ))}
             </div>
@@ -70,6 +63,13 @@ const Container = ({
 
     </div>
   );
+};
+
+Container.propTypes = {
+  fetchDataTravelsList: PropTypes.func.isRequired,
+  travelsInProgress: PropTypes.array.isRequired,
+  travelsDone: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default Container;

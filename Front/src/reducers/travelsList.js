@@ -1,8 +1,8 @@
 import { SAVE_DATA_TRAVELS_LIST } from '../actions/travelsList';
 
 export const initialState = {
-  travelsInProgress: {},
-  travelsDone: {},
+  travelsInProgress: [],
+  travelsDone: [],
   loading: true,
 };
 

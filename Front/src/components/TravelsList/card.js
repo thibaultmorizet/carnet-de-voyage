@@ -1,12 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.scss';
 
 const CardTravel = ({
-  title, description, image, url,
+  title, description, image, url, onClick,
 }) => {
-  console.log('yo', title);
   const handleClickDelete = (evt) => {
-    console.log(evt.target);
+    evt.preventDefault();
+    onClick(url);
   };
   return (
     <div className="cardTravel">
@@ -20,6 +21,13 @@ const CardTravel = ({
       </a>
     </div>
   );
+};
+
+CardTravel.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  url: PropTypes.number.isRequired,
 };
 
 export default CardTravel;

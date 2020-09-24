@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import FormInput from 'src/components/FormInput';
 import { Link } from 'react-router-dom';
 import { errorMessage } from 'src/selectors/carnetDeVoyage';
@@ -14,7 +12,6 @@ const Comments = ({
   sendComment,
   like,
   oldComment,
-  comment,
   likeStepForTravel,
   unlikeStepForTravel,
 }) => {
@@ -75,7 +72,6 @@ const Comments = ({
     <div className="comment">
       <h4 className="comment__title">Commentaires
         <span className="comment__title--nblike">{like} likes</span>
-        {/* <FontAwesomeIcon className="comment__title--icon" icon={faThumbsUp} onClick={handleClickLike} /> */}
         <div className="likeIcon">
           <i className="likeIcon__i" onClick={onClickLike} />
           <span className="likeIcon__span">liked!</span>
@@ -114,7 +110,8 @@ Comments.propTypes = {
   sendComment: PropTypes.func.isRequired,
   like: PropTypes.number.isRequired,
   oldComment: PropTypes.array.isRequired,
-  comment: PropTypes.string.isRequired,
+  likeStepForTravel: PropTypes.func.isRequired,
+  unlikeStepForTravel: PropTypes.func.isRequired,
 };
 
 export default Comments;
