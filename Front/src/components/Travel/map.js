@@ -21,6 +21,13 @@ const Map = ({ step, onClickStep }) => {
       AllImages.push(currentImg);
     });
     onClickStep(title, AllImages, stepLike, id, description, comments);
+    const likeelement = document.querySelector('.press');
+    const likeSpanElement = document.querySelector('.likeIcon__span');
+    if (likeelement) {
+      likeelement.classList.remove('press');
+      likeSpanElement.classList.remove('press');
+    }
+
     const divElement = document.querySelector('.travelPage__content');
     divElement.style.display = 'block';
   };
