@@ -123,6 +123,7 @@ const TravelPage = ({
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             contentLabel="Example Modal"
+            shouldFocusAfterRender={false}
             className="modalEx modelEx2"
             style={{
               overlay: {
