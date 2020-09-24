@@ -33,7 +33,7 @@ const Comments = ({
 
   const handleClickLike = (evt) => {
     console.log(evt.currentTarget);
-    const isItLike = evt.currentTarget.classList.contains('iconLike');
+    const isItLike = evt.currentTarget.classList.contains('press');
     if (isItLike) {
       evt.currentTarget.classList.remove('iconLike');
       unlikeStepForTravel();
@@ -56,11 +56,30 @@ const Comments = ({
       errorMessage(message, '.comment__add--div');
     }
   };
+
+  const onClickLike = (evt) => {
+    evt.target.classList.toggle('press');
+    const span = document.querySelector('.likeIcon__span');
+    span.classList.toggle('press');
+
+    const isItLike = evt.currentTarget.classList.contains('press');
+    if (!isItLike) {
+      unlikeStepForTravel();
+    }
+    if (isItLike) {
+      likeStepForTravel();
+    }
+  };
+
   return (
     <div className="comment">
       <h4 className="comment__title">Commentaires
         <span className="comment__title--nblike">{like} likes</span>
-        <FontAwesomeIcon className="comment__title--icon" icon={faThumbsUp} onClick={handleClickLike} />
+        {/* <FontAwesomeIcon className="comment__title--icon" icon={faThumbsUp} onClick={handleClickLike} /> */}
+        <div className="likeIcon">
+          <i className="likeIcon__i" onClick={onClickLike} />
+          <span className="likeIcon__span">liked!</span>
+        </div>
       </h4>
       <div className="comment__allComment">
         {oldComment !== null && showAllComment()}

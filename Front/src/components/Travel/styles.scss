@@ -142,6 +142,10 @@
     }
     &--icon {
       margin-left: .5em;
+      cursor: pointer;
+      &:hover {
+        color: lightblue;
+      }
     }
   }
   &__add {
@@ -178,7 +182,7 @@
 }
 
 .iconLike {
-  color: red;
+  color: lightblue;
 }
 
 .singleComment {
@@ -320,4 +324,73 @@
   .singleComment__bubble {
     width: 60%;
   }
+}
+
+
+
+
+
+.likeIcon {
+  margin:0 auto;
+  position: relative;
+  display: inline;
+}
+
+.likeIcon__i {
+  cursor:pointer;
+  padding:10px 12px 8px;
+  background:#fff;
+  border-radius:50%;
+  display:inline-block;
+  color:#aaa;
+  transition:.2s;
+}
+
+.likeIcon__i:hover {
+  color:#666;
+}
+
+.likeIcon__i:before {
+  font-family:fontawesome;
+  content:'\f004';
+  font-style:normal;
+}
+
+.likeIcon__span {
+  position: absolute;
+  // bottom:70px;
+  left:0;
+  right:0;
+  visibility: hidden;
+  transition:.6s;
+  z-index:-2;
+  font-size:2px;
+  color:transparent;
+  font-weight:400;
+}
+
+.likeIcon__i.press {
+  animation: size .4s;
+  color:#e23b3b;
+}
+
+.likeIcon__span.press {
+  bottom: 10px;
+  left: 60px;
+  font-size:14px;
+  visibility:visible;
+  animation: fade 1s;
+}
+
+@keyframes fade {
+  0% {color: #transparent}
+  50% {color:#e23b3b}
+  100% {color:#transparent}
+}
+
+@keyframes size {
+  0% {padding:10px 12px 8px;}
+  50% {padding:14px 16px 12px;  
+    margin-top:-4px;}
+  100% {padding:10px 12px 8px;}
 }
