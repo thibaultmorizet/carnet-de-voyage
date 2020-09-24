@@ -8,13 +8,12 @@ import FormInput from 'src/components/FormInput';
 import Map from 'src/components/Map';
 import PropTypes from 'prop-types';
 import {
-  useParams, useHistory, Link,
+  useParams, Link,
 } from 'react-router-dom';
 import {
   errorMessage,
   handleDate,
   handlePicture,
-  toastNotification,
 } from 'src/selectors/carnetDeVoyage';
 import { useToasts } from 'react-toast-notifications';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -27,6 +26,7 @@ const FormStep = ({
   description,
   latitude,
   longitude,
+  picture,
   step_date,
   response,
   changeField,
@@ -34,7 +34,6 @@ const FormStep = ({
   changePicture,
 }) => {
   const { addToast } = useToasts();
-  const history = useHistory();
   const { id } = useParams();
   const [count, setCount] = useState(0);
 
@@ -57,7 +56,7 @@ const FormStep = ({
           autoDismiss: true,
           autoDismissTimeout: '2000',
         });
-        history.push('/travels/list');
+        location.replace(`/travel/${id}`);
       }
     }
   };
@@ -68,11 +67,11 @@ const FormStep = ({
 
   const handleForm = (evt) => {
     evt.preventDefault();
-    const allDataForRegister = [title, description, latitude, longitude, step_date];
+    const allDataForRegister = [title, description, latitude, longitude, step_date, picture];
     const isEmptyElement = allDataForRegister.includes('');
     const submitElt = '.divElement_form';
 
-    if (isEmptyElement === true) {
+    if (isEmptyElement === true || latitude === 0 || longitude === 0) {
       const message = 'Veuillez remplir tous les champs';
       errorMessage(message, submitElt);
     }
@@ -143,9 +142,6 @@ const FormStep = ({
               <FontAwesomeIcon icon={faSpinner} spin />
             </div>
             <input className="formStep__element--submit" type="submit" value="Enregistrer l'étape" onClick={() => setCount(1)} />
-            {/* <FontAwesomeIcon className="submit__loading" icon={faSpinner} /> */}
-
-            {/* spin */}
           </div>
 
         </div>
@@ -166,6 +162,7 @@ FormStep.propTypes = {
   step_date: PropTypes.string.isRequired,
   response: PropTypes.string.isRequired,
   changePicture: PropTypes.func.isRequired,
+  picture: PropTypes.string.isRequired,
 };
 
 export default FormStep;

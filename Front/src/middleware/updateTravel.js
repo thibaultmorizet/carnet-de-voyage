@@ -49,7 +49,6 @@ const updateTravel = (store) => (next) => (action) => {
       const state = store.getState();
       const token = Cookies.get('token');
       const { id } = action;
-      console.log('id', id);
       axios.delete(`http://34.239.44.174/api/travels/${id}/delete`, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
         })

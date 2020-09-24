@@ -3,9 +3,11 @@ import ImageUploader from 'react-images-upload';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import {
-  faTimes, faPaperPlane, faPlaneArrival, faSpinner,
+  faTimes, faPaperPlane, faPlaneArrival, faSpinner, faArrowCircleLeft,
 } from '@fortawesome/free-solid-svg-icons';
-import { useParams, useHistory, Redirect } from 'react-router-dom';
+import {
+  useParams, useHistory, Redirect, Link,
+} from 'react-router-dom';
 import Spinner from 'src/components/Spinner';
 import {
   handlePicture, errorMessage, handleDate, toastNotification,
@@ -131,6 +133,10 @@ const FormUpdateTravel = ({
       )}
       {!loading && (
         <div className="formTravel">
+          <Link to={`/travel/${id}`} className="travelPage__header--return">
+            <FontAwesomeIcon icon={faArrowCircleLeft} />
+            <p>Revenir au voyage</p>
+          </Link>
           <h2 className="createTravel__title formUpdateTravel__title">Modifier mon Voyage</h2>
           <form action="" className="formTravel__form" onSubmit={handleSubmit}>
             <div className="formTravel__form--firstInput">
@@ -241,7 +247,10 @@ FormUpdateTravel.propTypes = {
   loading: PropTypes.bool.isRequired,
   creation_date: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  picture_url: PropTypes.array,
+  picture_url: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+  ]),
   changeDateForUpdateTravel: PropTypes.func.isRequired,
   status: PropTypes.bool.isRequired,
   sendDataForUpdateTravel: PropTypes.func.isRequired,

@@ -124,6 +124,7 @@ TravelPage.propTypes = {
   description: PropTypes.string.isRequired,
   currentId: PropTypes.number,
   response: PropTypes.bool.isRequired,
+  fetchDataForUrlShare: PropTypes.func.isRequired,
 };
 
 TravelPage.defaultProps = {

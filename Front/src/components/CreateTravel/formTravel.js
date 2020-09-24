@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 import { useToasts } from 'react-toast-notifications';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { useHistory } from 'react-router-dom';
+import { faSpinner, faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
 import {
   errorMessage,
@@ -24,6 +24,7 @@ const FormTravel = ({
   response,
 }) => {
   const { addToast } = useToasts();
+  const { id } = useParams();
   const history = useHistory();
   const toastFailOrSuccess = () => {
     const message = 'Votre voyage à bien été enregistré. Vous pouvez dès maintenant ajouter une étape :)';
@@ -70,6 +71,11 @@ const FormTravel = ({
 
   return (
     <div className="formTravel">
+
+      <Link to="/travels/list" className="travelPage__header--return">
+        <FontAwesomeIcon icon={faArrowCircleLeft} />
+        <p>Revenir à ma liste de voyage</p>
+      </Link>
       <form action="" className="formTravel__form" onSubmit={handleSubmit}>
         <div className="formTravel__form--firstInput">
           <FormInput

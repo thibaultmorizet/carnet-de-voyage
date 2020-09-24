@@ -27,7 +27,7 @@ const CardTravel = ({
   };
   return (
     <div className="cardTravel">
-      <div href={`/travel/${url}`} className={`travels__inProgress travel${url}`}>
+      <div href={`/travel/${url}`} className={`travel${url}`}>
         <p className="travels--icon" onClick={openModal}>˟</p>
         <a href={`/travel/${url}`}>
           <img src={`http://34.239.44.174/uploads/pictures/${image}`} alt="" />
@@ -65,6 +65,7 @@ CardTravel.propTypes = {
   description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   url: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default CardTravel;

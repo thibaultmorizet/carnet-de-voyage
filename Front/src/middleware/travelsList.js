@@ -11,11 +11,8 @@ const travelsList = (store) => (next) => (action) => {
       axios.get('http://34.239.44.174/api/travels/list', { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
           const { data } = response;
-          console.log(data);
           const travelsInProgress = data.filter((elt) => elt.status === false);
-          console.log('travelsProgress', travelsInProgress);
           const travelsDone = data.filter((elt) => elt.status === true);
-          console.log('travelsdone', travelsDone);
 
           store.dispatch(saveDataTravelsList(travelsInProgress, travelsDone));
         })
