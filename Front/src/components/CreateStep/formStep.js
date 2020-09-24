@@ -103,7 +103,7 @@ const FormStep = ({
       </Link>
 
       <form action="" className="formStep__element" onSubmit={handleForm}>
-        <Map onChange={changeField} latitude={51.505} longitude={-0.09} />
+        <Map onChange={changeField} latitude={48.873126} longitude={2.316808} />
 
         <div className="formStep__element--allInput">
           <FormInput

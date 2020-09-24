@@ -44,6 +44,30 @@ const TravelPage = ({
     fetchDataForUrlShare(id);
   };
 
+  function copyText (element) {
+    var range, selection, worked;
+
+    if (document.body.createTextRange) {
+      range = document.body.createTextRange();
+      range.moveToElementText(element);
+      range.select();
+    } else if (window.getSelection) {
+      selection = window.getSelection();
+      range = document.createRange();
+      range.selectNodeContents(element);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+
+    try {
+      document.execCommand('copy');
+      alert('text copied');
+    }
+    catch (err) {
+      alert('unable to copy text');
+    }
+  }
+
   return (
     <div className="travelPage">
       {loading && (
@@ -79,6 +103,7 @@ const TravelPage = ({
             {Cookies.get('loggedIn') && type === undefined && (
             <div className="travelPage__shareDiv">
               <input type="button" className="travelPage__header--addStep shareTravel" value="Créer un lien de partage" onClick={shareTravel} />
+              <input type="button" className="travelPage__header--addStep shareUrlCopy" value="Copie moi" onClick={copyText} />
             </div>
             )}
 
