@@ -11,7 +11,7 @@ const CardTravel = ({
   };
   return (
     <div className="cardTravel">
-      <a href={`http://localhost:8080/travel/${url}`} className="travels__inProgress">
+      <a href={`/travel/${url}`} className="travels__inProgress">
         <p className="travels--icon" onClick={handleClickDelete}>˟</p>
         <img src={`http://34.239.44.174/uploads/pictures/${image}`} alt="" />
         <div className="travels__commentary">
