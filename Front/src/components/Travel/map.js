@@ -76,7 +76,7 @@ const Map = ({ step, onClickStep }) => {
   };
 
   const generateMap = () => {
-    const mymap = L.map('travelPage__map').setView([51.505, -0.09], 2);
+    const mymap = L.map('travelPage__map').setView([48.873126, 2.316808], 2);
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png').addTo(mymap);
 
     addPhotoStep(mymap);
