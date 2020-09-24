@@ -27,17 +27,22 @@ class TravelApiController extends AbstractController
      * @param UserRepository $userRepository
      * @return userArray [userId, admin(false or true)] or null (Bab Token or username not found)
      */
-    public static function checkTokenRequest(JWTEncoderInterface $jWTEncoderInterface, UserRepository $userRepository) {
+    public static function checkTokenRequest(JWTEncoderInterface $jWTEncoderInterface, UserRepository $userRepository)
+    {
         // get the Token from the headers
         $token = apache_request_headers()["Authorization"];
-        if ($token == null) { return null; } // not Token
+        if ($token == null) {
+            return null;
+        } // not Token
         // delete sub string "Berear "
-        $token = substr($token,7);
+        $token = substr($token, 7);
         // Decode Token
         $tokenArray = $jWTEncoderInterface->decode($token);
         // gets a User object from username
         $user = $userRepository->findOneByUsername($tokenArray['username']);
-        if ($user == null) { return null; } // username not found in Database
+        if ($user == null) {
+            return null;
+        } // username not found in Database
         $userArray["userId"] = $user->getId();
         $userArray["admin"] = false;
         //dd($userArray);
@@ -58,7 +63,7 @@ class TravelApiController extends AbstractController
      */
     public function add(SerializerInterface $serializer, Request $request, ValidatorInterface $validator, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface)
     {
-        
+
         $userArrayToken = $this->checkTokenRequest($jWTEncoderInterface, $userRepository);
         if ($userArrayToken == null) {
             return $this->json(
@@ -67,7 +72,7 @@ class TravelApiController extends AbstractController
                     "error" => "Bad Token or token username not found"
                 ],
                 Response::HTTP_BAD_REQUEST
-            );    
+            );
         }
 
         try {
@@ -108,12 +113,12 @@ class TravelApiController extends AbstractController
 
         // Transform the json request into an array
         $requestArray = json_decode($request->getContent(), true);
-        
+
         $travel->setCreationDate(DateTime::createFromFormat('j/m/Y', ($requestArray['travel_date'])));
 
-	// Set status code
-	$travel->setStatus(0);
-        
+        // Set status code
+        $travel->setStatus(0);
+
         // Get a User object with the Id
         $user = $userRepository->find($userArrayToken['userId']);
         if ($user == NULL) {  // User not found !
@@ -158,10 +163,10 @@ class TravelApiController extends AbstractController
         // New object FileSystem for filesystem operations
         $fileSystem = new FileSystem();
         // Path + image file name
-        $filenameWithPath = getcwd(). "/uploads/pictures" . "/" . $fileNameUnique;
+        $filenameWithPath = getcwd() . "/uploads/pictures" . "/" . $fileNameUnique;
         // Create file on disk
-        $fileSystem->dumpFile($filenameWithPath,$dataImage);
-              
+        $fileSystem->dumpFile($filenameWithPath, $dataImage);
+
         // returns OK message (201): Object created in DataBase
         return $this->json(
             [
@@ -177,7 +182,8 @@ class TravelApiController extends AbstractController
      *  @Route("/api/travels/{id}/update", name="api_travels_update", requirements={"id"="\d+"}, methods={"PUT"})
      * 
      */
-    public function update (Request $request, TravelRepository $travelRepository, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface, $id) {
+    public function update(Request $request, TravelRepository $travelRepository, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface, $id)
+    {
 
         // search and recover in BDD the Travel id
         $travel = $travelRepository->find($id);
@@ -186,21 +192,21 @@ class TravelApiController extends AbstractController
             return $this->json(
                 [
                     "success" => false,
-                    "errors" => "Bad travel Id : " .$id
+                    "errors" => "Bad travel Id : " . $id
                 ],
                 Response::HTTP_BAD_REQUEST // HTTP Response 400
             );
         }
 
         $userArrayToken = $this->checkTokenRequest($jWTEncoderInterface, $userRepository);
-        if (($userArrayToken == null or $userArrayToken["userId"] != $travel->getCreator()->getId() )) {
+        if (($userArrayToken == null or $userArrayToken["userId"] != $travel->getCreator()->getId())) {
             return $this->json(
                 [
                     "success" => false,
                     "errors" => "Bad Token, token username not found or no authorize"
                 ],
                 Response::HTTP_BAD_REQUEST
-            );    
+            );
         }
 
         // Transform the json request into an array
@@ -219,10 +225,9 @@ class TravelApiController extends AbstractController
         if (array_key_exists('status', $requestArray)) {
             if ($requestArray['status'] == true) {
                 $travel->setStatus(true);
-            }
-            else {
+            } else {
                 $travel->setStatus(false);
-            }    
+            }
         }
         if (array_key_exists('picture_travel', $requestArray) && $requestArray['picture_travel'] && array_key_exists('picture_data', $requestArray) && $requestArray['picture_data'] != null) {
             // Get the namefile of the request
@@ -248,13 +253,13 @@ class TravelApiController extends AbstractController
             // New object FileSystem for filesystem operations
             $fileSystem = new FileSystem();
             // Path + new image file name
-            $newFilenameWithPath = getcwd()."/uploads/pictures/"  . $fileNameUnique;
+            $newFilenameWithPath = getcwd() . "/uploads/pictures/"  . $fileNameUnique;
             // Path + old image file name
-            $oldFilenameWithPath = getcwd()."/uploads/pictures/" . $travel->getPictureUrl();
+            $oldFilenameWithPath = getcwd() . "/uploads/pictures/" . $travel->getPictureUrl();
             // Delete old file image on disk
-            $fileSystem->remove($oldFilenameWithPath);
+            unlink(__DIR__ . "/../../public/uploads/pictures/" . $oldFilenameWithPath);
             // Create new file image on disk
-            $fileSystem->dumpFile($newFilenameWithPath,$dataImage);
+            $fileSystem->dumpFile($newFilenameWithPath, $dataImage);
             // updated the image name of the Travel object
             $travel->setPictureUrl($fileNameUnique);
         }
@@ -274,8 +279,7 @@ class TravelApiController extends AbstractController
                 ],
                 Response::HTTP_CREATED
             );
-        }
-        else {
+        } else {
             return $this->json(
                 [
                     "success" => true,
@@ -283,7 +287,7 @@ class TravelApiController extends AbstractController
                 ],
                 Response::HTTP_CREATED
             );
-        }    
+        }
     }
 
     /**
@@ -306,29 +310,24 @@ class TravelApiController extends AbstractController
 
         $userArrayToken = $this->checkTokenRequest($jWTEncoderInterface, $userRepository);
         //dd($userArrayToken, $travel->getCreator()->getId());
-        if (!($userArrayToken["admin"] == true) ) {
+        if (!($userArrayToken["admin"] == true)) {
             if ($userArrayToken == null or $userArrayToken["userId"] != $travel->getCreator()->getId()) {
                 return $this->json(
                     [
                         "success" => false,
                         "errors" => "Bad Token or token username not found"
-                     ],
+                    ],
                     Response::HTTP_BAD_REQUEST
-                );    
+                );
             }
         }
 
-        $fileSystem = new Filesystem();
-        // file + path to delete
-        $fileDelete = getcwd()."/uploads/pictures/" . $travel -> getPictureUrl();
-        
         // Delete the Travel, Steps and Comments
         $manager = $this->getDoctrine()->getManager();
         $manager->remove($travel);
         $manager->flush();
 
-        // Delete path + all image files       
-        $fileSystem->remove($fileDelete);
+        unlink(__DIR__ . "/../../public/uploads/pictures/" . $travel->getPictureUrl());
 
         return $this->json(
             [
@@ -343,7 +342,8 @@ class TravelApiController extends AbstractController
      *  @Route("api/travels/{id}", name="api_travels_show", methods={"GET"}, requirements={"id"="\d+"})
      * 
      */
-    public function show (travelRepository $travelRepository, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface, $id) {
+    public function show(travelRepository $travelRepository, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface, $id)
+    {
         // search and recover in BDD the Travel id
         $travel = $travelRepository->find($id);
         // Travel (id) found or not
@@ -360,30 +360,31 @@ class TravelApiController extends AbstractController
         // check token
         $userArrayToken = $this->checkTokenRequest($jWTEncoderInterface, $userRepository);
         if (!($userArrayToken["admin"] == true)) {
-            if ($userArrayToken == null or $userArrayToken["userId"] != $travel->getCreator()->getId() ) {
+            if ($userArrayToken == null or $userArrayToken["userId"] != $travel->getCreator()->getId()) {
                 return $this->json(
                     [
                         "success" => false,
                         "errors" => "Bad Token or token username not found"
                     ],
                     Response::HTTP_BAD_REQUEST
-                );        
-            }    
-        }    
+                );
+            }
+        }
         return $this->json(
             $travel,
             200,
             [],
             ["groups" => ["travel:read"]]
-        );    
+        );
     }
-    
+
     /**
      * 
      *  @Route("api/travels/list", name="api_travels_list", methods={"GET"})
      * 
      */
-    public function list (travelRepository $travelRepository, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface) {
+    public function list(travelRepository $travelRepository, UserRepository $userRepository, JWTEncoderInterface $jWTEncoderInterface)
+    {
         $userArrayToken = $this->checkTokenRequest($jWTEncoderInterface, $userRepository);
         if ($userArrayToken == null) {
             return $this->json(
@@ -392,7 +393,7 @@ class TravelApiController extends AbstractController
                     "errors" => "Bad Token"
                 ],
                 Response::HTTP_BAD_REQUEST
-            );        
+            );
         }
         // Find UserId in Database and create a User object
         $user = $userRepository->find($userArrayToken['userId']);
@@ -410,7 +411,8 @@ class TravelApiController extends AbstractController
      * 
      *  @Route("travels/{id}/{token}", name="travel_url", methods={"GET"}, requirements={"id"="\d+","token"="[a-z0-9]{32}"})
      */
-    public function showToken (travelRepository $travelRepository, UserRepository $userRepository, $token, $id) {
+    public function showToken(travelRepository $travelRepository, UserRepository $userRepository, $token, $id)
+    {
         // exemples token : 5599730f81933c40cd8512c7cc2604aa
         //                  d6885d0e149c4f007450c6563f3d94b9
         $travel = $travelRepository->find($id);
@@ -421,7 +423,7 @@ class TravelApiController extends AbstractController
                     "errors" => "Travel not found"
                 ],
                 Response::HTTP_BAD_REQUEST
-            );    
+            );
         }
         // Get token of travel
         $tokenTravel = $travel->getToken();
@@ -432,7 +434,7 @@ class TravelApiController extends AbstractController
                     "errors" => "Token incorrect or token expired"
                 ],
                 Response::HTTP_BAD_REQUEST
-            ); 
+            );
         }
         //dd($token, $tokenTravel);
         return $this->json(
@@ -442,5 +444,4 @@ class TravelApiController extends AbstractController
             ["groups" => ["travel:read"]]
         );
     }
-
 }
