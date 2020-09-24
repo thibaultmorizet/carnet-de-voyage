@@ -18,7 +18,7 @@ import {
 } from 'src/selectors/carnetDeVoyage';
 import { useToasts } from 'react-toast-notifications';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowCircleLeft, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import ImageUploader from 'react-images-upload';
 import './styles.scss';
 
@@ -86,6 +86,8 @@ const FormStep = ({
     }
     else {
       changeField(id, 'travel_id');
+      const loadingElement = document.querySelector('.submit__loading');
+      loadingElement.style.display = 'flex';
       handleSubmit();
     }
   };
@@ -137,8 +139,15 @@ const FormStep = ({
           </div>
 
           <div className="divElement_form">
+            <div className="submit__loading">
+              <FontAwesomeIcon icon={faSpinner} spin />
+            </div>
             <input className="formStep__element--submit" type="submit" value="Enregistrer l'étape" onClick={() => setCount(1)} />
+            {/* <FontAwesomeIcon className="submit__loading" icon={faSpinner} /> */}
+
+            {/* spin */}
           </div>
+
         </div>
 
       </form>

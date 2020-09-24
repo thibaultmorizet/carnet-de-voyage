@@ -351,9 +351,11 @@
 }
 
 .likeIcon__i:before {
-  font-family:FontAwesome;
+  font-family:'Font Awesome 5 Free';
   content:"\f004";
-  font-style:normal;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 900;
 }
 
 .likeIcon__span {

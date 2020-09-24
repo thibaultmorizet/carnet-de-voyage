@@ -5,7 +5,7 @@
   background-position:  top 10% right 0px;
   background-size: 70%;
   overflow: hidden;
-  // min-height: 100vh;
+   min-height: 100vh;
   // height: auto;
   &__title, &__span{
     font-family: 'Pacifico', cursive;
@@ -77,6 +77,13 @@
   &:hover {
     background-color: rgb(132, 187, 206);
   }
+}
+
+.submit__loading {
+
+  display: none;
+  position: relative;
+  justify-content: center;
 }
 
 
@@ -331,11 +338,21 @@
     min-width: 20em;
   }
 
+  .submit__loading {
+    position: relative;
+    justify-content: flex-end;
+    width: 85%;
+  }
+
   .createStep {
     min-height: 100vh;
     background-repeat: no-repeat;
     background-position:  top 10% right 0px;
     background-size: 40%;
+  }
+
+  .divElement_form {
+    position: relative;
   }
 
   #map {
@@ -351,12 +368,12 @@
     background-color: transparent;
     box-shadow: none;
     backdrop-filter: blur(0px);
+    padding-bottom: 4em;
     &__element {
       display: flex;
       &--submit {
         position: absolute;
-        bottom: 0;
-        right: 10%;
+        right: -10%;
       }
       &--allInput {
         width: 40%;
@@ -388,14 +405,17 @@
 
   .formStep {
     &__element {
-      &--submit {
-      }
       &--allInput {
         width: 33%;
         
       }
     }
-    
+  }
 
+  .submit__loading {
+
+    position: relative;
+    justify-content: flex-end;
+    width: 96%;
   }
 }
