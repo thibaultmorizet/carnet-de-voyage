@@ -50,7 +50,7 @@ const FormUpdateStep = ({
 
   const toastFailOrSuccess = () => {
     const messageSuccess = 'Votre étape a bien été modifiée';
-    const destination = '/travels/list';
+    const destination = `/travel/${id}`;
     toastNotification(addToast, history, response, messageSuccess, destination);
   };
 
