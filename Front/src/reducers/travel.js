@@ -1,6 +1,7 @@
 import {
   SAVE_DATA_FOR_SINGLE_TRAVEL, SAVE_DATA_FOR_SINGLE_STEP, ADD_COMMENT, SAVE_DATA_FOR_URL_SHARE, ERROR_UNTHORIZED_TRAVEL,
 } from '../actions/travel';
+import { SAVE_LIKE_STEP_FOR_TRAVEL, SAVE_UNLIKE_STEP_FOR_TRAVEL } from '../actions/comment';
 
 export const initialState = {
   travel: {
@@ -76,6 +77,16 @@ const travel = (state = initialState, action = {}) => {
       return {
         ...state,
         response: false,
+      };
+    case SAVE_LIKE_STEP_FOR_TRAVEL:
+      return {
+        ...state,
+        like: state.like + 1,
+      };
+    case SAVE_UNLIKE_STEP_FOR_TRAVEL:
+      return {
+        ...state,
+        like: state.like - 1,
       };
     default:
       return state;
