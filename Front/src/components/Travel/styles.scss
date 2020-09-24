@@ -102,13 +102,14 @@
 }
 
 .shareUrl {
-  text-align: center;
-  display: block;
-  word-wrap: break-word;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  padding: .5em;
-  background-color: rgba(172, 123, 228, .2);
-  font-size: .9em;
+  display: none;
+  // text-align: center;
+  // display: block;
+  // word-wrap: break-word;
+  // box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  // padding: .5em;
+  // background-color: rgba(172, 123, 228, .2);
+  // font-size: .9em;
 }
 
 .shareTravel {
@@ -323,13 +324,14 @@
   }
 
   .shareUrl {
-    text-align: right;
-    display: block;
-    word-wrap: break-word;
-    position: absolute;
-    top: 18%;
-    right: 2%;
-    width: 30%;
+    display: none;
+    // text-align: right;
+    // display: block;
+    // word-wrap: break-word;
+    // position: absolute;
+    // top: 18%;
+    // right: 2%;
+    // width: 30%;
   }
 }
 
