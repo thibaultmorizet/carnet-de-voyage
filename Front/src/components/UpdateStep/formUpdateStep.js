@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowCircleLeft, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Spinner from 'src/components/Spinner';
 import { handlePicture, toastNotification } from 'src/selectors/carnetDeVoyage';
 import Modal from 'react-modal';
@@ -80,6 +80,8 @@ const FormUpdateStep = ({
   const handleOnSubmit = (evt) => {
     evt.preventDefault();
     sendDateUpdate();
+    const divElement = document.querySelector('.submit__loading');
+    divElement.style.display = 'flex';
   };
 
   const openModal = () => {
@@ -147,6 +149,9 @@ const FormUpdateStep = ({
             </div>
 
             <div className="FormUpdateStep__formElt--finalInput" id="roro">
+              <div className="submit__loading submit_update_travel">
+                <FontAwesomeIcon icon={faSpinner} spin />
+              </div>
               <input className="formStep__element--submit FormUpdateStep__submit" type="submit" value="Enregistrer l'étape" />
               <input className="formStep__element--submit FormUpdateStep__delete" type="button" value="Supprimer l'étape" onClick={openModal} />
               <Modal

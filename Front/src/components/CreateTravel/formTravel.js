@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './styles.scss';
 import { useToasts } from 'react-toast-notifications';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
 import {
@@ -60,7 +62,9 @@ const FormTravel = ({
       errorMessage(message, submitElt);
     }
     else {
+      const divElement = document.querySelector('.submit__loading');
       saveDateCreateTravel();
+      divElement.style.display = 'flex';
     }
   };
 
@@ -108,6 +112,9 @@ const FormTravel = ({
         </div>
 
         <div className="formTravel__form--div">
+          <div className="submit__loading submit_create_travel">
+            <FontAwesomeIcon icon={faSpinner} spin />
+          </div>
           <input className="formTravel__submit" type="submit" value="Enregistrer mon nouveau voyage" />
         </div>
 

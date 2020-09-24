@@ -56,14 +56,15 @@
     color: red;
     font-weight: bolder;
     position: relative;
-    top: 2.2em;
+    font-size: 2em;
+    top: 1.8em;
     left: 0.4em;
     cursor: pointer;
   }
   &__commentary {
     background-color: rgba(5, 197, 255, 0.233);
     padding: 0.4em;
-    width: 9.3em;
+    width: 90%;
     border-radius: 5px;
     backdrop-filter: blur(2px);
     position: relative;
@@ -83,6 +84,22 @@
     }
   }
 }
+
+.notTravelsDone {
+  padding-top: 2em;
+  text-align: center;
+  line-height: 1.2em;
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+
+@media only screen and (min-width : 370px) {
+  .travels__commentary {
+  width: 60%;
+  }
+}
+
 
 @media only screen and (min-width : 767px) {
     .travels__container {
@@ -111,6 +128,10 @@
     display: inline;
     padding: 1em;
     
+  }
+
+  .travels__commentary {
+    width: 50%;
   }
 
   .travels__allTravels {
@@ -163,7 +184,7 @@
   }
   .travels__commentary {
     padding: 0.6em;
-    width: 13em;
+    width: 50%;
     h3 {
       font-size: 1.3em;
       padding-bottom: 0.5em;
