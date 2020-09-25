@@ -28,7 +28,7 @@ const Container = ({
             <input type="button" name="travelsInput" className="travelsInput" value="Créer un nouveau voyage" />
           </a>
 
-          {travelsInProgress.length !== 0 && travelsDone !== 0 && (
+          {travelsInProgress.length + travelsDone.length !== 0 && (
             <>
               <div className="travels__inProgress">
                 <h2 className="travels__container--title"> Voyages en cours </h2>
@@ -89,7 +89,7 @@ const Container = ({
             </>
           )}
 
-          {travelsInProgress.length === 0 && travelsDone === 0 && (
+          {travelsInProgress.length === 0 && travelsDone.length === 0 && (
             <div>
               <h4 className="notTravelsDone">Vous n'avez pas aucun voyage, n'hésitez pas à en ajouter :)</h4>
             </div>
