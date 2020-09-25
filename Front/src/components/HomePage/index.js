@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './header';
 import Title from './title';
 import Presentation from '../Presentation';
-import UrlInput from '../UrlInput';
 import './styles.scss';
 
 const HomePage = () => (
@@ -10,7 +9,6 @@ const HomePage = () => (
     <Header />
     <Title text="Carnet de Voyage" />
     <Presentation />
-    <UrlInput />
   </div>
 );
 
