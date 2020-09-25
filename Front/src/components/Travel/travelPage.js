@@ -1,3 +1,4 @@
+/* eslint-disable no-new */
 /* eslint-disable new-cap */
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
@@ -8,6 +9,7 @@ import { faPen, faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import {
   Link, useParams, useHistory, Redirect,
 } from 'react-router-dom';
+import Clipboard from 'clipboard';
 import Spinner from 'src/components/Spinner';
 import { changeDateFormat, addImage } from 'src/selectors/carnetDeVoyage';
 import Comments from 'src/containers/comment';
@@ -35,11 +37,20 @@ const TravelPage = ({
 }) => {
   const { id, type } = useParams();
   const history = useHistory();
+
+  let countCopy = 0;
+
+  const clipBoardCopy = () => {
+    new Clipboard('#btnCopy');
+  };
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [actualPicture, setActualPicture] = useState('');
 
+
   useEffect(() => {
     fetchDataForSingleTravel(id, type);
+    clipBoardCopy();
   }, []);
 
   useEffect(() => {
@@ -51,6 +62,36 @@ const TravelPage = ({
     fetchDataForUrlShare(id);
   };
 
+
+  const handleChangeCopy = (evt) => {
+    countCopy += 1;
+    if (countCopy === 10) {
+      evt.target.value = 'Vraiment ?';
+    }
+    else if (countCopy === 20) {
+      evt.target.value = 'Calm Down !';
+    }
+    else if (countCopy === 30) {
+      evt.target.value = 'Put this mouse down !';
+    }
+    else if (countCopy === 40) {
+      evt.target.value = 'Stop it and take my money !';
+    }
+    else if (countCopy === 50) {
+      evt.target.value = 'You win, i\'m giving up...';
+    }
+    else if (countCopy === 100) {
+      evt.target.value = 'No... how dare you';
+    }
+    else {
+      evt.target.value = `Copié ${countCopy} !`;
+    }
+
+    setTimeout(() => {
+      const inputElement = document.querySelector('.shareUrlCopy');
+      inputElement.value = 'Copie moi !';
+    }, 1000);
+
   const openModal = (evt) => {
     console.log(evt.target.src);
     setIsOpen(true);
@@ -60,21 +101,22 @@ const TravelPage = ({
 
   const closeModal = () => {
     setIsOpen(false);
+
   };
 
   return (
     <div className="travelPage">
       {loading && (
-      <Spinner />
+        <Spinner />
       )}
       {!loading && step.length !== 0 && (
         <>
           <div className="travelPage__header">
             {Cookies.get('loggedIn') && type === undefined && (
-            <Link to="/travels/list" className="travelPage__header--return">
-              <FontAwesomeIcon icon={faArrowCircleLeft} />
-              <p>Revenir</p>
-            </Link>
+              <Link to="/travels/list" className="travelPage__header--return">
+                <FontAwesomeIcon icon={faArrowCircleLeft} />
+                <p>Revenir</p>
+              </Link>
             )}
 
             <h2 className="travelPage__header--title">{travel.title}</h2>
@@ -89,15 +131,16 @@ const TravelPage = ({
             </p>
 
             {Cookies.get('loggedIn') && type === undefined && (
-            <a href={`/travel/${id}/add`}>
-              <input type="button" className="travelPage__header--addStep" value="Ajouter une étape" />
-            </a>
+              <a href={`/travel/${id}/add`}>
+                <input type="button" className="travelPage__header--addStep" value="Ajouter une étape" />
+              </a>
             )}
 
             {Cookies.get('loggedIn') && type === undefined && (
-            <div className="travelPage__shareDiv">
-              <input type="button" className="travelPage__header--addStep shareTravel" value="Créer un lien de partage" onClick={shareTravel} />
-            </div>
+              <div className="travelPage__shareDiv">
+                <input type="button" className="travelPage__header--addStep shareTravel" value="Créer un lien de partage" onClick={shareTravel} />
+                <input type="button" id="btnCopy" className="shareUrlCopy" value="Copie moi" onClick={handleChangeCopy} data-clipboard-target="#copyMe" />
+              </div>
             )}
 
           </div>

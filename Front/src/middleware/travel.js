@@ -39,6 +39,9 @@ const travel = (store) => (next) => (action) => {
           const allUrl = `http://34.202.233.128/travels/${response.data.id}/${response.data.url_token}`;
           const pCreate = document.createElement('p');
           const divElement = document.querySelector('.travelPage__shareDiv');
+          const divCopyElement = document.querySelector('.shareUrlCopy');
+          divCopyElement.style.display = 'block';
+          pCreate.setAttribute('id', 'copyMe');
           pCreate.className = 'shareUrl';
           pCreate.innerHTML = allUrl;
           divElement.appendChild(pCreate);

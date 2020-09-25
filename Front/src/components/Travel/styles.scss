@@ -114,6 +114,7 @@
 }
 
 .shareUrl {
+  // display: none;
   text-align: center;
   display: block;
   word-wrap: break-word;
@@ -126,6 +127,20 @@
 .shareTravel {
   background-color: rgb(172, 123, 228);
   cursor: pointer;
+  &:hover {
+    background-color: rgb(149, 100, 206);
+  }
+}
+
+.shareUrlCopy {
+  background-color: rgb(172, 123, 228);
+  display: none;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  padding: .5em 1em;
+  border-radius: 10px;
+  margin: 0em auto .5em;
   &:hover {
     background-color: rgb(149, 100, 206);
   }
@@ -339,7 +354,15 @@
     top: 17%
   }
 
+  .shareUrlCopy {
+    right: 33%;
+    top: 18.1%;
+    position: absolute;
+  }
+
+
   .shareUrl {
+    // display: none;
     text-align: right;
     display: block;
     word-wrap: break-word;
@@ -366,16 +389,30 @@
     width: 60%;
   }
 
+  .shareUrl {
+    width: 26%;
+  }
+  .shareUrlCopy {
+    right: 29%;
+    top: 18.1%;
+    position: absolute;
+
+
   .modaxEx__content--picture {
     max-height: 50em;
   }
   
   .modelEx2 {
     margin: 3% auto;
+
   }
 }
 
-
+@media only screen and (min-width : 2560px) {
+  .shareUrl {
+    width: 19%;
+  }
+}
 
 
 
