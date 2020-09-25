@@ -47,7 +47,6 @@ const TravelPage = ({
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [actualPicture, setActualPicture] = useState('');
 
-
   useEffect(() => {
     fetchDataForSingleTravel(id, type);
     clipBoardCopy();
@@ -61,7 +60,6 @@ const TravelPage = ({
     evt.target.remove();
     fetchDataForUrlShare(id);
   };
-
 
   const handleChangeCopy = (evt) => {
     countCopy += 1;
@@ -92,24 +90,23 @@ const TravelPage = ({
       inputElement.value = 'Copie moi !';
     }, 1000);
 
-  const openModal = (evt) => {
-    console.log(evt.target.src);
-    setIsOpen(true);
-    setActualPicture(evt.target.src);
-    console.log(actualPicture);
-  };
+    const openModal = (evt) => {
+      console.log(evt.target.src);
+      setIsOpen(true);
+      setActualPicture(evt.target.src);
+      console.log(actualPicture);
+    };
 
-  const closeModal = () => {
-    setIsOpen(false);
+    const closeModal = () => {
+      setIsOpen(false);
+    };
 
-  };
-
-  return (
-    <div className="travelPage">
-      {loading && (
+    return (
+      <div className="travelPage">
+        {loading && (
         <Spinner />
-      )}
-      {!loading && step.length !== 0 && (
+        )}
+        {!loading && step.length !== 0 && (
         <>
           <div className="travelPage__header">
             {Cookies.get('loggedIn') && type === undefined && (
@@ -179,15 +176,16 @@ const TravelPage = ({
             </div>
           </Modal>
         </>
-      )}
-      {!loading && step.length === 0 && (
+        )}
+        {!loading && step.length === 0 && (
         <Redirect to={`/travel/${id}/add`} />
-      )}
-      {!response && (
+        )}
+        {!response && (
         <Redirect to="/" />
-      )}
-    </div>
-  );
+        )}
+      </div>
+    );
+  };
 };
 
 TravelPage.propTypes = {

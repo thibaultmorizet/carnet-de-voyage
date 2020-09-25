@@ -396,6 +396,7 @@
     right: 29%;
     top: 18.1%;
     position: absolute;
+  }
 
 
   .modaxEx__content--picture {
@@ -479,6 +480,6 @@
 @keyframes size {
   0% {padding:10px 12px 8px;}
   50% {padding:14px 16px 12px;  
-    margin-top:-4px;}
+  margin-top:-4px;}
   100% {padding:10px 12px 8px;}
 }
