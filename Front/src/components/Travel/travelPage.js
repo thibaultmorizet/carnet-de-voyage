@@ -1,7 +1,7 @@
 /* eslint-disable no-new */
 /* eslint-disable new-cap */
 /* eslint-disable max-len */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +14,12 @@ import Spinner from 'src/components/Spinner';
 import { changeDateFormat, addImage } from 'src/selectors/carnetDeVoyage';
 import Comments from 'src/containers/comment';
 import Map from 'src/containers/mapShowTravel';
+
+import Modal from 'react-modal';
+
 import './styles.scss';
+
+Modal.setAppElement('#root');
 
 const TravelPage = ({
   travel,
@@ -32,11 +37,16 @@ const TravelPage = ({
 }) => {
   const { id, type } = useParams();
   const history = useHistory();
+
   let countCopy = 0;
 
   const clipBoardCopy = () => {
     new Clipboard('#btnCopy');
   };
+
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [actualPicture, setActualPicture] = useState('');
+
 
   useEffect(() => {
     fetchDataForSingleTravel(id, type);
@@ -44,13 +54,14 @@ const TravelPage = ({
   }, []);
 
   useEffect(() => {
-    addImage(currentPicture);
+    addImage(currentPicture, openModal);
   }, [currentPicture]);
 
   const shareTravel = (evt) => {
     evt.target.remove();
     fetchDataForUrlShare(id);
   };
+
 
   const handleChangeCopy = (evt) => {
     countCopy += 1;
@@ -80,6 +91,17 @@ const TravelPage = ({
       const inputElement = document.querySelector('.shareUrlCopy');
       inputElement.value = 'Copie moi !';
     }, 1000);
+
+  const openModal = (evt) => {
+    console.log(evt.target.src);
+    setIsOpen(true);
+    setActualPicture(evt.target.src);
+    console.log(actualPicture);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+
   };
 
   return (
@@ -139,6 +161,23 @@ const TravelPage = ({
             <Comments like={like} />
 
           </div>
+
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            contentLabel="Example Modal"
+            shouldFocusAfterRender={false}
+            className="modalEx modelEx2"
+            style={{
+              overlay: {
+                backdropFilter: 'blur(5px)',
+              },
+            }}
+          >
+            <div className="modalEx__content">
+              <img className="modaxEx__content--picture" src={actualPicture} alt="lolo" />
+            </div>
+          </Modal>
         </>
       )}
       {!loading && step.length === 0 && (
@@ -163,6 +202,7 @@ TravelPage.propTypes = {
   description: PropTypes.string.isRequired,
   currentId: PropTypes.number,
   response: PropTypes.bool.isRequired,
+  fetchDataForUrlShare: PropTypes.func.isRequired,
 };
 
 TravelPage.defaultProps = {

@@ -56,14 +56,15 @@
     color: red;
     font-weight: bolder;
     position: relative;
-    top: 2.2em;
+    font-size: 2em;
+    top: 1.8em;
     left: 0.4em;
     cursor: pointer;
   }
   &__commentary {
     background-color: rgba(5, 197, 255, 0.233);
     padding: 0.4em;
-    width: 9.3em;
+    width: 90%;
     border-radius: 5px;
     backdrop-filter: blur(2px);
     position: relative;
@@ -83,6 +84,22 @@
     }
   }
 }
+
+.notTravelsDone {
+  padding-top: 2em;
+  text-align: center;
+  line-height: 1.2em;
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+
+@media only screen and (min-width : 370px) {
+  .travels__commentary {
+  width:15em;
+  }
+}
+
 
 @media only screen and (min-width : 767px) {
     .travels__container {
@@ -113,10 +130,13 @@
     
   }
 
+  .travels__commentary {
+    width: 15em;
+  }
+
   .travels__allTravels {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
   }
 }
 @media only screen and (min-width : 1024px) {
@@ -148,8 +168,8 @@
   .travels__container {
     background-image: url(../../assets/images/avion-papier.png);
     background-repeat: no-repeat;
-    background-position:  top 20% right 20%;
-    background-size: 25%;
+    background-position:  top 38% right 14%;
+    background-size: 20%;
     height: auto;
   .travels__container--title {
     font-size: 2em;
@@ -163,7 +183,7 @@
   }
   .travels__commentary {
     padding: 0.6em;
-    width: 13em;
+    width: 20em;
     h3 {
       font-size: 1.3em;
       padding-bottom: 0.5em;

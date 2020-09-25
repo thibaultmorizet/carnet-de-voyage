@@ -75,7 +75,7 @@
       position: relative;
       top: -50px;
       left: -20px;
-      z-index: 10;
+      z-index: 0;
     }
     &--excerpt {
       position: relative;
@@ -99,6 +99,18 @@
       margin: auto;
     }
   }
+}
+
+.modaxEx__content--picture {
+  max-height: 40em;
+}
+
+.modelEx2 {
+  margin: 50% auto;
+}
+
+.modalEx__content {
+  border: none;
 }
 
 .shareUrl {
@@ -245,7 +257,7 @@
 
 #travelPage__map {
   height: 50em;
-  z-index: 1;
+  z-index: 0;
 }
 
 .leaflet-popup-content-wrapper {
@@ -268,6 +280,14 @@
 @media only screen and (min-width : 426px) {
   .singleComment__bubble {
     width: 65%;
+  }
+
+  .modaxEx__content--picture {
+    max-height: 50em;
+  }
+  
+  .modelEx2 {
+    margin: 15% auto;
   }
 
   #travelPage__map {
@@ -303,6 +323,16 @@
   #travelPage__map {
     height: 60em;
   }
+
+  .modaxEx__content--picture {
+    max-height: 50em;
+  }
+  
+  .modelEx2 {
+    margin: 15% auto;
+  }
+
+
 
   .singleComment__bubble {
     width: 70%;
@@ -343,10 +373,22 @@
   }
 }
 
+@media only screen and (min-width : 1024px) {
+  
+.modaxEx__content--picture {
+  max-height: 50em;
+}
+
+.modelEx2 {
+  margin: 10% auto;
+}
+}
+
 @media only screen and (min-width : 1440px) {
   .singleComment__bubble {
     width: 60%;
   }
+
   .shareUrl {
     width: 26%;
   }
@@ -354,6 +396,15 @@
     right: 29%;
     top: 18.1%;
     position: absolute;
+
+
+  .modaxEx__content--picture {
+    max-height: 50em;
+  }
+  
+  .modelEx2 {
+    margin: 3% auto;
+
   }
 }
 
@@ -386,9 +437,11 @@
 }
 
 .likeIcon__i:before {
-  font-family:FontAwesome;
+  font-family:'Font Awesome 5 Free';
   content:"\f004";
-  font-style:normal;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 900;
 }
 
 .likeIcon__span {

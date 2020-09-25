@@ -127,12 +127,7 @@ RegisterForm.propTypes = {
   last_name: PropTypes.string.isRequired,
   first_name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  response: PropTypes.string.isRequired,
 };
 
 export default RegisterForm;
-
-// Nom -- last_name
-// Prénom -- first_name
-// Email -- email
-// Mot de passe -- password
-// Salut1234

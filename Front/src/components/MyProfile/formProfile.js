@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import React, { useEffect } from 'react';
 import FormInput from 'src/components/FormInput';
 import PropTypes from 'prop-types';
@@ -5,7 +6,7 @@ import Cookies from 'js-cookie';
 import Modal from 'react-modal';
 import { errorMessage, toastNotification } from 'src/selectors/carnetDeVoyage';
 import { useToasts } from 'react-toast-notifications';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Spinner from 'src/components/Spinner';
 import './styles.scss';
 
@@ -187,6 +188,7 @@ FormProfile.propTypes = {
   loading: PropTypes.bool.isRequired,
   response: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  deleteUser: PropTypes.func.isRequired,
 };
 
 export default FormProfile;
