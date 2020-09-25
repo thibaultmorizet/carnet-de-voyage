@@ -23,7 +23,7 @@
 |description|LONGTEXT|NOT NULL|La description du voyage|
 |status|BOOLEAN|NOT NULL|Le status 0: en cours 1: terminé|
 |picture_url|VARCHAR(255)|NULL|La photo de présentation du voyage|
-|creation_date|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de début du voyage|
+|creation_date|DATE|DEFAULT CURRENT_TIMESTAMP|La date de début du voyage|
 |created_at|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de création du voyage|
 |updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour du voyage|
 |creator|INT|NOT NULL|L'id de l'utilisateur qui à crée le voyage (relation)|
@@ -33,11 +33,12 @@
 |Champ|Type|Spécificités|Description|
 |-|-|-|-|
 |id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant de l'étape|
+|title|VARCHAR(255)|NOT NULL|Le titre de l'étape|
 |description|VARCHAR(255)|NOT NULL|La description de l'étape|
-|latitude|VARCHAR(255)|NOT NULL|Latitude de l'étape|
-|longitude|VARCHAR(255)|NOT NULL|Longitude de l'étape|
+|latitude|FLOAT|NOT NULL|Latitude de l'étape|
+|longitude|FLOAT|NOT NULL|Longitude de l'étape|
 |like|INT|NULL|Nombre de like de l'étape|
-|step_date|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de l'étape|
+|step_date|DATE|DEFAULT CURRENT_TIMESTAMP|La date de l'étape|
 |created_at|TIMESTAMP|DEFAULT CURRENT_TIMESTAMP|La date de création de l'étape|
 |updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de l'étape|
 |travel_id|INT|NOT NULL|L'id du voyage (relation)|

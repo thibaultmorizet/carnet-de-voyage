@@ -1,0 +1,71 @@
+.footer {
+ position: relative;
+ bottom: 3.1em;
+ letter-spacing: 0.2em;
+  &__nav {
+    // position: absolute;  
+    width: 100%;
+    background-color: rgba(207, 221, 224, 0.2);
+    backdrop-filter: blur(1px);
+    bottom: 0;
+    color: white;
+    &--ul {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+    }
+    &--ul a:hover {
+      color: #2B8BB0;
+      font-weight: bold;
+    }
+    &--li {
+      padding: 1em 0em;
+      text-shadow: 0px 0px 4px rgba(0,0,0,0.6);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: bold;
+      font-size: .8em;
+      width: 30%;
+    }
+  }
+}
+
+@media only screen and (min-width : 375px) {
+  .footer {
+    bottom: 3em;
+    &__nav {
+      &--li {
+      }
+    }
+  }
+}
+
+@media only screen and (min-width : 425px) {
+  .footer {
+    bottom: 2.35em;
+    &__nav {
+      &--li {
+      }
+    }
+
+  }
+}
+
+@media only screen and (min-width : 1024px) {
+  .footer {
+    &__nav {
+      &--li {
+        width: 20%;
+      }
+    }
+  }
+}
+
+
+@-moz-document url-prefix() {
+  .footer__nav {
+  position: relative;
+  bottom: .1em;  
+  margin-bottom:-2.40em;  
+ }
+}

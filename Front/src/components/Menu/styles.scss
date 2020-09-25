@@ -1,0 +1,21 @@
+.menu {
+  background-color: rgba(255, 255, 255, .2);
+  backdrop-filter: blur(2px);
+  padding: 1.5em;
+  &__nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    &--li {
+      list-style: none;
+      padding: 0em 2em;
+      &:hover {
+        color: rgb(64, 114, 131);
+      }
+    }
+    &--icon {
+      position: absolute;
+      left: 20px;
+    }
+  }
+}

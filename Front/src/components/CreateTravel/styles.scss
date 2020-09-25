@@ -1,0 +1,121 @@
+.createTravel{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url('../../assets/images/createTravel.svg'), url('../../assets/images/createTravelId.svg');
+  background-repeat: no-repeat;
+  background-position: top, bottom;
+  min-height: 92vh;
+  &__title {
+    font-family: 'Pacifico', cursive;
+    font-size: 2em;
+    text-align: center;
+    margin: 1em;
+  }
+}
+
+.submit_create_travel {
+  justify-content: center;
+  width: 100%;
+}
+
+
+.formTravel {
+  margin: 4em 1em;
+  background-color: rgba($color: white, $alpha: .5);
+  border-radius: 10px;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  padding: 1em;
+  &__submit {
+    background-color: rgb(255, 217, 0);
+    padding: 1em 2em;
+    border: none;
+    display: block;
+    margin:1em auto;
+    border-radius: 20px;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(219, 187, 5);
+    }
+  }
+}
+
+@media only screen and (min-width : 426px) {
+  .createTravel{
+    background-size: 50%, 50%;
+  }
+}
+
+@media only screen and (min-width : 769px) {
+  .createTravel{
+    background-position: bottom -2em left -2em, top -3em right -2em;
+    background-size: 50%, 30%;
+    background-attachment: fixed;
+    &__title {
+      margin: 2em auto 0em;
+    }
+  }
+
+  .formTravel {
+    background-color: transparent;
+    backdrop-filter: blur(0px);
+    box-shadow: none;
+    padding: 1em;
+    &__form {
+      &--firstInput {
+        display: flex;
+      }
+      &--firstInput .floating-label {
+        width: 50%;
+        margin: 1em;
+      }
+      &--description {
+        width: 90%;
+        display: block;
+        margin: 1em auto;
+      }
+      &--picture {
+        width: 40%;
+        display: block;
+        margin: 2em auto;
+      }
+    }
+    
+    &__submit {
+      margin-top: 1em;
+    }
+  }
+}
+
+@media only screen and (min-width : 1440px) {
+  .createTravel{
+    background-size: 40%, 20%;
+    background-position: bottom -1em left -2em, top -3em right -2em;
+  }
+  .formTravel {
+    width: 60%;
+    margin:2em auto;
+    &__form {
+      &--firstInput {
+        width: 80%;
+        margin: auto;
+      }
+
+      &--description {
+        width: 60%;
+        display: block;
+        margin: 1em auto;
+      }
+      &--picture {
+        width: 40%;
+        display: block;
+        margin: 2em auto;
+      }
+    }
+    
+    &__submit {
+      margin-top: 2em;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+.floating-label { 
+  position:relative; 
+  margin-bottom:1em; 
+  margin-top: 1.5em;
+  font-family: 'IBM Plex Sans', sans-serif;
+
+}
+input {
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+.floating-input {
+  font-size:1em;
+  padding:.5em;
+  display:block;
+  width:100%;
+  background-color: white;
+  border-radius: 10px;
+  border: none;
+  box-shadow: -1px 2px 15px -6px rgba(0,0,0,0.75);
+}
+
+label {
+  color: rgba(0, 0, 0, .5);
+  font-size:.9em;
+  position:absolute;
+  pointer-events:none;
+  left:10px;
+  top:10px;
+  transition:0.1s ease all; 
+  -moz-transition:0.1s ease all; 
+  -webkit-transition:0.1s ease all;
+}
+
+.floating-input:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
+  top:-1em;
+  font-size:.7em;
+  color: black;
+  color: rgb(55, 118, 139);
+}

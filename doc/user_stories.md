@@ -28,17 +28,21 @@
 | En tant que | Je veux | Afin de (si besoin/nécessaire) |
 |--|--|--|
 | utilisateur | pouvoir créer une étape | - |
+| utilisateur | pouvoir ajouter un Titre à mon étape  | - |
 | utilisateur | pouvoir ajouter une image à mon étape  | - |
 | utilisateur | pouvoir ajouter du texte à mon image | - |
 | utilisateur | pouvoir me localiser | rajouter du contenu dans mon voyage |
 | utilisateur | pouvoir ajouter une date à mon étape | |
 | utilisateur | pouvoir supprimer mon étape | - |
+| utilisateur | pouvoir modifier mon Titre | - |
 | utilisateur | pouvoir modifier mon image | - |
 | utilisateur | pouvoir modifier mon texte | - |
 | utilisateur | pouvoir modifier la localisation | rajouter du contenu dans mon voyage |
 | utilisateur | pouvoir modifier une date à mon étape | |
 | utilisateur | pouvoir commenter les étapes des voyages pour lesquels j'ai été invité | - |
+| utilisateur | pouvoir supprimer un commentaire que j'ai créer | - |
 | utilisateur | pouvoir aimer les étapes des voyages pour lesquels j'ai été invité | - |
+| utilisateur | pouvoir ne plus aimer les étapes des voyages pour lesquels j'ai été invité | - |
 
 
 ## USER

@@ -1,0 +1,88 @@
+.menuDesktop {
+  background-color: rgba(255, 255, 255, .2);
+  box-shadow: 5px 6px 13px -8px rgba(0,0,0,0.75);
+  backdrop-filter: blur(2px);
+  padding: 1.3em;
+  font-size: 1.2em;
+  
+  &__nav {
+    display: flex;
+    align-items: center;
+    &--icon {
+      padding-bottom: 0.5em;
+      cursor: pointer;
+      &:hover {
+        color: rgb(64, 114, 131);
+      }
+    }
+    &--li {
+      list-style: none;
+      padding-right: 7em;
+      &:hover {
+        color: rgb(64, 114, 131);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width : 767px) {
+  .menuDesktop {
+    display: none;
+    .menu__nav--li {
+      font-size: 0.8em;
+    }
+  }
+}
+@media only screen and (min-width : 767px) {
+  .menuDesktop {
+    padding-bottom: 0.2em;
+    .menu__nav--li {
+      font-size: 0.59em;
+      margin-right: auto;
+    }
+    .menu__nav--icon {
+      position: relative;
+      // bottom: 0.5em;
+      padding-right: 7em;
+    }
+  }
+}
+@media only screen and (min-width : 1024px) {
+  .menuDesktop {
+    padding-bottom: 0.6em;
+    .menu__nav--li {
+      font-size: 0.8em;
+      margin: auto;
+    }
+    .menu__nav--icon {
+      position: relative;
+      // bottom: 0.5em;
+    }
+  }
+}
+@media only screen and (min-width : 1224px) {
+  .menuDesktop {
+    padding-bottom: 0.6em;
+    .menu__nav--li {
+      font-size: 0.9em;
+      margin: auto;
+    }
+    .menu__nav--icon {
+      position: relative;
+      // bottom: 0.5em;
+    }
+  }
+}
+@media only screen and (min-width : 2560px) {
+  .menuDesktop {
+    padding-bottom: 1em;
+    .menu__nav--li {
+      font-size: 1.2em;
+      margin: auto;
+    }
+    .menu__nav--icon {
+      position: relative;
+      // bottom: 0.5em;
+    }
+  }
+}

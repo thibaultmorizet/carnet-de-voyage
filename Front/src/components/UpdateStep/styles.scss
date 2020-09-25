@@ -1,0 +1,231 @@
+.UpdateStep{
+  background-image: url('../../assets/images/background-men-phone.svg');
+  background-repeat: no-repeat;
+  background-position:  bottom 0% right 0px;
+  background-size: 70%;
+}
+
+.updatePageReturn {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+}
+
+.essai {
+  display: block;
+}
+.uploadPictureContainer {
+  display: block;
+}
+
+.uploadPicture{
+  max-width: 2em;
+}
+
+.FormUpdateStep {
+  width: 90%;
+  padding: 1em;
+  margin: 2em auto;
+  background-color: rgba($color: white, $alpha: .5);
+  border-radius: 10px;
+  backdrop-filter: blur(2px);
+  box-shadow: 0px 2px 14px -8px rgba(0,0,0,0.75);
+  &__delete {
+    background-color: rgb(241, 122, 122);
+  }
+  &__formElt{
+    &--pictures {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    &--finalInput {
+      flex-wrap: wrap;
+    }
+  }
+  
+}
+
+.carre {
+  min-height: 7em;
+  min-width: 7em;
+  background-color: lightblue;
+  margin: 1em;
+}
+
+.pictures {
+  &__n1 {
+    max-width: 7em;
+    height: auto;
+  }
+}
+
+.submit_update_travel {
+  display: none;
+  justify-content: center;
+}
+
+
+
+.pictures__icon {
+  color: red;
+}
+
+textarea {
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+.modalEx {
+  background-color: white;
+  width: 80%;
+  margin: 100% auto;
+  box-shadow: -1px -1px 21px -8px rgba(0,0,0,0.64);
+  border: none;
+  &__content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    &--title {
+    padding: 2em;
+    text-align: center;
+    display: block;
+    }
+    &--close {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background-color: #FFD900;
+      padding: 1em;
+      margin: 0em 1em 2em;
+      border: none;
+      border-radius: 10px;
+      width: 30%;
+      &:hover {
+        background-color: rgb(189, 163, 17);
+      }
+
+    }
+    &--delete {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background-color: rgb(248, 126, 44);
+      padding: 1em;
+      margin: 0em 1em 2em;
+      border: none;
+      border-radius: 10px;
+      width: 30%;
+      &:hover {
+        background-color: rgb(192, 96, 32);
+      }
+    }
+  }
+}
+
+@media only screen and (min-device-width : 320px) {
+  .FormUpdateStep {
+    margin-bottom: 4em;
+  }
+}
+
+@media only screen and (min-width : 426px) {
+  .UpdateStep {
+    background-image: url('../../assets/images/background-men-phone.svg'), url('../../assets/images/globe.svg');
+    background-repeat: no-repeat;
+    background-position:  bottom -5% right 0px, top 25% left 0px;
+    background-size: 50%, 30%;
+  }
+  .FormUpdateStep {
+    width: 70%;
+  }
+
+  .carre {
+    min-height: 9em;
+    min-width: 13em;
+  }
+
+  .modalEx {
+    width: 70%;
+    margin: 60% auto;
+  }
+  
+}
+
+@media only screen and (min-width : 769px) {
+
+  .UpdateStep {
+    background-position:  bottom -10% right -30px, bottom -10% left -100px;
+    background-size: 40%, 40%;
+  }
+
+  .FormUpdateStep {
+    width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+    backdrop-filter: blur(0px);
+    margin:0;
+    &__formElt {
+      display: flex;
+      &--pictures{
+        // order: 1;
+      } 
+      &--allInput {
+        // order: 2;
+        margin: .5em;
+        justify-content: start;
+      }
+      &--finalInput {
+        position: relative;
+        // order: 4;
+        display: flex;
+      }
+    }
+    &__submit {
+      position: relative;
+      width: 40%;
+      padding: 1em;
+      right:0%;
+    }
+    &__delete {
+      position: relative;
+      width: 40%;
+      padding: 1em;
+      right:0%;
+    }
+  
+  }
+  .carre {
+    min-height: 4em;
+    min-width: 8em;
+    margin: .5em;
+  }
+
+  .modalEx {
+    width: 50%;
+    margin: 45% auto;
+  }
+}
+
+@media only screen and (min-width : 1440px) {
+  .UpdateStep {
+    background-position:  bottom -6% right -30px, bottom -50% left -100px;
+    background-size: 20%, 25%;
+  }
+
+  .FormUpdateStep{
+    display: flex;
+    justify-content: center;
+    &__formElt {
+      &--allInput {
+        justify-content: space-between;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  .modalEx {
+    width: 30%;
+    margin: 25em auto;
+  }
+
+}
+
+
+

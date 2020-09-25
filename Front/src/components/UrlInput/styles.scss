@@ -1,0 +1,72 @@
+.urlInput {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 7em;
+  &__form {
+    &--url {
+      margin-right: .5em;
+      padding: .6em;
+      border-radius: 10px;
+      border: none;
+      &::placeholder {
+        font-family: 'IBM Plex Sans', sans-serif;
+      }
+    }
+    &--button {
+      padding: .5em;
+      background-color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      &:hover {
+        background-color: rgb(111, 194, 221);
+        cursor: pointer;
+      }
+    }
+  }
+  
+}
+
+@media only screen and (min-device-width : 320px) {
+  .urlInput {
+    padding-bottom: 7em;
+  }
+  }
+
+@media only screen and (min-width : 426px) {
+  .urlInput {
+    &__form {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      &--url {
+        width: 40%;
+        box-shadow: -1px 2px 18px -9px rgba(0,0,0,0.75);
+      }
+      &--button {
+        width: 13%;
+        box-shadow: -1px 2px 18px -9px rgba(0,0,0,0.75);
+      }
+    }
+  }
+
+}
+
+@media only screen and (min-width : 1224px) {
+    .urlInput {
+      &__form {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        &--url {
+          width: 27%;
+          box-shadow: -1px 2px 18px -9px rgba(0,0,0,0.75);
+        }
+        &--button {
+          width: 6%;
+          box-shadow: -1px 2px 18px -9px rgba(0,0,0,0.75);
+        }
+      }
+    }
+    }
