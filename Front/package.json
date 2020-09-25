@@ -62,6 +62,7 @@
     "axios": "^0.20.0",
     "base64-img": "^1.0.4",
     "bcryptjs": "^2.4.3",
+    "clipboard": "^2.0.6",
     "http-proxy-middleware": "^1.0.5",
     "js-cookie": "^2.2.1",
     "leaflet": "^1.7.1",

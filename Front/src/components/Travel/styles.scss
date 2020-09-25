@@ -102,14 +102,14 @@
 }
 
 .shareUrl {
-  display: none;
-  // text-align: center;
-  // display: block;
-  // word-wrap: break-word;
-  // box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  // padding: .5em;
-  // background-color: rgba(172, 123, 228, .2);
-  // font-size: .9em;
+  // display: none;
+  text-align: center;
+  display: block;
+  word-wrap: break-word;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  padding: .5em;
+  background-color: rgba(172, 123, 228, .2);
+  font-size: .9em;
 }
 
 .shareTravel {
@@ -122,8 +122,13 @@
 
 .shareUrlCopy {
   background-color: rgb(172, 123, 228);
+  display: none;
   cursor: pointer;
-
+  position: relative;
+  border: none;
+  padding: .5em 1em;
+  border-radius: 10px;
+  margin: 0em auto .5em;
   &:hover {
     background-color: rgb(149, 100, 206);
   }
@@ -320,18 +325,21 @@
   }
 
   .shareUrlCopy {
-    top: 17%
+    right: 33%;
+    top: 18.1%;
+    position: absolute;
   }
 
+
   .shareUrl {
-    display: none;
-    // text-align: right;
-    // display: block;
-    // word-wrap: break-word;
-    // position: absolute;
-    // top: 18%;
-    // right: 2%;
-    // width: 30%;
+    // display: none;
+    text-align: right;
+    display: block;
+    word-wrap: break-word;
+    position: absolute;
+    top: 18%;
+    right: 2%;
+    width: 30%;
   }
 }
 
@@ -339,9 +347,21 @@
   .singleComment__bubble {
     width: 60%;
   }
+  .shareUrl {
+    width: 26%;
+  }
+  .shareUrlCopy {
+    right: 29%;
+    top: 18.1%;
+    position: absolute;
+  }
 }
 
-
+@media only screen and (min-width : 2560px) {
+  .shareUrl {
+    width: 19%;
+  }
+}
 
 
 
