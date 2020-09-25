@@ -38,7 +38,7 @@ class MailerController extends AbstractController
         $email = (new TemplatedEmail())
             ->from($requestArray["email"])
             ->to("sebtoorop@gmail.com")
-            ->subject($requestArray["object"])
+            ->subject($requestArray["object"] . " From: " . $requestArray["email"])
             ->text($requestArray["text"]);
             
         $mailer->send($email);
