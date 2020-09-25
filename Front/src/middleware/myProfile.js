@@ -40,7 +40,8 @@ const Register = (store) => (next) => (action) => {
 
       axios.delete(`http://34.239.44.174/api/user/${id}/delete`, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
-          Cookies.remove();
+          Cookies.remove('token');
+          Cookies.remove('loggedIn');
           location.replace('/');
         })
         .catch((error) => console.log(error));
