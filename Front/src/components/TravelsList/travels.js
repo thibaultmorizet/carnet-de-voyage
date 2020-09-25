@@ -73,6 +73,7 @@ const Container = ({
                         description={elt.description}
                         image={elt.pictureUrl}
                         url={elt.id}
+                        onClick={deleteTravel}
                       />
 
                     ))}
