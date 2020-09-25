@@ -25,8 +25,9 @@ export const sendDataForUpdateTravel = () => ({
   type: SEND_DATA_FOR_UPDATE_TRAVEL,
 });
 
-export const deleteTravel = () => ({
+export const deleteTravel = (id) => ({
   type: DELETE_TRAVEL,
+  id,
 });
 
 export const errorUnthorizedUpdateTravel = () => ({

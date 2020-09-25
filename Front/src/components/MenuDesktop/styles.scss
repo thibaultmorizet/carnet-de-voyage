@@ -7,6 +7,7 @@
   
   &__nav {
     display: flex;
+    align-items: center;
     &--icon {
       padding-bottom: 0.5em;
       cursor: pointer;
@@ -41,7 +42,7 @@
     }
     .menu__nav--icon {
       position: relative;
-      bottom: 0.5em;
+      // bottom: 0.5em;
       padding-right: 7em;
     }
   }
@@ -55,7 +56,7 @@
     }
     .menu__nav--icon {
       position: relative;
-      bottom: 0.5em;
+      // bottom: 0.5em;
     }
   }
 }
@@ -68,7 +69,7 @@
     }
     .menu__nav--icon {
       position: relative;
-      bottom: 0.5em;
+      // bottom: 0.5em;
     }
   }
 }
@@ -81,7 +82,7 @@
     }
     .menu__nav--icon {
       position: relative;
-      bottom: 0.5em;
+      // bottom: 0.5em;
     }
   }
 }

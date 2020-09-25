@@ -15,6 +15,7 @@ import travel from '../middleware/travel';
 import comment from '../middleware/comment';
 import createTravel from '../middleware/createTravel';
 import updateTravel from '../middleware/updateTravel';
+import travelsList from '../middleware/travelsList';
 import myProfile from '../middleware/myProfile';
 
 // == Enhancers
@@ -34,6 +35,7 @@ const enhancers = composeEnhancers(
     comment,
     createTravel,
     updateTravel,
+    travelsList,
     myProfile,
     // secondMiddleware,
   ),

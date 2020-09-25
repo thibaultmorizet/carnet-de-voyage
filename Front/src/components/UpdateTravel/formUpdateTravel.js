@@ -2,13 +2,18 @@ import React, { useEffect } from 'react';
 import ImageUploader from 'react-images-upload';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
-import { faTimes, faPaperPlane, faPlaneArrival } from '@fortawesome/free-solid-svg-icons';
-import { useParams, useHistory, Redirect } from 'react-router-dom';
+import {
+  faTimes, faPaperPlane, faPlaneArrival, faSpinner, faArrowCircleLeft,
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  useParams, useHistory, Redirect, Link,
+} from 'react-router-dom';
 import Spinner from 'src/components/Spinner';
 import {
   handlePicture, errorMessage, handleDate, toastNotification,
 } from 'src/selectors/carnetDeVoyage';
 import { useToasts } from 'react-toast-notifications';
+
 import Toggle from 'react-toggle';
 import Modal from 'react-modal';
 import FormInput from '../FormInput';
@@ -102,7 +107,9 @@ const FormUpdateTravel = ({
       errorMessage(message, submitElt);
     }
     else {
+      const divElement = document.querySelector('.submit__loading');
       sendDataForUpdateTravel();
+      divElement.style.display = 'flex';
     }
   };
 
@@ -115,8 +122,8 @@ const FormUpdateTravel = ({
   };
 
   const handleDeleteTravel = () => {
-    deleteTravel();
-    return <Redirect push to="/" />;
+    deleteTravel(id);
+    location.replace('/');
   };
 
   return (
@@ -126,6 +133,10 @@ const FormUpdateTravel = ({
       )}
       {!loading && (
         <div className="formTravel">
+          <Link to={`/travel/${id}`} className="travelPage__header--return">
+            <FontAwesomeIcon icon={faArrowCircleLeft} />
+            <p>Revenir au voyage</p>
+          </Link>
           <h2 className="createTravel__title formUpdateTravel__title">Modifier mon Voyage</h2>
           <form action="" className="formTravel__form" onSubmit={handleSubmit}>
             <div className="formTravel__form--firstInput">
@@ -190,6 +201,9 @@ const FormUpdateTravel = ({
             </div>
 
             <div className="formTravel__form--div">
+              <div className="submit__loading submit_create_travel">
+                <FontAwesomeIcon icon={faSpinner} spin />
+              </div>
               <input className="formTravel__submit" type="submit" value="Enregistrer mon voyage" />
             </div>
 
@@ -233,7 +247,10 @@ FormUpdateTravel.propTypes = {
   loading: PropTypes.bool.isRequired,
   creation_date: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  picture_url: PropTypes.array,
+  picture_url: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+  ]),
   changeDateForUpdateTravel: PropTypes.func.isRequired,
   status: PropTypes.bool.isRequired,
   sendDataForUpdateTravel: PropTypes.func.isRequired,

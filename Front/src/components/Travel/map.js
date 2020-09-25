@@ -21,6 +21,13 @@ const Map = ({ step, onClickStep }) => {
       AllImages.push(currentImg);
     });
     onClickStep(title, AllImages, stepLike, id, description, comments);
+    const likeelement = document.querySelector('.press');
+    const likeSpanElement = document.querySelector('.likeIcon__span');
+    if (likeelement) {
+      likeelement.classList.remove('press');
+      likeSpanElement.classList.remove('press');
+    }
+
     const divElement = document.querySelector('.travelPage__content');
     divElement.style.display = 'block';
   };
@@ -69,7 +76,7 @@ const Map = ({ step, onClickStep }) => {
   };
 
   const generateMap = () => {
-    const mymap = L.map('travelPage__map').setView([51.505, -0.09], 2);
+    const mymap = L.map('travelPage__map').setView([48.873126, 2.316808], 2);
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png').addTo(mymap);
 
     addPhotoStep(mymap);

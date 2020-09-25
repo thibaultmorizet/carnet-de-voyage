@@ -1,33 +1,113 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import Spinner from 'src/components/Spinner';
 import './styles.scss';
+import CardTravel from './card';
 
-import img1 from '../../assets/images/background-machu.jpg';
+const Container = ({
+  fetchDataTravelsList,
+  travelsInProgress,
+  travelsDone,
+  loading,
+  deleteTravel,
+}) => {
+  useEffect(() => {
+    fetchDataTravelsList();
+  }, []);
 
-const Container = () => (
-  <div className="travels__container">
+  return (
 
-    <input type="submit" name="travelsInput" className="travelsInput" value="Créer un nouveau voyage" />
+    <div className="travels__container">
+      {loading && (
+      <Spinner />
+      )}
 
-    <div className="travels__inProgress">
-      <h2 className="travels__container--title"> Voyages en cours </h2>
-      <p className="travels--icon">˟</p>
-      <img src={img1} alt="" />
-      <div className="travels__commentary">
-        <h3 className="commentary--title">Voyage au Pérou</h3>
-        <p className="commentary--text">Trop bien, ça dure deux jours</p>
-      </div>
+      {!loading && (
+        <>
+          <a href="/travels/create">
+            <input type="button" name="travelsInput" className="travelsInput" value="Créer un nouveau voyage" />
+          </a>
+
+          {travelsInProgress.length + travelsDone.length !== 0 && (
+            <>
+              <div className="travels__inProgress">
+                <h2 className="travels__container--title"> Voyages en cours </h2>
+                <div className="travels__allTravels">
+
+                  {travelsInProgress.length !== 0 && (
+                  <>
+                    {travelsInProgress.map((elt) => (
+                      <CardTravel
+                        key={elt.id}
+                        title={elt.title}
+                        description={elt.description}
+                        image={elt.pictureUrl}
+                        url={elt.id}
+                        onClick={deleteTravel}
+                      />
+
+                    ))}
+
+                  </>
+                  )}
+
+                  {travelsInProgress.length === 0 && (
+                  <div>
+                    <h4 className="notTravelsDone">Vous n'avez pas encore de voyage en cours, n'hésitez pas à en ajouter :)</h4>
+                  </div>
+                  )}
+
+                </div>
+              </div>
+
+              <div className="travels__finish">
+                <h2 className="travels__container--title"> Voyages terminés </h2>
+                <div className="travels__allTravels">
+                  {travelsDone.length !== 0 && (
+                  <>
+                    {travelsDone.map((elt) => (
+
+                      <CardTravel
+                        key={elt.id}
+                        title={elt.title}
+                        description={elt.description}
+                        image={elt.pictureUrl}
+                        url={elt.id}
+                      />
+
+                    ))}
+                  </>
+                  )}
+
+                  {travelsDone.length === 0 && (
+                  <div>
+                    <h4 className="notTravelsDone">Vous n'avez pas encore fini de voyager, prenez votre temps et profiter de chaque minute</h4>
+                  </div>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+
+          {travelsInProgress.length === 0 && travelsDone.length === 0 && (
+            <div>
+              <h4 className="notTravelsDone">Vous n'avez pas aucun voyage, n'hésitez pas à en ajouter :)</h4>
+            </div>
+          )}
+
+        </>
+      )}
+
     </div>
+  );
+};
 
-    <div className="travels__finish">
-      <h2 className="travels__container--title"> Voyages terminés </h2>
-      <p className="travels--icon">˟</p>
-      <img src={img1} alt="" />
-      <div className="travels__commentary">
-        <h3 className="commentary--title">Voyage au Pérou</h3>
-        <p className="commentary--text">Trop bien, ça dure deux jours</p>
-      </div>
-    </div>
-  </div>
-);
+Container.propTypes = {
+  fetchDataTravelsList: PropTypes.func.isRequired,
+  travelsInProgress: PropTypes.array.isRequired,
+  travelsDone: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  deleteTravel: PropTypes.func.isRequired,
+};
 
 export default Container;

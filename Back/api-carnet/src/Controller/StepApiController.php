@@ -141,7 +141,7 @@ class StepApiController extends AbstractController
                     $pictureName = uniqid() . strrchr($pictureUrl, '.');
                     $spl = new SplFileInfo($pictureName);
                     //we put the extension in a variable
-                    $extension = $spl->getExtension();
+                    $extension = strtolower($spl->getExtension());
                     //we test if the extension is "jpeg" or "jpg" or "png":
                     //-if it isn't
                     if ($extension != "jpeg" and $extension != "png" and $extension != "jpg") {
@@ -287,7 +287,7 @@ class StepApiController extends AbstractController
                         $pictureName = uniqid() . strrchr($pictureUrl, '.');
                         $spl = new SplFileInfo($pictureName);
                         //we put the extension in a variable
-                        $extension = $spl->getExtension();
+                        $extension = strtolower($spl->getExtension());
                         //we test if the extension is "jpeg" or "jpg" or "png"
                         //if it isn't
                         if ($extension != "jpeg" and $extension != "png" and $extension != "jpg") {

@@ -11,6 +11,7 @@
       background-color: transparent;
       display: block;
       border: none;
+      padding-top: 1.5em;
       font-family: 'IBM Plex Sans', sans-serif;
       font-size: .8em;
       & p {
@@ -27,6 +28,9 @@
       float: right;
       position: relative;
       top: -2em;
+      &:hover {
+        color: rgb(118, 197, 223);
+      }
     }
     &--follow {
       background-color: lightblue;
@@ -41,6 +45,8 @@
       font-style: italic;
       position: relative;
       top: -10px;
+      margin-top: 1em;
+      
     }
     &--addStep {
       background-color: rgb(142, 211, 235);
@@ -69,7 +75,7 @@
       position: relative;
       top: -50px;
       left: -20px;
-      z-index: 10;
+      z-index: 0;
     }
     &--excerpt {
       position: relative;
@@ -95,7 +101,20 @@
   }
 }
 
+.modaxEx__content--picture {
+  max-height: 40em;
+}
+
+.modelEx2 {
+  margin: 50% auto;
+}
+
+.modalEx__content {
+  border: none;
+}
+
 .shareUrl {
+  // display: none;
   text-align: center;
   display: block;
   word-wrap: break-word;
@@ -107,6 +126,24 @@
 
 .shareTravel {
   background-color: rgb(172, 123, 228);
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(149, 100, 206);
+  }
+}
+
+.shareUrlCopy {
+  background-color: rgb(172, 123, 228);
+  display: none;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  padding: .5em 1em;
+  border-radius: 10px;
+  margin: 0em auto .5em;
+  &:hover {
+    background-color: rgb(149, 100, 206);
+  }
 }
 
 .stepImages {
@@ -132,6 +169,10 @@
     }
     &--icon {
       margin-left: .5em;
+      cursor: pointer;
+      &:hover {
+        color: lightblue;
+      }
     }
   }
   &__add {
@@ -149,6 +190,10 @@
       border: none;
       padding: 1em;
       border-radius: 15px;
+      cursor: pointer;
+      &:hover {
+        background-color: rgb(219, 187, 5);
+      }
     }
   }
   &__connect {
@@ -161,6 +206,10 @@
     border-radius: 10px;
     margin-bottom: 1em;
   }
+}
+
+.iconLike {
+  color: lightblue;
 }
 
 .singleComment {
@@ -208,7 +257,7 @@
 
 #travelPage__map {
   height: 50em;
-  z-index: 1;
+  z-index: 0;
 }
 
 .leaflet-popup-content-wrapper {
@@ -231,6 +280,14 @@
 @media only screen and (min-width : 426px) {
   .singleComment__bubble {
     width: 65%;
+  }
+
+  .modaxEx__content--picture {
+    max-height: 50em;
+  }
+  
+  .modelEx2 {
+    margin: 15% auto;
   }
 
   #travelPage__map {
@@ -267,6 +324,16 @@
     height: 60em;
   }
 
+  .modaxEx__content--picture {
+    max-height: 50em;
+  }
+  
+  .modelEx2 {
+    margin: 15% auto;
+  }
+
+
+
   .singleComment__bubble {
     width: 70%;
   }
@@ -287,7 +354,15 @@
     top: 17%
   }
 
+  .shareUrlCopy {
+    right: 33%;
+    top: 18.1%;
+    position: absolute;
+  }
+
+
   .shareUrl {
+    // display: none;
     text-align: right;
     display: block;
     word-wrap: break-word;
@@ -298,8 +373,113 @@
   }
 }
 
+@media only screen and (min-width : 1024px) {
+  
+.modaxEx__content--picture {
+  max-height: 50em;
+}
+
+.modelEx2 {
+  margin: 10% auto;
+}
+}
+
 @media only screen and (min-width : 1440px) {
   .singleComment__bubble {
     width: 60%;
   }
+
+  .shareUrl {
+    width: 26%;
+  }
+  .shareUrlCopy {
+    right: 29%;
+    top: 18.1%;
+    position: absolute;
+  }
+
+
+  .modaxEx__content--picture {
+    max-height: 50em;
+  }
+  
+  .modelEx2 {
+    margin: 3% auto;
+
+  }
+}
+
+@media only screen and (min-width : 2560px) {
+  .shareUrl {
+    width: 19%;
+  }
+}
+
+
+
+.likeIcon {
+  margin:0 auto;
+  position: relative;
+  display: inline;
+}
+
+.likeIcon__i {
+  cursor:pointer;
+  padding:10px 12px 8px;
+  background:#fff;
+  border-radius:50%;
+  display:inline-block;
+  color:#aaa;
+  transition:.2s;
+}
+
+.likeIcon__i:hover {
+  color:#666;
+}
+
+.likeIcon__i:before {
+  font-family:'Font Awesome 5 Free';
+  content:"\f004";
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 900;
+}
+
+.likeIcon__span {
+  position: absolute;
+  // bottom:70px;
+  left:0;
+  right:0;
+  visibility: hidden;
+  transition:.6s;
+  z-index:-2;
+  font-size:2px;
+  color:transparent;
+  font-weight:400;
+}
+
+.likeIcon__i.press {
+  animation: size .4s;
+  color:#e23b3b;
+}
+
+.likeIcon__span.press {
+  bottom: 10px;
+  left: 60px;
+  font-size:14px;
+  visibility:visible;
+  animation: fade 1s;
+}
+
+@keyframes fade {
+  0% {color: #transparent}
+  50% {color:#e23b3b}
+  100% {color:#transparent}
+}
+
+@keyframes size {
+  0% {padding:10px 12px 8px;}
+  50% {padding:14px 16px 12px;  
+  margin-top:-4px;}
+  100% {padding:10px 12px 8px;}
 }

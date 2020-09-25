@@ -108,12 +108,7 @@ class UserApiController extends AbstractController
         $manager->persist($user);
         $manager->flush();
 
-        return $this->json(
-            [
-                "success" => true,
-                "id" => $user->getId(),
-            ],
-        );
+   	return $this->redirect('http://34.202.233.128/login');
     }
 
     /**

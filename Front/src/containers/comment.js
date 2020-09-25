@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
-import { changeValueComment, sendComment } from 'src/actions/comment';
+import {
+  changeValueComment, sendComment, likeStepForTravel, unlikeStepForTravel,
+} from 'src/actions/comment';
 import Comment from 'src/components/Travel/comments';
 
 const mapStateToProps = (state) => ({
@@ -13,6 +15,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   sendComment: () => {
     dispatch(sendComment());
+  },
+  likeStepForTravel: () => {
+    dispatch(likeStepForTravel());
+  },
+  unlikeStepForTravel: () => {
+    dispatch(unlikeStepForTravel());
   },
 });
 
