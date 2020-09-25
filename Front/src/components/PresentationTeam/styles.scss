@@ -1,5 +1,6 @@
 .presentationTeam {
   margin-bottom: 3em;
+  min-height: 100vh;
   &__title {
     font-family: 'Pacifico', cursive;
     text-align: center;
@@ -47,13 +48,19 @@
   }
 }
 
+@media only screen and (min-device-width : 320px) {
+  .presentationTeam__cards {
+    margin-bottom: 4em;
+  }
+}
+
 @media only screen and (min-width : 426px) {
   .presentationTeam {
     background-image: url('../../assets/images/team.svg');
     background-repeat: no-repeat;
     background-size: 60%;
     background-position: bottom 0% left 50%;
-    height: 100vh;
+    min-height: 100vh;
     margin-bottom: 0;
     &__cards {
       display: flex;

@@ -1,13 +1,12 @@
 .login {
 
-  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-image: url(../../assets/images/background-machu.jpg);
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  min-height: 100vh;
 
   &__form {
     
@@ -84,6 +83,12 @@
   cursor: pointer;
   &:hover {
     background-color: lightblue;
+  }
+}
+
+@media only screen and (min-device-width : 320px) {
+  .login__form {
+    margin-bottom: 4em;
   }
 }
 

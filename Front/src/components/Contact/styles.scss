@@ -1,5 +1,5 @@
 .contact {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-image: url('../../assets/images/contact.svg');
@@ -50,6 +50,12 @@
   .formContact {
     width: 60%;
   } 
+}
+
+@media only screen and (min-device-width : 320px) {
+  .formContact {
+    margin-bottom: 4em;
+  }
 }
 
 @media only screen and (min-width : 769px) {
