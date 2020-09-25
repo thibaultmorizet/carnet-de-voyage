@@ -15,7 +15,7 @@ class MailerController extends AbstractController
     public function sendEmail(MailerInterface $mailer, $userMail, $subject, $html, $username, $token)
     {
         $email = (new TemplatedEmail())
-            ->from('carnetdevoyage@example.com')
+            ->from('o.carnet.de.voyage@gmail.com')
             ->to($userMail)
             ->subject($subject)
             ->htmlTemplate($html)
@@ -37,7 +37,7 @@ class MailerController extends AbstractController
         //Send email to preconfigure Mail
         $email = (new TemplatedEmail())
             ->from($requestArray["email"])
-            ->to("sebtoorop@gmail.com")
+            ->to("o.carnet.de.voyage@gmail.com")
             ->subject($requestArray["object"] . " From: " . $requestArray["email"])
             ->text($requestArray["text"]);
             
@@ -45,7 +45,7 @@ class MailerController extends AbstractController
 
         //Send a copy
         $emailCopy = (new TemplatedEmail())
-            ->from('carnetdevoyage@example.com')
+            ->from('o.carnet.de.voyage@gmail.com')
             ->to($requestArray["email"])
             ->subject($requestArray["object"]. 'copie')
             ->text('Vous venez de nous faire parvenir ce message : '. PHP_EOL . $requestArray["text"]);
