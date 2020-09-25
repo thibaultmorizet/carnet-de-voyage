@@ -86,7 +86,7 @@
   }
 }
 
-@media only screen and (min-device-width : 320px) {
+@media only screen and (min-device-width : 320px) and (max-device-height: 480px) {
   .login__form {
     margin-bottom: 4em;
   }

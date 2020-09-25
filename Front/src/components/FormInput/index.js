@@ -9,13 +9,14 @@ const FormInput = ({
   content,
   onChange,
   value = undefined,
+  readOnly,
 }) => {
   const handleChange = (evt) => {
     onChange(evt.target.value, name);
   };
   return (
     <div className="floating-label">
-      <input className="floating-input" name={name} type={type} placeholder=" " onChange={handleChange} value={value} />
+      <input className="floating-input" name={name} type={type} placeholder=" " onChange={handleChange} value={value} readOnly={readOnly} />
       <label htmlFor={name}>{content}</label>
     </div>
   );
@@ -27,10 +28,12 @@ FormInput.propTypes = {
   content: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string,
+  readOnly: PropTypes.bool,
 };
 
 FormInput.defaultProps = {
   value: undefined,
+  readOnly: undefined,
 };
 
 export default FormInput;

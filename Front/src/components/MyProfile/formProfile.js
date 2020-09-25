@@ -28,6 +28,7 @@ const FormProfile = ({
   const history = useHistory();
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const { addToast } = useToasts();
+  const readOnly = true;
 
   useEffect(() => {
     fetchDataForUser();
@@ -122,6 +123,7 @@ const FormProfile = ({
               content="Email"
               onChange={changeFieldForDataUser}
               value={email}
+              readOnly
             />
 
             <FormInput
