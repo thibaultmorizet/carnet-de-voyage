@@ -39,7 +39,10 @@ const Register = (store) => (next) => (action) => {
       const token = Cookies.get('token');
 
       axios.delete(`http://34.239.44.174/api/user/${id}/delete`, { headers: { Authorization: `Bearer ${token}` } })
-        .then((response) => store.dispatch(saveDataForUser(response.data)))
+        .then((response) => {
+          Cookies.remove();
+          location.replace('/');
+        })
         .catch((error) => console.log(error));
       break;
     }
