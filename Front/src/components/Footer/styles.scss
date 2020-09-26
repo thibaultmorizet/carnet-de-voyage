@@ -16,7 +16,7 @@
       align-items: center;
     }
     &--ul a:hover {
-      color: #2B8BB0;
+      color: rgb(29, 92, 117);
       font-weight: bold;
     }
     &--li {
@@ -26,6 +26,11 @@
       font-weight: bold;
       font-size: .8em;
       width: 30%;
+      transition: background 1s; 
+      &:hover {
+        background-color: rgba(207, 221, 224, 0.4);
+        transition: background 1s; 
+      }
     }
   }
 }

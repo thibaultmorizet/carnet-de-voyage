@@ -58,8 +58,10 @@
       display: block;
       margin: 1em auto;
       cursor: pointer;
+      transition: background 1s; 
       &:hover {
         background-color: rgb(107, 180, 204);
+        transition: background 2s; 
       }
     }
   }

@@ -48,7 +48,7 @@
   }
 }
 
-@media only screen and (min-device-width : 320px) {
+@media only screen and (min-device-width : 320px)  and (max-device-height: 480px) {
   .presentationTeam__cards {
     margin-bottom: 4em;
   }
