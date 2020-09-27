@@ -1,6 +1,6 @@
 .travelPage {
   min-height: 100vh;
-  margin-bottom: 2.5em;
+  margin-bottom: 3em;
   &__header {
     margin: 1em;
     &--title {
@@ -60,6 +60,7 @@
       cursor: pointer;
       &:hover {
         background-color: rgb(107, 180, 204);
+
       }
     }
   }
@@ -279,9 +280,13 @@
   width: 100%;
 }
 
-@media only screen and (min-width : 426px) {
+@media only screen and (min-width : 425px) {
   .singleComment__bubble {
     width: 65%;
+  }
+
+  .travelPage {
+    margin-bottom: 2.6em;
   }
 
   .modaxEx__content--picture {
@@ -301,13 +306,15 @@
       &--title {
         text-align: left;
         display: inline-block;
-        padding-right: .5em;
+        
       }
       &--icon {
         display: inline;
         float: none;
         position: relative;
-        top:0;
+        text-align: center;
+        top:-10px;
+        margin-left: 1em;
       }
     }
   }
@@ -381,6 +388,10 @@
   max-height: 50em;
 }
 
+#travelPage__map {
+  min-height: 70vh;
+}
+
 .modelEx2 {
   margin: 10% auto;
 }
@@ -389,6 +400,10 @@
 @media only screen and (min-width : 1440px) {
   .singleComment__bubble {
     width: 60%;
+  }
+
+  #travelPage__map {
+    min-height: 80vh;
   }
 
   .shareUrl {
@@ -411,10 +426,16 @@
   }
 }
 
-@media only screen and (min-width : 2560px) {
+@media only screen and (min-width : 2559px) {
   .shareUrl {
     width: 19%;
   }
+
+  #travelPage__map {
+    min-height: 80vh;
+  }
+
+  
 }
 
 
