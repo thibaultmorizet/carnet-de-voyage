@@ -6,30 +6,31 @@ const Footer = () => (
   <div className="footer">
     <nav className="footer__nav">
       <ul className="footer__nav--ul">
-        <li className="footer__nav--li">
-          <NavLink
-            to="/contact"
-            exact
-          >
-            Contact
-          </NavLink>
-        </li>
-        <li className="footer__nav--li">
-          <NavLink
-            to="/privacy"
-            exact
-          >
-            Mentions Légales
-          </NavLink>
-        </li>
-        <li className="footer__nav--li">
-          <NavLink
-            to="/presentation"
-            exact
-          >
-            Présentation
-          </NavLink>
-        </li>
+
+        <NavLink
+          to="/contact"
+          exact
+          className="footer__nav--li"
+        >
+          Contact
+        </NavLink>
+
+        <NavLink
+          to="/privacy"
+          exact
+          className="footer__nav--li"
+        >
+          Mentions Légales
+        </NavLink>
+
+        <NavLink
+          to="/presentation"
+          exact
+          className="footer__nav--li"
+        >
+          Présentation
+        </NavLink>
+
       </ul>
     </nav>
   </div>
