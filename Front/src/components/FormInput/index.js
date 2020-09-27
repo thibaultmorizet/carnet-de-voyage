@@ -8,7 +8,7 @@ const FormInput = ({
   name,
   content,
   onChange,
-  value = undefined,
+  value,
 }) => {
   const handleChange = (evt) => {
     onChange(evt.target.value, name);

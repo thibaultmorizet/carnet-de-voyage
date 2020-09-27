@@ -29,6 +29,10 @@
   }
 }
 
+.readOnlyInput {
+  background-color: rgba($color: grey, $alpha: .1)
+}
+
 .spanDeleteUser {
   display: block;
   padding-top: .8em;

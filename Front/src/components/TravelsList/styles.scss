@@ -10,6 +10,7 @@
     padding-top: 2em;
     margin-left: 1.5em;
     margin-right: 1.5em;
+    min-height: 50vh;
 
       &--title {
         font-family: 'Pacifico', cursive;
@@ -30,8 +31,10 @@
         font-size: 0.8em;
         font-weight: bold;
         cursor: pointer;
+        transition: background 2s; 
         &:hover {
           background-color: lightblue;
+          transition: background 1s;
         }
       }
 
@@ -92,6 +95,19 @@
   font-size: 1.2em;
   font-style: italic;
 }
+
+.cardTravel {
+  -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.cardTravel:hover {
+  -webkit-transform: scale(1.1);
+	transform: scale(1.1);
+}
+
 
 
 @media only screen and (min-device-width : 320px) {

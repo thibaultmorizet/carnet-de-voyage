@@ -84,11 +84,13 @@ const FormProfile = ({
     setIsOpen(false);
   };
 
-  const handleDeleteTravel = () => {
+  const handleDeleteTravel = (evt) => {
+    evt.preventDefault();
+    console.log('salut');
     deleteUser();
-    Cookies.remove('token');
-    Cookies.remove('loggedIn');
-    location.replace('/');
+    // Cookies.remove('token');
+    // Cookies.remove('loggedIn');
+    // location.replace('/');
   };
   return (
     <div className="formProfile">
@@ -116,13 +118,10 @@ const FormProfile = ({
               value={firstname}
             />
 
-            <FormInput
-              type="email"
-              name="email"
-              content="Email"
-              onChange={changeFieldForDataUser}
-              value={email}
-            />
+            <div className="floating-label">
+              <input className="floating-input readOnlyInput" name="email" type="email" placeholder=" " onChange={changeFieldForDataUser} value={email} readOnly />
+              <label htmlFor="email">Email</label>
+            </div>
 
             <FormInput
               type="password"
