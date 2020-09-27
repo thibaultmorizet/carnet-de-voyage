@@ -47,8 +47,8 @@ class MailerController extends AbstractController
         $emailCopy = (new TemplatedEmail())
             ->from('o.carnet.de.voyage@gmail.com')
             ->to($requestArray["email"])
-            ->subject($requestArray["object"]. 'copie')
-            ->text('Vous venez de nous faire parvenir ce message : '. PHP_EOL . $requestArray["text"]);
+            ->subject('Copie du mail : ' . $requestArray["object"])
+            ->text('Vous venez de nous faire parvenir ce message: '. PHP_EOL . $requestArray["text"]);
 
         $mailer->send($emailCopy);
 
