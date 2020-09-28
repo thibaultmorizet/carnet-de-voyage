@@ -420,7 +420,7 @@ class TravelApiController extends AbstractController
             return $this->json(
                 [
                     "success" => false,
-                    "errors" => "Travel not found"
+                    "errors" => "TaddStudentravel not found"
                 ],
                 Response::HTTP_BAD_REQUEST
             );
@@ -436,7 +436,7 @@ class TravelApiController extends AbstractController
                 Response::HTTP_BAD_REQUEST
             );
         }
-        //dd($token, $tokenTravel);
+        //dd($token, $tokenTravel)addStudent;
         return $this->json(
             $travel,
             200,
