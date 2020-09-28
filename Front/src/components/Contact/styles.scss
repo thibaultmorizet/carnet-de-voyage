@@ -1,0 +1,82 @@
+.contact {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url('../../assets/images/contact.svg');
+  background-repeat: no-repeat;
+  background-position: bottom -50px right 0px;
+  &__title {
+    font-family: 'Pacifico', cursive;
+    font-size: 2em;
+    text-align: center;
+    margin: 1em;
+  }
+}
+
+.formContact {
+  width: 80%;
+  margin: auto;
+  backdrop-filter: blur(2px);
+  background-color: rgba($color: white, $alpha: .8);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  padding: 1em;
+  border-radius: 10px;
+  &__submit {
+    background-color: #FFD900;
+    display: block;
+    margin: 1em auto 0em;
+    border: none;
+    padding: .6em 2em;
+    border-radius: 10px;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  &__checkbox {
+    margin: 1em 0;
+    &--label {
+      position: relative;
+      pointer-events: auto;
+      left: 0;
+      top: 0;
+      color: black;
+      
+    }
+  }
+}
+
+@media only screen and (min-width : 426px) {
+  .contact {
+    background-position: center;
+  }
+  .formContact {
+    width: 60%;
+  } 
+}
+
+@media only screen and (min-device-width : 320px)  and (max-device-height: 480px) {
+  .formContact {
+    margin-bottom: 4em;
+  }
+}
+
+@media only screen and (min-width : 769px) {
+  .contact {
+    background-image: url('../../assets/images/contact.svg'), url('../../assets/images/contact2.svg');
+    background-repeat: no-repeat;
+    background-position: top 0px right -50px, bottom left -250px ;
+    background-size: 60% 60%;
+  }
+  .formContact {
+    width: 50%;
+  } 
+}
+
+@media only screen and (min-width : 1440px) {
+  .contact {
+    background-position: top 0px right -100px, bottom -100px left -250px;
+    background-size: 80% 80%;
+  }
+
+  .formContact {
+    width: 40%;
+  } 
+}

@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useToasts } from 'react-toast-notifications';
 import { useHistory } from 'react-router-dom';
-import { errorMessage } from '../../selectors/carnetDeVoyage';
+import { errorMessage, toastNotification } from '../../selectors/carnetDeVoyage';
 import FormInput from '../FormInput';
 import './styles.scss';
 
@@ -16,10 +16,12 @@ const RegisterForm = ({
   email,
   password,
   verifyPassword,
+  response,
 }) => {
   const history = useHistory();
   const { addToast } = useToasts();
 
+  // TODO: refactor this function because it's ugly, i don't like it but i don't have time. Please future Chloe, to this for me. Counter : 0
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const allDataForRegister = [email, first_name, last_name, password, verifyPassword];
@@ -42,11 +44,6 @@ const RegisterForm = ({
       }
       else {
         handleRegister();
-        addToast('Incription Réussie ! Vous allez recevoir un email de confirmation', {
-          appearance: 'success',
-          autoDismiss: true,
-        });
-        history.push('/login');
       }
     }
     else {
@@ -54,6 +51,16 @@ const RegisterForm = ({
       errorMessage(message, divElt);
     }
   };
+
+  const toastFailOrSuccess = () => {
+    const message = 'L\'inscription à réussi, veuillez vérifier vos mails';
+    const destination = '/travels/list';
+    toastNotification(addToast, history, response, message, destination);
+  };
+
+  useEffect(() => {
+    toastFailOrSuccess();
+  }, [response]);
 
   return (
     <div className="register__form">
@@ -120,12 +127,7 @@ RegisterForm.propTypes = {
   last_name: PropTypes.string.isRequired,
   first_name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  response: PropTypes.string.isRequired,
 };
 
 export default RegisterForm;
-
-// Nom -- last_name
-// Prénom -- first_name
-// Email -- email
-// Mot de passe -- password
-// Salut1234

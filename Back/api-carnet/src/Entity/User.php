@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 /**
@@ -21,55 +21,69 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("user")
+     * @Groups({"step:show", "user", "userlist", "userlist:search", "user:information"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups("user")
+     * @Groups({"user", "userlist:search", "travel:read", "user:information"})
+     * @Assert\NotBlank
+     * @Assert\Email
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups("user")
+     * @Groups({"user", "user:information"})
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Groups("user")
+     * @Groups({"user", "user:information"})
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("user")
+     * @Groups({"step:show", "user", "userlist", "userlist:search", "travel:read", "user:information"})
+     * @Assert\Length(max=255, maxMessage="Cette valeur est trop longue (maximum {{ limit }} caractères)")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("user")
+     * @Groups({"step:show", "user", "userlist", "userlist:search", "travel:read", "user:information"})
+     * @Assert\Length(max=255, maxMessage="Cette valeur est trop longue (maximum {{ limit }} caractères)")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"step:show", "userlist", "userlist:search", "user:information"})
      */
     private $avatar;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"user:information"})
+     * @Assert\Type("\DateTime")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"user:information"})
+     * @Assert\Type("\DateTime")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Travel::class, mappedBy="creator", orphanRemoval=true)
+     */
+    private $travel;
 
     /**
      * @ORM\ManyToMany(targetEntity=Travel::class, mappedBy="followers")
@@ -77,7 +91,7 @@ class User implements UserInterface
     private $follower;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="userId", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user", orphanRemoval=true)
      */
     private $comments;
 
@@ -305,6 +319,37 @@ class User implements UserInterface
     public function setToken(?string $token): self
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Travel[]
+     */
+    public function getTravel(): Collection
+    {
+        return $this->travel;
+    }
+
+    public function addTravel(Travel $travel): self
+    {
+        if (!$this->travel->contains($travel)) {
+            $this->travel[] = $travel;
+            $travel->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTravel(Travel $travel): self
+    {
+        if ($this->travel->contains($travel)) {
+            $this->travel->removeElement($travel);
+            // set the owning side to null (unless already changed)
+            if ($travel->getCreator() === $this) {
+                $travel->setCreator(null);
+            }
+        }
 
         return $this;
     }

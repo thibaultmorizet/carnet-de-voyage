@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
@@ -15,21 +18,29 @@ class Comment
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"travel:read", "step:show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"travel:read", "step:show"})
+     * @Assert\NotBlank
+     * @Assert\Length(max=255, maxMessage="Cette valeur est trop longue (maximum {{ limit }} caractères)")
      */
     private $comment;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"step:show","travel:read"})
+     * @Assert\Type("\DateTime") 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"step:show"})
+     * @Assert\Type("\DateTime") 
      */
     private $updatedAt;
 
@@ -42,6 +53,7 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"step:show","travel:read"})
      */
     private $user;
 

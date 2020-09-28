@@ -1,14 +1,12 @@
 .login {
 
-  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-image: url(../../assets/images/background-machu.jpg);
   background-size: cover;
   background-position: center;
-  height: 100vh;
-  padding-top: 1em;
+  min-height: 100vh;
 
   &__form {
     
@@ -27,6 +25,9 @@
     margin-bottom: 1em;
 
   }
+  &--submit {
+    margin-top: 1em;
+  }
   & form {
 
     width: 80%;
@@ -35,6 +36,7 @@
   }
  }
 }
+
 
 .errorMessage {
   font-size: .8em;
@@ -81,6 +83,12 @@
   cursor: pointer;
   &:hover {
     background-color: lightblue;
+  }
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-height: 480px) {
+  .login__form {
+    margin-bottom: 4em;
   }
 }
 

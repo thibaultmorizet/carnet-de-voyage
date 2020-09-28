@@ -1,0 +1,145 @@
+.formProfile {
+  background-image: url('../../assets/images/myProfile.svg'), url('../../assets/images/myProfile2.svg');
+  background-repeat: no-repeat;
+  background-position: top, bottom;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 90vh;
+  width: 80%;
+  margin: auto;
+  &__form {
+    background-color: rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    padding: 1em;
+    box-shadow: -1px 2px 15px -6px rgba(0,0,0,0.75);
+    &--title {
+      font-family: 'Pacifico', cursive;
+      text-align: center;
+      font-size: 2em;
+      padding: 1em;
+    }
+    &--span {
+      text-align: center;
+      font-size: .8em;
+      padding-bottom: .5em;
+    }
+  }
+}
+
+.readOnlyInput {
+  background-color: rgba($color: grey, $alpha: .1)
+}
+
+.spanDeleteUser {
+  display: block;
+  padding-top: .8em;
+  font-weight: bold;
+}
+
+.submitButtonUser {
+  background-color: #FFC727;
+  padding: .5em 1em;
+  display: block;
+  border: none;
+  border-radius: 10px;
+  margin: 2em auto 1em;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(255, 209, 83);
+  }
+}
+
+.deleteButtonUser {
+  background-color: #DD6A57;
+  padding: .5em 1em;
+  display: block;
+  border: none;
+  border-radius: 10px;
+  margin: 1em auto 1em;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(245, 123, 101);
+  }
+}
+
+@media only screen and (min-device-width : 320px) {
+  .myProfile {
+    // margin-bottom: 4em;
+    min-height: 100vh;
+  }
+}
+
+@media only screen and (min-width : 426px) {
+  .formProfile {
+    background-size: 90%, 40%;
+    &__form {
+       width: 80%;
+       margin: auto;
+    }
+  }
+}
+
+@media only screen and (min-width : 769px) {
+  .formProfile {
+    background-image: url('../../assets/images/myProfile.svg');
+    background-position: top 50% left 0;
+    display: block;
+    width: 100%;
+    &__form {
+      //  padding: 14% 2em 1em;
+       width: 40%;
+       margin-left: 60%;
+       height: 100%;
+       align-content: center;
+       align-items: center;
+      background-color: rgba(255, 255, 255, .7);
+      border-radius: 0%;
+       backdrop-filter: blur(0px);
+       box-shadow: none;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+
+       &--content {
+         display: flex;
+         width: 100%;
+         flex-wrap: wrap;
+         justify-content: center;
+         & div {
+           margin: 1em;
+          //  width: 80%;
+         }
+       }
+    }
+  }
+}
+
+@media only screen and (min-width : 1440px) {
+  .formProfile {
+    background-size: 60%;
+    
+    &__form {
+      background-color: transparent;
+      &--content {
+        width: 80%;
+        
+      }
+    }
+  }
+}
+
+@media only screen and (min-width : 1824px) {
+  .formProfile {
+    background-size: 50%;
+    background-position: top 50% left 10%;
+    &__form {
+      &--content {
+        width: 80%;
+      }
+    }
+  }
+}

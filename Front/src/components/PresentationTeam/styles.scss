@@ -1,0 +1,120 @@
+.presentationTeam {
+  margin-bottom: 3em;
+  min-height: 100vh;
+  &__title {
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    margin: 1em;
+    font-size: 2em;
+  }
+  &__cards {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+
+.card {
+  width: 80%;
+  margin: 1em auto;
+  position: relative;
+  padding: .5em;
+  box-shadow: 1px 0px 15px -5px rgba(0,0,0,0.41);
+  background-color: rgba(white, $alpha: .6);
+  backdrop-filter: blur(10px);
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+  &__img {
+    max-width: 8em;
+  }
+  &__spe {
+    max-width: 2em;
+    position: absolute;
+    right: .5em;
+  }
+  &__content {
+    position: absolute;
+    bottom: .5em;
+    right: .5em;
+    text-align: right;
+    width: 11em;
+    &--title {
+      font-family: 'Pacifico', cursive;
+    }
+    &--spe {
+      font-size: .8em;
+    }
+  }
+}
+
+@media only screen and (min-device-width : 320px)  and (max-device-height: 480px) {
+  .presentationTeam__cards {
+    margin-bottom: 4em;
+  }
+}
+
+@media only screen and (min-width : 426px) {
+  .presentationTeam {
+    background-image: url('../../assets/images/team.svg');
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position: bottom 0% left 50%;
+    min-height: 100vh;
+    margin-bottom: 0;
+    &__cards {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+  }
+  .card {
+    width: 40%;
+  }
+}
+
+
+@media only screen and (min-width : 1024px) {
+  .presentationTeam {
+    &__cards {
+      width: 80%;
+      margin: auto;
+    }
+  }
+  .card {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width : 1440px) {
+  .presentationTeam {
+    
+    &__title {
+      font-size: 4em;
+    }
+    &__cards {
+      width: 80%;
+      margin: 5em auto;
+    }
+  }
+  .card {
+    width: 30%;
+    &__img {
+      max-width: 12em;
+    }
+    &__spe {
+      max-width: 2em;
+      position: absolute;
+      right: .5em;
+    }
+    &__content {
+      &--title {
+        font-size: 1.3em;
+        margin-bottom: .3em;
+      }
+      &--spe {
+        font-size: 1em;
+      }
+    }
+  }
+}

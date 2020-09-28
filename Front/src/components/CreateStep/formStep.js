@@ -1,14 +1,18 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import FormInput from 'src/components/FormInput';
 import Map from 'src/components/CreateStep/map';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
-import { errorMessage, handleDate, emptyElement } from 'src/selectors/carnetDeVoyage';
+import { useParams, useHistory } from 'react-router-dom';
+import {
+  errorMessage,
+  handleDate,
+  handlePicture,
+  toastNotification,
+} from 'src/selectors/carnetDeVoyage';
 import { useToasts } from 'react-toast-notifications';
 import ImageUploader from 'react-images-upload';
-import FileUploader from './fileButton';
 import './styles.scss';
 
 const FormStep = ({
@@ -17,32 +21,33 @@ const FormStep = ({
   latitude,
   longitude,
   step_date,
+  response,
   changeField,
   handleSubmit,
+  changePicture,
 }) => {
   const { addToast } = useToasts();
+  const history = useHistory();
   const { id } = useParams();
   const handleChange = (evt) => {
     changeField(evt.target.value, 'description');
   };
 
-  function getBase64(file, onLoadCallback) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  }
+  const toastFailOrSuccess = () => {
+    toastNotification(addToast, history, response);
+  };
+
+  useEffect(() => {
+    toastFailOrSuccess();
+  }, [response]);
 
   const handleForm = (evt) => {
     evt.preventDefault();
     const allDataForRegister = [title, description, latitude, longitude, step_date];
+    const isEmptyElement = allDataForRegister.includes('');
     const submitElt = '.divElement_form';
 
-    if (emptyElement(allDataForRegister) === true) {
+    if (isEmptyElement === true) {
       const message = 'Veuillez remplir tous les champs';
       errorMessage(message, submitElt);
     }
@@ -60,19 +65,8 @@ const FormStep = ({
     }
   };
 
-  const handlePicture = (evt) => {
-    if (evt[0]) {
-      const promise = getBase64(evt[0]);
-      promise.then((result) => {
-        const elementWanted = result;
-        const { name } = evt[0];
-        const array = {
-          url: name,
-          data: elementWanted,
-        };
-        changeField(array, 'picture');
-      });
-    }
+  const handleChangePicture = (evt) => {
+    handlePicture(evt, changePicture);
   };
 
   return (
@@ -101,14 +95,12 @@ const FormStep = ({
             onChange={changeField}
           />
 
-          {/* <FileUploader onChange={changeField} /> */}
           <ImageUploader
             withIcon
-            onChange={handlePicture}
-            imgExtension={['.jpg', '.gif', '.png', '.gif']}
+            onChange={handleChangePicture}
+            imgExtension={['.jpg', '.gif', '.png', '.jpeg']}
             maxFileSize={5242880}
             withPreview
-            singleImage
           />
 
           <div className="divElement_form">
@@ -127,6 +119,11 @@ FormStep.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   step_date: PropTypes.string.isRequired,
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
+  step_date: PropTypes.string.isRequired,
+  response: PropTypes.string.isRequired,
+  changePicture: PropTypes.func.isRequired,
 };
 
 export default FormStep;

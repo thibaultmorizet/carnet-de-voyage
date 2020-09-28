@@ -1,0 +1,71 @@
+.privacy {
+  background-image: url('../../assets/images/privacy.svg');
+  background-repeat: no-repeat;
+  &__content {
+    // margin-left: 40%;
+   background-color: rgba(255, 255, 255, 0.5);
+   border-radius: 20px;
+   padding: 1em;
+   backdrop-filter: blur(2px);
+   box-shadow: -1px 2px 15px -6px rgba(0,0,0,0.75);
+    margin: 1em;
+    &--bigTitle {
+      font-family: 'Pacifico', cursive;
+      font-size: 2em;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    &--text {
+      padding: 1em 0em; 
+      line-height: 1.2em;
+      & a {
+        color: rgb(255, 196, 0);
+      }
+    }
+    &--title {
+      font-weight: bold;
+    }
+  }
+}
+
+.linkFreepik {
+  color: rgb(223, 172, 6);
+  &:hover {
+    color: rgb(156, 120, 1);
+  }
+}
+
+@media only screen and (min-device-width : 320px)  and (max-device-height: 480px) {
+  .privacy__content {
+    margin-bottom: 4em;
+  }
+}
+
+@media only screen and (min-width : 769px) {
+  .privacy {
+    background-size: 50%;
+    background-position: 0% 50%;
+    &__content {
+       margin-left: 40%;
+      &--bigTitle {
+        font-size: 2em;
+        text-align: left;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width : 1440px) {
+  .privacy {
+    background-size: 40%;
+    background-position: 0% 50%;
+    &__content {
+      margin-left: 50%;
+       margin-left: 40%;
+      &--bigTitle {
+        font-size: 2em;
+      }
+    }
+  }
+}
+
