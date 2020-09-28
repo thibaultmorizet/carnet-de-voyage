@@ -1,5 +1,5 @@
 .register {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;  
   justify-content: space-between;
@@ -54,6 +54,12 @@
   cursor: pointer;
   &:hover {
     background-color: lightblue;
+  }
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-height: 480px) {
+  .register__form {
+    margin-bottom: 4em ;
   }
 }
 

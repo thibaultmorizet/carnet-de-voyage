@@ -5,6 +5,7 @@ import { changeValue, saveStep, changeValuePicture } from 'src/actions/createSte
 const mapStateToProps = (state) => ({
   title: state.createStep.title,
   description: state.createStep.description,
+  picture: state.createStep.picture,
   latitude: state.createStep.latitude,
   longitude: state.createStep.longitude,
   step_date: state.createStep.step_date,
@@ -16,7 +17,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeValue(value, name));
   },
   handleSubmit: () => {
-    console.log('je fais un submit');
     dispatch(saveStep());
   },
   changePicture: (value, name) => {

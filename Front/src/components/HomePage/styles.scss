@@ -2,13 +2,16 @@
   background-image: url(../../assets/images/background-machu.jpg);
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .headerHomePage {
   &__mobile {
     display: block;
-    padding-top: 1em;
+    
+    & .button {
+      padding-top: 1em;
+    }
   }
   &__desktop {
     display: none;

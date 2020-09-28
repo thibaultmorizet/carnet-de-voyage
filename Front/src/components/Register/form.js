@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useToasts } from 'react-toast-notifications';
 import { useHistory } from 'react-router-dom';
-import { errorMessage } from '../../selectors/carnetDeVoyage';
+import { errorMessage, toastNotification } from '../../selectors/carnetDeVoyage';
 import FormInput from '../FormInput';
 import './styles.scss';
 
@@ -52,24 +52,14 @@ const RegisterForm = ({
     }
   };
 
-  const toastNotification = () => {
-    if (response === 'Error') {
-      addToast('Il y a eu une erreur dans l\'envoi du formulaire. Veuillez réessayer plus tard', {
-        appearance: 'error',
-        autoDismiss: true,
-      });
-    }
-    else if (response === 'Success') {
-      addToast('L\'inscription à réussi, veuillez vérifier vos mails', {
-        appearance: 'success',
-        autoDismiss: true,
-      });
-      history.push('/login');
-    }
+  const toastFailOrSuccess = () => {
+    const message = 'L\'inscription à réussi, veuillez vérifier vos mails';
+    const destination = '/travels/list';
+    toastNotification(addToast, history, response, message, destination);
   };
 
   useEffect(() => {
-    toastNotification();
+    toastFailOrSuccess();
   }, [response]);
 
   return (
@@ -137,12 +127,7 @@ RegisterForm.propTypes = {
   last_name: PropTypes.string.isRequired,
   first_name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  response: PropTypes.string.isRequired,
 };
 
 export default RegisterForm;
-
-// Nom -- last_name
-// Prénom -- first_name
-// Email -- email
-// Mot de passe -- password
-// Salut1234

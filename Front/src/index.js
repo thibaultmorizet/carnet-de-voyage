@@ -4,12 +4,13 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { ToastProvider } from 'react-toast-notifications';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
 
-// == Import : local
+// == Impogrt : local
 // Composants
-import CarnetDeVoyage from 'src/components/CarnetDeVoyage';
+import CarnetDeVoyage from './containers/carnetDeVoyage';
 // Store
-import store from 'src/store';
+import store from './store';
 
 // == Render
 // 1. Élément React racine (celui qui contient l'ensemble de l'app)
@@ -17,9 +18,11 @@ import store from 'src/store';
 const rootReactElement = (
   <Provider store={store}>
     <Router>
-      <ToastProvider>
-        <CarnetDeVoyage />
-      </ToastProvider>
+      <CookiesProvider>
+        <ToastProvider>
+          <CarnetDeVoyage />
+        </ToastProvider>
+      </CookiesProvider>
     </Router>
   </Provider>
 );

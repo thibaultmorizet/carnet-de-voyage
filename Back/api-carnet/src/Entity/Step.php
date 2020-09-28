@@ -5,8 +5,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\StepRepository;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 
 /**
@@ -19,42 +21,52 @@ class Step
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"travel:read"})
      * @Groups({"step:show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"travel:read"})
      * @Groups({"step:show"})
+     * @Assert\NotBlank
+     * @Assert\Length(max=255, maxMessage="Cette valeur est trop longue (maximum {{ limit }} caractères)")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"step:show"})
+     * @Groups({"step:show","travel:read"})
+     * @Assert\NotBlank
+     * @Assert\Length(max=255, maxMessage="Cette valeur est trop longue (maximum {{ limit }} caractères)")
      */
     private $description;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"travel:read"})
      * @Groups({"step:show"})
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"travel:read"})
      * @Groups({"step:show"})
      */
     private $longitude;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"travel:read"})
      * @Groups({"step:show"})
      */
     private $stepLike;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"travel:read"})
      * @Groups({"step:show"})
      */
     private $stepDate;
@@ -62,12 +74,14 @@ class Step
     /**
      * @ORM\Column(type="datetime")
      * @Groups({"step:show"})
+     * @Assert\Type("\DateTime") 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"step:show"})
+     * @Assert\Type("\DateTime") 
      */
     private $updatedAt;
 
@@ -80,13 +94,13 @@ class Step
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="step", orphanRemoval=true)
-     * @Groups({"step:show"})
+     * @Groups({"step:show", "travel:read"})
      */
     private $comments;
 
     /**
      * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="step", orphanRemoval=true)
-     * @Groups({"step:show"})
+     * @Groups({"step:show", "travel:read"})
      */
     private $pictures;
 
